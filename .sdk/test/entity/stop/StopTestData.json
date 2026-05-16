@@ -1,0 +1,41 @@
+{
+  "existing": {
+    "stop": {
+      "STOP00": {
+        "id": "STOP00",
+        "location": {},
+        "name": "s3e",
+        "product": {},
+        "station": {},
+        "type": "s41"
+      },
+      "STOP01": {
+        "id": "STOP01",
+        "location": {},
+        "name": "s7a",
+        "product": {},
+        "station": {},
+        "type": "s7d"
+      },
+      "STOP02": {
+        "id": "STOP02",
+        "location": {},
+        "name": "sb6",
+        "product": {},
+        "station": {},
+        "type": "sb9"
+      }
+    }
+  },
+  "new": {
+    "stop": {
+      "stop_ref01": {
+        "location": {},
+        "name": "sf2",
+        "product": {},
+        "station": {},
+        "type": "sf5"
+      }
+    }
+  }
+}

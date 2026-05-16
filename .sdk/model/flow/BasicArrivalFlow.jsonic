@@ -1,0 +1,26 @@
+# BasicArrivalFlow
+
+main: kit: flow: BasicArrivalFlow:
+{
+  entity: "arrival",
+  kind: "basic",
+  name: "BasicArrivalFlow",
+  step: [
+    {
+      match: {
+        stop_id: "stop01"
+      }
+
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "arrival_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicArrivalFlow"
+}

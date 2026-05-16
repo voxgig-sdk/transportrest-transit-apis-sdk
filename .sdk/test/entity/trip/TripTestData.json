@@ -1,0 +1,41 @@
+{
+  "existing": {
+    "trip": {
+      "TRIP00": {
+        "destination": {},
+        "direction": "s3d",
+        "id": "TRIP00",
+        "line": {},
+        "origin": {},
+        "stopover": []
+      },
+      "TRIP01": {
+        "destination": {},
+        "direction": "s79",
+        "id": "TRIP01",
+        "line": {},
+        "origin": {},
+        "stopover": []
+      },
+      "TRIP02": {
+        "destination": {},
+        "direction": "sb5",
+        "id": "TRIP02",
+        "line": {},
+        "origin": {},
+        "stopover": []
+      }
+    }
+  },
+  "new": {
+    "trip": {
+      "trip_ref01": {
+        "destination": {},
+        "direction": "sf1",
+        "line": {},
+        "origin": {},
+        "stopover": []
+      }
+    }
+  }
+}

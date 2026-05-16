@@ -1,0 +1,52 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 7
+  metrics: count: path: 7
+  metrics: count: method: 7
+
+  entity: arrival: {
+    path: "/stops/{id}/arrivals": {
+      rename: param: "id": *"stop_id"
+      op: list: method: *GET
+    }
+  }
+
+  entity: departure: {
+    path: "/stops/{id}/departures": {
+      rename: param: "id": *"stop_id"
+      op: list: method: *GET
+    }
+  }
+
+  entity: journey: {
+    path: "/journeys": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: location: {
+    path: "/locations": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: radar: {
+    path: "/radar": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: stop: {
+    path: "/stops/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: trip: {
+    path: "/trips/{id}": {
+      op: load: method: *GET
+    }
+  }
+
+}

@@ -1,0 +1,32 @@
+# BasicTripFlow
+
+main: kit: flow: BasicTripFlow:
+{
+  entity: "trip",
+  kind: "basic",
+  name: "BasicTripFlow",
+  step: [
+    {
+      input: {
+        ref: "trip_ref01",
+        srcdatavar: "trip_ref01_data",
+        suffix: "_dt0"
+      }
+
+      match: {
+        id: "trip01"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-trip_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicTripFlow"
+}

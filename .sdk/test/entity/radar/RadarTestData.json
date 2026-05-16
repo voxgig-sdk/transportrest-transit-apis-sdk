@@ -1,0 +1,38 @@
+{
+  "existing": {
+    "radar": {
+      "RADAR00": {
+        "direction": "s32",
+        "line": {},
+        "location": {},
+        "next_stopover": [],
+        "trip_id": "TRIP01"
+      },
+      "RADAR01": {
+        "direction": "s64",
+        "line": {},
+        "location": {},
+        "next_stopover": [],
+        "trip_id": "TRIP01"
+      },
+      "RADAR02": {
+        "direction": "s96",
+        "line": {},
+        "location": {},
+        "next_stopover": [],
+        "trip_id": "TRIP01"
+      }
+    }
+  },
+  "new": {
+    "radar": {
+      "radar_ref01": {
+        "direction": "sc8",
+        "line": {},
+        "location": {},
+        "next_stopover": [],
+        "trip_id": "TRIP01"
+      }
+    }
+  }
+}

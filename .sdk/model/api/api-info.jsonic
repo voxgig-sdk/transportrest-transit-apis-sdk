@@ -1,0 +1,48 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        name: "transport.rest"
+        url: "https://transport.rest/"
+      }
+      description: "Provides transit APIs for different regions such as Germany, Poland, Berlin-Brandenburg, Schleswig-Holstein, Europe, and England. Publicly available, developer-friendly transit data APIs run by friendly people on the internet."
+      license: {
+        name: "ISC"
+        url: "https://opensource.org/licenses/ISC"
+      }
+      servers: [
+        {
+          description: "Deutsche Bahn (Germany) API"
+          url: "https://v6.db.transport.rest"
+        }
+        {
+          description: "Poland transit API"
+          url: "https://poland.transport.rest"
+        }
+        {
+          description: "VBB (Berlin & Brandenburg) API"
+          url: "https://v6.vbb.transport.rest"
+        }
+        {
+          description: "BVG (Berlin & Brandenburg) API"
+          url: "https://v6.bvg.transport.rest"
+        }
+        {
+          description: "Flixbus (Germany/Europe) API"
+          url: "https://1.flixbus.transport.rest"
+        }
+        {
+          description: "Nottingham City Transport (England) API"
+          url: "https://v1.nottingham-city.transport.rest"
+        }
+      ]
+      title: "transport.rest transit APIs"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

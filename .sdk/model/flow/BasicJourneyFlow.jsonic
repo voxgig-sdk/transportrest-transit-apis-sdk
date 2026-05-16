@@ -1,0 +1,22 @@
+# BasicJourneyFlow
+
+main: kit: flow: BasicJourneyFlow:
+{
+  entity: "journey",
+  kind: "basic",
+  name: "BasicJourneyFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "journey_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicJourneyFlow"
+}

@@ -1,0 +1,904 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "transport.rest transit APIs",
+    "description": "Provides transit APIs for different regions such as Germany, Poland, Berlin-Brandenburg, Schleswig-Holstein, Europe, and England. Publicly available, developer-friendly transit data APIs run by friendly people on the internet.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "transport.rest",
+      "url": "https://transport.rest/"
+    },
+    "license": {
+      "name": "ISC",
+      "url": "https://opensource.org/licenses/ISC"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://v6.db.transport.rest",
+      "description": "Deutsche Bahn (Germany) API"
+    },
+    {
+      "url": "https://poland.transport.rest",
+      "description": "Poland transit API"
+    },
+    {
+      "url": "https://v6.vbb.transport.rest",
+      "description": "VBB (Berlin & Brandenburg) API"
+    },
+    {
+      "url": "https://v6.bvg.transport.rest",
+      "description": "BVG (Berlin & Brandenburg) API"
+    },
+    {
+      "url": "https://1.flixbus.transport.rest",
+      "description": "Flixbus (Germany/Europe) API"
+    },
+    {
+      "url": "https://v1.nottingham-city.transport.rest",
+      "description": "Nottingham City Transport (England) API"
+    }
+  ],
+  "paths": {
+    "/locations": {
+      "get": {
+        "summary": "Search for locations",
+        "description": "Search for stations, stops, addresses, and points of interest by query string",
+        "operationId": "searchLocations",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "description": "Search query for locations",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "Berlin"
+          },
+          {
+            "name": "results",
+            "in": "query",
+            "description": "Number of results to return",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "minimum": 1,
+              "maximum": 100
+            }
+          },
+          {
+            "name": "stops",
+            "in": "query",
+            "description": "Include stops/stations in results",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "addresses",
+            "in": "query",
+            "description": "Include addresses in results",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          },
+          {
+            "name": "poi",
+            "in": "query",
+            "description": "Include points of interest in results",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with locations",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Location"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/stops/{id}": {
+      "get": {
+        "summary": "Get stop/station details",
+        "description": "Retrieve detailed information about a specific stop or station",
+        "operationId": "getStop",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Stop/station ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "900000003201"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with stop details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Stop"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Stop not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/stops/{id}/departures": {
+      "get": {
+        "summary": "Get departures from a stop",
+        "description": "Retrieve upcoming departures from a specific stop or station",
+        "operationId": "getDepartures",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Stop/station ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "900000003201"
+          },
+          {
+            "name": "when",
+            "in": "query",
+            "description": "Date and time for which to get departures (ISO 8601 format)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "duration",
+            "in": "query",
+            "description": "Duration in minutes for which to get departures",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 120,
+              "minimum": 1
+            }
+          },
+          {
+            "name": "results",
+            "in": "query",
+            "description": "Maximum number of departures to return",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "minimum": 1
+            }
+          },
+          {
+            "name": "direction",
+            "in": "query",
+            "description": "Filter departures by direction (stop ID)",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with departures",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "departures": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Departure"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Stop not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/stops/{id}/arrivals": {
+      "get": {
+        "summary": "Get arrivals at a stop",
+        "description": "Retrieve upcoming arrivals at a specific stop or station",
+        "operationId": "getArrivals",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Stop/station ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "when",
+            "in": "query",
+            "description": "Date and time for which to get arrivals (ISO 8601 format)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "duration",
+            "in": "query",
+            "description": "Duration in minutes for which to get arrivals",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 120,
+              "minimum": 1
+            }
+          },
+          {
+            "name": "results",
+            "in": "query",
+            "description": "Maximum number of arrivals to return",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 10,
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with arrivals",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "arrivals": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Arrival"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Stop not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/journeys": {
+      "get": {
+        "summary": "Find journeys",
+        "description": "Find journeys between two locations or stops",
+        "operationId": "getJourneys",
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "description": "Origin location ID or coordinates",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "900000003201"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "Destination location ID or coordinates",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "900000100003"
+          },
+          {
+            "name": "departure",
+            "in": "query",
+            "description": "Desired departure time (ISO 8601 format)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "arrival",
+            "in": "query",
+            "description": "Desired arrival time (ISO 8601 format)",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "results",
+            "in": "query",
+            "description": "Number of journey results to return",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 3,
+              "minimum": 1
+            }
+          },
+          {
+            "name": "stopovers",
+            "in": "query",
+            "description": "Include stopovers in journey details",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with journeys",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "journeys": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Journey"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/trips/{id}": {
+      "get": {
+        "summary": "Get trip details",
+        "description": "Retrieve detailed information about a specific trip",
+        "operationId": "getTrip",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Trip ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lineName",
+            "in": "query",
+            "description": "Line name of the trip",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "stopovers",
+            "in": "query",
+            "description": "Include stopovers in trip details",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with trip details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Trip"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Trip not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/radar": {
+      "get": {
+        "summary": "Get radar view of vehicles",
+        "description": "Get vehicles in a geographical bounding box",
+        "operationId": "getRadar",
+        "parameters": [
+          {
+            "name": "north",
+            "in": "query",
+            "description": "Northern latitude boundary",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "west",
+            "in": "query",
+            "description": "Western longitude boundary",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "south",
+            "in": "query",
+            "description": "Southern latitude boundary",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "east",
+            "in": "query",
+            "description": "Eastern longitude boundary",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          {
+            "name": "results",
+            "in": "query",
+            "description": "Maximum number of vehicles to return",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 256
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with vehicles",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "movements": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Movement"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Location": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "stop",
+              "station",
+              "location",
+              "address",
+              "poi"
+            ],
+            "description": "Type of location"
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the location"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the location"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Coordinates"
+          },
+          "products": {
+            "type": "object",
+            "description": "Available products at this location"
+          }
+        }
+      },
+      "Stop": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "stop",
+              "station"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the stop"
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the stop"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Coordinates"
+          },
+          "products": {
+            "type": "object",
+            "description": "Available products at this stop"
+          },
+          "station": {
+            "type": "object",
+            "description": "Parent station if applicable"
+          }
+        }
+      },
+      "Coordinates": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "location"
+            ]
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double",
+            "description": "Latitude coordinate"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double",
+            "description": "Longitude coordinate"
+          }
+        }
+      },
+      "Departure": {
+        "type": "object",
+        "properties": {
+          "tripId": {
+            "type": "string",
+            "description": "Trip identifier"
+          },
+          "stop": {
+            "$ref": "#/components/schemas/Stop"
+          },
+          "when": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Scheduled departure time"
+          },
+          "plannedWhen": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Originally planned departure time"
+          },
+          "delay": {
+            "type": "integer",
+            "description": "Delay in seconds"
+          },
+          "platform": {
+            "type": "string",
+            "description": "Departure platform"
+          },
+          "plannedPlatform": {
+            "type": "string",
+            "description": "Originally planned platform"
+          },
+          "direction": {
+            "type": "string",
+            "description": "Direction of the trip"
+          },
+          "line": {
+            "$ref": "#/components/schemas/Line"
+          }
+        }
+      },
+      "Arrival": {
+        "type": "object",
+        "properties": {
+          "tripId": {
+            "type": "string",
+            "description": "Trip identifier"
+          },
+          "stop": {
+            "$ref": "#/components/schemas/Stop"
+          },
+          "when": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Scheduled arrival time"
+          },
+          "plannedWhen": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Originally planned arrival time"
+          },
+          "delay": {
+            "type": "integer",
+            "description": "Delay in seconds"
+          },
+          "platform": {
+            "type": "string",
+            "description": "Arrival platform"
+          },
+          "plannedPlatform": {
+            "type": "string",
+            "description": "Originally planned platform"
+          },
+          "direction": {
+            "type": "string",
+            "description": "Direction of the trip"
+          },
+          "line": {
+            "$ref": "#/components/schemas/Line"
+          }
+        }
+      },
+      "Line": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "line"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "description": "Line identifier"
+          },
+          "name": {
+            "type": "string",
+            "description": "Line name"
+          },
+          "mode": {
+            "type": "string",
+            "description": "Mode of transport"
+          },
+          "product": {
+            "type": "string",
+            "description": "Product type"
+          },
+          "operator": {
+            "type": "object",
+            "description": "Operating company"
+          }
+        }
+      },
+      "Journey": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "journey"
+            ]
+          },
+          "legs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Leg"
+            },
+            "description": "Journey legs"
+          },
+          "refreshToken": {
+            "type": "string",
+            "description": "Token to refresh this journey"
+          }
+        }
+      },
+      "Leg": {
+        "type": "object",
+        "properties": {
+          "origin": {
+            "$ref": "#/components/schemas/Stop"
+          },
+          "destination": {
+            "$ref": "#/components/schemas/Stop"
+          },
+          "departure": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Departure time"
+          },
+          "plannedDeparture": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Planned departure time"
+          },
+          "arrival": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Arrival time"
+          },
+          "plannedArrival": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Planned arrival time"
+          },
+          "line": {
+            "$ref": "#/components/schemas/Line"
+          },
+          "direction": {
+            "type": "string",
+            "description": "Direction of the leg"
+          },
+          "stopovers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Stopover"
+            }
+          }
+        }
+      },
+      "Stopover": {
+        "type": "object",
+        "properties": {
+          "stop": {
+            "$ref": "#/components/schemas/Stop"
+          },
+          "arrival": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "plannedArrival": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "departure": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "plannedDeparture": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Trip": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Trip identifier"
+          },
+          "line": {
+            "$ref": "#/components/schemas/Line"
+          },
+          "direction": {
+            "type": "string",
+            "description": "Direction of the trip"
+          },
+          "origin": {
+            "$ref": "#/components/schemas/Stop"
+          },
+          "destination": {
+            "$ref": "#/components/schemas/Stop"
+          },
+          "stopovers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Stopover"
+            }
+          }
+        }
+      },
+      "Movement": {
+        "type": "object",
+        "properties": {
+          "tripId": {
+            "type": "string",
+            "description": "Trip identifier"
+          },
+          "direction": {
+            "type": "string",
+            "description": "Direction of the movement"
+          },
+          "line": {
+            "$ref": "#/components/schemas/Line"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Coordinates"
+          },
+          "nextStopovers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Stopover"
+            }
+          }
+        }
+      }
+    }
+  }
+}

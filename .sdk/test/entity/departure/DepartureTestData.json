@@ -1,0 +1,57 @@
+{
+  "existing": {
+    "departure": {
+      "DEPARTURE00": {
+        "delay": "s5a",
+        "direction": "s5b",
+        "line": {},
+        "planned_platform": "s5d",
+        "planned_when": "s5e",
+        "platform": "s5f",
+        "stop": {},
+        "trip_id": "TRIP01",
+        "when": "s62",
+        "stop_id": "STOP01"
+      },
+      "DEPARTURE01": {
+        "delay": "sb4",
+        "direction": "sb5",
+        "line": {},
+        "planned_platform": "sb7",
+        "planned_when": "sb8",
+        "platform": "sb9",
+        "stop": {},
+        "trip_id": "TRIP01",
+        "when": "sbc",
+        "stop_id": "STOP01"
+      },
+      "DEPARTURE02": {
+        "delay": "s10e",
+        "direction": "s10f",
+        "line": {},
+        "planned_platform": "s111",
+        "planned_when": "s112",
+        "platform": "s113",
+        "stop": {},
+        "trip_id": "TRIP01",
+        "when": "s116",
+        "stop_id": "STOP01"
+      }
+    }
+  },
+  "new": {
+    "departure": {
+      "departure_ref01": {
+        "delay": "s168",
+        "direction": "s169",
+        "line": {},
+        "planned_platform": "s16b",
+        "planned_when": "s16c",
+        "platform": "s16d",
+        "stop": {},
+        "trip_id": "TRIP01",
+        "when": "s170"
+      }
+    }
+  }
+}

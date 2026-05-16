@@ -1,0 +1,37 @@
+{
+  "existing": {
+    "location": {
+      "LOCATION00": {
+        "id": "LOCATION00",
+        "location": {},
+        "name": "s34",
+        "product": {},
+        "type": "s36"
+      },
+      "LOCATION01": {
+        "id": "LOCATION01",
+        "location": {},
+        "name": "s66",
+        "product": {},
+        "type": "s68"
+      },
+      "LOCATION02": {
+        "id": "LOCATION02",
+        "location": {},
+        "name": "s98",
+        "product": {},
+        "type": "s9a"
+      }
+    }
+  },
+  "new": {
+    "location": {
+      "location_ref01": {
+        "location": {},
+        "name": "sca",
+        "product": {},
+        "type": "scc"
+      }
+    }
+  }
+}

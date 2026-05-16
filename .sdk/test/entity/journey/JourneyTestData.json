@@ -1,0 +1,30 @@
+{
+  "existing": {
+    "journey": {
+      "JOURNEY00": {
+        "leg": [],
+        "refresh_token": "s1f",
+        "type": "s20"
+      },
+      "JOURNEY01": {
+        "leg": [],
+        "refresh_token": "s3d",
+        "type": "s3e"
+      },
+      "JOURNEY02": {
+        "leg": [],
+        "refresh_token": "s5b",
+        "type": "s5c"
+      }
+    }
+  },
+  "new": {
+    "journey": {
+      "journey_ref01": {
+        "leg": [],
+        "refresh_token": "s79",
+        "type": "s7a"
+      }
+    }
+  }
+}

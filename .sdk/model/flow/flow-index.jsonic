@@ -1,0 +1,9 @@
+# Flows
+
+@"BasicArrivalFlow.jsonic"
+@"BasicDepartureFlow.jsonic"
+@"BasicJourneyFlow.jsonic"
+@"BasicLocationFlow.jsonic"
+@"BasicRadarFlow.jsonic"
+@"BasicStopFlow.jsonic"
+@"BasicTripFlow.jsonic"

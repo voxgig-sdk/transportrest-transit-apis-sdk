@@ -1,0 +1,22 @@
+# BasicRadarFlow
+
+main: kit: flow: BasicRadarFlow:
+{
+  entity: "radar",
+  kind: "basic",
+  name: "BasicRadarFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "radar_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicRadarFlow"
+}
