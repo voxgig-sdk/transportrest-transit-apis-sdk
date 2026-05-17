@@ -29,7 +29,7 @@ class Config {
 
 
   options = {
-    base: 'https://v6.db.transport.rest',
+    base: '$$main.kit.info.servers.0.url$$',
 
     'AUTHBLOCK'headers: 'HEADERS',
 

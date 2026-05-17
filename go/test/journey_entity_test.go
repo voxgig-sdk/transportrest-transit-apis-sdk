@@ -9,10 +9,10 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/voxgig-sdk/transportrest-transit-apis-sdk"
-	"github.com/voxgig-sdk/transportrest-transit-apis-sdk/core"
+	sdk "github.com/voxgig-sdk/transportrest-transit-apis-sdk/go"
+	"github.com/voxgig-sdk/transportrest-transit-apis-sdk/go/core"
 
-	vs "github.com/voxgig/struct"
+	vs "github.com/voxgig-sdk/transportrest-transit-apis-sdk/go/utility/struct"
 )
 
 func TestJourneyEntity(t *testing.T) {

@@ -1,10 +1,10 @@
 package voxgigtransportresttransitapissdk
 
 import (
-	"github.com/voxgig-sdk/transportrest-transit-apis-sdk/core"
-	"github.com/voxgig-sdk/transportrest-transit-apis-sdk/entity"
-	"github.com/voxgig-sdk/transportrest-transit-apis-sdk/feature"
-	_ "github.com/voxgig-sdk/transportrest-transit-apis-sdk/utility"
+	"github.com/voxgig-sdk/transportrest-transit-apis-sdk/go/core"
+	"github.com/voxgig-sdk/transportrest-transit-apis-sdk/go/entity"
+	"github.com/voxgig-sdk/transportrest-transit-apis-sdk/go/feature"
+	_ "github.com/voxgig-sdk/transportrest-transit-apis-sdk/go/utility"
 )
 
 // Type aliases preserve external API.
