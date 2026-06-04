@@ -41,7 +41,23 @@
           }
         ],
         "title": "transport.rest transit APIs",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "tagline": "Query German and European public-transport timetables, journeys, and realtime departures via a community REST wrapper around Deutsche Bahn",
+        "homepage": "https://v6.db.transport.rest",
+        "docs_url": "https://v6.db.transport.rest",
+        "license_short": "ISC — open-source community project; underlying data is Deutsche Bahn's.",
+        "license_md": "- The `db-rest` server code is published under the **ISC License**.\n- The data returned is sourced from Deutsche Bahn's VENDO backend; usage is subject to DB's own terms.\n- This is an unofficial, community-maintained mirror — it is not operated by Deutsche Bahn.\n- Heavy users are encouraged to self-host or rely on GTFS feeds, since the upstream APIs have stricter rate limits than the older HAFAS endpoints.",
+        "about_md": "`transport.rest` is a family of community-run REST APIs that wrap public-transport backends across Germany and Europe. The DB v6 endpoint at `https://v6.db.transport.rest` is built on top of [`db-vendo-client`](https://github.com/public-transport/db-vendo-client) and exposes the same long-distance, regional, and selected international and local services you see in the DB Navigator app.\n\nWhat you typically get from the API:\n\n- **Locations** — search stations, stops, addresses, and points of interest by name or coordinates.\n- **Departures / Arrivals** — board listings for a given stop, including realtime delays, platforms, and direction filters.\n- **Journeys** — A-to-B routing with transfers, prices (where available), and polyline geometry.\n- **Trips / Stops** — detailed timetable and stop-sequence data for a specific train or bus run.\n\nNo API key is required and CORS is enabled, which makes the service convenient for prototyping. The maintainers document a soft limit of around **100 requests/minute** and warn that the underlying VENDO backend is markedly more rate-limited than the deprecated HAFAS API; the `/radar` endpoint in particular is not currently usable. Responses support ETag-based caching, and a Docker image plus Redis cache are recommended for production use.",
+        "entity_desc": {
+          "arrival": "Realtime arrival board for a stop, typically served from `/stops/{id}/arrivals`, including platform, delay, and origin information.",
+          "departure": "Realtime departure board for a stop, typically served from `/stops/{id}/departures`, with direction, platform, and delay data.",
+          "journey": "A-to-B trip planning from `/journeys`, returning one or more itineraries with legs, transfers, and timing.",
+          "location": "Free-text and geo lookup for stations, addresses, and POIs via `/locations` (and station autocomplete).",
+          "radar": "Geographic radar of vehicles currently in a bounding box via `/radar` — noted as unavailable on the current VENDO backend.",
+          "stop": "Station and stop metadata served from `/stops/{id}`, including name, location, and product categories.",
+          "trip": "Detailed run of a single train or bus via `/trips/{id}`, with the full stop sequence and realtime status."
+        },
+        "auth": false
       },
       "config": {
         "auth": {
@@ -49,7 +65,15 @@
         },
         "headers": {
           "content-type": "application/json"
-        }
+        },
+        "docs_order": [
+          "ts",
+          "py",
+          "php",
+          "go",
+          "rb",
+          "lua"
+        ]
       },
       "entity": {
         "arrival": {

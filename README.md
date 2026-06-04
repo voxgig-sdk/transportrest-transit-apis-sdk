@@ -1,9 +1,99 @@
 # TransportrestTransitApis SDK
 
+Query German and European public-transport timetables, journeys, and realtime departures via a community REST wrapper around Deutsche Bahn
 
+> TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
 
-Available for [Golang](go/) and [Go CLI](go-cli/) and [Go MCP server](go-mcp/) and [Lua](lua/) and [PHP](php/) and [Python](py/) and [Ruby](rb/) and [TypeScript](ts/).
+## About transport.rest transit APIs
 
+`transport.rest` is a family of community-run REST APIs that wrap public-transport backends across Germany and Europe. The DB v6 endpoint at `https://v6.db.transport.rest` is built on top of [`db-vendo-client`](https://github.com/public-transport/db-vendo-client) and exposes the same long-distance, regional, and selected international and local services you see in the DB Navigator app.
+
+What you typically get from the API:
+
+- **Locations** — search stations, stops, addresses, and points of interest by name or coordinates.
+- **Departures / Arrivals** — board listings for a given stop, including realtime delays, platforms, and direction filters.
+- **Journeys** — A-to-B routing with transfers, prices (where available), and polyline geometry.
+- **Trips / Stops** — detailed timetable and stop-sequence data for a specific train or bus run.
+
+No API key is required and CORS is enabled, which makes the service convenient for prototyping. The maintainers document a soft limit of around **100 requests/minute** and warn that the underlying VENDO backend is markedly more rate-limited than the deprecated HAFAS API; the `/radar` endpoint in particular is not currently usable. Responses support ETag-based caching, and a Docker image plus Redis cache are recommended for production use.
+
+## Try it
+
+**TypeScript**
+```bash
+npm install transportrest-transit-apis
+```
+
+**Python**
+```bash
+pip install transportrest-transit-apis-sdk
+```
+
+**PHP**
+```bash
+composer require voxgig/transportrest-transit-apis-sdk
+```
+
+**Golang**
+```bash
+go get github.com/voxgig-sdk/transportrest-transit-apis-sdk/go
+```
+
+**Ruby**
+```bash
+gem install transportrest-transit-apis-sdk
+```
+
+**Lua**
+```bash
+luarocks install transportrest-transit-apis-sdk
+```
+
+## 30-second quickstart
+
+### TypeScript
+
+```ts
+import { TransportrestTransitApisSDK } from 'transportrest-transit-apis'
+
+const client = new TransportrestTransitApisSDK({})
+
+// List all arrivals
+const arrivals = await client.Arrival().list()
+```
+
+See the [TypeScript README](ts/README.md) for the
+full guide, or scroll down for the same example in other languages.
+
+## What's in the box
+
+| Surface | Use it for | Path |
+| --- | --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
+| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+
+## Use it from an AI agent (MCP)
+
+The generated MCP server exposes every operation in this SDK as an
+[MCP](https://modelcontextprotocol.io) tool that Claude, Cursor or Cline
+can call directly. Build and register it:
+
+```bash
+cd go-mcp && go build -o transportrest-transit-apis-mcp .
+```
+
+Then add it to your agent's MCP config (Claude Desktop, Cursor, etc.):
+
+```json
+{
+  "mcpServers": {
+    "transportrest-transit-apis": {
+      "command": "/abs/path/to/transportrest-transit-apis-mcp"
+    }
+  }
+}
+```
 
 ## Entities
 
@@ -11,81 +101,28 @@ The API exposes 7 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Arrival** |  | `/stops/{id}/arrivals` |
-| **Departure** |  | `/stops/{id}/departures` |
-| **Journey** |  | `/journeys` |
-| **Location** |  | `/locations` |
-| **Radar** |  | `/radar` |
-| **Stop** |  | `/stops/{id}` |
-| **Trip** |  | `/trips/{id}` |
+| **Arrival** | Realtime arrival board for a stop, typically served from `/stops/{id}/arrivals`, including platform, delay, and origin information. | `/stops/{id}/arrivals` |
+| **Departure** | Realtime departure board for a stop, typically served from `/stops/{id}/departures`, with direction, platform, and delay data. | `/stops/{id}/departures` |
+| **Journey** | A-to-B trip planning from `/journeys`, returning one or more itineraries with legs, transfers, and timing. | `/journeys` |
+| **Location** | Free-text and geo lookup for stations, addresses, and POIs via `/locations` (and station autocomplete). | `/locations` |
+| **Radar** | Geographic radar of vehicles currently in a bounding box via `/radar` — noted as unavailable on the current VENDO backend. | `/radar` |
+| **Stop** | Station and stop metadata served from `/stops/{id}`, including name, location, and product categories. | `/stops/{id}` |
+| **Trip** | Detailed run of a single train or bus via `/trips/{id}`, with the full stop sequence and realtime status. | `/trips/{id}` |
 
-Each entity supports the following operations where available: **load**, **list**, **create**,
-**update**, and **remove**.
+Each entity supports the following operations where available: **load**,
+**list**, **create**, **update**, and **remove**.
 
+## Quickstart in other languages
 
-## Architecture
+### Python
 
-### Entity-operation model
+```python
+from transportresttransitapis_sdk import TransportrestTransitApisSDK
 
-Every SDK call follows the same pipeline:
+client = TransportrestTransitApisSDK({})
 
-1. **Point** — resolve the API endpoint from the operation definition.
-2. **Spec** — build the HTTP specification (URL, method, headers, body).
-3. **Request** — send the HTTP request.
-4. **Response** — receive and parse the response.
-5. **Result** — extract the result data for the caller.
-
-At each stage a feature hook fires (e.g. `PrePoint`, `PreSpec`,
-`PreRequest`), allowing features to inspect or modify the pipeline.
-
-### Features
-
-Features are hook-based middleware that extend SDK behaviour.
-
-| Feature | Purpose |
-| --- | --- |
-| **TestFeature** | In-memory mock transport for testing without a live server |
-
-You can add custom features by passing them in the `extend` option at
-construction time.
-
-### Direct and Prepare
-
-For endpoints not covered by the entity model, use the low-level methods:
-
-- **`direct(fetchargs)`** — build and send an HTTP request in one step.
-- **`prepare(fetchargs)`** — build the request without sending it.
-
-Both accept a map with `path`, `method`, `params`, `query`, `headers`,
-and `body`.
-
-
-## Quick start
-
-### Golang
-
-```go
-import sdk "github.com/voxgig-sdk/transportrest-transit-apis-sdk/go"
-
-client := sdk.NewTransportrestTransitApisSDK(map[string]any{
-    "apikey": os.Getenv("TRANSPORTREST-TRANSIT-APIS_APIKEY"),
-})
-
-// List all arrivals
-arrivals, err := client.Arrival(nil).List(nil, nil)
-```
-
-### Lua
-
-```lua
-local sdk = require("transportrest-transit-apis_sdk")
-
-local client = sdk.new({
-  apikey = os.getenv("TRANSPORTREST-TRANSIT-APIS_APIKEY"),
-})
-
--- List all arrivals
-local arrivals, err = client:Arrival(nil):list(nil, nil)
+# List all arrivals
+arrivals, err = client.Arrival(None).list(None, None)
 ```
 
 ### PHP
@@ -94,26 +131,21 @@ local arrivals, err = client:Arrival(nil):list(nil, nil)
 <?php
 require_once 'transportresttransitapis_sdk.php';
 
-$client = new TransportrestTransitApisSDK([
-    "apikey" => getenv("TRANSPORTREST-TRANSIT-APIS_APIKEY"),
-]);
+$client = new TransportrestTransitApisSDK([]);
 
 // List all arrivals
 [$arrivals, $err] = $client->Arrival(null)->list(null, null);
 ```
 
-### Python
+### Golang
 
-```python
-import os
-from transportresttransitapis_sdk import TransportrestTransitApisSDK
+```go
+import sdk "github.com/voxgig-sdk/transportrest-transit-apis-sdk/go"
 
-client = TransportrestTransitApisSDK({
-    "apikey": os.environ.get("TRANSPORTREST-TRANSIT-APIS_APIKEY"),
-})
+client := sdk.NewTransportrestTransitApisSDK(map[string]any{})
 
-# List all arrivals
-arrivals, err = client.Arrival(None).list(None, None)
+// List all arrivals
+arrivals, err := client.Arrival(nil).List(nil, nil)
 ```
 
 ### Ruby
@@ -121,48 +153,42 @@ arrivals, err = client.Arrival(None).list(None, None)
 ```ruby
 require_relative "TransportrestTransitApis_sdk"
 
-client = TransportrestTransitApisSDK.new({
-  "apikey" => ENV["TRANSPORTREST-TRANSIT-APIS_APIKEY"],
-})
+client = TransportrestTransitApisSDK.new({})
 
 # List all arrivals
 arrivals, err = client.Arrival(nil).list(nil, nil)
 ```
 
-### TypeScript
-
-```ts
-import { TransportrestTransitApisSDK } from 'transportrest-transit-apis'
-
-const client = new TransportrestTransitApisSDK({
-  apikey: process.env.TRANSPORTREST-TRANSIT-APIS_APIKEY,
-})
-
-// List all arrivals
-const arrivals = await client.Arrival().list()
-```
-
-
-## Testing
-
-Both SDKs provide a test mode that replaces the HTTP transport with an
-in-memory mock, so tests run without a network connection.
-
-### Golang
-
-```go
-client := sdk.TestSDK(nil, nil)
-result, err := client.Arrival(nil).Load(
-    map[string]any{"id": "test01"}, nil,
-)
-```
-
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Arrival(nil):load(
-  { id = "test01" }, nil
+local sdk = require("transportrest-transit-apis_sdk")
+
+local client = sdk.new({})
+
+-- List all arrivals
+local arrivals, err = client:Arrival(nil):list(nil, nil)
+```
+
+## Unit testing in offline mode
+
+Every SDK ships a test mode that swaps the HTTP transport for an
+in-memory mock, so unit tests run offline.
+
+### TypeScript
+
+```ts
+const client = TransportrestTransitApisSDK.test()
+const result = await client.Arrival().load({ id: 'test01' })
+// result.ok === true, result.data contains mock data
+```
+
+### Python
+
+```python
+client = TransportrestTransitApisSDK.test(None, None)
+result, err = client.Arrival(None).load(
+    {"id": "test01"}, None
 )
 ```
 
@@ -175,12 +201,12 @@ $client = TransportrestTransitApisSDK::test(null, null);
 );
 ```
 
-### Python
+### Golang
 
-```python
-client = TransportrestTransitApisSDK.test(None, None)
-result, err = client.Arrival(None).load(
-    {"id": "test01"}, None
+```go
+client := sdk.TestSDK(nil, nil)
+result, err := client.Arrival(nil).Load(
+    map[string]any{"id": "test01"}, nil,
 )
 ```
 
@@ -193,14 +219,46 @@ result, err = client.Arrival(nil).load(
 )
 ```
 
-### TypeScript
+### Lua
 
-```ts
-const client = TransportrestTransitApisSDK.test()
-const result = await client.Arrival().load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+```lua
+local client = sdk.test(nil, nil)
+local result, err = client:Arrival(nil):load(
+  { id = "test01" }, nil
+)
 ```
 
+## How it works
+
+Every SDK call runs the same five-stage pipeline:
+
+1. **Point** — resolve the API endpoint from the operation definition.
+2. **Spec** — build the HTTP specification (URL, method, headers, body).
+3. **Request** — send the HTTP request.
+4. **Response** — receive and parse the response.
+5. **Result** — extract the result data for the caller.
+
+A feature hook fires at each stage (e.g. `PrePoint`, `PreSpec`,
+`PreRequest`), so features can inspect or modify the pipeline without
+forking the SDK.
+
+### Features
+
+| Feature | Purpose |
+| --- | --- |
+| **TestFeature** | In-memory mock transport for testing without a live server |
+
+Pass custom features via the `extend` option at construction time.
+
+### Direct and Prepare
+
+For endpoints the entity model doesn't cover, use the low-level methods:
+
+- **`direct(fetchargs)`** — build and send an HTTP request in one step.
+- **`prepare(fetchargs)`** — build the request without sending it.
+
+Both accept a map with `path`, `method`, `params`, `query`,
+`headers`, and `body`. See the [How-to guides](#how-to-guides) below.
 
 ## How-to guides
 
@@ -208,21 +266,22 @@ const result = await client.Arrival().load({ id: 'test01' })
 
 When the entity interface does not cover an endpoint, use `direct`:
 
-**Go:**
-```go
-result, err := client.Direct(map[string]any{
-    "path":   "/api/resource/{id}",
-    "method": "GET",
-    "params": map[string]any{"id": "example"},
+**TypeScript:**
+```ts
+const result = await client.direct({
+  path: '/api/resource/{id}',
+  method: 'GET',
+  params: { id: 'example' },
 })
+console.log(result.data)
 ```
 
-**Lua:**
-```lua
-local result, err = client:direct({
-  path = "/api/resource/{id}",
-  method = "GET",
-  params = { id = "example" },
+**Python:**
+```python
+result, err = client.direct({
+    "path": "/api/resource/{id}",
+    "method": "GET",
+    "params": {"id": "example"},
 })
 ```
 
@@ -235,12 +294,12 @@ local result, err = client:direct({
 ]);
 ```
 
-**Python:**
-```python
-result, err = client.direct({
-    "path": "/api/resource/{id}",
+**Go:**
+```go
+result, err := client.Direct(map[string]any{
+    "path":   "/api/resource/{id}",
     "method": "GET",
-    "params": {"id": "example"},
+    "params": map[string]any{"id": "example"},
 })
 ```
 
@@ -253,25 +312,33 @@ result, err = client.direct({
 })
 ```
 
-**TypeScript:**
-```ts
-const result = await client.direct({
-  path: '/api/resource/{id}',
-  method: 'GET',
-  params: { id: 'example' },
+**Lua:**
+```lua
+local result, err = client:direct({
+  path = "/api/resource/{id}",
+  method = "GET",
+  params = { id = "example" },
 })
-console.log(result.data)
 ```
 
+## Per-language documentation
 
-## Language-specific documentation
+- [TypeScript](ts/README.md)
+- [Python](py/README.md)
+- [PHP](php/README.md)
+- [Golang](go/README.md)
+- [Ruby](rb/README.md)
+- [Lua](lua/README.md)
 
-- [Golang SDK](go/README.md)
-- [Go CLI SDK](go-cli/README.md)
-- [Go MCP server SDK](go-mcp/README.md)
-- [Lua SDK](lua/README.md)
-- [PHP SDK](php/README.md)
-- [Python SDK](py/README.md)
-- [Ruby SDK](rb/README.md)
-- [TypeScript SDK](ts/README.md)
+## Using the transport.rest transit APIs
 
+- Upstream: [https://v6.db.transport.rest](https://v6.db.transport.rest)
+
+- The `db-rest` server code is published under the **ISC License**.
+- The data returned is sourced from Deutsche Bahn's VENDO backend; usage is subject to DB's own terms.
+- This is an unofficial, community-maintained mirror — it is not operated by Deutsche Bahn.
+- Heavy users are encouraged to self-host or rely on GTFS feeds, since the upstream APIs have stricter rate limits than the older HAFAS endpoints.
+
+---
+
+Generated from the transport.rest transit APIs OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
