@@ -10,13 +10,13 @@ The Ruby SDK for the TransportrestTransitApis API — an entity-oriented client 
 
 ## Install
 ```bash
-gem install transportrest-transit-apis-sdk
+gem install voxgig-sdk-transportrest-transit-apis
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "transportrest-transit-apis-sdk"
+gem "voxgig-sdk-transportrest-transit-apis"
 ```
 
 Then run:

@@ -10,7 +10,7 @@ The TypeScript SDK for the TransportrestTransitApis API — a type-safe, entity-
 
 ## Install
 ```bash
-npm install transportrest-transit-apis
+npm install @voxgig-sdk/transportrest-transit-apis
 ```
 ## Tutorial: your first API call
 

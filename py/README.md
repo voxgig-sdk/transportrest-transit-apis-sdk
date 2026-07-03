@@ -10,7 +10,7 @@ The Python SDK for the TransportrestTransitApis API — an entity-oriented clien
 
 ## Install
 ```bash
-pip install transportrest-transit-apis-sdk
+pip install voxgig-sdk-transportrest-transit-apis
 ```
 
 Or install from source:

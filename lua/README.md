@@ -10,7 +10,7 @@ The Lua SDK for the TransportrestTransitApis API — an entity-oriented client u
 
 ## Install
 ```bash
-luarocks install transportrest-transit-apis-sdk
+luarocks install voxgig-sdk-transportrest-transit-apis
 ```
 
 If the module is not yet published, add the source directory to

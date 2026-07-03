@@ -10,7 +10,7 @@ The PHP SDK for the TransportrestTransitApis API — an entity-oriented client u
 
 ## Install
 ```bash
-composer require voxgig/transportrest-transit-apis-sdk
+composer require voxgig-sdk/transportrest-transit-apis
 ```
 
 
