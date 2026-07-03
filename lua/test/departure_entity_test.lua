@@ -94,6 +94,7 @@ function departure_basic_setup(extra)
     ["TRANSPORTRESTTRANSITAPIS_TEST_DEPARTURE_ENTID"] = idmap,
     ["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] = "FALSE",
     ["TRANSPORTRESTTRANSITAPIS_TEST_EXPLAIN"] = "FALSE",
+    ["TRANSPORTRESTTRANSITAPIS_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -105,6 +106,7 @@ function departure_basic_setup(extra)
   if env["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
+        apikey = env["TRANSPORTRESTTRANSITAPIS_APIKEY"],
       },
       extra or {},
     })

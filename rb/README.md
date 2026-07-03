@@ -1,6 +1,11 @@
 # TransportrestTransitApis Ruby SDK
 
-The Ruby SDK for the TransportrestTransitApis API. Provides an entity-oriented interface using idiomatic Ruby conventions.
+
+
+The Ruby SDK for the TransportrestTransitApis API — an entity-oriented client using idiomatic Ruby conventions.
+
+> Other languages, the CLI, and MCP server live alongside this one — see
+> the [top-level README](../README.md).
 
 
 ## Install
@@ -31,13 +36,15 @@ loading a specific record.
 ```ruby
 require_relative "TransportrestTransitApis_sdk"
 
-client = TransportrestTransitApisSDK.new({})
+client = TransportrestTransitApisSDK.new({
+  "apikey" => ENV["TRANSPORTREST-TRANSIT-APIS_APIKEY"],
+})
 ```
 
 ### 2. List arrivals
 
 ```ruby
-result, err = client.Arrival(nil).list(nil, nil)
+result, err = client.Arrival().list
 raise err if err
 
 if result.is_a?(Array)
@@ -89,11 +96,9 @@ puts fetchdef["headers"]
 Create a mock client for unit testing — no server required:
 
 ```ruby
-client = TransportrestTransitApisSDK.test(nil, nil)
+client = TransportrestTransitApisSDK.test
 
-result, err = client.TransportrestTransitApis(nil).load(
-  { "id" => "test01" }, nil
-)
+result, err = client.TransportrestTransitApis().load({ "id" => "test01" })
 # result contains mock response data
 ```
 
@@ -125,6 +130,7 @@ Create a `.env.local` file at the project root:
 
 ```
 TRANSPORTREST-TRANSIT-APIS_TEST_LIVE=TRUE
+TRANSPORTREST-TRANSIT-APIS_APIKEY=<your-key>
 ```
 
 Then run:
@@ -147,6 +153,7 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
+| `apikey` | `String` | API key for authentication. |
 | `base` | `String` | Base URL of the API server. |
 | `prefix` | `String` | URL path prefix prepended to all requests. |
 | `suffix` | `String` | URL path suffix appended to all requests. |

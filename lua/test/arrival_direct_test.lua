@@ -77,12 +77,14 @@ function arrival_direct_setup(mockres)
   local env = runner.env_override({
     ["TRANSPORTRESTTRANSITAPIS_TEST_ARRIVAL_ENTID"] = {},
     ["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] = "FALSE",
+    ["TRANSPORTRESTTRANSITAPIS_APIKEY"] = "NONE",
   })
 
   local live = env["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
+      apikey = env["TRANSPORTRESTTRANSITAPIS_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

@@ -1,21 +1,8 @@
 # TransportrestTransitApis SDK
 
-Query German and European public-transport timetables, journeys, and realtime departures via a community REST wrapper around Deutsche Bahn
+transport.rest transit APIs client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About transport.rest transit APIs
-
-`transport.rest` is a family of community-run REST APIs that wrap public-transport backends across Germany and Europe. The DB v6 endpoint at `https://v6.db.transport.rest` is built on top of [`db-vendo-client`](https://github.com/public-transport/db-vendo-client) and exposes the same long-distance, regional, and selected international and local services you see in the DB Navigator app.
-
-What you typically get from the API:
-
-- **Locations** — search stations, stops, addresses, and points of interest by name or coordinates.
-- **Departures / Arrivals** — board listings for a given stop, including realtime delays, platforms, and direction filters.
-- **Journeys** — A-to-B routing with transfers, prices (where available), and polyline geometry.
-- **Trips / Stops** — detailed timetable and stop-sequence data for a specific train or bus run.
-
-No API key is required and CORS is enabled, which makes the service convenient for prototyping. The maintainers document a soft limit of around **100 requests/minute** and warn that the underlying VENDO backend is markedly more rate-limited than the deprecated HAFAS API; the `/radar` endpoint in particular is not currently usable. Responses support ETag-based caching, and a Docker image plus Redis cache are recommended for production use.
 
 ## Try it
 
@@ -49,29 +36,31 @@ gem install transportrest-transit-apis-sdk
 luarocks install transportrest-transit-apis-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { TransportrestTransitApisSDK } from 'transportrest-transit-apis'
 
-const client = new TransportrestTransitApisSDK({})
+const client = new TransportrestTransitApisSDK({
+  apikey: process.env.TRANSPORTREST-TRANSIT-APIS_APIKEY,
+})
 
 // List all arrivals
 const arrivals = await client.Arrival().list()
+console.log(arrivals.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -101,13 +90,13 @@ The API exposes 7 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Arrival** | Realtime arrival board for a stop, typically served from `/stops/{id}/arrivals`, including platform, delay, and origin information. | `/stops/{id}/arrivals` |
-| **Departure** | Realtime departure board for a stop, typically served from `/stops/{id}/departures`, with direction, platform, and delay data. | `/stops/{id}/departures` |
-| **Journey** | A-to-B trip planning from `/journeys`, returning one or more itineraries with legs, transfers, and timing. | `/journeys` |
-| **Location** | Free-text and geo lookup for stations, addresses, and POIs via `/locations` (and station autocomplete). | `/locations` |
-| **Radar** | Geographic radar of vehicles currently in a bounding box via `/radar` — noted as unavailable on the current VENDO backend. | `/radar` |
-| **Stop** | Station and stop metadata served from `/stops/{id}`, including name, location, and product categories. | `/stops/{id}` |
-| **Trip** | Detailed run of a single train or bus via `/trips/{id}`, with the full stop sequence and realtime status. | `/trips/{id}` |
+| **Arrival** |  | `/stops/{id}/arrivals` |
+| **Departure** |  | `/stops/{id}/departures` |
+| **Journey** |  | `/journeys` |
+| **Location** |  | `/locations` |
+| **Radar** |  | `/radar` |
+| **Stop** |  | `/stops/{id}` |
+| **Trip** |  | `/trips/{id}` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -117,12 +106,16 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from transportresttransitapis_sdk import TransportrestTransitApisSDK
 
-client = TransportrestTransitApisSDK({})
+client = TransportrestTransitApisSDK({
+    "apikey": os.environ.get("TRANSPORTREST-TRANSIT-APIS_APIKEY"),
+})
 
 # List all arrivals
-arrivals, err = client.Arrival(None).list(None, None)
+arrivals, err = client.Arrival().list()
+print(arrivals)
 ```
 
 ### PHP
@@ -131,10 +124,13 @@ arrivals, err = client.Arrival(None).list(None, None)
 <?php
 require_once 'transportresttransitapis_sdk.php';
 
-$client = new TransportrestTransitApisSDK([]);
+$client = new TransportrestTransitApisSDK([
+    "apikey" => getenv("TRANSPORTREST-TRANSIT-APIS_APIKEY"),
+]);
 
 // List all arrivals
-[$arrivals, $err] = $client->Arrival(null)->list(null, null);
+[$arrivals, $err] = $client->Arrival()->list();
+print_r($arrivals);
 ```
 
 ### Golang
@@ -142,10 +138,13 @@ $client = new TransportrestTransitApisSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/transportrest-transit-apis-sdk/go"
 
-client := sdk.NewTransportrestTransitApisSDK(map[string]any{})
+client := sdk.NewTransportrestTransitApisSDK(map[string]any{
+    "apikey": os.Getenv("TRANSPORTREST-TRANSIT-APIS_APIKEY"),
+})
 
 // List all arrivals
 arrivals, err := client.Arrival(nil).List(nil, nil)
+fmt.Println(arrivals)
 ```
 
 ### Ruby
@@ -153,10 +152,13 @@ arrivals, err := client.Arrival(nil).List(nil, nil)
 ```ruby
 require_relative "TransportrestTransitApis_sdk"
 
-client = TransportrestTransitApisSDK.new({})
+client = TransportrestTransitApisSDK.new({
+  "apikey" => ENV["TRANSPORTREST-TRANSIT-APIS_APIKEY"],
+})
 
 # List all arrivals
-arrivals, err = client.Arrival(nil).list(nil, nil)
+arrivals, err = client.Arrival().list
+puts arrivals
 ```
 
 ### Lua
@@ -164,10 +166,13 @@ arrivals, err = client.Arrival(nil).list(nil, nil)
 ```lua
 local sdk = require("transportrest-transit-apis_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("TRANSPORTREST-TRANSIT-APIS_APIKEY"),
+})
 
 -- List all arrivals
-local arrivals, err = client:Arrival(nil):list(nil, nil)
+local arrivals, err = client:Arrival():list()
+print(arrivals)
 ```
 
 ## Unit testing in offline mode
@@ -186,25 +191,21 @@ const result = await client.Arrival().load({ id: 'test01' })
 ### Python
 
 ```python
-client = TransportrestTransitApisSDK.test(None, None)
-result, err = client.Arrival(None).load(
-    {"id": "test01"}, None
-)
+client = TransportrestTransitApisSDK.test()
+result, err = client.Arrival().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = TransportrestTransitApisSDK::test(null, null);
-[$result, $err] = $client->Arrival(null)->load(
-    ["id" => "test01"], null
-);
+$client = TransportrestTransitApisSDK::test();
+[$result, $err] = $client->Arrival()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Arrival(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -213,19 +214,15 @@ result, err := client.Arrival(nil).Load(
 ### Ruby
 
 ```ruby
-client = TransportrestTransitApisSDK.test(nil, nil)
-result, err = client.Arrival(nil).load(
-  { "id" => "test01" }, nil
-)
+client = TransportrestTransitApisSDK.test
+result, err = client.Arrival().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Arrival(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Arrival():load({ id = "test01" })
 ```
 
 ## How it works
@@ -329,15 +326,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the transport.rest transit APIs
-
-- Upstream: [https://v6.db.transport.rest](https://v6.db.transport.rest)
-
-- The `db-rest` server code is published under the **ISC License**.
-- The data returned is sourced from Deutsche Bahn's VENDO backend; usage is subject to DB's own terms.
-- This is an unofficial, community-maintained mirror — it is not operated by Deutsche Bahn.
-- Heavy users are encouraged to self-host or rely on GTFS feeds, since the upstream APIs have stricter rate limits than the older HAFAS endpoints.
 
 ---
 

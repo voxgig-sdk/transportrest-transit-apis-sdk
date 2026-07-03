@@ -119,6 +119,7 @@ func journeyBasicSetup(extra map[string]any) *entityTestSetup {
 		"TRANSPORTRESTTRANSITAPIS_TEST_JOURNEY_ENTID": idmap,
 		"TRANSPORTRESTTRANSITAPIS_TEST_LIVE":      "FALSE",
 		"TRANSPORTRESTTRANSITAPIS_TEST_EXPLAIN":   "FALSE",
+		"TRANSPORTRESTTRANSITAPIS_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["TRANSPORTRESTTRANSITAPIS_TEST_JOURNEY_ENTID"])
@@ -129,6 +130,7 @@ func journeyBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
+				"apikey": env["TRANSPORTRESTTRANSITAPIS_APIKEY"],
 			},
 			extra,
 		})

@@ -68,12 +68,14 @@ function radar_direct_setup($mockres)
     $env = Runner::env_override([
         "TRANSPORTRESTTRANSITAPIS_TEST_RADAR_ENTID" => [],
         "TRANSPORTRESTTRANSITAPIS_TEST_LIVE" => "FALSE",
+        "TRANSPORTRESTTRANSITAPIS_APIKEY" => "NONE",
     ]);
 
     $live = $env["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
+            "apikey" => $env["TRANSPORTRESTTRANSITAPIS_APIKEY"],
         ];
         $client = new TransportrestTransitApisSDK($merged_opts);
         return [

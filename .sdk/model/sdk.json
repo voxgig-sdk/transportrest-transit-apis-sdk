@@ -1,9 +1,1179 @@
 {
-  "name": "transportrest-transit-apis",
-  "origin": "voxgig-sdk",
   "def": "transportrest-transit-apis_0.1.0.json",
   "main": {
+    "def": {
+      "desc": ""
+    },
     "kit": {
+      "config": {
+        "auth": {
+          "prefix": "Bearer"
+        },
+        "docs_order": [
+          "ts",
+          "py",
+          "php",
+          "go",
+          "rb",
+          "lua"
+        ],
+        "headers": {
+          "content-type": "application/json"
+        }
+      },
+      "entity": {
+        "arrival": {
+          "active": true,
+          "alias": {
+            "field": {}
+          },
+          "fields": [
+            {
+              "active": true,
+              "name": "delay",
+              "req": false,
+              "type": "`$INTEGER`"
+            },
+            {
+              "active": true,
+              "name": "direction",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "line",
+              "req": false,
+              "type": "`$OBJECT`"
+            },
+            {
+              "active": true,
+              "name": "planned_platform",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "planned_when",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "platform",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "stop",
+              "req": false,
+              "type": "`$OBJECT`"
+            },
+            {
+              "active": true,
+              "name": "trip_id",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "when",
+              "req": false,
+              "type": "`$STRING`"
+            }
+          ],
+          "name": "arrival",
+          "op": {
+            "list": {
+              "input": "data",
+              "name": "list",
+              "points": [
+                {
+                  "active": true,
+                  "args": {
+                    "params": [
+                      {
+                        "active": true,
+                        "kind": "param",
+                        "name": "stop_id",
+                        "orig": "id",
+                        "reqd": true,
+                        "type": "`$STRING`"
+                      }
+                    ],
+                    "query": [
+                      {
+                        "active": true,
+                        "example": 120,
+                        "kind": "query",
+                        "name": "duration",
+                        "orig": "duration",
+                        "reqd": false,
+                        "type": "`$INTEGER`"
+                      },
+                      {
+                        "active": true,
+                        "example": 10,
+                        "kind": "query",
+                        "name": "result",
+                        "orig": "result",
+                        "reqd": false,
+                        "type": "`$INTEGER`"
+                      },
+                      {
+                        "active": true,
+                        "kind": "query",
+                        "name": "when",
+                        "orig": "when",
+                        "reqd": false,
+                        "type": "`$STRING`"
+                      }
+                    ]
+                  },
+                  "method": "GET",
+                  "orig": "/stops/{id}/arrivals",
+                  "parts": [
+                    "stops",
+                    "{stop_id}",
+                    "arrivals"
+                  ],
+                  "rename": {
+                    "param": {
+                      "id": "stop_id"
+                    }
+                  },
+                  "select": {
+                    "exist": [
+                      "duration",
+                      "result",
+                      "stop_id",
+                      "when"
+                    ]
+                  },
+                  "transform": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            }
+          },
+          "relations": {
+            "ancestors": [
+              [
+                "stop"
+              ]
+            ]
+          }
+        },
+        "departure": {
+          "active": true,
+          "alias": {
+            "field": {}
+          },
+          "fields": [
+            {
+              "active": true,
+              "name": "delay",
+              "req": false,
+              "type": "`$INTEGER`"
+            },
+            {
+              "active": true,
+              "name": "direction",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "line",
+              "req": false,
+              "type": "`$OBJECT`"
+            },
+            {
+              "active": true,
+              "name": "planned_platform",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "planned_when",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "platform",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "stop",
+              "req": false,
+              "type": "`$OBJECT`"
+            },
+            {
+              "active": true,
+              "name": "trip_id",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "when",
+              "req": false,
+              "type": "`$STRING`"
+            }
+          ],
+          "name": "departure",
+          "op": {
+            "list": {
+              "input": "data",
+              "name": "list",
+              "points": [
+                {
+                  "active": true,
+                  "args": {
+                    "params": [
+                      {
+                        "active": true,
+                        "example": "900000003201",
+                        "kind": "param",
+                        "name": "stop_id",
+                        "orig": "id",
+                        "reqd": true,
+                        "type": "`$STRING`"
+                      }
+                    ],
+                    "query": [
+                      {
+                        "active": true,
+                        "kind": "query",
+                        "name": "direction",
+                        "orig": "direction",
+                        "reqd": false,
+                        "type": "`$STRING`"
+                      },
+                      {
+                        "active": true,
+                        "example": 120,
+                        "kind": "query",
+                        "name": "duration",
+                        "orig": "duration",
+                        "reqd": false,
+                        "type": "`$INTEGER`"
+                      },
+                      {
+                        "active": true,
+                        "example": 10,
+                        "kind": "query",
+                        "name": "result",
+                        "orig": "result",
+                        "reqd": false,
+                        "type": "`$INTEGER`"
+                      },
+                      {
+                        "active": true,
+                        "kind": "query",
+                        "name": "when",
+                        "orig": "when",
+                        "reqd": false,
+                        "type": "`$STRING`"
+                      }
+                    ]
+                  },
+                  "method": "GET",
+                  "orig": "/stops/{id}/departures",
+                  "parts": [
+                    "stops",
+                    "{stop_id}",
+                    "departures"
+                  ],
+                  "rename": {
+                    "param": {
+                      "id": "stop_id"
+                    }
+                  },
+                  "select": {
+                    "exist": [
+                      "direction",
+                      "duration",
+                      "result",
+                      "stop_id",
+                      "when"
+                    ]
+                  },
+                  "transform": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            }
+          },
+          "relations": {
+            "ancestors": [
+              [
+                "stop"
+              ]
+            ]
+          }
+        },
+        "journey": {
+          "active": true,
+          "alias": {
+            "field": {}
+          },
+          "fields": [
+            {
+              "active": true,
+              "name": "leg",
+              "req": false,
+              "type": "`$ARRAY`"
+            },
+            {
+              "active": true,
+              "name": "refresh_token",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "type",
+              "req": false,
+              "type": "`$STRING`"
+            }
+          ],
+          "name": "journey",
+          "op": {
+            "list": {
+              "input": "data",
+              "name": "list",
+              "points": [
+                {
+                  "active": true,
+                  "args": {
+                    "query": [
+                      {
+                        "active": true,
+                        "kind": "query",
+                        "name": "arrival",
+                        "orig": "arrival",
+                        "reqd": false,
+                        "type": "`$STRING`"
+                      },
+                      {
+                        "active": true,
+                        "kind": "query",
+                        "name": "departure",
+                        "orig": "departure",
+                        "reqd": false,
+                        "type": "`$STRING`"
+                      },
+                      {
+                        "active": true,
+                        "example": "900000003201",
+                        "kind": "query",
+                        "name": "from",
+                        "orig": "from",
+                        "reqd": true,
+                        "type": "`$STRING`"
+                      },
+                      {
+                        "active": true,
+                        "example": 3,
+                        "kind": "query",
+                        "name": "result",
+                        "orig": "result",
+                        "reqd": false,
+                        "type": "`$INTEGER`"
+                      },
+                      {
+                        "active": true,
+                        "example": false,
+                        "kind": "query",
+                        "name": "stopover",
+                        "orig": "stopover",
+                        "reqd": false,
+                        "type": "`$BOOLEAN`"
+                      },
+                      {
+                        "active": true,
+                        "example": "900000100003",
+                        "kind": "query",
+                        "name": "to",
+                        "orig": "to",
+                        "reqd": true,
+                        "type": "`$STRING`"
+                      }
+                    ]
+                  },
+                  "method": "GET",
+                  "orig": "/journeys",
+                  "parts": [
+                    "journeys"
+                  ],
+                  "select": {
+                    "exist": [
+                      "arrival",
+                      "departure",
+                      "from",
+                      "result",
+                      "stopover",
+                      "to"
+                    ]
+                  },
+                  "transform": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            }
+          },
+          "relations": {
+            "ancestors": []
+          }
+        },
+        "location": {
+          "active": true,
+          "alias": {
+            "field": {}
+          },
+          "fields": [
+            {
+              "active": true,
+              "name": "id",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "location",
+              "req": false,
+              "type": "`$OBJECT`"
+            },
+            {
+              "active": true,
+              "name": "name",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "product",
+              "req": false,
+              "type": "`$OBJECT`"
+            },
+            {
+              "active": true,
+              "name": "type",
+              "req": false,
+              "type": "`$STRING`"
+            }
+          ],
+          "id": {
+            "field": "id",
+            "name": "id"
+          },
+          "name": "location",
+          "op": {
+            "list": {
+              "input": "data",
+              "name": "list",
+              "points": [
+                {
+                  "active": true,
+                  "args": {
+                    "query": [
+                      {
+                        "active": true,
+                        "example": true,
+                        "kind": "query",
+                        "name": "address",
+                        "orig": "address",
+                        "reqd": false,
+                        "type": "`$BOOLEAN`"
+                      },
+                      {
+                        "active": true,
+                        "example": true,
+                        "kind": "query",
+                        "name": "poi",
+                        "orig": "poi",
+                        "reqd": false,
+                        "type": "`$BOOLEAN`"
+                      },
+                      {
+                        "active": true,
+                        "example": "Berlin",
+                        "kind": "query",
+                        "name": "query",
+                        "orig": "query",
+                        "reqd": true,
+                        "type": "`$STRING`"
+                      },
+                      {
+                        "active": true,
+                        "example": 10,
+                        "kind": "query",
+                        "name": "result",
+                        "orig": "result",
+                        "reqd": false,
+                        "type": "`$INTEGER`"
+                      },
+                      {
+                        "active": true,
+                        "example": true,
+                        "kind": "query",
+                        "name": "stop",
+                        "orig": "stop",
+                        "reqd": false,
+                        "type": "`$BOOLEAN`"
+                      }
+                    ]
+                  },
+                  "method": "GET",
+                  "orig": "/locations",
+                  "parts": [
+                    "locations"
+                  ],
+                  "select": {
+                    "exist": [
+                      "address",
+                      "poi",
+                      "query",
+                      "result",
+                      "stop"
+                    ]
+                  },
+                  "transform": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            }
+          },
+          "relations": {
+            "ancestors": []
+          }
+        },
+        "radar": {
+          "active": true,
+          "alias": {
+            "field": {}
+          },
+          "fields": [
+            {
+              "active": true,
+              "name": "direction",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "line",
+              "req": false,
+              "type": "`$OBJECT`"
+            },
+            {
+              "active": true,
+              "name": "location",
+              "req": false,
+              "type": "`$OBJECT`"
+            },
+            {
+              "active": true,
+              "name": "next_stopover",
+              "req": false,
+              "type": "`$ARRAY`"
+            },
+            {
+              "active": true,
+              "name": "trip_id",
+              "req": false,
+              "type": "`$STRING`"
+            }
+          ],
+          "name": "radar",
+          "op": {
+            "list": {
+              "input": "data",
+              "name": "list",
+              "points": [
+                {
+                  "active": true,
+                  "args": {
+                    "query": [
+                      {
+                        "active": true,
+                        "kind": "query",
+                        "name": "east",
+                        "orig": "east",
+                        "reqd": true,
+                        "type": "`$NUMBER`"
+                      },
+                      {
+                        "active": true,
+                        "kind": "query",
+                        "name": "north",
+                        "orig": "north",
+                        "reqd": true,
+                        "type": "`$NUMBER`"
+                      },
+                      {
+                        "active": true,
+                        "example": 256,
+                        "kind": "query",
+                        "name": "result",
+                        "orig": "result",
+                        "reqd": false,
+                        "type": "`$INTEGER`"
+                      },
+                      {
+                        "active": true,
+                        "kind": "query",
+                        "name": "south",
+                        "orig": "south",
+                        "reqd": true,
+                        "type": "`$NUMBER`"
+                      },
+                      {
+                        "active": true,
+                        "kind": "query",
+                        "name": "west",
+                        "orig": "west",
+                        "reqd": true,
+                        "type": "`$NUMBER`"
+                      }
+                    ]
+                  },
+                  "method": "GET",
+                  "orig": "/radar",
+                  "parts": [
+                    "radar"
+                  ],
+                  "select": {
+                    "exist": [
+                      "east",
+                      "north",
+                      "result",
+                      "south",
+                      "west"
+                    ]
+                  },
+                  "transform": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            }
+          },
+          "relations": {
+            "ancestors": []
+          }
+        },
+        "stop": {
+          "active": true,
+          "alias": {
+            "field": {}
+          },
+          "fields": [
+            {
+              "active": true,
+              "name": "id",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "location",
+              "req": false,
+              "type": "`$OBJECT`"
+            },
+            {
+              "active": true,
+              "name": "name",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "product",
+              "req": false,
+              "type": "`$OBJECT`"
+            },
+            {
+              "active": true,
+              "name": "station",
+              "req": false,
+              "type": "`$OBJECT`"
+            },
+            {
+              "active": true,
+              "name": "type",
+              "req": false,
+              "type": "`$STRING`"
+            }
+          ],
+          "id": {
+            "field": "id",
+            "name": "id"
+          },
+          "name": "stop",
+          "op": {
+            "load": {
+              "input": "data",
+              "name": "load",
+              "points": [
+                {
+                  "active": true,
+                  "args": {
+                    "params": [
+                      {
+                        "active": true,
+                        "example": "900000003201",
+                        "kind": "param",
+                        "name": "id",
+                        "orig": "id",
+                        "reqd": true,
+                        "type": "`$STRING`"
+                      }
+                    ]
+                  },
+                  "method": "GET",
+                  "orig": "/stops/{id}",
+                  "parts": [
+                    "stops",
+                    "{id}"
+                  ],
+                  "select": {
+                    "exist": [
+                      "id"
+                    ]
+                  },
+                  "transform": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            }
+          },
+          "relations": {
+            "ancestors": []
+          }
+        },
+        "trip": {
+          "active": true,
+          "alias": {
+            "field": {}
+          },
+          "fields": [
+            {
+              "active": true,
+              "name": "destination",
+              "req": false,
+              "type": "`$OBJECT`"
+            },
+            {
+              "active": true,
+              "name": "direction",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "id",
+              "req": false,
+              "type": "`$STRING`"
+            },
+            {
+              "active": true,
+              "name": "line",
+              "req": false,
+              "type": "`$OBJECT`"
+            },
+            {
+              "active": true,
+              "name": "origin",
+              "req": false,
+              "type": "`$OBJECT`"
+            },
+            {
+              "active": true,
+              "name": "stopover",
+              "req": false,
+              "type": "`$ARRAY`"
+            }
+          ],
+          "id": {
+            "field": "id",
+            "name": "id"
+          },
+          "name": "trip",
+          "op": {
+            "load": {
+              "input": "data",
+              "name": "load",
+              "points": [
+                {
+                  "active": true,
+                  "args": {
+                    "params": [
+                      {
+                        "active": true,
+                        "kind": "param",
+                        "name": "id",
+                        "orig": "id",
+                        "reqd": true,
+                        "type": "`$STRING`"
+                      }
+                    ],
+                    "query": [
+                      {
+                        "active": true,
+                        "kind": "query",
+                        "name": "line_name",
+                        "orig": "line_name",
+                        "reqd": false,
+                        "type": "`$STRING`"
+                      },
+                      {
+                        "active": true,
+                        "example": true,
+                        "kind": "query",
+                        "name": "stopover",
+                        "orig": "stopover",
+                        "reqd": false,
+                        "type": "`$BOOLEAN`"
+                      }
+                    ]
+                  },
+                  "method": "GET",
+                  "orig": "/trips/{id}",
+                  "parts": [
+                    "trips",
+                    "{id}"
+                  ],
+                  "select": {
+                    "exist": [
+                      "id",
+                      "line_name",
+                      "stopover"
+                    ]
+                  },
+                  "transform": {
+                    "req": "`reqdata`",
+                    "res": "`body`"
+                  }
+                }
+              ]
+            }
+          },
+          "relations": {
+            "ancestors": []
+          }
+        }
+      },
+      "feature": {
+        "test": {
+          "active": true,
+          "config": {
+            "options": {
+              "active": false
+            }
+          },
+          "hook": {
+            "GetData": {
+              "active": true,
+              "await": false
+            },
+            "GetMatch": {
+              "active": true,
+              "await": false
+            },
+            "PostConstruct": {
+              "active": true,
+              "await": false
+            },
+            "PostConstructEntity": {
+              "active": true,
+              "await": false
+            },
+            "PostOperation": {
+              "active": false,
+              "await": false
+            },
+            "PrePoint": {
+              "active": true,
+              "await": false
+            },
+            "PreRequest": {
+              "active": true,
+              "await": false
+            },
+            "PreResponse": {
+              "active": true,
+              "await": false
+            },
+            "PreResult": {
+              "active": true,
+              "await": false
+            },
+            "PreSpec": {
+              "active": true,
+              "await": false
+            },
+            "PreTarget": {
+              "active": false,
+              "await": false
+            },
+            "SetData": {
+              "active": true,
+              "await": false
+            },
+            "SetMatch": {
+              "active": true,
+              "await": false
+            }
+          },
+          "name": "test",
+          "target": {
+            "go": {
+              "deps": {}
+            },
+            "go-cli": {
+              "deps": {}
+            },
+            "go-mcp": {
+              "deps": {}
+            },
+            "lua": {
+              "deps": {}
+            },
+            "php": {
+              "deps": {}
+            },
+            "py": {
+              "deps": {}
+            },
+            "rb": {
+              "deps": {}
+            },
+            "ts": {
+              "deps": {}
+            }
+          },
+          "title": "In-memory mock transport for testing without a live server",
+          "version": "0.0.1"
+        }
+      },
+      "flow": {
+        "BasicArrivalFlow": {
+          "active": true,
+          "entity": "arrival",
+          "key$": "BasicArrivalFlow",
+          "kind": "basic",
+          "name": "BasicArrivalFlow",
+          "param": {},
+          "step": [
+            {
+              "active": true,
+              "data": {},
+              "input": {},
+              "match": {
+                "stop_id": "stop01"
+              },
+              "op": "list",
+              "spec": [],
+              "valid": [
+                {
+                  "apply": "ItemExists",
+                  "def": {
+                    "ref": "arrival_ref01"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "BasicDepartureFlow": {
+          "active": true,
+          "entity": "departure",
+          "key$": "BasicDepartureFlow",
+          "kind": "basic",
+          "name": "BasicDepartureFlow",
+          "param": {},
+          "step": [
+            {
+              "active": true,
+              "data": {},
+              "input": {},
+              "match": {
+                "stop_id": "stop01"
+              },
+              "op": "list",
+              "spec": [],
+              "valid": [
+                {
+                  "apply": "ItemExists",
+                  "def": {
+                    "ref": "departure_ref01"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "BasicJourneyFlow": {
+          "active": true,
+          "entity": "journey",
+          "key$": "BasicJourneyFlow",
+          "kind": "basic",
+          "name": "BasicJourneyFlow",
+          "param": {},
+          "step": [
+            {
+              "active": true,
+              "data": {},
+              "input": {},
+              "match": {},
+              "op": "list",
+              "spec": [],
+              "valid": [
+                {
+                  "apply": "ItemExists",
+                  "def": {
+                    "ref": "journey_ref01"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "BasicLocationFlow": {
+          "active": true,
+          "entity": "location",
+          "key$": "BasicLocationFlow",
+          "kind": "basic",
+          "name": "BasicLocationFlow",
+          "param": {},
+          "step": [
+            {
+              "active": true,
+              "data": {},
+              "input": {},
+              "match": {},
+              "op": "list",
+              "spec": [],
+              "valid": [
+                {
+                  "apply": "ItemExists",
+                  "def": {
+                    "ref": "location_ref01"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "BasicRadarFlow": {
+          "active": true,
+          "entity": "radar",
+          "key$": "BasicRadarFlow",
+          "kind": "basic",
+          "name": "BasicRadarFlow",
+          "param": {},
+          "step": [
+            {
+              "active": true,
+              "data": {},
+              "input": {},
+              "match": {},
+              "op": "list",
+              "spec": [],
+              "valid": [
+                {
+                  "apply": "ItemExists",
+                  "def": {
+                    "ref": "radar_ref01"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "BasicStopFlow": {
+          "active": true,
+          "entity": "stop",
+          "key$": "BasicStopFlow",
+          "kind": "basic",
+          "name": "BasicStopFlow",
+          "param": {},
+          "step": [
+            {
+              "active": true,
+              "data": {},
+              "input": {
+                "ref": "stop_ref01",
+                "srcdatavar": "stop_ref01_data",
+                "suffix": "_dt0"
+              },
+              "match": {
+                "id": "stop01"
+              },
+              "op": "load",
+              "spec": [],
+              "valid": [
+                {
+                  "apply": "TextFieldMark",
+                  "def": {
+                    "mark": "Mark01-stop_ref01"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "BasicTripFlow": {
+          "active": true,
+          "entity": "trip",
+          "key$": "BasicTripFlow",
+          "kind": "basic",
+          "name": "BasicTripFlow",
+          "param": {},
+          "step": [
+            {
+              "active": true,
+              "data": {},
+              "input": {
+                "ref": "trip_ref01",
+                "srcdatavar": "trip_ref01_data",
+                "suffix": "_dt0"
+              },
+              "match": {
+                "id": "trip01"
+              },
+              "op": "load",
+              "spec": [],
+              "valid": [
+                {
+                  "apply": "TextFieldMark",
+                  "def": {
+                    "mark": "Mark01-trip_ref01"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      },
       "info": {
         "contact": {
           "name": "transport.rest",
@@ -41,1201 +1211,35 @@
           }
         ],
         "title": "transport.rest transit APIs",
-        "version": "1.0.0",
-        "tagline": "Query German and European public-transport timetables, journeys, and realtime departures via a community REST wrapper around Deutsche Bahn",
-        "homepage": "https://v6.db.transport.rest",
-        "docs_url": "https://v6.db.transport.rest",
-        "license_short": "ISC — open-source community project; underlying data is Deutsche Bahn's.",
-        "license_md": "- The `db-rest` server code is published under the **ISC License**.\n- The data returned is sourced from Deutsche Bahn's VENDO backend; usage is subject to DB's own terms.\n- This is an unofficial, community-maintained mirror — it is not operated by Deutsche Bahn.\n- Heavy users are encouraged to self-host or rely on GTFS feeds, since the upstream APIs have stricter rate limits than the older HAFAS endpoints.",
-        "about_md": "`transport.rest` is a family of community-run REST APIs that wrap public-transport backends across Germany and Europe. The DB v6 endpoint at `https://v6.db.transport.rest` is built on top of [`db-vendo-client`](https://github.com/public-transport/db-vendo-client) and exposes the same long-distance, regional, and selected international and local services you see in the DB Navigator app.\n\nWhat you typically get from the API:\n\n- **Locations** — search stations, stops, addresses, and points of interest by name or coordinates.\n- **Departures / Arrivals** — board listings for a given stop, including realtime delays, platforms, and direction filters.\n- **Journeys** — A-to-B routing with transfers, prices (where available), and polyline geometry.\n- **Trips / Stops** — detailed timetable and stop-sequence data for a specific train or bus run.\n\nNo API key is required and CORS is enabled, which makes the service convenient for prototyping. The maintainers document a soft limit of around **100 requests/minute** and warn that the underlying VENDO backend is markedly more rate-limited than the deprecated HAFAS API; the `/radar` endpoint in particular is not currently usable. Responses support ETag-based caching, and a Docker image plus Redis cache are recommended for production use.",
-        "entity_desc": {
-          "arrival": "Realtime arrival board for a stop, typically served from `/stops/{id}/arrivals`, including platform, delay, and origin information.",
-          "departure": "Realtime departure board for a stop, typically served from `/stops/{id}/departures`, with direction, platform, and delay data.",
-          "journey": "A-to-B trip planning from `/journeys`, returning one or more itineraries with legs, transfers, and timing.",
-          "location": "Free-text and geo lookup for stations, addresses, and POIs via `/locations` (and station autocomplete).",
-          "radar": "Geographic radar of vehicles currently in a bounding box via `/radar` — noted as unavailable on the current VENDO backend.",
-          "stop": "Station and stop metadata served from `/stops/{id}`, including name, location, and product categories.",
-          "trip": "Detailed run of a single train or bus via `/trips/{id}`, with the full stop sequence and realtime status."
-        },
-        "auth": false
+        "version": "1.0.0"
       },
-      "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
-        "headers": {
-          "content-type": "application/json"
-        },
-        "docs_order": [
-          "ts",
-          "py",
-          "php",
-          "go",
-          "rb",
-          "lua"
-        ]
-      },
-      "entity": {
-        "arrival": {
-          "alias": {
-            "field": {}
-          },
-          "fields": [
-            {
-              "name": "delay",
-              "req": false,
-              "type": "`$INTEGER`",
-              "active": true
-            },
-            {
-              "name": "direction",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            },
-            {
-              "name": "line",
-              "req": false,
-              "type": "`$OBJECT`",
-              "active": true
-            },
-            {
-              "name": "planned_platform",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            },
-            {
-              "name": "planned_when",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            },
-            {
-              "name": "platform",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            },
-            {
-              "name": "stop",
-              "req": false,
-              "type": "`$OBJECT`",
-              "active": true
-            },
-            {
-              "name": "trip_id",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            },
-            {
-              "name": "when",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            }
-          ],
-          "name": "arrival",
-          "op": {
-            "list": {
-              "name": "list",
-              "points": [
-                {
-                  "args": {
-                    "params": [
-                      {
-                        "kind": "param",
-                        "name": "stop_id",
-                        "orig": "id",
-                        "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
-                      }
-                    ],
-                    "query": [
-                      {
-                        "example": 120,
-                        "kind": "query",
-                        "name": "duration",
-                        "orig": "duration",
-                        "reqd": false,
-                        "type": "`$INTEGER`",
-                        "active": true
-                      },
-                      {
-                        "example": 10,
-                        "kind": "query",
-                        "name": "result",
-                        "orig": "result",
-                        "reqd": false,
-                        "type": "`$INTEGER`",
-                        "active": true
-                      },
-                      {
-                        "kind": "query",
-                        "name": "when",
-                        "orig": "when",
-                        "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
-                      }
-                    ]
-                  },
-                  "method": "GET",
-                  "orig": "/stops/{id}/arrivals",
-                  "parts": [
-                    "stops",
-                    "{stop_id}",
-                    "arrivals"
-                  ],
-                  "rename": {
-                    "param": {
-                      "id": "stop_id"
-                    }
-                  },
-                  "select": {
-                    "exist": [
-                      "duration",
-                      "result",
-                      "stop_id",
-                      "when"
-                    ]
-                  },
-                  "transform": {
-                    "req": "`reqdata`",
-                    "res": "`body`"
-                  },
-                  "active": true
-                }
-              ],
-              "input": "data"
-            }
-          },
-          "relations": {
-            "ancestors": [
-              [
-                "stop"
-              ]
-            ]
-          },
-          "active": true
-        },
-        "departure": {
-          "alias": {
-            "field": {}
-          },
-          "fields": [
-            {
-              "name": "delay",
-              "req": false,
-              "type": "`$INTEGER`",
-              "active": true
-            },
-            {
-              "name": "direction",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            },
-            {
-              "name": "line",
-              "req": false,
-              "type": "`$OBJECT`",
-              "active": true
-            },
-            {
-              "name": "planned_platform",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            },
-            {
-              "name": "planned_when",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            },
-            {
-              "name": "platform",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            },
-            {
-              "name": "stop",
-              "req": false,
-              "type": "`$OBJECT`",
-              "active": true
-            },
-            {
-              "name": "trip_id",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            },
-            {
-              "name": "when",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            }
-          ],
-          "name": "departure",
-          "op": {
-            "list": {
-              "name": "list",
-              "points": [
-                {
-                  "args": {
-                    "params": [
-                      {
-                        "example": "900000003201",
-                        "kind": "param",
-                        "name": "stop_id",
-                        "orig": "id",
-                        "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
-                      }
-                    ],
-                    "query": [
-                      {
-                        "kind": "query",
-                        "name": "direction",
-                        "orig": "direction",
-                        "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
-                      },
-                      {
-                        "example": 120,
-                        "kind": "query",
-                        "name": "duration",
-                        "orig": "duration",
-                        "reqd": false,
-                        "type": "`$INTEGER`",
-                        "active": true
-                      },
-                      {
-                        "example": 10,
-                        "kind": "query",
-                        "name": "result",
-                        "orig": "result",
-                        "reqd": false,
-                        "type": "`$INTEGER`",
-                        "active": true
-                      },
-                      {
-                        "kind": "query",
-                        "name": "when",
-                        "orig": "when",
-                        "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
-                      }
-                    ]
-                  },
-                  "method": "GET",
-                  "orig": "/stops/{id}/departures",
-                  "parts": [
-                    "stops",
-                    "{stop_id}",
-                    "departures"
-                  ],
-                  "rename": {
-                    "param": {
-                      "id": "stop_id"
-                    }
-                  },
-                  "select": {
-                    "exist": [
-                      "direction",
-                      "duration",
-                      "result",
-                      "stop_id",
-                      "when"
-                    ]
-                  },
-                  "transform": {
-                    "req": "`reqdata`",
-                    "res": "`body`"
-                  },
-                  "active": true
-                }
-              ],
-              "input": "data"
-            }
-          },
-          "relations": {
-            "ancestors": [
-              [
-                "stop"
-              ]
-            ]
-          },
-          "active": true
-        },
-        "journey": {
-          "alias": {
-            "field": {}
-          },
-          "fields": [
-            {
-              "name": "leg",
-              "req": false,
-              "type": "`$ARRAY`",
-              "active": true
-            },
-            {
-              "name": "refresh_token",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            },
-            {
-              "name": "type",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            }
-          ],
-          "name": "journey",
-          "op": {
-            "list": {
-              "name": "list",
-              "points": [
-                {
-                  "args": {
-                    "query": [
-                      {
-                        "kind": "query",
-                        "name": "arrival",
-                        "orig": "arrival",
-                        "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
-                      },
-                      {
-                        "kind": "query",
-                        "name": "departure",
-                        "orig": "departure",
-                        "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
-                      },
-                      {
-                        "example": "900000003201",
-                        "kind": "query",
-                        "name": "from",
-                        "orig": "from",
-                        "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
-                      },
-                      {
-                        "example": 3,
-                        "kind": "query",
-                        "name": "result",
-                        "orig": "result",
-                        "reqd": false,
-                        "type": "`$INTEGER`",
-                        "active": true
-                      },
-                      {
-                        "example": false,
-                        "kind": "query",
-                        "name": "stopover",
-                        "orig": "stopover",
-                        "reqd": false,
-                        "type": "`$BOOLEAN`",
-                        "active": true
-                      },
-                      {
-                        "example": "900000100003",
-                        "kind": "query",
-                        "name": "to",
-                        "orig": "to",
-                        "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
-                      }
-                    ]
-                  },
-                  "method": "GET",
-                  "orig": "/journeys",
-                  "parts": [
-                    "journeys"
-                  ],
-                  "select": {
-                    "exist": [
-                      "arrival",
-                      "departure",
-                      "from",
-                      "result",
-                      "stopover",
-                      "to"
-                    ]
-                  },
-                  "transform": {
-                    "req": "`reqdata`",
-                    "res": "`body`"
-                  },
-                  "active": true
-                }
-              ],
-              "input": "data"
-            }
-          },
-          "active": true,
-          "relations": {
-            "ancestors": []
-          }
-        },
-        "location": {
-          "alias": {
-            "field": {}
-          },
-          "fields": [
-            {
-              "name": "id",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            },
-            {
-              "name": "location",
-              "req": false,
-              "type": "`$OBJECT`",
-              "active": true
-            },
-            {
-              "name": "name",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            },
-            {
-              "name": "product",
-              "req": false,
-              "type": "`$OBJECT`",
-              "active": true
-            },
-            {
-              "name": "type",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            }
-          ],
-          "id": {
-            "field": "id",
-            "name": "id"
-          },
-          "name": "location",
-          "op": {
-            "list": {
-              "name": "list",
-              "points": [
-                {
-                  "args": {
-                    "query": [
-                      {
-                        "example": true,
-                        "kind": "query",
-                        "name": "address",
-                        "orig": "address",
-                        "reqd": false,
-                        "type": "`$BOOLEAN`",
-                        "active": true
-                      },
-                      {
-                        "example": true,
-                        "kind": "query",
-                        "name": "poi",
-                        "orig": "poi",
-                        "reqd": false,
-                        "type": "`$BOOLEAN`",
-                        "active": true
-                      },
-                      {
-                        "example": "Berlin",
-                        "kind": "query",
-                        "name": "query",
-                        "orig": "query",
-                        "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
-                      },
-                      {
-                        "example": 10,
-                        "kind": "query",
-                        "name": "result",
-                        "orig": "result",
-                        "reqd": false,
-                        "type": "`$INTEGER`",
-                        "active": true
-                      },
-                      {
-                        "example": true,
-                        "kind": "query",
-                        "name": "stop",
-                        "orig": "stop",
-                        "reqd": false,
-                        "type": "`$BOOLEAN`",
-                        "active": true
-                      }
-                    ]
-                  },
-                  "method": "GET",
-                  "orig": "/locations",
-                  "parts": [
-                    "locations"
-                  ],
-                  "select": {
-                    "exist": [
-                      "address",
-                      "poi",
-                      "query",
-                      "result",
-                      "stop"
-                    ]
-                  },
-                  "transform": {
-                    "req": "`reqdata`",
-                    "res": "`body`"
-                  },
-                  "active": true
-                }
-              ],
-              "input": "data"
-            }
-          },
-          "active": true,
-          "relations": {
-            "ancestors": []
-          }
-        },
-        "radar": {
-          "alias": {
-            "field": {}
-          },
-          "fields": [
-            {
-              "name": "direction",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            },
-            {
-              "name": "line",
-              "req": false,
-              "type": "`$OBJECT`",
-              "active": true
-            },
-            {
-              "name": "location",
-              "req": false,
-              "type": "`$OBJECT`",
-              "active": true
-            },
-            {
-              "name": "next_stopover",
-              "req": false,
-              "type": "`$ARRAY`",
-              "active": true
-            },
-            {
-              "name": "trip_id",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            }
-          ],
-          "name": "radar",
-          "op": {
-            "list": {
-              "name": "list",
-              "points": [
-                {
-                  "args": {
-                    "query": [
-                      {
-                        "kind": "query",
-                        "name": "east",
-                        "orig": "east",
-                        "reqd": true,
-                        "type": "`$NUMBER`",
-                        "active": true
-                      },
-                      {
-                        "kind": "query",
-                        "name": "north",
-                        "orig": "north",
-                        "reqd": true,
-                        "type": "`$NUMBER`",
-                        "active": true
-                      },
-                      {
-                        "example": 256,
-                        "kind": "query",
-                        "name": "result",
-                        "orig": "result",
-                        "reqd": false,
-                        "type": "`$INTEGER`",
-                        "active": true
-                      },
-                      {
-                        "kind": "query",
-                        "name": "south",
-                        "orig": "south",
-                        "reqd": true,
-                        "type": "`$NUMBER`",
-                        "active": true
-                      },
-                      {
-                        "kind": "query",
-                        "name": "west",
-                        "orig": "west",
-                        "reqd": true,
-                        "type": "`$NUMBER`",
-                        "active": true
-                      }
-                    ]
-                  },
-                  "method": "GET",
-                  "orig": "/radar",
-                  "parts": [
-                    "radar"
-                  ],
-                  "select": {
-                    "exist": [
-                      "east",
-                      "north",
-                      "result",
-                      "south",
-                      "west"
-                    ]
-                  },
-                  "transform": {
-                    "req": "`reqdata`",
-                    "res": "`body`"
-                  },
-                  "active": true
-                }
-              ],
-              "input": "data"
-            }
-          },
-          "active": true,
-          "relations": {
-            "ancestors": []
-          }
-        },
-        "stop": {
-          "alias": {
-            "field": {}
-          },
-          "fields": [
-            {
-              "name": "id",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            },
-            {
-              "name": "location",
-              "req": false,
-              "type": "`$OBJECT`",
-              "active": true
-            },
-            {
-              "name": "name",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            },
-            {
-              "name": "product",
-              "req": false,
-              "type": "`$OBJECT`",
-              "active": true
-            },
-            {
-              "name": "station",
-              "req": false,
-              "type": "`$OBJECT`",
-              "active": true
-            },
-            {
-              "name": "type",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            }
-          ],
-          "id": {
-            "field": "id",
-            "name": "id"
-          },
-          "name": "stop",
-          "op": {
-            "load": {
-              "name": "load",
-              "points": [
-                {
-                  "args": {
-                    "params": [
-                      {
-                        "example": "900000003201",
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "id",
-                        "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
-                      }
-                    ]
-                  },
-                  "method": "GET",
-                  "orig": "/stops/{id}",
-                  "parts": [
-                    "stops",
-                    "{id}"
-                  ],
-                  "select": {
-                    "exist": [
-                      "id"
-                    ]
-                  },
-                  "transform": {
-                    "req": "`reqdata`",
-                    "res": "`body`"
-                  },
-                  "active": true
-                }
-              ],
-              "input": "data"
-            }
-          },
-          "active": true,
-          "relations": {
-            "ancestors": []
-          }
-        },
-        "trip": {
-          "alias": {
-            "field": {}
-          },
-          "fields": [
-            {
-              "name": "destination",
-              "req": false,
-              "type": "`$OBJECT`",
-              "active": true
-            },
-            {
-              "name": "direction",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            },
-            {
-              "name": "id",
-              "req": false,
-              "type": "`$STRING`",
-              "active": true
-            },
-            {
-              "name": "line",
-              "req": false,
-              "type": "`$OBJECT`",
-              "active": true
-            },
-            {
-              "name": "origin",
-              "req": false,
-              "type": "`$OBJECT`",
-              "active": true
-            },
-            {
-              "name": "stopover",
-              "req": false,
-              "type": "`$ARRAY`",
-              "active": true
-            }
-          ],
-          "id": {
-            "field": "id",
-            "name": "id"
-          },
-          "name": "trip",
-          "op": {
-            "load": {
-              "name": "load",
-              "points": [
-                {
-                  "args": {
-                    "params": [
-                      {
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "id",
-                        "reqd": true,
-                        "type": "`$STRING`",
-                        "active": true
-                      }
-                    ],
-                    "query": [
-                      {
-                        "kind": "query",
-                        "name": "line_name",
-                        "orig": "line_name",
-                        "reqd": false,
-                        "type": "`$STRING`",
-                        "active": true
-                      },
-                      {
-                        "example": true,
-                        "kind": "query",
-                        "name": "stopover",
-                        "orig": "stopover",
-                        "reqd": false,
-                        "type": "`$BOOLEAN`",
-                        "active": true
-                      }
-                    ]
-                  },
-                  "method": "GET",
-                  "orig": "/trips/{id}",
-                  "parts": [
-                    "trips",
-                    "{id}"
-                  ],
-                  "select": {
-                    "exist": [
-                      "id",
-                      "line_name",
-                      "stopover"
-                    ]
-                  },
-                  "transform": {
-                    "req": "`reqdata`",
-                    "res": "`body`"
-                  },
-                  "active": true
-                }
-              ],
-              "input": "data"
-            }
-          },
-          "active": true,
-          "relations": {
-            "ancestors": []
-          }
-        }
-      },
-      "feature": {
-        "test": {
-          "name": "test",
-          "title": "In-memory mock transport for testing without a live server",
-          "version": "0.0.1",
-          "active": true,
-          "config": {
-            "options": {
-              "active": false
-            }
-          },
-          "hook": {
-            "PostConstruct": {
-              "active": true,
-              "await": false
-            },
-            "PostConstructEntity": {
-              "active": true,
-              "await": false
-            },
-            "SetData": {
-              "active": true,
-              "await": false
-            },
-            "GetData": {
-              "active": true,
-              "await": false
-            },
-            "SetMatch": {
-              "active": true
-            },
-            "GetMatch": {
-              "active": true,
-              "await": false
-            },
-            "PrePoint": {
-              "active": true
-            },
-            "PreSpec": {
-              "active": true,
-              "await": false
-            },
-            "PreRequest": {
-              "active": true,
-              "await": false
-            },
-            "PreResponse": {
-              "active": true,
-              "await": false
-            },
-            "PreResult": {
-              "active": true,
-              "await": false
-            },
-            "PreTarget": {
-              "active": false,
-              "await": false
-            },
-            "PostOperation": {
-              "active": false,
-              "await": false
-            }
-          },
-          "target": {
-            "ts": {
-              "deps": {}
-            },
-            "go": {
-              "deps": {}
-            },
-            "lua": {
-              "deps": {}
-            },
-            "php": {
-              "deps": {}
-            },
-            "py": {
-              "deps": {}
-            },
-            "rb": {
-              "deps": {}
-            },
-            "go-cli": {
-              "deps": {}
-            },
-            "go-mcp": {
-              "deps": {}
-            }
-          }
-        }
-      },
-      "flow": {
-        "BasicArrivalFlow": {
-          "entity": "arrival",
-          "kind": "basic",
-          "name": "BasicArrivalFlow",
-          "step": [
-            {
-              "match": {
-                "stop_id": "stop01"
-              },
-              "op": "list",
-              "valid": [
-                {
-                  "apply": "ItemExists",
-                  "def": {
-                    "ref": "arrival_ref01"
-                  }
-                }
-              ],
-              "active": true,
-              "data": {},
-              "input": {},
-              "spec": []
-            }
-          ],
-          "key$": "BasicArrivalFlow",
-          "active": true,
-          "param": {}
-        },
-        "BasicDepartureFlow": {
-          "entity": "departure",
-          "kind": "basic",
-          "name": "BasicDepartureFlow",
-          "step": [
-            {
-              "match": {
-                "stop_id": "stop01"
-              },
-              "op": "list",
-              "valid": [
-                {
-                  "apply": "ItemExists",
-                  "def": {
-                    "ref": "departure_ref01"
-                  }
-                }
-              ],
-              "active": true,
-              "data": {},
-              "input": {},
-              "spec": []
-            }
-          ],
-          "key$": "BasicDepartureFlow",
-          "active": true,
-          "param": {}
-        },
-        "BasicJourneyFlow": {
-          "entity": "journey",
-          "kind": "basic",
-          "name": "BasicJourneyFlow",
-          "step": [
-            {
-              "op": "list",
-              "valid": [
-                {
-                  "apply": "ItemExists",
-                  "def": {
-                    "ref": "journey_ref01"
-                  }
-                }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "input": {},
-              "spec": []
-            }
-          ],
-          "key$": "BasicJourneyFlow",
-          "active": true,
-          "param": {}
-        },
-        "BasicLocationFlow": {
-          "entity": "location",
-          "kind": "basic",
-          "name": "BasicLocationFlow",
-          "step": [
-            {
-              "op": "list",
-              "valid": [
-                {
-                  "apply": "ItemExists",
-                  "def": {
-                    "ref": "location_ref01"
-                  }
-                }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "input": {},
-              "spec": []
-            }
-          ],
-          "key$": "BasicLocationFlow",
-          "active": true,
-          "param": {}
-        },
-        "BasicRadarFlow": {
-          "entity": "radar",
-          "kind": "basic",
-          "name": "BasicRadarFlow",
-          "step": [
-            {
-              "op": "list",
-              "valid": [
-                {
-                  "apply": "ItemExists",
-                  "def": {
-                    "ref": "radar_ref01"
-                  }
-                }
-              ],
-              "active": true,
-              "match": {},
-              "data": {},
-              "input": {},
-              "spec": []
-            }
-          ],
-          "key$": "BasicRadarFlow",
-          "active": true,
-          "param": {}
-        },
-        "BasicStopFlow": {
-          "entity": "stop",
-          "kind": "basic",
-          "name": "BasicStopFlow",
-          "step": [
-            {
-              "input": {
-                "ref": "stop_ref01",
-                "srcdatavar": "stop_ref01_data",
-                "suffix": "_dt0"
-              },
-              "match": {
-                "id": "stop01"
-              },
-              "op": "load",
-              "valid": [
-                {
-                  "apply": "TextFieldMark",
-                  "def": {
-                    "mark": "Mark01-stop_ref01"
-                  }
-                }
-              ],
-              "active": true,
-              "data": {},
-              "spec": []
-            }
-          ],
-          "key$": "BasicStopFlow",
-          "active": true,
-          "param": {}
-        },
-        "BasicTripFlow": {
-          "entity": "trip",
-          "kind": "basic",
-          "name": "BasicTripFlow",
-          "step": [
-            {
-              "input": {
-                "ref": "trip_ref01",
-                "srcdatavar": "trip_ref01_data",
-                "suffix": "_dt0"
-              },
-              "match": {
-                "id": "trip01"
-              },
-              "op": "load",
-              "valid": [
-                {
-                  "apply": "TextFieldMark",
-                  "def": {
-                    "mark": "Mark01-trip_ref01"
-                  }
-                }
-              ],
-              "active": true,
-              "data": {},
-              "spec": []
-            }
-          ],
-          "key$": "BasicTripFlow",
-          "active": true,
-          "param": {}
-        }
-      },
+      "option": {},
       "target": {
-        "go-cli": {
-          "title": "Go CLI",
-          "ext": "go",
+        "go": {
+          "active": true,
           "comment": {
             "line": "//"
           },
+          "deps": {},
+          "ext": "go",
           "module": {
             "name": "transportrest-transit-apis"
           },
+          "name": "go",
+          "srcfeature": false,
+          "title": "Golang"
+        },
+        "go-cli": {
+          "active": true,
+          "comment": {
+            "line": "//"
+          },
+          "deps": {},
+          "ext": "go",
+          "module": {
+            "name": "transportrest-transit-apis"
+          },
+          "name": "go-cli",
           "phase": {
             "entity": {
               "active": false
@@ -1250,19 +1254,19 @@
               "active": false
             }
           },
-          "deps": {},
-          "name": "go-cli",
-          "active": true
+          "title": "Go CLI"
         },
         "go-mcp": {
-          "title": "Go MCP server",
-          "ext": "go",
+          "active": true,
           "comment": {
             "line": "//"
           },
+          "deps": {},
+          "ext": "go",
           "module": {
             "name": "transportrest-transit-apis"
           },
+          "name": "go-mcp",
           "phase": {
             "entity": {
               "active": false
@@ -1277,138 +1281,120 @@
               "active": false
             }
           },
-          "deps": {},
-          "name": "go-mcp",
-          "active": true
-        },
-        "ts": {
-          "title": "TypeScript",
-          "ext": "ts",
-          "comment": {
-            "line": "//"
-          },
-          "module": {
-            "name": "transportrest-transit-apis"
-          },
-          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
-          "deps": {
-            "dotenv": {
-              "active": true,
-              "version": "^17.4.2",
-              "kind": "dev"
-            },
-            "typescript": {
-              "active": true,
-              "version": "^5.9.3",
-              "kind": "dev"
-            },
-            "@types/node": {
-              "active": true,
-              "version": "^25.6.0",
-              "kind": "dev"
-            }
-          },
-          "name": "ts",
-          "active": true
-        },
-        "go": {
-          "title": "Golang",
-          "ext": "go",
-          "comment": {
-            "line": "//"
-          },
-          "module": {
-            "name": "transportrest-transit-apis"
-          },
-          "srcfeature": false,
-          "deps": {},
-          "name": "go",
-          "active": true
+          "title": "Go MCP server"
         },
         "lua": {
-          "title": "Lua",
-          "ext": "lua",
+          "active": true,
           "comment": {
             "line": "--"
           },
-          "module": {
-            "name": "transportrest-transit-apis"
-          },
-          "srcfeature": false,
           "deps": {
             "dkjson": {
               "active": true,
-              "version": "2.5",
-              "kind": "prod"
+              "kind": "prod",
+              "version": "2.5"
             }
           },
+          "ext": "lua",
+          "module": {
+            "name": "transportrest-transit-apis"
+          },
           "name": "lua",
-          "active": true
+          "srcfeature": false,
+          "title": "Lua"
         },
         "php": {
-          "title": "PHP",
-          "ext": "php",
+          "active": true,
           "comment": {
             "line": "//"
           },
+          "deps": {},
+          "ext": "php",
           "module": {
             "name": "transportrest-transit-apis"
           },
-          "srcfeature": false,
-          "deps": {},
           "name": "php",
-          "active": true
+          "srcfeature": false,
+          "title": "PHP"
         },
         "py": {
-          "title": "Python",
-          "ext": "py",
+          "active": true,
           "comment": {
             "line": "#"
           },
-          "module": {
-            "name": "transportrest-transit-apis"
-          },
-          "srcfeature": false,
           "deps": {
             "requests": {
               "active": true,
-              "version": "2.33",
-              "kind": "prod"
+              "kind": "prod",
+              "version": "2.33"
             }
           },
-          "name": "py",
-          "active": true
-        },
-        "rb": {
-          "title": "Ruby",
-          "ext": "rb",
-          "comment": {
-            "line": "#"
-          },
+          "ext": "py",
           "module": {
             "name": "transportrest-transit-apis"
           },
+          "name": "py",
           "srcfeature": false,
+          "title": "Python"
+        },
+        "rb": {
+          "active": true,
+          "comment": {
+            "line": "#"
+          },
           "deps": {
-            "voxgig-struct": {
-              "active": true,
-              "version": "0.0.10",
-              "kind": "prod"
-            },
             "json": {
               "active": true,
-              "version": "0",
-              "kind": "prod"
+              "kind": "prod",
+              "version": "0"
+            },
+            "voxgig-struct": {
+              "active": true,
+              "kind": "prod",
+              "version": "0.0.10"
             }
           },
+          "ext": "rb",
+          "module": {
+            "name": "transportrest-transit-apis"
+          },
           "name": "rb",
-          "active": true
+          "srcfeature": false,
+          "title": "Ruby"
+        },
+        "ts": {
+          "active": true,
+          "base": "node_modules/@voxgig/sdkgen/project/.sdk",
+          "comment": {
+            "line": "//"
+          },
+          "deps": {
+            "@types/node": {
+              "active": true,
+              "kind": "dev",
+              "version": "^25.6.0"
+            },
+            "dotenv": {
+              "active": true,
+              "kind": "dev",
+              "version": "^17.4.2"
+            },
+            "typescript": {
+              "active": true,
+              "kind": "dev",
+              "version": "^5.9.3"
+            }
+          },
+          "ext": "ts",
+          "module": {
+            "name": "transportrest-transit-apis"
+          },
+          "name": "ts",
+          "title": "TypeScript"
         }
-      },
-      "option": {}
-    },
-    "def": {
-      "desc": ""
+      }
     }
-  }
+  },
+  "name": "transportrest-transit-apis",
+  "origin": "voxgig-sdk"
 }

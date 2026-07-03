@@ -118,12 +118,14 @@ func arrivalDirectSetup(mockres any) *arrivalDirectSetupResult {
 	env := envOverride(map[string]any{
 		"TRANSPORTRESTTRANSITAPIS_TEST_ARRIVAL_ENTID": map[string]any{},
 		"TRANSPORTRESTTRANSITAPIS_TEST_LIVE":    "FALSE",
+		"TRANSPORTRESTTRANSITAPIS_APIKEY":       "NONE",
 	})
 
 	live := env["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["TRANSPORTRESTTRANSITAPIS_APIKEY"],
 		}
 		client := sdk.NewTransportrestTransitApisSDK(mergedOpts)
 
