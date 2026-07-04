@@ -210,98 +210,49 @@ class TransportrestTransitApisSDK {
 
 
 
-  _arrival?: ArrivalEntity
-
-  // Idiomatic facade: `client.arrival.list()` / `client.arrival.load({ id })`.
-  get arrival(): ArrivalEntity {
-    return (this._arrival ??= new ArrivalEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.arrival` instead. */
+  // Entity access: `client.Arrival().list()` / `client.Arrival().load({ id })`.
   Arrival(data?: any) {
     const self = this
     return new ArrivalEntity(self,data)
   }
 
 
-  _departure?: DepartureEntity
-
-  // Idiomatic facade: `client.departure.list()` / `client.departure.load({ id })`.
-  get departure(): DepartureEntity {
-    return (this._departure ??= new DepartureEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.departure` instead. */
+  // Entity access: `client.Departure().list()` / `client.Departure().load({ id })`.
   Departure(data?: any) {
     const self = this
     return new DepartureEntity(self,data)
   }
 
 
-  _journey?: JourneyEntity
-
-  // Idiomatic facade: `client.journey.list()` / `client.journey.load({ id })`.
-  get journey(): JourneyEntity {
-    return (this._journey ??= new JourneyEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.journey` instead. */
+  // Entity access: `client.Journey().list()` / `client.Journey().load({ id })`.
   Journey(data?: any) {
     const self = this
     return new JourneyEntity(self,data)
   }
 
 
-  _location?: LocationEntity
-
-  // Idiomatic facade: `client.location.list()` / `client.location.load({ id })`.
-  get location(): LocationEntity {
-    return (this._location ??= new LocationEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.location` instead. */
+  // Entity access: `client.Location().list()` / `client.Location().load({ id })`.
   Location(data?: any) {
     const self = this
     return new LocationEntity(self,data)
   }
 
 
-  _radar?: RadarEntity
-
-  // Idiomatic facade: `client.radar.list()` / `client.radar.load({ id })`.
-  get radar(): RadarEntity {
-    return (this._radar ??= new RadarEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.radar` instead. */
+  // Entity access: `client.Radar().list()` / `client.Radar().load({ id })`.
   Radar(data?: any) {
     const self = this
     return new RadarEntity(self,data)
   }
 
 
-  _stop?: StopEntity
-
-  // Idiomatic facade: `client.stop.list()` / `client.stop.load({ id })`.
-  get stop(): StopEntity {
-    return (this._stop ??= new StopEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.stop` instead. */
+  // Entity access: `client.Stop().list()` / `client.Stop().load({ id })`.
   Stop(data?: any) {
     const self = this
     return new StopEntity(self,data)
   }
 
 
-  _trip?: TripEntity
-
-  // Idiomatic facade: `client.trip.list()` / `client.trip.load({ id })`.
-  get trip(): TripEntity {
-    return (this._trip ??= new TripEntity(this, undefined))
-  }
-
-  /** @deprecated Use `client.trip` instead. */
+  // Entity access: `client.Trip().list()` / `client.Trip().load({ id })`.
   Trip(data?: any) {
     const self = this
     return new TripEntity(self,data)

@@ -31,14 +31,16 @@ from transportresttransitapis_sdk import TransportrestTransitApisSDK
 client = TransportrestTransitApisSDK()
 ```
 
-### 2. List arrivals
+### 2. List arrival records
+
+`list()` returns a `list` of records (each a `dict`) and raises on
+error — iterate it directly.
 
 ```python
 try:
-    result = client.arrival.list()
-    for item in result:
-        d = item.data_get()
-        print(d["id"], d["name"])
+    arrivals = client.Arrival().list({})
+    for arrival in arrivals:
+        print(arrival)
 except Exception as err:
     print(f"list failed: {err}")
 ```
@@ -86,8 +88,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = TransportrestTransitApisSDK.test()
 
-result = client.arrival.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+arrival = client.Arrival().load({"id": "test01"})
+# arrival contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -163,7 +166,7 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> dict` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> dict` | Build and send an HTTP request. Returns a result dict (branch on `ok`). |
-| `Arrival` | `(data) -> ArrivalEntity` | Create a Arrival entity instance. |
+| `Arrival` | `(data) -> ArrivalEntity` | Create an Arrival entity instance. |
 | `Departure` | `(data) -> DepartureEntity` | Create a Departure entity instance. |
 | `Journey` | `(data) -> JourneyEntity` | Create a Journey entity instance. |
 | `Location` | `(data) -> LocationEntity` | Create a Location entity instance. |
@@ -322,7 +325,7 @@ API path: `/trips/{id}`
 
 ### Arrival
 
-Create an instance: `const arrival = client.arrival`
+Create an instance: `arrival = client.Arrival()`
 
 #### Operations
 
@@ -346,14 +349,14 @@ Create an instance: `const arrival = client.arrival`
 
 #### Example: List
 
-```ts
-const arrivals = await client.arrival.list()
+```python
+arrivals = client.Arrival().list({})
 ```
 
 
 ### Departure
 
-Create an instance: `const departure = client.departure`
+Create an instance: `departure = client.Departure()`
 
 #### Operations
 
@@ -377,14 +380,14 @@ Create an instance: `const departure = client.departure`
 
 #### Example: List
 
-```ts
-const departures = await client.departure.list()
+```python
+departures = client.Departure().list({})
 ```
 
 
 ### Journey
 
-Create an instance: `const journey = client.journey`
+Create an instance: `journey = client.Journey()`
 
 #### Operations
 
@@ -402,14 +405,14 @@ Create an instance: `const journey = client.journey`
 
 #### Example: List
 
-```ts
-const journeys = await client.journey.list()
+```python
+journeys = client.Journey().list({})
 ```
 
 
 ### Location
 
-Create an instance: `const location = client.location`
+Create an instance: `location = client.Location()`
 
 #### Operations
 
@@ -429,14 +432,14 @@ Create an instance: `const location = client.location`
 
 #### Example: List
 
-```ts
-const locations = await client.location.list()
+```python
+locations = client.Location().list({})
 ```
 
 
 ### Radar
 
-Create an instance: `const radar = client.radar`
+Create an instance: `radar = client.Radar()`
 
 #### Operations
 
@@ -456,14 +459,14 @@ Create an instance: `const radar = client.radar`
 
 #### Example: List
 
-```ts
-const radars = await client.radar.list()
+```python
+radars = client.Radar().list({})
 ```
 
 
 ### Stop
 
-Create an instance: `const stop = client.stop`
+Create an instance: `stop = client.Stop()`
 
 #### Operations
 
@@ -484,14 +487,14 @@ Create an instance: `const stop = client.stop`
 
 #### Example: Load
 
-```ts
-const stop = await client.stop.load({ id: 'stop_id' })
+```python
+stop = client.Stop().load({"id": "stop_id"})
 ```
 
 
 ### Trip
 
-Create an instance: `const trip = client.trip`
+Create an instance: `trip = client.Trip()`
 
 #### Operations
 
@@ -512,8 +515,8 @@ Create an instance: `const trip = client.trip`
 
 #### Example: Load
 
-```ts
-const trip = await client.trip.load({ id: 'trip_id' })
+```python
+trip = client.Trip().load({"id": "trip_id"})
 ```
 
 
@@ -587,7 +590,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-arrival = client.arrival
+arrival = client.Arrival()
 arrival.load({"id": "example_id"})
 
 # arrival.data_get() now returns the loaded arrival data

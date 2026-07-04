@@ -233,10 +233,10 @@ class TransportrestTransitApisSDK
 
     private $_arrival = null;
 
-    // Idiomatic facade: $client->arrival()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Arrival() (PHP method
-    // names are case-insensitive).
-    public function arrival($data = null)
+    // Canonical facade: $client->Arrival()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->arrival()
+    // resolves here too.
+    public function Arrival($data = null)
     {
         require_once __DIR__ . '/entity/arrival_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class TransportrestTransitApisSDK
 
     private $_departure = null;
 
-    // Idiomatic facade: $client->departure()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Departure() (PHP method
-    // names are case-insensitive).
-    public function departure($data = null)
+    // Canonical facade: $client->Departure()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->departure()
+    // resolves here too.
+    public function Departure($data = null)
     {
         require_once __DIR__ . '/entity/departure_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class TransportrestTransitApisSDK
 
     private $_journey = null;
 
-    // Idiomatic facade: $client->journey()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Journey() (PHP method
-    // names are case-insensitive).
-    public function journey($data = null)
+    // Canonical facade: $client->Journey()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->journey()
+    // resolves here too.
+    public function Journey($data = null)
     {
         require_once __DIR__ . '/entity/journey_entity.php';
         if ($data === null) {
@@ -287,10 +287,10 @@ class TransportrestTransitApisSDK
 
     private $_location = null;
 
-    // Idiomatic facade: $client->location()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Location() (PHP method
-    // names are case-insensitive).
-    public function location($data = null)
+    // Canonical facade: $client->Location()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->location()
+    // resolves here too.
+    public function Location($data = null)
     {
         require_once __DIR__ . '/entity/location_entity.php';
         if ($data === null) {
@@ -305,10 +305,10 @@ class TransportrestTransitApisSDK
 
     private $_radar = null;
 
-    // Idiomatic facade: $client->radar()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Radar() (PHP method
-    // names are case-insensitive).
-    public function radar($data = null)
+    // Canonical facade: $client->Radar()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->radar()
+    // resolves here too.
+    public function Radar($data = null)
     {
         require_once __DIR__ . '/entity/radar_entity.php';
         if ($data === null) {
@@ -323,10 +323,10 @@ class TransportrestTransitApisSDK
 
     private $_stop = null;
 
-    // Idiomatic facade: $client->stop()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Stop() (PHP method
-    // names are case-insensitive).
-    public function stop($data = null)
+    // Canonical facade: $client->Stop()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->stop()
+    // resolves here too.
+    public function Stop($data = null)
     {
         require_once __DIR__ . '/entity/stop_entity.php';
         if ($data === null) {
@@ -341,10 +341,10 @@ class TransportrestTransitApisSDK
 
     private $_trip = null;
 
-    // Idiomatic facade: $client->trip()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Trip() (PHP method
-    // names are case-insensitive).
-    public function trip($data = null)
+    // Canonical facade: $client->Trip()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->trip()
+    // resolves here too.
+    public function Trip($data = null)
     {
         require_once __DIR__ . '/entity/trip_entity.php';
         if ($data === null) {

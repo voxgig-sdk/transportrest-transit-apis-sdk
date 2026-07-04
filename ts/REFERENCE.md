@@ -181,7 +181,7 @@ Alias for `TransportrestTransitApisSDK.test()`.
 ## ArrivalEntity
 
 ```ts
-const arrival = client.arrival
+const arrival = client.Arrival()
 ```
 
 ### Fields
@@ -205,7 +205,7 @@ const arrival = client.arrival
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.arrival.list()
+const results = await client.Arrival().list()
 ```
 
 ### Common Methods
@@ -239,7 +239,7 @@ Return a copy of the entity options.
 ## DepartureEntity
 
 ```ts
-const departure = client.departure
+const departure = client.Departure()
 ```
 
 ### Fields
@@ -263,7 +263,7 @@ const departure = client.departure
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.departure.list()
+const results = await client.Departure().list()
 ```
 
 ### Common Methods
@@ -297,7 +297,7 @@ Return a copy of the entity options.
 ## JourneyEntity
 
 ```ts
-const journey = client.journey
+const journey = client.Journey()
 ```
 
 ### Fields
@@ -315,7 +315,7 @@ const journey = client.journey
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.journey.list()
+const results = await client.Journey().list()
 ```
 
 ### Common Methods
@@ -349,7 +349,7 @@ Return a copy of the entity options.
 ## LocationEntity
 
 ```ts
-const location = client.location
+const location = client.Location()
 ```
 
 ### Fields
@@ -369,7 +369,7 @@ const location = client.location
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.location.list()
+const results = await client.Location().list()
 ```
 
 ### Common Methods
@@ -403,7 +403,7 @@ Return a copy of the entity options.
 ## RadarEntity
 
 ```ts
-const radar = client.radar
+const radar = client.Radar()
 ```
 
 ### Fields
@@ -423,7 +423,7 @@ const radar = client.radar
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.radar.list()
+const results = await client.Radar().list()
 ```
 
 ### Common Methods
@@ -457,7 +457,7 @@ Return a copy of the entity options.
 ## StopEntity
 
 ```ts
-const stop = client.stop
+const stop = client.Stop()
 ```
 
 ### Fields
@@ -478,7 +478,7 @@ const stop = client.stop
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.stop.load({ id: 'stop_id' })
+const result = await client.Stop().load({ id: 'stop_id' })
 ```
 
 ### Common Methods
@@ -512,7 +512,7 @@ Return a copy of the entity options.
 ## TripEntity
 
 ```ts
-const trip = client.trip
+const trip = client.Trip()
 ```
 
 ### Fields
@@ -533,7 +533,7 @@ const trip = client.trip
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.trip.load({ id: 'trip_id' })
+const result = await client.Trip().load({ id: 'trip_id' })
 ```
 
 ### Common Methods

@@ -31,17 +31,17 @@ local sdk = require("transportrest-transit-apis_sdk")
 local client = sdk.new()
 ```
 
-### 2. List arrivals
+### 2. List arrival records
+
+Entity operations return `(value, err)`. For `list`, `value` is the
+array of records itself — iterate it directly (there is no wrapper).
 
 ```lua
-local result, err = client:arrival():list()
+local arrivals, err = client:Arrival():list()
 if err then error(err) end
 
-if type(result) == "table" then
-  for _, item in ipairs(result) do
-    local d = item:data_get()
-    print(d["id"], d["name"])
-  end
+for _, item in ipairs(arrivals) do
+  print(item["id"], item["name"])
 end
 ```
 
@@ -88,8 +88,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:arrival():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:Arrival():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -167,7 +167,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> table, err` | Build an HTTP request definition without sending. |
 | `direct` | `(fetchargs) -> table, err` | Build and send an HTTP request. |
-| `Arrival` | `(data) -> ArrivalEntity` | Create a Arrival entity instance. |
+| `Arrival` | `(data) -> ArrivalEntity` | Create an Arrival entity instance. |
 | `Departure` | `(data) -> DepartureEntity` | Create a Departure entity instance. |
 | `Journey` | `(data) -> JourneyEntity` | Create a Journey entity instance. |
 | `Location` | `(data) -> LocationEntity` | Create a Location entity instance. |
@@ -195,17 +195,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local arrival, err = client:Arrival():load({ id = "example_id" })
+    if err then error(err) end
+    -- arrival is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -322,7 +327,7 @@ API path: `/trips/{id}`
 
 ### Arrival
 
-Create an instance: `const arrival = client.arrival`
+Create an instance: `local arrival = client:Arrival(nil)`
 
 #### Operations
 
@@ -346,14 +351,14 @@ Create an instance: `const arrival = client.arrival`
 
 #### Example: List
 
-```ts
-const arrivals = await client.arrival.list()
+```lua
+local arrivals, err = client:Arrival():list()
 ```
 
 
 ### Departure
 
-Create an instance: `const departure = client.departure`
+Create an instance: `local departure = client:Departure(nil)`
 
 #### Operations
 
@@ -377,14 +382,14 @@ Create an instance: `const departure = client.departure`
 
 #### Example: List
 
-```ts
-const departures = await client.departure.list()
+```lua
+local departures, err = client:Departure():list()
 ```
 
 
 ### Journey
 
-Create an instance: `const journey = client.journey`
+Create an instance: `local journey = client:Journey(nil)`
 
 #### Operations
 
@@ -402,14 +407,14 @@ Create an instance: `const journey = client.journey`
 
 #### Example: List
 
-```ts
-const journeys = await client.journey.list()
+```lua
+local journeys, err = client:Journey():list()
 ```
 
 
 ### Location
 
-Create an instance: `const location = client.location`
+Create an instance: `local location = client:Location(nil)`
 
 #### Operations
 
@@ -429,14 +434,14 @@ Create an instance: `const location = client.location`
 
 #### Example: List
 
-```ts
-const locations = await client.location.list()
+```lua
+local locations, err = client:Location():list()
 ```
 
 
 ### Radar
 
-Create an instance: `const radar = client.radar`
+Create an instance: `local radar = client:Radar(nil)`
 
 #### Operations
 
@@ -456,14 +461,14 @@ Create an instance: `const radar = client.radar`
 
 #### Example: List
 
-```ts
-const radars = await client.radar.list()
+```lua
+local radars, err = client:Radar():list()
 ```
 
 
 ### Stop
 
-Create an instance: `const stop = client.stop`
+Create an instance: `local stop = client:Stop(nil)`
 
 #### Operations
 
@@ -484,14 +489,14 @@ Create an instance: `const stop = client.stop`
 
 #### Example: Load
 
-```ts
-const stop = await client.stop.load({ id: 'stop_id' })
+```lua
+local stop, err = client:Stop():load({ id = "stop_id" })
 ```
 
 
 ### Trip
 
-Create an instance: `const trip = client.trip`
+Create an instance: `local trip = client:Trip(nil)`
 
 #### Operations
 
@@ -512,8 +517,8 @@ Create an instance: `const trip = client.trip`
 
 #### Example: Load
 
-```ts
-const trip = await client.trip.load({ id: 'trip_id' })
+```lua
+local trip, err = client:Trip():load({ id = "trip_id" })
 ```
 
 
@@ -588,7 +593,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local arrival = client:arrival()
+local arrival = client:Arrival()
 arrival:load({ id = "example_id" })
 
 -- arrival:data_get() now returns the loaded arrival data

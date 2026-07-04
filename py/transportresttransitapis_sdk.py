@@ -220,121 +220,51 @@ class TransportrestTransitApisSDK:
         }
 
 
-    @property
-    def arrival(self):
-        """Idiomatic facade: client.arrival.list() / client.arrival.load({"id": ...})."""
-        from entity.arrival_entity import ArrivalEntity
-        cached = getattr(self, "_arrival", None)
-        if cached is None:
-            cached = ArrivalEntity(self, None)
-            self._arrival = cached
-        return cached
-
-    def Arrival(self, data=None):
-        # Deprecated: use client.arrival instead.
+    def Arrival(self, data=None) -> "ArrivalEntity":
+        """Entity factory: client.Arrival().list({}) / client.Arrival().load({"id": ...})."""
         from entity.arrival_entity import ArrivalEntity
         return ArrivalEntity(self, data)
 
 
-    @property
-    def departure(self):
-        """Idiomatic facade: client.departure.list() / client.departure.load({"id": ...})."""
-        from entity.departure_entity import DepartureEntity
-        cached = getattr(self, "_departure", None)
-        if cached is None:
-            cached = DepartureEntity(self, None)
-            self._departure = cached
-        return cached
-
-    def Departure(self, data=None):
-        # Deprecated: use client.departure instead.
+    def Departure(self, data=None) -> "DepartureEntity":
+        """Entity factory: client.Departure().list({}) / client.Departure().load({"id": ...})."""
         from entity.departure_entity import DepartureEntity
         return DepartureEntity(self, data)
 
 
-    @property
-    def journey(self):
-        """Idiomatic facade: client.journey.list() / client.journey.load({"id": ...})."""
-        from entity.journey_entity import JourneyEntity
-        cached = getattr(self, "_journey", None)
-        if cached is None:
-            cached = JourneyEntity(self, None)
-            self._journey = cached
-        return cached
-
-    def Journey(self, data=None):
-        # Deprecated: use client.journey instead.
+    def Journey(self, data=None) -> "JourneyEntity":
+        """Entity factory: client.Journey().list({}) / client.Journey().load({"id": ...})."""
         from entity.journey_entity import JourneyEntity
         return JourneyEntity(self, data)
 
 
-    @property
-    def location(self):
-        """Idiomatic facade: client.location.list() / client.location.load({"id": ...})."""
-        from entity.location_entity import LocationEntity
-        cached = getattr(self, "_location", None)
-        if cached is None:
-            cached = LocationEntity(self, None)
-            self._location = cached
-        return cached
-
-    def Location(self, data=None):
-        # Deprecated: use client.location instead.
+    def Location(self, data=None) -> "LocationEntity":
+        """Entity factory: client.Location().list({}) / client.Location().load({"id": ...})."""
         from entity.location_entity import LocationEntity
         return LocationEntity(self, data)
 
 
-    @property
-    def radar(self):
-        """Idiomatic facade: client.radar.list() / client.radar.load({"id": ...})."""
-        from entity.radar_entity import RadarEntity
-        cached = getattr(self, "_radar", None)
-        if cached is None:
-            cached = RadarEntity(self, None)
-            self._radar = cached
-        return cached
-
-    def Radar(self, data=None):
-        # Deprecated: use client.radar instead.
+    def Radar(self, data=None) -> "RadarEntity":
+        """Entity factory: client.Radar().list({}) / client.Radar().load({"id": ...})."""
         from entity.radar_entity import RadarEntity
         return RadarEntity(self, data)
 
 
-    @property
-    def stop(self):
-        """Idiomatic facade: client.stop.list() / client.stop.load({"id": ...})."""
-        from entity.stop_entity import StopEntity
-        cached = getattr(self, "_stop", None)
-        if cached is None:
-            cached = StopEntity(self, None)
-            self._stop = cached
-        return cached
-
-    def Stop(self, data=None):
-        # Deprecated: use client.stop instead.
+    def Stop(self, data=None) -> "StopEntity":
+        """Entity factory: client.Stop().list({}) / client.Stop().load({"id": ...})."""
         from entity.stop_entity import StopEntity
         return StopEntity(self, data)
 
 
-    @property
-    def trip(self):
-        """Idiomatic facade: client.trip.list() / client.trip.load({"id": ...})."""
-        from entity.trip_entity import TripEntity
-        cached = getattr(self, "_trip", None)
-        if cached is None:
-            cached = TripEntity(self, None)
-            self._trip = cached
-        return cached
-
-    def Trip(self, data=None):
-        # Deprecated: use client.trip instead.
+    def Trip(self, data=None) -> "TripEntity":
+        """Entity factory: client.Trip().list({}) / client.Trip().load({"id": ...})."""
         from entity.trip_entity import TripEntity
         return TripEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "TransportrestTransitApisSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -354,3 +284,15 @@ class TransportrestTransitApisSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.arrival_entity import ArrivalEntity
+    from entity.departure_entity import DepartureEntity
+    from entity.journey_entity import JourneyEntity
+    from entity.location_entity import LocationEntity
+    from entity.radar_entity import RadarEntity
+    from entity.stop_entity import StopEntity
+    from entity.trip_entity import TripEntity

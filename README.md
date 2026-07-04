@@ -26,9 +26,11 @@ import { TransportrestTransitApisSDK } from '@voxgig-sdk/transportrest-transit-a
 
 const client = new TransportrestTransitApisSDK()
 
-// List all arrivals
-const arrivals = await client.arrival.list()
-console.log(arrivals.data)
+// List all arrivals (returns Arrival[])
+const arrivals = await client.Arrival().list()
+for (const arrival of arrivals) {
+  console.log(arrival)
+}
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -89,9 +91,10 @@ from transportresttransitapis_sdk import TransportrestTransitApisSDK
 
 client = TransportrestTransitApisSDK()
 
-# List all arrivals
-arrivals = client.arrival.list()
-print(arrivals)
+# List all arrivals (returns a list, raises on error)
+arrivals = client.Arrival().list({})
+for arrival in arrivals:
+    print(arrival)
 ```
 
 ### PHP
@@ -102,8 +105,8 @@ require_once 'transportresttransitapis_sdk.php';
 
 $client = new TransportrestTransitApisSDK();
 
-// List all arrivals (throws on error)
-$arrivals = $client->arrival()->list();
+// List all arrivals (returns an array; throws on error)
+$arrivals = $client->Arrival()->list();
 print_r($arrivals);
 ```
 
@@ -126,8 +129,8 @@ require_relative "TransportrestTransitApis_sdk"
 
 client = TransportrestTransitApisSDK.new
 
-# List all arrivals
-arrivals = client.arrival.list
+# List all arrivals (returns an Array; raises on error)
+arrivals = client.Arrival.list
 puts arrivals
 ```
 
@@ -139,7 +142,7 @@ local sdk = require("transportrest-transit-apis_sdk")
 local client = sdk.new()
 
 -- List all arrivals
-local arrivals, err = client:arrival():list()
+local arrivals, err = client:Arrival():list()
 print(arrivals)
 ```
 
@@ -152,22 +155,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = TransportrestTransitApisSDK.test()
-const result = await client.arrival.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const arrival = await client.Arrival().load({ id: 'test01' })
+// arrival is a bare Arrival populated with mock data
+console.log(arrival)
 ```
 
 ### Python
 
 ```python
 client = TransportrestTransitApisSDK.test()
-result = client.arrival.load({"id": "test01"})
+arrival = client.Arrival().load({"id": "test01"})
+print(arrival)
 ```
 
 ### PHP
 
 ```php
-$client = TransportrestTransitApisSDK::test();
-$result = $client->arrival()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = TransportrestTransitApisSDK::test([
+    "entity" => ["arrival" => ["test01" => ["id" => "test01"]]],
+]);
+$arrival = $client->Arrival()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -182,15 +190,18 @@ result, err := client.Arrival(nil).Load(
 ### Ruby
 
 ```ruby
-client = TransportrestTransitApisSDK.test
-result = client.arrival.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = TransportrestTransitApisSDK.test({
+  "entity" => { "arrival" => { "test01" => { "id" => "test01" } } },
+})
+arrival = client.Arrival.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:arrival():load({ id = "test01" })
+local result, err = client:Arrival():load({ id = "test01" })
 ```
 
 ## How it works
@@ -238,6 +249,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

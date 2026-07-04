@@ -104,7 +104,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## ArrivalEntity
 
 ```python
-arrival = client.arrival
+arrival = client.Arrival()
 ```
 
 ### Fields
@@ -128,7 +128,9 @@ arrival = client.arrival
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.arrival.list({})
+results = client.Arrival().list({})
+for arrival in results:
+    print(arrival)
 ```
 
 ### Common Methods
@@ -163,7 +165,7 @@ Return the entity name.
 ## DepartureEntity
 
 ```python
-departure = client.departure
+departure = client.Departure()
 ```
 
 ### Fields
@@ -187,7 +189,9 @@ departure = client.departure
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.departure.list({})
+results = client.Departure().list({})
+for departure in results:
+    print(departure)
 ```
 
 ### Common Methods
@@ -222,7 +226,7 @@ Return the entity name.
 ## JourneyEntity
 
 ```python
-journey = client.journey
+journey = client.Journey()
 ```
 
 ### Fields
@@ -240,7 +244,9 @@ journey = client.journey
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.journey.list({})
+results = client.Journey().list({})
+for journey in results:
+    print(journey)
 ```
 
 ### Common Methods
@@ -275,7 +281,7 @@ Return the entity name.
 ## LocationEntity
 
 ```python
-location = client.location
+location = client.Location()
 ```
 
 ### Fields
@@ -295,7 +301,9 @@ location = client.location
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.location.list({})
+results = client.Location().list({})
+for location in results:
+    print(location)
 ```
 
 ### Common Methods
@@ -330,7 +338,7 @@ Return the entity name.
 ## RadarEntity
 
 ```python
-radar = client.radar
+radar = client.Radar()
 ```
 
 ### Fields
@@ -350,7 +358,9 @@ radar = client.radar
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.radar.list({})
+results = client.Radar().list({})
+for radar in results:
+    print(radar)
 ```
 
 ### Common Methods
@@ -385,7 +395,7 @@ Return the entity name.
 ## StopEntity
 
 ```python
-stop = client.stop
+stop = client.Stop()
 ```
 
 ### Fields
@@ -406,7 +416,7 @@ stop = client.stop
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.stop.load({"id": "stop_id"})
+result = client.Stop().load({"id": "stop_id"})
 ```
 
 ### Common Methods
@@ -441,7 +451,7 @@ Return the entity name.
 ## TripEntity
 
 ```python
-trip = client.trip
+trip = client.Trip()
 ```
 
 ### Fields
@@ -462,7 +472,7 @@ trip = client.trip
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.trip.load({"id": "trip_id"})
+result = client.Trip().load({"id": "trip_id"})
 ```
 
 ### Common Methods

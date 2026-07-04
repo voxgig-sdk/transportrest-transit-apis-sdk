@@ -110,7 +110,7 @@ same parameters as `direct()`. Raises on error.
 ## ArrivalEntity
 
 ```ruby
-arrival = client.arrival
+arrival = client.Arrival
 ```
 
 ### Fields
@@ -134,7 +134,7 @@ arrival = client.arrival
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.arrival.list(nil)
+results = client.Arrival.list(nil)
 ```
 
 ### Common Methods
@@ -170,7 +170,7 @@ Return the entity name.
 ## DepartureEntity
 
 ```ruby
-departure = client.departure
+departure = client.Departure
 ```
 
 ### Fields
@@ -194,7 +194,7 @@ departure = client.departure
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.departure.list(nil)
+results = client.Departure.list(nil)
 ```
 
 ### Common Methods
@@ -230,7 +230,7 @@ Return the entity name.
 ## JourneyEntity
 
 ```ruby
-journey = client.journey
+journey = client.Journey
 ```
 
 ### Fields
@@ -248,7 +248,7 @@ journey = client.journey
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.journey.list(nil)
+results = client.Journey.list(nil)
 ```
 
 ### Common Methods
@@ -284,7 +284,7 @@ Return the entity name.
 ## LocationEntity
 
 ```ruby
-location = client.location
+location = client.Location
 ```
 
 ### Fields
@@ -304,7 +304,7 @@ location = client.location
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.location.list(nil)
+results = client.Location.list(nil)
 ```
 
 ### Common Methods
@@ -340,7 +340,7 @@ Return the entity name.
 ## RadarEntity
 
 ```ruby
-radar = client.radar
+radar = client.Radar
 ```
 
 ### Fields
@@ -360,7 +360,7 @@ radar = client.radar
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.radar.list(nil)
+results = client.Radar.list(nil)
 ```
 
 ### Common Methods
@@ -396,7 +396,7 @@ Return the entity name.
 ## StopEntity
 
 ```ruby
-stop = client.stop
+stop = client.Stop
 ```
 
 ### Fields
@@ -417,7 +417,7 @@ stop = client.stop
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.stop.load({ "id" => "stop_id" })
+result = client.Stop.load({ "id" => "stop_id" })
 ```
 
 ### Common Methods
@@ -453,7 +453,7 @@ Return the entity name.
 ## TripEntity
 
 ```ruby
-trip = client.trip
+trip = client.Trip
 ```
 
 ### Fields
@@ -474,7 +474,7 @@ trip = client.trip
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.trip.load({ "id" => "trip_id" })
+result = client.Trip.load({ "id" => "trip_id" })
 ```
 
 ### Common Methods

@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:arrival():list() / client:arrival():load({ id = ... })
-function TransportrestTransitApisSDK:arrival(data)
+-- Idiomatic facade: client:Arrival():list() / client:Arrival():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function TransportrestTransitApisSDK:Arrival(data)
   local EntityMod = require("entity.arrival_entity")
   if data == nil then
     if self._arrival == nil then
@@ -256,15 +257,10 @@ function TransportrestTransitApisSDK:arrival(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:arrival() instead.
-function TransportrestTransitApisSDK:Arrival(data)
-  local EntityMod = require("entity.arrival_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:departure():list() / client:departure():load({ id = ... })
-function TransportrestTransitApisSDK:departure(data)
+-- Idiomatic facade: client:Departure():list() / client:Departure():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function TransportrestTransitApisSDK:Departure(data)
   local EntityMod = require("entity.departure_entity")
   if data == nil then
     if self._departure == nil then
@@ -275,15 +271,10 @@ function TransportrestTransitApisSDK:departure(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:departure() instead.
-function TransportrestTransitApisSDK:Departure(data)
-  local EntityMod = require("entity.departure_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:journey():list() / client:journey():load({ id = ... })
-function TransportrestTransitApisSDK:journey(data)
+-- Idiomatic facade: client:Journey():list() / client:Journey():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function TransportrestTransitApisSDK:Journey(data)
   local EntityMod = require("entity.journey_entity")
   if data == nil then
     if self._journey == nil then
@@ -294,15 +285,10 @@ function TransportrestTransitApisSDK:journey(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:journey() instead.
-function TransportrestTransitApisSDK:Journey(data)
-  local EntityMod = require("entity.journey_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:location():list() / client:location():load({ id = ... })
-function TransportrestTransitApisSDK:location(data)
+-- Idiomatic facade: client:Location():list() / client:Location():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function TransportrestTransitApisSDK:Location(data)
   local EntityMod = require("entity.location_entity")
   if data == nil then
     if self._location == nil then
@@ -313,15 +299,10 @@ function TransportrestTransitApisSDK:location(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:location() instead.
-function TransportrestTransitApisSDK:Location(data)
-  local EntityMod = require("entity.location_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:radar():list() / client:radar():load({ id = ... })
-function TransportrestTransitApisSDK:radar(data)
+-- Idiomatic facade: client:Radar():list() / client:Radar():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function TransportrestTransitApisSDK:Radar(data)
   local EntityMod = require("entity.radar_entity")
   if data == nil then
     if self._radar == nil then
@@ -332,15 +313,10 @@ function TransportrestTransitApisSDK:radar(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:radar() instead.
-function TransportrestTransitApisSDK:Radar(data)
-  local EntityMod = require("entity.radar_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:stop():list() / client:stop():load({ id = ... })
-function TransportrestTransitApisSDK:stop(data)
+-- Idiomatic facade: client:Stop():list() / client:Stop():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function TransportrestTransitApisSDK:Stop(data)
   local EntityMod = require("entity.stop_entity")
   if data == nil then
     if self._stop == nil then
@@ -351,15 +327,10 @@ function TransportrestTransitApisSDK:stop(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:stop() instead.
-function TransportrestTransitApisSDK:Stop(data)
-  local EntityMod = require("entity.stop_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:trip():list() / client:trip():load({ id = ... })
-function TransportrestTransitApisSDK:trip(data)
+-- Idiomatic facade: client:Trip():list() / client:Trip():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function TransportrestTransitApisSDK:Trip(data)
   local EntityMod = require("entity.trip_entity")
   if data == nil then
     if self._trip == nil then
@@ -367,12 +338,6 @@ function TransportrestTransitApisSDK:trip(data)
     end
     return self._trip
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:trip() instead.
-function TransportrestTransitApisSDK:Trip(data)
-  local EntityMod = require("entity.trip_entity")
   return EntityMod.new(self, data)
 end
 

@@ -28,16 +28,14 @@ require_relative "TransportrestTransitApis_sdk"
 client = TransportrestTransitApisSDK.new
 ```
 
-### 2. List arrivals
+### 2. List arrival records
 
 ```ruby
 begin
-  result = client.arrival.list
-  if result.is_a?(Array)
-    result.each do |item|
-      d = item.data_get
-      puts "#{d["id"]} #{d["name"]}"
-    end
+  # list returns an Array of Arrival records — iterate directly.
+  arrivals = client.Arrival.list
+  arrivals.each do |item|
+    puts "#{item["id"]} #{item["name"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -85,13 +83,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = TransportrestTransitApisSDK.test
+client = TransportrestTransitApisSDK.test({
+  "entity" => { "arrival" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.arrival.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+arrival = client.Arrival.load({ "id" => "test01" })
+puts arrival
 ```
 
 ### Use a custom fetch function
@@ -167,7 +169,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
 | `prepare` | `(fetchargs) -> Hash` | Build an HTTP request definition without sending. Raises on error. |
 | `direct` | `(fetchargs) -> Hash` | Build and send an HTTP request. Returns a result hash (`result["ok"]`); does not raise. |
-| `Arrival` | `(data) -> ArrivalEntity` | Create a Arrival entity instance. |
+| `Arrival` | `(data) -> ArrivalEntity` | Create an Arrival entity instance. |
 | `Departure` | `(data) -> DepartureEntity` | Create a Departure entity instance. |
 | `Journey` | `(data) -> JourneyEntity` | Create a Journey entity instance. |
 | `Location` | `(data) -> LocationEntity` | Create a Location entity instance. |
@@ -325,7 +327,7 @@ API path: `/trips/{id}`
 
 ### Arrival
 
-Create an instance: `const arrival = client.arrival`
+Create an instance: `arrival = client.Arrival`
 
 #### Operations
 
@@ -349,14 +351,15 @@ Create an instance: `const arrival = client.arrival`
 
 #### Example: List
 
-```ts
-const arrivals = await client.arrival.list()
+```ruby
+# list returns an Array of Arrival records (raises on error).
+arrivals = client.Arrival.list
 ```
 
 
 ### Departure
 
-Create an instance: `const departure = client.departure`
+Create an instance: `departure = client.Departure`
 
 #### Operations
 
@@ -380,14 +383,15 @@ Create an instance: `const departure = client.departure`
 
 #### Example: List
 
-```ts
-const departures = await client.departure.list()
+```ruby
+# list returns an Array of Departure records (raises on error).
+departures = client.Departure.list
 ```
 
 
 ### Journey
 
-Create an instance: `const journey = client.journey`
+Create an instance: `journey = client.Journey`
 
 #### Operations
 
@@ -405,14 +409,15 @@ Create an instance: `const journey = client.journey`
 
 #### Example: List
 
-```ts
-const journeys = await client.journey.list()
+```ruby
+# list returns an Array of Journey records (raises on error).
+journeys = client.Journey.list
 ```
 
 
 ### Location
 
-Create an instance: `const location = client.location`
+Create an instance: `location = client.Location`
 
 #### Operations
 
@@ -432,14 +437,15 @@ Create an instance: `const location = client.location`
 
 #### Example: List
 
-```ts
-const locations = await client.location.list()
+```ruby
+# list returns an Array of Location records (raises on error).
+locations = client.Location.list
 ```
 
 
 ### Radar
 
-Create an instance: `const radar = client.radar`
+Create an instance: `radar = client.Radar`
 
 #### Operations
 
@@ -459,14 +465,15 @@ Create an instance: `const radar = client.radar`
 
 #### Example: List
 
-```ts
-const radars = await client.radar.list()
+```ruby
+# list returns an Array of Radar records (raises on error).
+radars = client.Radar.list
 ```
 
 
 ### Stop
 
-Create an instance: `const stop = client.stop`
+Create an instance: `stop = client.Stop`
 
 #### Operations
 
@@ -487,14 +494,15 @@ Create an instance: `const stop = client.stop`
 
 #### Example: Load
 
-```ts
-const stop = await client.stop.load({ id: 'stop_id' })
+```ruby
+# load returns the bare Stop record (raises on error).
+stop = client.Stop.load({ "id" => "stop_id" })
 ```
 
 
 ### Trip
 
-Create an instance: `const trip = client.trip`
+Create an instance: `trip = client.Trip`
 
 #### Operations
 
@@ -515,8 +523,9 @@ Create an instance: `const trip = client.trip`
 
 #### Example: Load
 
-```ts
-const trip = await client.trip.load({ id: 'trip_id' })
+```ruby
+# load returns the bare Trip record (raises on error).
+trip = client.Trip.load({ "id" => "trip_id" })
 ```
 
 
@@ -591,7 +600,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-arrival = client.arrival
+arrival = client.Arrival
 arrival.load({ "id" => "example_id" })
 
 # arrival.data_get now returns the loaded arrival data

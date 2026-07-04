@@ -4,125 +4,115 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class Arrival:
-    delay: Optional[int] = None
-    direction: Optional[str] = None
-    line: Optional[dict] = None
-    planned_platform: Optional[str] = None
-    planned_when: Optional[str] = None
-    platform: Optional[str] = None
-    stop: Optional[dict] = None
-    trip_id: Optional[str] = None
-    when: Optional[str] = None
+class Arrival(TypedDict, total=False):
+    delay: int
+    direction: str
+    line: dict
+    planned_platform: str
+    planned_when: str
+    platform: str
+    stop: dict
+    trip_id: str
+    when: str
 
 
-@dataclass
-class ArrivalListMatch:
+class ArrivalListMatch(TypedDict):
     stop_id: str
 
 
-@dataclass
-class Departure:
-    delay: Optional[int] = None
-    direction: Optional[str] = None
-    line: Optional[dict] = None
-    planned_platform: Optional[str] = None
-    planned_when: Optional[str] = None
-    platform: Optional[str] = None
-    stop: Optional[dict] = None
-    trip_id: Optional[str] = None
-    when: Optional[str] = None
+class Departure(TypedDict, total=False):
+    delay: int
+    direction: str
+    line: dict
+    planned_platform: str
+    planned_when: str
+    platform: str
+    stop: dict
+    trip_id: str
+    when: str
 
 
-@dataclass
-class DepartureListMatch:
+class DepartureListMatch(TypedDict):
     stop_id: str
 
 
-@dataclass
-class Journey:
-    leg: Optional[list] = None
-    refresh_token: Optional[str] = None
-    type: Optional[str] = None
+class Journey(TypedDict, total=False):
+    leg: list
+    refresh_token: str
+    type: str
 
 
-@dataclass
-class JourneyListMatch:
-    leg: Optional[list] = None
-    refresh_token: Optional[str] = None
-    type: Optional[str] = None
+class JourneyListMatch(TypedDict, total=False):
+    leg: list
+    refresh_token: str
+    type: str
 
 
-@dataclass
-class Location:
-    id: Optional[str] = None
-    location: Optional[dict] = None
-    name: Optional[str] = None
-    product: Optional[dict] = None
-    type: Optional[str] = None
+class Location(TypedDict, total=False):
+    id: str
+    location: dict
+    name: str
+    product: dict
+    type: str
 
 
-@dataclass
-class LocationListMatch:
-    id: Optional[str] = None
-    location: Optional[dict] = None
-    name: Optional[str] = None
-    product: Optional[dict] = None
-    type: Optional[str] = None
+class LocationListMatch(TypedDict, total=False):
+    id: str
+    location: dict
+    name: str
+    product: dict
+    type: str
 
 
-@dataclass
-class Radar:
-    direction: Optional[str] = None
-    line: Optional[dict] = None
-    location: Optional[dict] = None
-    next_stopover: Optional[list] = None
-    trip_id: Optional[str] = None
+class Radar(TypedDict, total=False):
+    direction: str
+    line: dict
+    location: dict
+    next_stopover: list
+    trip_id: str
 
 
-@dataclass
-class RadarListMatch:
-    direction: Optional[str] = None
-    line: Optional[dict] = None
-    location: Optional[dict] = None
-    next_stopover: Optional[list] = None
-    trip_id: Optional[str] = None
+class RadarListMatch(TypedDict, total=False):
+    direction: str
+    line: dict
+    location: dict
+    next_stopover: list
+    trip_id: str
 
 
-@dataclass
-class Stop:
-    id: Optional[str] = None
-    location: Optional[dict] = None
-    name: Optional[str] = None
-    product: Optional[dict] = None
-    station: Optional[dict] = None
-    type: Optional[str] = None
+class Stop(TypedDict, total=False):
+    id: str
+    location: dict
+    name: str
+    product: dict
+    station: dict
+    type: str
 
 
-@dataclass
-class StopLoadMatch:
+class StopLoadMatch(TypedDict):
     id: str
 
 
-@dataclass
-class Trip:
-    destination: Optional[dict] = None
-    direction: Optional[str] = None
-    id: Optional[str] = None
-    line: Optional[dict] = None
-    origin: Optional[dict] = None
-    stopover: Optional[list] = None
-
-
-@dataclass
-class TripLoadMatch:
+class Trip(TypedDict, total=False):
+    destination: dict
+    direction: str
     id: str
+    line: dict
+    origin: dict
+    stopover: list
 
+
+class TripLoadMatch(TypedDict):
+    id: str

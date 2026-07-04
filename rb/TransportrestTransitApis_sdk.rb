@@ -208,91 +208,49 @@ class TransportrestTransitApisSDK
   end
 
 
-  # Idiomatic facade: client.arrival.list / client.arrival.load({ "id" => ... })
-  def arrival
-    require_relative 'entity/arrival_entity'
-    @arrival ||= ArrivalEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.arrival instead.
+  # Canonical facade: client.Arrival.list / client.Arrival.load({ "id" => ... })
   def Arrival(data = nil)
     require_relative 'entity/arrival_entity'
     ArrivalEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.departure.list / client.departure.load({ "id" => ... })
-  def departure
-    require_relative 'entity/departure_entity'
-    @departure ||= DepartureEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.departure instead.
+  # Canonical facade: client.Departure.list / client.Departure.load({ "id" => ... })
   def Departure(data = nil)
     require_relative 'entity/departure_entity'
     DepartureEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.journey.list / client.journey.load({ "id" => ... })
-  def journey
-    require_relative 'entity/journey_entity'
-    @journey ||= JourneyEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.journey instead.
+  # Canonical facade: client.Journey.list / client.Journey.load({ "id" => ... })
   def Journey(data = nil)
     require_relative 'entity/journey_entity'
     JourneyEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.location.list / client.location.load({ "id" => ... })
-  def location
-    require_relative 'entity/location_entity'
-    @location ||= LocationEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.location instead.
+  # Canonical facade: client.Location.list / client.Location.load({ "id" => ... })
   def Location(data = nil)
     require_relative 'entity/location_entity'
     LocationEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.radar.list / client.radar.load({ "id" => ... })
-  def radar
-    require_relative 'entity/radar_entity'
-    @radar ||= RadarEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.radar instead.
+  # Canonical facade: client.Radar.list / client.Radar.load({ "id" => ... })
   def Radar(data = nil)
     require_relative 'entity/radar_entity'
     RadarEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.stop.list / client.stop.load({ "id" => ... })
-  def stop
-    require_relative 'entity/stop_entity'
-    @stop ||= StopEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.stop instead.
+  # Canonical facade: client.Stop.list / client.Stop.load({ "id" => ... })
   def Stop(data = nil)
     require_relative 'entity/stop_entity'
     StopEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.trip.list / client.trip.load({ "id" => ... })
-  def trip
-    require_relative 'entity/trip_entity'
-    @trip ||= TripEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.trip instead.
+  # Canonical facade: client.Trip.list / client.Trip.load({ "id" => ... })
   def Trip(data = nil)
     require_relative 'entity/trip_entity'
     TripEntity.new(self, data)

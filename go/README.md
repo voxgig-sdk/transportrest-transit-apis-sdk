@@ -30,37 +30,33 @@ go mod edit -replace github.com/voxgig-sdk/transportrest-transit-apis-sdk/go=../
 This tutorial walks through creating a client, listing entities, and
 loading a specific record.
 
-### 1. Create a client
+### Quickstart
+
+A complete program: create a client, then call the entity operations.
+Each operation returns `(value, error)` — the value is the data itself
+(there is no `{ok, data}` wrapper), so check `err` and use the value
+directly.
 
 ```go
 package main
 
 import (
     "fmt"
-
     sdk "github.com/voxgig-sdk/transportrest-transit-apis-sdk/go"
-    "github.com/voxgig-sdk/transportrest-transit-apis-sdk/go/core"
 )
 
 func main() {
     client := sdk.New()
-```
 
-### 2. List arrivals
-
-```go
-    result, err := client.Arrival(nil).List(nil, nil)
+    // List arrival records — the value is the array of records itself.
+    arrivals, err := client.Arrival(nil).List(nil, nil)
     if err != nil {
         panic(err)
     }
-
-    rm := core.ToMapAny(result)
-    if rm["ok"] == true {
-        for _, item := range rm["data"].([]any) {
-            p := core.ToMapAny(item)
-            fmt.Println(p["id"], p["name"])
-        }
+    for _, item := range arrivals.([]any) {
+        fmt.Println(item)
     }
+}
 ```
 
 
@@ -110,10 +106,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-result, err := client.Arrival(nil).Load(
+arrival, err := client.Arrival(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
-// result contains mock response data
+if err != nil {
+    panic(err)
+}
+fmt.Println(arrival) // the loaded mock data
 ```
 
 ### Use a custom fetch function
@@ -190,7 +189,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `GetUtility` | `() *Utility` | Copy of the SDK utility object. |
 | `Prepare` | `(fetchargs map[string]any) (map[string]any, error)` | Build an HTTP request definition without sending. |
 | `Direct` | `(fetchargs map[string]any) (map[string]any, error)` | Build and send an HTTP request. |
-| `Arrival` | `(data map[string]any) TransportrestTransitApisEntity` | Create a Arrival entity instance. |
+| `Arrival` | `(data map[string]any) TransportrestTransitApisEntity` | Create an Arrival entity instance. |
 | `Departure` | `(data map[string]any) TransportrestTransitApisEntity` | Create a Departure entity instance. |
 | `Journey` | `(data map[string]any) TransportrestTransitApisEntity` | Create a Journey entity instance. |
 | `Location` | `(data map[string]any) TransportrestTransitApisEntity` | Create a Location entity instance. |
@@ -216,17 +215,24 @@ All entities implement the `TransportrestTransitApisEntity` interface.
 
 ### Result shape
 
-Entity operations return `(any, error)`. The `any` value is a
-`map[string]any` with these keys:
+Entity operations return `(value, error)`. The `value` is the
+operation's data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `"ok"` | `bool` | `true` if the HTTP status is 2xx. |
-| `"status"` | `int` | HTTP status code. |
-| `"headers"` | `map[string]any` | Response headers. |
-| `"data"` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
+| `List` | a `[]any` of entity records |
 
-On error, `"ok"` is `false` and `"err"` contains the error value.
+Check `err` first, then use the value directly (or the typed
+`...Typed` variants, which return the entity's model struct and a typed
+slice):
+
+    arrival, err := client.Arrival(nil).Load(map[string]any{"id": "example_id"}, nil)
+    if err != nil { /* handle */ }
+    // arrival is the loaded record
+
+Only `Direct()` returns a response envelope — a `map[string]any` with
+`"ok"`, `"status"`, `"headers"`, and `"data"` keys.
 
 ### Entities
 
@@ -368,7 +374,11 @@ Create an instance: `arrival := client.Arrival(nil)`
 #### Example: List
 
 ```go
-results, err := client.Arrival(nil).List(nil, nil)
+arrivals, err := client.Arrival(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(arrivals) // the array of records
 ```
 
 
@@ -399,7 +409,11 @@ Create an instance: `departure := client.Departure(nil)`
 #### Example: List
 
 ```go
-results, err := client.Departure(nil).List(nil, nil)
+departures, err := client.Departure(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(departures) // the array of records
 ```
 
 
@@ -424,7 +438,11 @@ Create an instance: `journey := client.Journey(nil)`
 #### Example: List
 
 ```go
-results, err := client.Journey(nil).List(nil, nil)
+journeys, err := client.Journey(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(journeys) // the array of records
 ```
 
 
@@ -451,7 +469,11 @@ Create an instance: `location := client.Location(nil)`
 #### Example: List
 
 ```go
-results, err := client.Location(nil).List(nil, nil)
+locations, err := client.Location(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(locations) // the array of records
 ```
 
 
@@ -478,7 +500,11 @@ Create an instance: `radar := client.Radar(nil)`
 #### Example: List
 
 ```go
-results, err := client.Radar(nil).List(nil, nil)
+radars, err := client.Radar(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(radars) // the array of records
 ```
 
 
@@ -506,7 +532,11 @@ Create an instance: `stop := client.Stop(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Stop(nil).Load(map[string]any{"id": "stop_id"}, nil)
+stop, err := client.Stop(nil).Load(map[string]any{"id": "stop_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(stop) // the loaded record
 ```
 
 
@@ -534,7 +564,11 @@ Create an instance: `trip := client.Trip(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Trip(nil).Load(map[string]any{"id": "trip_id"}, nil)
+trip, err := client.Trip(nil).Load(map[string]any{"id": "trip_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(trip) // the loaded record
 ```
 
 
