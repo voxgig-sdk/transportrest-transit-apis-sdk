@@ -50,8 +50,7 @@ class TestRadarEntity:
         radar_ref01_ent = client.Radar(None)
         radar_ref01_match = {}
 
-        radar_ref01_list_result, err = radar_ref01_ent.list(radar_ref01_match, None)
-        assert err is None
+        radar_ref01_list_result = radar_ref01_ent.list(radar_ref01_match, None)
         assert isinstance(radar_ref01_list_result, list)
 
 
@@ -92,7 +91,6 @@ def _radar_basic_setup(extra):
         "TRANSPORTRESTTRANSITAPIS_TEST_RADAR_ENTID": idmap,
         "TRANSPORTRESTTRANSITAPIS_TEST_LIVE": "FALSE",
         "TRANSPORTRESTTRANSITAPIS_TEST_EXPLAIN": "FALSE",
-        "TRANSPORTRESTTRANSITAPIS_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -103,7 +101,6 @@ def _radar_basic_setup(extra):
     if env.get("TRANSPORTRESTTRANSITAPIS_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("TRANSPORTRESTTRANSITAPIS_APIKEY"),
             },
             extra or {},
         ])

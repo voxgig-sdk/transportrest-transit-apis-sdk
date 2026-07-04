@@ -10,26 +10,24 @@ This is an unofficial SDK for the transport.rest transit APIs public API, genera
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/transportrest-transit-apis` | `npm install @voxgig-sdk/transportrest-transit-apis` |
-| Python | `voxgig-sdk-transportrest-transit-apis` | `pip install voxgig-sdk-transportrest-transit-apis` |
-| PHP | `voxgig-sdk/transportrest-transit-apis` | `composer require voxgig-sdk/transportrest-transit-apis` |
-| Golang | `github.com/voxgig-sdk/transportrest-transit-apis-sdk/go` | `go get github.com/voxgig-sdk/transportrest-transit-apis-sdk/go` |
-| Ruby | `voxgig-sdk-transportrest-transit-apis` | `gem install voxgig-sdk-transportrest-transit-apis` |
-| Lua | `voxgig-sdk-transportrest-transit-apis` | `luarocks install voxgig-sdk-transportrest-transit-apis` |
+| TypeScript | `@voxgig-sdk/transportrest-transit-apis` | publish pending — [install from git tag](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/releases) |
+| Python | `voxgig-sdk-transportrest-transit-apis` | publish pending — [install from git tag](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/releases) |
+| PHP | `voxgig-sdk/transportrest-transit-apis` | publish pending — [install from git tag](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/releases) |
+| Golang | `github.com/voxgig-sdk/transportrest-transit-apis-sdk/go` | `go get github.com/voxgig-sdk/transportrest-transit-apis-sdk/go@latest` |
+| Ruby | `voxgig-sdk-transportrest-transit-apis` | publish pending — [install from git tag](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/releases) |
+| Lua | `voxgig-sdk-transportrest-transit-apis` | publish pending — [install from git tag](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/releases) |
 
 ## Quickstart
 
 ### TypeScript
 
 ```ts
-import { TransportrestTransitApisSDK } from 'transportrest-transit-apis'
+import { TransportrestTransitApisSDK } from '@voxgig-sdk/transportrest-transit-apis'
 
-const client = new TransportrestTransitApisSDK({
-  apikey: process.env.TRANSPORTREST-TRANSIT-APIS_APIKEY,
-})
+const client = new TransportrestTransitApisSDK()
 
 // List all arrivals
-const arrivals = await client.Arrival().list()
+const arrivals = await client.arrival.list()
 console.log(arrivals.data)
 ```
 
@@ -71,13 +69,13 @@ The API exposes 7 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Arrival** |  | `/stops/{id}/arrivals` |
-| **Departure** |  | `/stops/{id}/departures` |
-| **Journey** |  | `/journeys` |
-| **Location** |  | `/locations` |
-| **Radar** |  | `/radar` |
-| **Stop** |  | `/stops/{id}` |
-| **Trip** |  | `/trips/{id}` |
+| **Arrival** | The Arrival entity (list). | `/stops/{id}/arrivals` |
+| **Departure** | The Departure entity (list). | `/stops/{id}/departures` |
+| **Journey** | The Journey entity (list). | `/journeys` |
+| **Location** | The Location entity (list). | `/locations` |
+| **Radar** | The Radar entity (list). | `/radar` |
+| **Stop** | The Stop entity (load). | `/stops/{id}` |
+| **Trip** | The Trip entity (load). | `/trips/{id}` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -87,15 +85,12 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
-import os
 from transportresttransitapis_sdk import TransportrestTransitApisSDK
 
-client = TransportrestTransitApisSDK({
-    "apikey": os.environ.get("TRANSPORTREST-TRANSIT-APIS_APIKEY"),
-})
+client = TransportrestTransitApisSDK()
 
 # List all arrivals
-arrivals, err = client.Arrival().list()
+arrivals = client.arrival.list()
 print(arrivals)
 ```
 
@@ -105,12 +100,10 @@ print(arrivals)
 <?php
 require_once 'transportresttransitapis_sdk.php';
 
-$client = new TransportrestTransitApisSDK([
-    "apikey" => getenv("TRANSPORTREST-TRANSIT-APIS_APIKEY"),
-]);
+$client = new TransportrestTransitApisSDK();
 
-// List all arrivals
-[$arrivals, $err] = $client->Arrival()->list();
+// List all arrivals (throws on error)
+$arrivals = $client->arrival()->list();
 print_r($arrivals);
 ```
 
@@ -119,9 +112,7 @@ print_r($arrivals);
 ```go
 import sdk "github.com/voxgig-sdk/transportrest-transit-apis-sdk/go"
 
-client := sdk.NewTransportrestTransitApisSDK(map[string]any{
-    "apikey": os.Getenv("TRANSPORTREST-TRANSIT-APIS_APIKEY"),
-})
+client := sdk.New()
 
 // List all arrivals
 arrivals, err := client.Arrival(nil).List(nil, nil)
@@ -133,12 +124,10 @@ fmt.Println(arrivals)
 ```ruby
 require_relative "TransportrestTransitApis_sdk"
 
-client = TransportrestTransitApisSDK.new({
-  "apikey" => ENV["TRANSPORTREST-TRANSIT-APIS_APIKEY"],
-})
+client = TransportrestTransitApisSDK.new
 
 # List all arrivals
-arrivals, err = client.Arrival().list
+arrivals = client.arrival.list
 puts arrivals
 ```
 
@@ -147,12 +136,10 @@ puts arrivals
 ```lua
 local sdk = require("transportrest-transit-apis_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("TRANSPORTREST-TRANSIT-APIS_APIKEY"),
-})
+local client = sdk.new()
 
 -- List all arrivals
-local arrivals, err = client:Arrival():list()
+local arrivals, err = client:arrival():list()
 print(arrivals)
 ```
 
@@ -165,7 +152,7 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = TransportrestTransitApisSDK.test()
-const result = await client.Arrival().load({ id: 'test01' })
+const result = await client.arrival.load({ id: 'test01' })
 // result.ok === true, result.data contains mock data
 ```
 
@@ -173,14 +160,14 @@ const result = await client.Arrival().load({ id: 'test01' })
 
 ```python
 client = TransportrestTransitApisSDK.test()
-result, err = client.Arrival().load({"id": "test01"})
+result = client.arrival.load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
 $client = TransportrestTransitApisSDK::test();
-[$result, $err] = $client->Arrival()->load(["id" => "test01"]);
+$result = $client->arrival()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -196,14 +183,14 @@ result, err := client.Arrival(nil).Load(
 
 ```ruby
 client = TransportrestTransitApisSDK.test
-result, err = client.Arrival().load({ "id" => "test01" })
+result = client.arrival.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:Arrival():load({ id = "test01" })
+local result, err = client:arrival():load({ id = "test01" })
 ```
 
 ## How it works
@@ -256,7 +243,7 @@ console.log(result.data)
 
 **Python:**
 ```python
-result, err = client.direct({
+result = client.direct({
     "path": "/api/resource/{id}",
     "method": "GET",
     "params": {"id": "example"},
@@ -265,7 +252,7 @@ result, err = client.direct({
 
 **PHP:**
 ```php
-[$result, $err] = $client->direct([
+$result = $client->direct([
     "path" => "/api/resource/{id}",
     "method" => "GET",
     "params" => ["id" => "example"],
@@ -283,7 +270,7 @@ result, err := client.Direct(map[string]any{
 
 **Ruby:**
 ```ruby
-result, err = client.direct({
+result = client.direct({
   "path" => "/api/resource/{id}",
   "method" => "GET",
   "params" => { "id" => "example" },

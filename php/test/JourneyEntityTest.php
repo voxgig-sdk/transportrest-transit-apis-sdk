@@ -50,8 +50,7 @@ class JourneyEntityTest extends TestCase
         $journey_ref01_ent = $client->Journey(null);
         $journey_ref01_match = [];
 
-        [$journey_ref01_list_result, $err] = $journey_ref01_ent->list($journey_ref01_match, null);
-        $this->assertNull($err);
+        $journey_ref01_list_result = $journey_ref01_ent->list($journey_ref01_match, null);
         $this->assertIsArray($journey_ref01_list_result);
 
     }
@@ -86,7 +85,6 @@ function journey_basic_setup($extra)
         "TRANSPORTRESTTRANSITAPIS_TEST_JOURNEY_ENTID" => $idmap,
         "TRANSPORTRESTTRANSITAPIS_TEST_LIVE" => "FALSE",
         "TRANSPORTRESTTRANSITAPIS_TEST_EXPLAIN" => "FALSE",
-        "TRANSPORTRESTTRANSITAPIS_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -98,7 +96,6 @@ function journey_basic_setup($extra)
     if ($env["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["TRANSPORTRESTTRANSITAPIS_APIKEY"],
             ],
             $extra ?? [],
         ]);

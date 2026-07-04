@@ -144,16 +144,23 @@ class TransportrestTransitApisSDK:
 
         _, err = utility.prepare_auth(ctx)
         if err is not None:
-            return None, err
+            raise err
 
-        return utility.make_fetch_def(ctx)
+        fetchdef, err = utility.make_fetch_def(ctx)
+        if err is not None:
+            raise err
+
+        return fetchdef
 
     def direct(self, fetchargs=None):
         utility = self._utility
 
-        fetchdef, err = self.prepare(fetchargs)
-        if err is not None:
-            return {"ok": False, "err": err}, None
+        try:
+            fetchdef = self.prepare(fetchargs)
+        except Exception as err:
+            # direct() is the raw-HTTP escape hatch: it never raises, it
+            # returns a result object callers branch on via result["ok"].
+            return {"ok": False, "err": err}
 
         if fetchargs is None:
             fetchargs = {}
@@ -170,13 +177,13 @@ class TransportrestTransitApisSDK:
         fetched, fetch_err = utility.fetcher(ctx, url, fetchdef)
 
         if fetch_err is not None:
-            return {"ok": False, "err": fetch_err}, None
+            return {"ok": False, "err": fetch_err}
 
         if fetched is None:
             return {
                 "ok": False,
                 "err": ctx.make_error("direct_no_response", "response: undefined"),
-            }, None
+            }
 
         if isinstance(fetched, dict):
             status = helpers.to_int(vs.getprop(fetched, "status"))
@@ -205,45 +212,122 @@ class TransportrestTransitApisSDK:
                 "status": status,
                 "headers": headers,
                 "data": json_data,
-            }, None
+            }
 
         return {
             "ok": False,
             "err": ctx.make_error("direct_invalid", "invalid response type"),
-        }, None
+        }
 
+
+    @property
+    def arrival(self):
+        """Idiomatic facade: client.arrival.list() / client.arrival.load({"id": ...})."""
+        from entity.arrival_entity import ArrivalEntity
+        cached = getattr(self, "_arrival", None)
+        if cached is None:
+            cached = ArrivalEntity(self, None)
+            self._arrival = cached
+        return cached
 
     def Arrival(self, data=None):
+        # Deprecated: use client.arrival instead.
         from entity.arrival_entity import ArrivalEntity
         return ArrivalEntity(self, data)
 
 
+    @property
+    def departure(self):
+        """Idiomatic facade: client.departure.list() / client.departure.load({"id": ...})."""
+        from entity.departure_entity import DepartureEntity
+        cached = getattr(self, "_departure", None)
+        if cached is None:
+            cached = DepartureEntity(self, None)
+            self._departure = cached
+        return cached
+
     def Departure(self, data=None):
+        # Deprecated: use client.departure instead.
         from entity.departure_entity import DepartureEntity
         return DepartureEntity(self, data)
 
 
+    @property
+    def journey(self):
+        """Idiomatic facade: client.journey.list() / client.journey.load({"id": ...})."""
+        from entity.journey_entity import JourneyEntity
+        cached = getattr(self, "_journey", None)
+        if cached is None:
+            cached = JourneyEntity(self, None)
+            self._journey = cached
+        return cached
+
     def Journey(self, data=None):
+        # Deprecated: use client.journey instead.
         from entity.journey_entity import JourneyEntity
         return JourneyEntity(self, data)
 
 
+    @property
+    def location(self):
+        """Idiomatic facade: client.location.list() / client.location.load({"id": ...})."""
+        from entity.location_entity import LocationEntity
+        cached = getattr(self, "_location", None)
+        if cached is None:
+            cached = LocationEntity(self, None)
+            self._location = cached
+        return cached
+
     def Location(self, data=None):
+        # Deprecated: use client.location instead.
         from entity.location_entity import LocationEntity
         return LocationEntity(self, data)
 
 
+    @property
+    def radar(self):
+        """Idiomatic facade: client.radar.list() / client.radar.load({"id": ...})."""
+        from entity.radar_entity import RadarEntity
+        cached = getattr(self, "_radar", None)
+        if cached is None:
+            cached = RadarEntity(self, None)
+            self._radar = cached
+        return cached
+
     def Radar(self, data=None):
+        # Deprecated: use client.radar instead.
         from entity.radar_entity import RadarEntity
         return RadarEntity(self, data)
 
 
+    @property
+    def stop(self):
+        """Idiomatic facade: client.stop.list() / client.stop.load({"id": ...})."""
+        from entity.stop_entity import StopEntity
+        cached = getattr(self, "_stop", None)
+        if cached is None:
+            cached = StopEntity(self, None)
+            self._stop = cached
+        return cached
+
     def Stop(self, data=None):
+        # Deprecated: use client.stop instead.
         from entity.stop_entity import StopEntity
         return StopEntity(self, data)
 
 
+    @property
+    def trip(self):
+        """Idiomatic facade: client.trip.list() / client.trip.load({"id": ...})."""
+        from entity.trip_entity import TripEntity
+        cached = getattr(self, "_trip", None)
+        if cached is None:
+            cached = TripEntity(self, None)
+            self._trip = cached
+        return cached
+
     def Trip(self, data=None):
+        # Deprecated: use client.trip instead.
         from entity.trip_entity import TripEntity
         return TripEntity(self, data)
 

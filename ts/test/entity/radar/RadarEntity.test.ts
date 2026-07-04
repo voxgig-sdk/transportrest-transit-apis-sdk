@@ -113,7 +113,6 @@ function basicSetup(extra?: any) {
     'TRANSPORTREST_TRANSIT_APIS_TEST_RADAR_ENTID': idmap,
     'TRANSPORTREST_TRANSIT_APIS_TEST_LIVE': 'FALSE',
     'TRANSPORTREST_TRANSIT_APIS_TEST_EXPLAIN': 'FALSE',
-    'TRANSPORTREST_TRANSIT_APIS_APIKEY': 'NONE',
   })
 
   idmap = env['TRANSPORTREST_TRANSIT_APIS_TEST_RADAR_ENTID']
@@ -123,7 +122,6 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new TransportrestTransitApisSDK(merge([
       {
-        apikey: env.TRANSPORTREST_TRANSIT_APIS_APIKEY,
       },
       extra
     ]))

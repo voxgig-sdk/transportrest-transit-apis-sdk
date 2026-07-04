@@ -50,8 +50,7 @@ class RadarEntityTest extends TestCase
         $radar_ref01_ent = $client->Radar(null);
         $radar_ref01_match = [];
 
-        [$radar_ref01_list_result, $err] = $radar_ref01_ent->list($radar_ref01_match, null);
-        $this->assertNull($err);
+        $radar_ref01_list_result = $radar_ref01_ent->list($radar_ref01_match, null);
         $this->assertIsArray($radar_ref01_list_result);
 
     }
@@ -86,7 +85,6 @@ function radar_basic_setup($extra)
         "TRANSPORTRESTTRANSITAPIS_TEST_RADAR_ENTID" => $idmap,
         "TRANSPORTRESTTRANSITAPIS_TEST_LIVE" => "FALSE",
         "TRANSPORTRESTTRANSITAPIS_TEST_EXPLAIN" => "FALSE",
-        "TRANSPORTRESTTRANSITAPIS_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -98,7 +96,6 @@ function radar_basic_setup($extra)
     if ($env["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["TRANSPORTRESTTRANSITAPIS_APIKEY"],
             ],
             $extra ?? [],
         ]);

@@ -20,7 +20,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `dict` | SDK configuration options. |
-| `options["apikey"]` | `str` | API key for authentication. |
 | `options["base"]` | `str` | Base URL for API requests. |
 | `options["prefix"]` | `str` | URL prefix appended after base. |
 | `options["suffix"]` | `str` | URL suffix appended after path. |
@@ -78,9 +77,9 @@ Return a deep copy of the current SDK options.
 
 Return a copy of the SDK utility object.
 
-#### `direct(fetchargs=None) -> tuple`
+#### `direct(fetchargs=None) -> dict`
 
-Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
+Make a direct HTTP request to any API endpoint. Returns a result `dict` with `ok`, `status`, `headers`, and `data` (or `err` on failure). This escape hatch never raises — branch on `result["ok"]`.
 
 **Parameters:**
 
@@ -93,11 +92,11 @@ Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
 | `fetchargs["headers"]` | `dict` | Request headers (merged with defaults). |
 | `fetchargs["body"]` | `any` | Request body (dicts are JSON-serialized). |
 
-**Returns:** `(result_dict, err)`
+**Returns:** `result_dict`
 
-#### `prepare(fetchargs=None) -> tuple`
+#### `prepare(fetchargs=None) -> dict`
 
-Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
+Prepare a fetch definition without sending. Returns the `fetchdef` and raises on error.
 
 
 ---
@@ -105,7 +104,7 @@ Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
 ## ArrivalEntity
 
 ```python
-arrival = client.Arrival()
+arrival = client.arrival
 ```
 
 ### Fields
@@ -124,12 +123,12 @@ arrival = client.Arrival()
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> tuple`
+#### `list(reqmatch, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results, err = client.Arrival().list({})
+results = client.arrival.list({})
 ```
 
 ### Common Methods
@@ -164,7 +163,7 @@ Return the entity name.
 ## DepartureEntity
 
 ```python
-departure = client.Departure()
+departure = client.departure
 ```
 
 ### Fields
@@ -183,12 +182,12 @@ departure = client.Departure()
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> tuple`
+#### `list(reqmatch, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results, err = client.Departure().list({})
+results = client.departure.list({})
 ```
 
 ### Common Methods
@@ -223,7 +222,7 @@ Return the entity name.
 ## JourneyEntity
 
 ```python
-journey = client.Journey()
+journey = client.journey
 ```
 
 ### Fields
@@ -236,12 +235,12 @@ journey = client.Journey()
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> tuple`
+#### `list(reqmatch, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results, err = client.Journey().list({})
+results = client.journey.list({})
 ```
 
 ### Common Methods
@@ -276,7 +275,7 @@ Return the entity name.
 ## LocationEntity
 
 ```python
-location = client.Location()
+location = client.location
 ```
 
 ### Fields
@@ -291,12 +290,12 @@ location = client.Location()
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> tuple`
+#### `list(reqmatch, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results, err = client.Location().list({})
+results = client.location.list({})
 ```
 
 ### Common Methods
@@ -331,7 +330,7 @@ Return the entity name.
 ## RadarEntity
 
 ```python
-radar = client.Radar()
+radar = client.radar
 ```
 
 ### Fields
@@ -346,12 +345,12 @@ radar = client.Radar()
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> tuple`
+#### `list(reqmatch, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results, err = client.Radar().list({})
+results = client.radar.list({})
 ```
 
 ### Common Methods
@@ -386,7 +385,7 @@ Return the entity name.
 ## StopEntity
 
 ```python
-stop = client.Stop()
+stop = client.stop
 ```
 
 ### Fields
@@ -402,12 +401,12 @@ stop = client.Stop()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Stop().load({"id": "stop_id"})
+result = client.stop.load({"id": "stop_id"})
 ```
 
 ### Common Methods
@@ -442,7 +441,7 @@ Return the entity name.
 ## TripEntity
 
 ```python
-trip = client.Trip()
+trip = client.trip
 ```
 
 ### Fields
@@ -458,12 +457,12 @@ trip = client.Trip()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Trip().load({"id": "trip_id"})
+result = client.trip.load({"id": "trip_id"})
 ```
 
 ### Common Methods

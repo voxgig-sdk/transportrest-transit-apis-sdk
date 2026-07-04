@@ -45,6 +45,7 @@ class RadarEntity
     end
   end
 
+  # @return [Radar, Hash] the current Radar data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,6 +58,7 @@ class RadarEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Radar fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
@@ -65,6 +67,11 @@ class RadarEntity
   
 
   
+  # List Radar items matching the given filter.
+  #
+  # @param reqmatch [RadarListMatch, Hash, nil] match filter (any subset of Radar fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Radar>, Array] the matching Radar items; raises TransportrestTransitApisError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

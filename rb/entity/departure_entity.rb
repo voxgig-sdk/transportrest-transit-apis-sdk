@@ -45,6 +45,7 @@ class DepartureEntity
     end
   end
 
+  # @return [Departure, Hash] the current Departure data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,6 +58,7 @@ class DepartureEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Departure fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
@@ -65,6 +67,11 @@ class DepartureEntity
   
 
   
+  # List Departure items matching the given filter.
+  #
+  # @param reqmatch [DepartureListMatch, Hash, nil] match filter (any subset of Departure fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Departure>, Array] the matching Departure items; raises TransportrestTransitApisError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

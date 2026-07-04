@@ -45,6 +45,7 @@ class ArrivalEntity
     end
   end
 
+  # @return [Arrival, Hash] the current Arrival data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,6 +58,7 @@ class ArrivalEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Arrival fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
@@ -65,6 +67,11 @@ class ArrivalEntity
   
 
   
+  # List Arrival items matching the given filter.
+  #
+  # @param reqmatch [ArrivalListMatch, Hash, nil] match filter (any subset of Arrival fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Arrival>, Array] the matching Arrival items; raises TransportrestTransitApisError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

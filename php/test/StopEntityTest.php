@@ -51,8 +51,7 @@ class StopEntityTest extends TestCase
         $stop_ref01_match_dt0 = [
             "id" => $stop_ref01_data["id"],
         ];
-        [$stop_ref01_data_dt0_loaded, $err] = $stop_ref01_ent->load($stop_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $stop_ref01_data_dt0_loaded = $stop_ref01_ent->load($stop_ref01_match_dt0, null);
         $stop_ref01_data_dt0_load_result = Helpers::to_map($stop_ref01_data_dt0_loaded);
         $this->assertNotNull($stop_ref01_data_dt0_load_result);
         $this->assertEquals($stop_ref01_data_dt0_load_result["id"], $stop_ref01_data["id"]);
@@ -89,7 +88,6 @@ function stop_basic_setup($extra)
         "TRANSPORTRESTTRANSITAPIS_TEST_STOP_ENTID" => $idmap,
         "TRANSPORTRESTTRANSITAPIS_TEST_LIVE" => "FALSE",
         "TRANSPORTRESTTRANSITAPIS_TEST_EXPLAIN" => "FALSE",
-        "TRANSPORTRESTTRANSITAPIS_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -101,7 +99,6 @@ function stop_basic_setup($extra)
     if ($env["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["TRANSPORTRESTTRANSITAPIS_APIKEY"],
             ],
             $extra ?? [],
         ]);

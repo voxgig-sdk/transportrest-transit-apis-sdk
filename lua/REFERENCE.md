@@ -19,7 +19,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `table` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -108,7 +107,7 @@ same parameters as `direct()`.
 ## ArrivalEntity
 
 ```lua
-local arrival = client:Arrival(nil)
+local arrival = client:arrival(nil)
 ```
 
 ### Fields
@@ -132,7 +131,7 @@ local arrival = client:Arrival(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Arrival():list()
+local results, err = client:arrival():list()
 ```
 
 ### Common Methods
@@ -168,7 +167,7 @@ Return the entity name.
 ## DepartureEntity
 
 ```lua
-local departure = client:Departure(nil)
+local departure = client:departure(nil)
 ```
 
 ### Fields
@@ -192,7 +191,7 @@ local departure = client:Departure(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Departure():list()
+local results, err = client:departure():list()
 ```
 
 ### Common Methods
@@ -228,7 +227,7 @@ Return the entity name.
 ## JourneyEntity
 
 ```lua
-local journey = client:Journey(nil)
+local journey = client:journey(nil)
 ```
 
 ### Fields
@@ -246,7 +245,7 @@ local journey = client:Journey(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Journey():list()
+local results, err = client:journey():list()
 ```
 
 ### Common Methods
@@ -282,7 +281,7 @@ Return the entity name.
 ## LocationEntity
 
 ```lua
-local location = client:Location(nil)
+local location = client:location(nil)
 ```
 
 ### Fields
@@ -302,7 +301,7 @@ local location = client:Location(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Location():list()
+local results, err = client:location():list()
 ```
 
 ### Common Methods
@@ -338,7 +337,7 @@ Return the entity name.
 ## RadarEntity
 
 ```lua
-local radar = client:Radar(nil)
+local radar = client:radar(nil)
 ```
 
 ### Fields
@@ -358,7 +357,7 @@ local radar = client:Radar(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Radar():list()
+local results, err = client:radar():list()
 ```
 
 ### Common Methods
@@ -394,7 +393,7 @@ Return the entity name.
 ## StopEntity
 
 ```lua
-local stop = client:Stop(nil)
+local stop = client:stop(nil)
 ```
 
 ### Fields
@@ -415,7 +414,7 @@ local stop = client:Stop(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Stop():load({ id = "stop_id" })
+local result, err = client:stop():load({ id = "stop_id" })
 ```
 
 ### Common Methods
@@ -451,7 +450,7 @@ Return the entity name.
 ## TripEntity
 
 ```lua
-local trip = client:Trip(nil)
+local trip = client:trip(nil)
 ```
 
 ### Fields
@@ -472,7 +471,7 @@ local trip = client:Trip(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Trip():load({ id = "trip_id" })
+local result, err = client:trip():load({ id = "trip_id" })
 ```
 
 ### Common Methods

@@ -50,8 +50,7 @@ class TestJourneyEntity:
         journey_ref01_ent = client.Journey(None)
         journey_ref01_match = {}
 
-        journey_ref01_list_result, err = journey_ref01_ent.list(journey_ref01_match, None)
-        assert err is None
+        journey_ref01_list_result = journey_ref01_ent.list(journey_ref01_match, None)
         assert isinstance(journey_ref01_list_result, list)
 
 
@@ -92,7 +91,6 @@ def _journey_basic_setup(extra):
         "TRANSPORTRESTTRANSITAPIS_TEST_JOURNEY_ENTID": idmap,
         "TRANSPORTRESTTRANSITAPIS_TEST_LIVE": "FALSE",
         "TRANSPORTRESTTRANSITAPIS_TEST_EXPLAIN": "FALSE",
-        "TRANSPORTRESTTRANSITAPIS_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -103,7 +101,6 @@ def _journey_basic_setup(extra):
     if env.get("TRANSPORTRESTTRANSITAPIS_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("TRANSPORTRESTTRANSITAPIS_APIKEY"),
             },
             extra or {},
         ])

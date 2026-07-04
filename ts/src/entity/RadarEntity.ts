@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Radar,
+  RadarListMatch,
+} from '../TransportrestTransitApisTypes'
 
 // TODO: needs Entity superclass
-class RadarEntity extends TransportrestTransitApisEntityBase {
+class RadarEntity extends TransportrestTransitApisEntityBase<Radar> {
 
   constructor(client: TransportrestTransitApisSDK, entopts: any) {
     super(client, entopts)
@@ -33,7 +37,7 @@ class RadarEntity extends TransportrestTransitApisEntityBase {
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: RadarListMatch, ctrl?: Control): Promise<Radar[]> {
 
     const utility = this._utility
 
@@ -133,7 +137,9 @@ class RadarEntity extends TransportrestTransitApisEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Radar[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

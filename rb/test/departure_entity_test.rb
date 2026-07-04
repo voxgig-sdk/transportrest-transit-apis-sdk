@@ -45,8 +45,7 @@ class DepartureEntityTest < Minitest::Test
       "stop_id" => setup[:idmap]["stop01"],
     }
 
-    departure_ref01_list_result, err = departure_ref01_ent.list(departure_ref01_match, nil)
-    assert_nil err
+    departure_ref01_list_result = departure_ref01_ent.list(departure_ref01_match, nil)
     assert departure_ref01_list_result.is_a?(Array)
 
   end
@@ -85,7 +84,6 @@ def departure_basic_setup(extra)
     "TRANSPORTRESTTRANSITAPIS_TEST_DEPARTURE_ENTID" => idmap,
     "TRANSPORTRESTTRANSITAPIS_TEST_LIVE" => "FALSE",
     "TRANSPORTRESTTRANSITAPIS_TEST_EXPLAIN" => "FALSE",
-    "TRANSPORTRESTTRANSITAPIS_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -97,7 +95,6 @@ def departure_basic_setup(extra)
   if env["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["TRANSPORTRESTTRANSITAPIS_APIKEY"],
       },
       extra || {},
     ])

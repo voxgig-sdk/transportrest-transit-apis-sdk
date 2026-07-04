@@ -52,8 +52,7 @@ class ArrivalEntityTest extends TestCase
             "stop_id" => $setup["idmap"]["stop01"],
         ];
 
-        [$arrival_ref01_list_result, $err] = $arrival_ref01_ent->list($arrival_ref01_match, null);
-        $this->assertNull($err);
+        $arrival_ref01_list_result = $arrival_ref01_ent->list($arrival_ref01_match, null);
         $this->assertIsArray($arrival_ref01_list_result);
 
     }
@@ -88,7 +87,6 @@ function arrival_basic_setup($extra)
         "TRANSPORTRESTTRANSITAPIS_TEST_ARRIVAL_ENTID" => $idmap,
         "TRANSPORTRESTTRANSITAPIS_TEST_LIVE" => "FALSE",
         "TRANSPORTRESTTRANSITAPIS_TEST_EXPLAIN" => "FALSE",
-        "TRANSPORTRESTTRANSITAPIS_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -100,7 +98,6 @@ function arrival_basic_setup($extra)
     if ($env["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["TRANSPORTRESTTRANSITAPIS_APIKEY"],
             ],
             $extra ?? [],
         ]);

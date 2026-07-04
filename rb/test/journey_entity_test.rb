@@ -43,8 +43,7 @@ class JourneyEntityTest < Minitest::Test
     journey_ref01_ent = client.Journey(nil)
     journey_ref01_match = {}
 
-    journey_ref01_list_result, err = journey_ref01_ent.list(journey_ref01_match, nil)
-    assert_nil err
+    journey_ref01_list_result = journey_ref01_ent.list(journey_ref01_match, nil)
     assert journey_ref01_list_result.is_a?(Array)
 
   end
@@ -83,7 +82,6 @@ def journey_basic_setup(extra)
     "TRANSPORTRESTTRANSITAPIS_TEST_JOURNEY_ENTID" => idmap,
     "TRANSPORTRESTTRANSITAPIS_TEST_LIVE" => "FALSE",
     "TRANSPORTRESTTRANSITAPIS_TEST_EXPLAIN" => "FALSE",
-    "TRANSPORTRESTTRANSITAPIS_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -95,7 +93,6 @@ def journey_basic_setup(extra)
   if env["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["TRANSPORTRESTTRANSITAPIS_APIKEY"],
       },
       extra || {},
     ])

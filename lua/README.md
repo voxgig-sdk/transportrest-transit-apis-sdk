@@ -9,12 +9,9 @@ The Lua SDK for the TransportrestTransitApis API — an entity-oriented client u
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-transportrest-transit-apis
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -31,15 +28,13 @@ loading a specific record.
 ```lua
 local sdk = require("transportrest-transit-apis_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("TRANSPORTREST-TRANSIT-APIS_APIKEY"),
-})
+local client = sdk.new()
 ```
 
 ### 2. List arrivals
 
 ```lua
-local result, err = client:Arrival():list()
+local result, err = client:arrival():list()
 if err then error(err) end
 
 if type(result) == "table" then
@@ -93,7 +88,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:TransportrestTransitApis():load({ id = "test01" })
+local result, err = client:arrival():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -126,8 +121,7 @@ local client = sdk.new({
 Create a `.env.local` file at the project root:
 
 ```
-TRANSPORTREST-TRANSIT-APIS_TEST_LIVE=TRUE
-TRANSPORTREST-TRANSIT-APIS_APIKEY=<your-key>
+TRANSPORTREST_TRANSIT_APIS_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -150,7 +144,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -329,7 +322,7 @@ API path: `/trips/{id}`
 
 ### Arrival
 
-Create an instance: `const arrival = client.Arrival()`
+Create an instance: `const arrival = client.arrival`
 
 #### Operations
 
@@ -354,13 +347,13 @@ Create an instance: `const arrival = client.Arrival()`
 #### Example: List
 
 ```ts
-const arrivals = await client.Arrival().list()
+const arrivals = await client.arrival.list()
 ```
 
 
 ### Departure
 
-Create an instance: `const departure = client.Departure()`
+Create an instance: `const departure = client.departure`
 
 #### Operations
 
@@ -385,13 +378,13 @@ Create an instance: `const departure = client.Departure()`
 #### Example: List
 
 ```ts
-const departures = await client.Departure().list()
+const departures = await client.departure.list()
 ```
 
 
 ### Journey
 
-Create an instance: `const journey = client.Journey()`
+Create an instance: `const journey = client.journey`
 
 #### Operations
 
@@ -410,13 +403,13 @@ Create an instance: `const journey = client.Journey()`
 #### Example: List
 
 ```ts
-const journeys = await client.Journey().list()
+const journeys = await client.journey.list()
 ```
 
 
 ### Location
 
-Create an instance: `const location = client.Location()`
+Create an instance: `const location = client.location`
 
 #### Operations
 
@@ -437,13 +430,13 @@ Create an instance: `const location = client.Location()`
 #### Example: List
 
 ```ts
-const locations = await client.Location().list()
+const locations = await client.location.list()
 ```
 
 
 ### Radar
 
-Create an instance: `const radar = client.Radar()`
+Create an instance: `const radar = client.radar`
 
 #### Operations
 
@@ -464,13 +457,13 @@ Create an instance: `const radar = client.Radar()`
 #### Example: List
 
 ```ts
-const radars = await client.Radar().list()
+const radars = await client.radar.list()
 ```
 
 
 ### Stop
 
-Create an instance: `const stop = client.Stop()`
+Create an instance: `const stop = client.stop`
 
 #### Operations
 
@@ -492,13 +485,13 @@ Create an instance: `const stop = client.Stop()`
 #### Example: Load
 
 ```ts
-const stop = await client.Stop().load({ id: 'stop_id' })
+const stop = await client.stop.load({ id: 'stop_id' })
 ```
 
 
 ### Trip
 
-Create an instance: `const trip = client.Trip()`
+Create an instance: `const trip = client.trip`
 
 #### Operations
 
@@ -520,7 +513,7 @@ Create an instance: `const trip = client.Trip()`
 #### Example: Load
 
 ```ts
-const trip = await client.Trip().load({ id: 'trip_id' })
+const trip = await client.trip.load({ id: 'trip_id' })
 ```
 
 
@@ -595,11 +588,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local arrival = client:arrival()
+arrival:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- arrival:data_get() now returns the loaded arrival data
+-- arrival:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

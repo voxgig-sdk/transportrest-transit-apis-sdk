@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Departure,
+  DepartureListMatch,
+} from '../TransportrestTransitApisTypes'
 
 // TODO: needs Entity superclass
-class DepartureEntity extends TransportrestTransitApisEntityBase {
+class DepartureEntity extends TransportrestTransitApisEntityBase<Departure> {
 
   constructor(client: TransportrestTransitApisSDK, entopts: any) {
     super(client, entopts)
@@ -33,7 +37,7 @@ class DepartureEntity extends TransportrestTransitApisEntityBase {
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: DepartureListMatch, ctrl?: Control): Promise<Departure[]> {
 
     const utility = this._utility
 
@@ -133,7 +137,9 @@ class DepartureEntity extends TransportrestTransitApisEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Departure[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

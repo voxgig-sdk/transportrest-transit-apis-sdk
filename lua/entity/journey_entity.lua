@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch JourneyListMatch
+---@param ctrl? table
+---@return Journey[]
+---@return string? err
 function JourneyEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

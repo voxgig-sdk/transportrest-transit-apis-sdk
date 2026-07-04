@@ -15,9 +15,6 @@ module TransportrestTransitApisConfig
       },
       "options" => {
         "base" => "https://v6.db.transport.rest",
-        "auth" => {
-          "prefix" => "Bearer",
-        },
         "headers" => {
           "content-type" => "application/json",
         },
@@ -115,6 +112,7 @@ module TransportrestTransitApisConfig
                         "orig" => "id",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                     ],
                     "query" => [
@@ -268,6 +266,7 @@ module TransportrestTransitApisConfig
                         "orig" => "id",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                     ],
                     "query" => [
@@ -768,6 +767,7 @@ module TransportrestTransitApisConfig
                         "orig" => "id",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                     ],
                   },
@@ -858,6 +858,7 @@ module TransportrestTransitApisConfig
                         "orig" => "id",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                     ],
                     "query" => [

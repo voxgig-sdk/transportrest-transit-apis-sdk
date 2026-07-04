@@ -13,6 +13,9 @@ require_relative 'config'
 require_relative 'feature/base_feature'
 require_relative 'features'
 
+# Load typed models (Struct value objects).
+require_relative 'TransportrestTransitApis_types'
+
 
 class TransportrestTransitApisSDK
   attr_accessor :mode, :features, :options
@@ -131,7 +134,7 @@ class TransportrestTransitApisSDK
     end
 
     _, err = utility.prepare_auth.call(ctx)
-    return nil, err if err
+    raise err if err
 
     utility.make_fetch_def.call(ctx)
   end
@@ -139,8 +142,14 @@ class TransportrestTransitApisSDK
   def direct(fetchargs = {})
     utility = @_utility
 
-    fetchdef, err = prepare(fetchargs)
-    return { "ok" => false, "err" => err }, nil if err
+    # direct() is the raw-HTTP escape hatch: it always returns a result hash
+    # ({ "ok" => ..., ... }) and never raises. prepare() raises on error, so
+    # trap that and surface it in the hash.
+    begin
+      fetchdef = prepare(fetchargs)
+    rescue TransportrestTransitApisError => err
+      return { "ok" => false, "err" => err }
+    end
 
     fetchargs ||= {}
     ctrl = TransportrestTransitApisHelpers.to_map(VoxgigStruct.getprop(fetchargs, "ctrl")) || {}
@@ -153,13 +162,13 @@ class TransportrestTransitApisSDK
     url = fetchdef["url"] || ""
     fetched, fetch_err = utility.fetcher.call(ctx, url, fetchdef)
 
-    return { "ok" => false, "err" => fetch_err }, nil if fetch_err
+    return { "ok" => false, "err" => fetch_err } if fetch_err
 
     if fetched.nil?
       return {
         "ok" => false,
         "err" => ctx.make_error("direct_no_response", "response: undefined"),
-      }, nil
+      }
     end
 
     if fetched.is_a?(Hash)
@@ -189,52 +198,101 @@ class TransportrestTransitApisSDK
         "status" => status,
         "headers" => headers,
         "data" => json_data,
-      }, nil
+      }
     end
 
     return {
       "ok" => false,
       "err" => ctx.make_error("direct_invalid", "invalid response type"),
-    }, nil
+    }
   end
 
 
+  # Idiomatic facade: client.arrival.list / client.arrival.load({ "id" => ... })
+  def arrival
+    require_relative 'entity/arrival_entity'
+    @arrival ||= ArrivalEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.arrival instead.
   def Arrival(data = nil)
     require_relative 'entity/arrival_entity'
     ArrivalEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.departure.list / client.departure.load({ "id" => ... })
+  def departure
+    require_relative 'entity/departure_entity'
+    @departure ||= DepartureEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.departure instead.
   def Departure(data = nil)
     require_relative 'entity/departure_entity'
     DepartureEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.journey.list / client.journey.load({ "id" => ... })
+  def journey
+    require_relative 'entity/journey_entity'
+    @journey ||= JourneyEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.journey instead.
   def Journey(data = nil)
     require_relative 'entity/journey_entity'
     JourneyEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.location.list / client.location.load({ "id" => ... })
+  def location
+    require_relative 'entity/location_entity'
+    @location ||= LocationEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.location instead.
   def Location(data = nil)
     require_relative 'entity/location_entity'
     LocationEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.radar.list / client.radar.load({ "id" => ... })
+  def radar
+    require_relative 'entity/radar_entity'
+    @radar ||= RadarEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.radar instead.
   def Radar(data = nil)
     require_relative 'entity/radar_entity'
     RadarEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.stop.list / client.stop.load({ "id" => ... })
+  def stop
+    require_relative 'entity/stop_entity'
+    @stop ||= StopEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.stop instead.
   def Stop(data = nil)
     require_relative 'entity/stop_entity'
     StopEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.trip.list / client.trip.load({ "id" => ... })
+  def trip
+    require_relative 'entity/trip_entity'
+    @trip ||= TripEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.trip instead.
   def Trip(data = nil)
     require_relative 'entity/trip_entity'
     TripEntity.new(self, data)

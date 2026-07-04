@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Stop,
+  StopLoadMatch,
+} from '../TransportrestTransitApisTypes'
 
 // TODO: needs Entity superclass
-class StopEntity extends TransportrestTransitApisEntityBase {
+class StopEntity extends TransportrestTransitApisEntityBase<Stop> {
 
   constructor(client: TransportrestTransitApisSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class StopEntity extends TransportrestTransitApisEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: StopLoadMatch, ctrl?: Control): Promise<Stop> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class StopEntity extends TransportrestTransitApisEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Stop> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

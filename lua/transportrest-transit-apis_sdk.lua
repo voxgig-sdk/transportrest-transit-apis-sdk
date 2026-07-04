@@ -244,42 +244,133 @@ end
 
 
 
+-- Idiomatic facade: client:arrival():list() / client:arrival():load({ id = ... })
+function TransportrestTransitApisSDK:arrival(data)
+  local EntityMod = require("entity.arrival_entity")
+  if data == nil then
+    if self._arrival == nil then
+      self._arrival = EntityMod.new(self, nil)
+    end
+    return self._arrival
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:arrival() instead.
 function TransportrestTransitApisSDK:Arrival(data)
   local EntityMod = require("entity.arrival_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:departure():list() / client:departure():load({ id = ... })
+function TransportrestTransitApisSDK:departure(data)
+  local EntityMod = require("entity.departure_entity")
+  if data == nil then
+    if self._departure == nil then
+      self._departure = EntityMod.new(self, nil)
+    end
+    return self._departure
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:departure() instead.
 function TransportrestTransitApisSDK:Departure(data)
   local EntityMod = require("entity.departure_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:journey():list() / client:journey():load({ id = ... })
+function TransportrestTransitApisSDK:journey(data)
+  local EntityMod = require("entity.journey_entity")
+  if data == nil then
+    if self._journey == nil then
+      self._journey = EntityMod.new(self, nil)
+    end
+    return self._journey
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:journey() instead.
 function TransportrestTransitApisSDK:Journey(data)
   local EntityMod = require("entity.journey_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:location():list() / client:location():load({ id = ... })
+function TransportrestTransitApisSDK:location(data)
+  local EntityMod = require("entity.location_entity")
+  if data == nil then
+    if self._location == nil then
+      self._location = EntityMod.new(self, nil)
+    end
+    return self._location
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:location() instead.
 function TransportrestTransitApisSDK:Location(data)
   local EntityMod = require("entity.location_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:radar():list() / client:radar():load({ id = ... })
+function TransportrestTransitApisSDK:radar(data)
+  local EntityMod = require("entity.radar_entity")
+  if data == nil then
+    if self._radar == nil then
+      self._radar = EntityMod.new(self, nil)
+    end
+    return self._radar
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:radar() instead.
 function TransportrestTransitApisSDK:Radar(data)
   local EntityMod = require("entity.radar_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:stop():list() / client:stop():load({ id = ... })
+function TransportrestTransitApisSDK:stop(data)
+  local EntityMod = require("entity.stop_entity")
+  if data == nil then
+    if self._stop == nil then
+      self._stop = EntityMod.new(self, nil)
+    end
+    return self._stop
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:stop() instead.
 function TransportrestTransitApisSDK:Stop(data)
   local EntityMod = require("entity.stop_entity")
   return EntityMod.new(self, data)
 end
 
 
+-- Idiomatic facade: client:trip():list() / client:trip():load({ id = ... })
+function TransportrestTransitApisSDK:trip(data)
+  local EntityMod = require("entity.trip_entity")
+  if data == nil then
+    if self._trip == nil then
+      self._trip = EntityMod.new(self, nil)
+    end
+    return self._trip
+  end
+  return EntityMod.new(self, data)
+end
+
+-- Deprecated: use client:trip() instead.
 function TransportrestTransitApisSDK:Trip(data)
   local EntityMod = require("entity.trip_entity")
   return EntityMod.new(self, data)

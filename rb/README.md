@@ -9,21 +9,10 @@ The Ruby SDK for the TransportrestTransitApis API — an entity-oriented client 
 
 
 ## Install
-```bash
-gem install voxgig-sdk-transportrest-transit-apis
-```
+This package is not yet published to RubyGems. Install it from the
+GitHub release tag (`rb/vX.Y.Z`):
 
-Or add to your `Gemfile`:
-
-```ruby
-gem "voxgig-sdk-transportrest-transit-apis"
-```
-
-Then run:
-
-```bash
-bundle install
-```
+- Releases: [https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/releases](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/releases)
 
 
 ## Tutorial: your first API call
@@ -36,22 +25,22 @@ loading a specific record.
 ```ruby
 require_relative "TransportrestTransitApis_sdk"
 
-client = TransportrestTransitApisSDK.new({
-  "apikey" => ENV["TRANSPORTREST-TRANSIT-APIS_APIKEY"],
-})
+client = TransportrestTransitApisSDK.new
 ```
 
 ### 2. List arrivals
 
 ```ruby
-result, err = client.Arrival().list
-raise err if err
-
-if result.is_a?(Array)
-  result.each do |item|
-    d = item.data_get
-    puts "#{d["id"]} #{d["name"]}"
+begin
+  result = client.arrival.list
+  if result.is_a?(Array)
+    result.each do |item|
+      d = item.data_get
+      puts "#{d["id"]} #{d["name"]}"
+    end
   end
+rescue => err
+  warn "list failed: #{err}"
 end
 ```
 
@@ -63,32 +52,35 @@ end
 For endpoints not covered by entity methods:
 
 ```ruby
-result, err = client.direct({
+result = client.direct({
   "path" => "/api/resource/{id}",
   "method" => "GET",
   "params" => { "id" => "example" },
 })
-raise err if err
 
 if result["ok"]
   puts result["status"]  # 200
   puts result["data"]    # response body
+else
+  warn result["err"]
 end
 ```
 
 ### Prepare a request without sending it
 
 ```ruby
-fetchdef, err = client.prepare({
-  "path" => "/api/resource/{id}",
-  "method" => "DELETE",
-  "params" => { "id" => "example" },
-})
-raise err if err
-
-puts fetchdef["url"]
-puts fetchdef["method"]
-puts fetchdef["headers"]
+begin
+  fetchdef = client.prepare({
+    "path" => "/api/resource/{id}",
+    "method" => "DELETE",
+    "params" => { "id" => "example" },
+  })
+  puts fetchdef["url"]
+  puts fetchdef["method"]
+  puts fetchdef["headers"]
+rescue => err
+  warn "prepare failed: #{err}"
+end
 ```
 
 ### Use test mode
@@ -98,7 +90,7 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = TransportrestTransitApisSDK.test
 
-result, err = client.TransportrestTransitApis().load({ "id" => "test01" })
+result = client.arrival.load({ "id" => "test01" })
 # result contains mock response data
 ```
 
@@ -129,8 +121,7 @@ client = TransportrestTransitApisSDK.new({
 Create a `.env.local` file at the project root:
 
 ```
-TRANSPORTREST-TRANSIT-APIS_TEST_LIVE=TRUE
-TRANSPORTREST-TRANSIT-APIS_APIKEY=<your-key>
+TRANSPORTREST_TRANSIT_APIS_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -153,7 +144,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `String` | API key for authentication. |
 | `base` | `String` | Base URL of the API server. |
 | `prefix` | `String` | URL path prefix prepended to all requests. |
 | `suffix` | `String` | URL path suffix appended to all requests. |
@@ -175,8 +165,8 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | --- | --- | --- |
 | `options_map` | `() -> Hash` | Deep copy of current SDK options. |
 | `get_utility` | `() -> Utility` | Copy of the SDK utility object. |
-| `prepare` | `(fetchargs) -> [Hash, err]` | Build an HTTP request definition without sending. |
-| `direct` | `(fetchargs) -> [Hash, err]` | Build and send an HTTP request. |
+| `prepare` | `(fetchargs) -> Hash` | Build an HTTP request definition without sending. Raises on error. |
+| `direct` | `(fetchargs) -> Hash` | Build and send an HTTP request. Returns a result hash (`result["ok"]`); does not raise. |
 | `Arrival` | `(data) -> ArrivalEntity` | Create a Arrival entity instance. |
 | `Departure` | `(data) -> DepartureEntity` | Create a Departure entity instance. |
 | `Journey` | `(data) -> JourneyEntity` | Create a Journey entity instance. |
@@ -191,11 +181,11 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> [any, err]` | Load a single entity by match criteria. |
-| `list` | `(reqmatch, ctrl) -> [any, err]` | List entities matching the criteria. |
-| `create` | `(reqdata, ctrl) -> [any, err]` | Create a new entity. |
-| `update` | `(reqdata, ctrl) -> [any, err]` | Update an existing entity. |
-| `remove` | `(reqmatch, ctrl) -> [any, err]` | Remove an entity. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
+| `list` | `(reqmatch, ctrl) -> Array` | List entities matching the criteria. Raises on error. |
+| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
+| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
+| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -205,8 +195,12 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `[any, err]`. The first value is a
-`Hash` with these keys:
+Entity operations return the result data directly. On failure they
+raise a `TransportrestTransitApisError` (a `StandardError` subclass), so wrap
+calls in `begin`/`rescue` where you need to handle errors.
+
+The `direct` escape hatch is the exception: it never raises and instead
+returns a result `Hash` with these keys:
 
 | Key | Type | Description |
 | --- | --- | --- |
@@ -214,8 +208,7 @@ Entity operations return `[any, err]`. The first value is a
 | `status` | `Integer` | HTTP status code. |
 | `headers` | `Hash` | Response headers. |
 | `data` | `any` | Parsed JSON response body. |
-
-On error, `ok` is `false` and `err` contains the error value.
+| `err` | `Error` | Present when `ok` is `false`. |
 
 ### Entities
 
@@ -332,7 +325,7 @@ API path: `/trips/{id}`
 
 ### Arrival
 
-Create an instance: `const arrival = client.Arrival()`
+Create an instance: `const arrival = client.arrival`
 
 #### Operations
 
@@ -357,13 +350,13 @@ Create an instance: `const arrival = client.Arrival()`
 #### Example: List
 
 ```ts
-const arrivals = await client.Arrival().list()
+const arrivals = await client.arrival.list()
 ```
 
 
 ### Departure
 
-Create an instance: `const departure = client.Departure()`
+Create an instance: `const departure = client.departure`
 
 #### Operations
 
@@ -388,13 +381,13 @@ Create an instance: `const departure = client.Departure()`
 #### Example: List
 
 ```ts
-const departures = await client.Departure().list()
+const departures = await client.departure.list()
 ```
 
 
 ### Journey
 
-Create an instance: `const journey = client.Journey()`
+Create an instance: `const journey = client.journey`
 
 #### Operations
 
@@ -413,13 +406,13 @@ Create an instance: `const journey = client.Journey()`
 #### Example: List
 
 ```ts
-const journeys = await client.Journey().list()
+const journeys = await client.journey.list()
 ```
 
 
 ### Location
 
-Create an instance: `const location = client.Location()`
+Create an instance: `const location = client.location`
 
 #### Operations
 
@@ -440,13 +433,13 @@ Create an instance: `const location = client.Location()`
 #### Example: List
 
 ```ts
-const locations = await client.Location().list()
+const locations = await client.location.list()
 ```
 
 
 ### Radar
 
-Create an instance: `const radar = client.Radar()`
+Create an instance: `const radar = client.radar`
 
 #### Operations
 
@@ -467,13 +460,13 @@ Create an instance: `const radar = client.Radar()`
 #### Example: List
 
 ```ts
-const radars = await client.Radar().list()
+const radars = await client.radar.list()
 ```
 
 
 ### Stop
 
-Create an instance: `const stop = client.Stop()`
+Create an instance: `const stop = client.stop`
 
 #### Operations
 
@@ -495,13 +488,13 @@ Create an instance: `const stop = client.Stop()`
 #### Example: Load
 
 ```ts
-const stop = await client.Stop().load({ id: 'stop_id' })
+const stop = await client.stop.load({ id: 'stop_id' })
 ```
 
 
 ### Trip
 
-Create an instance: `const trip = client.Trip()`
+Create an instance: `const trip = client.trip`
 
 #### Operations
 
@@ -523,7 +516,7 @@ Create an instance: `const trip = client.Trip()`
 #### Example: Load
 
 ```ts
-const trip = await client.Trip().load({ id: 'trip_id' })
+const trip = await client.trip.load({ id: 'trip_id' })
 ```
 
 
@@ -598,11 +591,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-moon = client.Moon
-moon.load({ "planet_id" => "earth", "id" => "luna" })
+arrival = client.arrival
+arrival.load({ "id" => "example_id" })
 
-# moon.data_get now returns the loaded moon data
-# moon.match_get returns the last match criteria
+# arrival.data_get now returns the loaded arrival data
+# arrival.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

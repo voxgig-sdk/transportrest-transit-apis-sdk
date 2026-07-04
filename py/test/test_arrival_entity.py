@@ -52,8 +52,7 @@ class TestArrivalEntity:
             "stop_id": setup["idmap"]["stop01"],
         }
 
-        arrival_ref01_list_result, err = arrival_ref01_ent.list(arrival_ref01_match, None)
-        assert err is None
+        arrival_ref01_list_result = arrival_ref01_ent.list(arrival_ref01_match, None)
         assert isinstance(arrival_ref01_list_result, list)
 
 
@@ -94,7 +93,6 @@ def _arrival_basic_setup(extra):
         "TRANSPORTRESTTRANSITAPIS_TEST_ARRIVAL_ENTID": idmap,
         "TRANSPORTRESTTRANSITAPIS_TEST_LIVE": "FALSE",
         "TRANSPORTRESTTRANSITAPIS_TEST_EXPLAIN": "FALSE",
-        "TRANSPORTRESTTRANSITAPIS_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -105,7 +103,6 @@ def _arrival_basic_setup(extra):
     if env.get("TRANSPORTRESTTRANSITAPIS_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("TRANSPORTRESTTRANSITAPIS_APIKEY"),
             },
             extra or {},
         ])

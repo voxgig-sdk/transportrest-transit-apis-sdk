@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch DepartureListMatch
+---@param ctrl? table
+---@return Departure[]
+---@return string? err
 function DepartureEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

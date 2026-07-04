@@ -43,8 +43,7 @@ class RadarEntityTest < Minitest::Test
     radar_ref01_ent = client.Radar(nil)
     radar_ref01_match = {}
 
-    radar_ref01_list_result, err = radar_ref01_ent.list(radar_ref01_match, nil)
-    assert_nil err
+    radar_ref01_list_result = radar_ref01_ent.list(radar_ref01_match, nil)
     assert radar_ref01_list_result.is_a?(Array)
 
   end
@@ -83,7 +82,6 @@ def radar_basic_setup(extra)
     "TRANSPORTRESTTRANSITAPIS_TEST_RADAR_ENTID" => idmap,
     "TRANSPORTRESTTRANSITAPIS_TEST_LIVE" => "FALSE",
     "TRANSPORTRESTTRANSITAPIS_TEST_EXPLAIN" => "FALSE",
-    "TRANSPORTRESTTRANSITAPIS_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -95,7 +93,6 @@ def radar_basic_setup(extra)
   if env["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["TRANSPORTRESTTRANSITAPIS_APIKEY"],
       },
       extra || {},
     ])

@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch RadarListMatch
+---@param ctrl? table
+---@return Radar[]
+---@return string? err
 function RadarEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

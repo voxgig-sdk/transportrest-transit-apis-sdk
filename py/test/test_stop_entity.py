@@ -51,8 +51,7 @@ class TestStopEntity:
         stop_ref01_match_dt0 = {
             "id": stop_ref01_data["id"],
         }
-        stop_ref01_data_dt0_loaded, err = stop_ref01_ent.load(stop_ref01_match_dt0, None)
-        assert err is None
+        stop_ref01_data_dt0_loaded = stop_ref01_ent.load(stop_ref01_match_dt0, None)
         stop_ref01_data_dt0_load_result = helpers.to_map(stop_ref01_data_dt0_loaded)
         assert stop_ref01_data_dt0_load_result is not None
         assert stop_ref01_data_dt0_load_result["id"] == stop_ref01_data["id"]
@@ -95,7 +94,6 @@ def _stop_basic_setup(extra):
         "TRANSPORTRESTTRANSITAPIS_TEST_STOP_ENTID": idmap,
         "TRANSPORTRESTTRANSITAPIS_TEST_LIVE": "FALSE",
         "TRANSPORTRESTTRANSITAPIS_TEST_EXPLAIN": "FALSE",
-        "TRANSPORTRESTTRANSITAPIS_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -106,7 +104,6 @@ def _stop_basic_setup(extra):
     if env.get("TRANSPORTRESTTRANSITAPIS_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("TRANSPORTRESTTRANSITAPIS_APIKEY"),
             },
             extra or {},
         ])

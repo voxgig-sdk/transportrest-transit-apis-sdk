@@ -51,8 +51,7 @@ class TripEntityTest extends TestCase
         $trip_ref01_match_dt0 = [
             "id" => $trip_ref01_data["id"],
         ];
-        [$trip_ref01_data_dt0_loaded, $err] = $trip_ref01_ent->load($trip_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $trip_ref01_data_dt0_loaded = $trip_ref01_ent->load($trip_ref01_match_dt0, null);
         $trip_ref01_data_dt0_load_result = Helpers::to_map($trip_ref01_data_dt0_loaded);
         $this->assertNotNull($trip_ref01_data_dt0_load_result);
         $this->assertEquals($trip_ref01_data_dt0_load_result["id"], $trip_ref01_data["id"]);
@@ -89,7 +88,6 @@ function trip_basic_setup($extra)
         "TRANSPORTRESTTRANSITAPIS_TEST_TRIP_ENTID" => $idmap,
         "TRANSPORTRESTTRANSITAPIS_TEST_LIVE" => "FALSE",
         "TRANSPORTRESTTRANSITAPIS_TEST_EXPLAIN" => "FALSE",
-        "TRANSPORTRESTTRANSITAPIS_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -101,7 +99,6 @@ function trip_basic_setup($extra)
     if ($env["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["TRANSPORTRESTTRANSITAPIS_APIKEY"],
             ],
             $extra ?? [],
         ]);

@@ -245,36 +245,57 @@ func (sdk *TransportrestTransitApisSDK) Direct(fetchargs map[string]any) (map[st
 }
 
 
+// Arrival returns a Arrival entity bound to this client.
+// Idiomatic usage: client.Arrival(nil).List(nil, nil) or
+// client.Arrival(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *TransportrestTransitApisSDK) Arrival(data map[string]any) TransportrestTransitApisEntity {
 	return NewArrivalEntityFunc(sdk, data)
 }
 
 
+// Departure returns a Departure entity bound to this client.
+// Idiomatic usage: client.Departure(nil).List(nil, nil) or
+// client.Departure(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *TransportrestTransitApisSDK) Departure(data map[string]any) TransportrestTransitApisEntity {
 	return NewDepartureEntityFunc(sdk, data)
 }
 
 
+// Journey returns a Journey entity bound to this client.
+// Idiomatic usage: client.Journey(nil).List(nil, nil) or
+// client.Journey(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *TransportrestTransitApisSDK) Journey(data map[string]any) TransportrestTransitApisEntity {
 	return NewJourneyEntityFunc(sdk, data)
 }
 
 
+// Location returns a Location entity bound to this client.
+// Idiomatic usage: client.Location(nil).List(nil, nil) or
+// client.Location(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *TransportrestTransitApisSDK) Location(data map[string]any) TransportrestTransitApisEntity {
 	return NewLocationEntityFunc(sdk, data)
 }
 
 
+// Radar returns a Radar entity bound to this client.
+// Idiomatic usage: client.Radar(nil).List(nil, nil) or
+// client.Radar(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *TransportrestTransitApisSDK) Radar(data map[string]any) TransportrestTransitApisEntity {
 	return NewRadarEntityFunc(sdk, data)
 }
 
 
+// Stop returns a Stop entity bound to this client.
+// Idiomatic usage: client.Stop(nil).List(nil, nil) or
+// client.Stop(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *TransportrestTransitApisSDK) Stop(data map[string]any) TransportrestTransitApisEntity {
 	return NewStopEntityFunc(sdk, data)
 }
 
 
+// Trip returns a Trip entity bound to this client.
+// Idiomatic usage: client.Trip(nil).List(nil, nil) or
+// client.Trip(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *TransportrestTransitApisSDK) Trip(data map[string]any) TransportrestTransitApisEntity {
 	return NewTripEntityFunc(sdk, data)
 }
