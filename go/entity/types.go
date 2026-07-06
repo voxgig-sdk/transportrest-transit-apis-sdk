@@ -51,8 +51,7 @@ type Journey struct {
 	Type *string `json:"type,omitempty"`
 }
 
-// JourneyListMatch mirrors the journey fields as an all-optional match
-// filter (Go analog of Partial<Journey>).
+// JourneyListMatch is the typed request payload for Journey.ListTyped.
 type JourneyListMatch struct {
 	Leg *[]any `json:"leg,omitempty"`
 	RefreshToken *string `json:"refresh_token,omitempty"`
@@ -68,8 +67,7 @@ type Location struct {
 	Type *string `json:"type,omitempty"`
 }
 
-// LocationListMatch mirrors the location fields as an all-optional match
-// filter (Go analog of Partial<Location>).
+// LocationListMatch is the typed request payload for Location.ListTyped.
 type LocationListMatch struct {
 	Id *string `json:"id,omitempty"`
 	Location *map[string]any `json:"location,omitempty"`
@@ -87,8 +85,7 @@ type Radar struct {
 	TripId *string `json:"trip_id,omitempty"`
 }
 
-// RadarListMatch mirrors the radar fields as an all-optional match
-// filter (Go analog of Partial<Radar>).
+// RadarListMatch is the typed request payload for Radar.ListTyped.
 type RadarListMatch struct {
 	Direction *string `json:"direction,omitempty"`
 	Line *map[string]any `json:"line,omitempty"`

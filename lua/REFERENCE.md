@@ -114,15 +114,15 @@ local arrival = client:Arrival(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delay` | ``$INTEGER`` | No |  |
-| `direction` | ``$STRING`` | No |  |
-| `line` | ``$OBJECT`` | No |  |
-| `planned_platform` | ``$STRING`` | No |  |
-| `planned_when` | ``$STRING`` | No |  |
-| `platform` | ``$STRING`` | No |  |
-| `stop` | ``$OBJECT`` | No |  |
-| `trip_id` | ``$STRING`` | No |  |
-| `when` | ``$STRING`` | No |  |
+| `delay` | `number` | No |  |
+| `direction` | `string` | No |  |
+| `line` | `table` | No |  |
+| `planned_platform` | `string` | No |  |
+| `planned_when` | `string` | No |  |
+| `platform` | `string` | No |  |
+| `stop` | `table` | No |  |
+| `trip_id` | `string` | No |  |
+| `when` | `string` | No |  |
 
 ### Operations
 
@@ -174,15 +174,15 @@ local departure = client:Departure(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delay` | ``$INTEGER`` | No |  |
-| `direction` | ``$STRING`` | No |  |
-| `line` | ``$OBJECT`` | No |  |
-| `planned_platform` | ``$STRING`` | No |  |
-| `planned_when` | ``$STRING`` | No |  |
-| `platform` | ``$STRING`` | No |  |
-| `stop` | ``$OBJECT`` | No |  |
-| `trip_id` | ``$STRING`` | No |  |
-| `when` | ``$STRING`` | No |  |
+| `delay` | `number` | No |  |
+| `direction` | `string` | No |  |
+| `line` | `table` | No |  |
+| `planned_platform` | `string` | No |  |
+| `planned_when` | `string` | No |  |
+| `platform` | `string` | No |  |
+| `stop` | `table` | No |  |
+| `trip_id` | `string` | No |  |
+| `when` | `string` | No |  |
 
 ### Operations
 
@@ -234,9 +234,9 @@ local journey = client:Journey(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `leg` | ``$ARRAY`` | No |  |
-| `refresh_token` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `leg` | `table` | No |  |
+| `refresh_token` | `string` | No |  |
+| `type` | `string` | No |  |
 
 ### Operations
 
@@ -288,11 +288,11 @@ local location = client:Location(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `product` | ``$OBJECT`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `id` | `string` | No |  |
+| `location` | `table` | No |  |
+| `name` | `string` | No |  |
+| `product` | `table` | No |  |
+| `type` | `string` | No |  |
 
 ### Operations
 
@@ -344,11 +344,11 @@ local radar = client:Radar(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `direction` | ``$STRING`` | No |  |
-| `line` | ``$OBJECT`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `next_stopover` | ``$ARRAY`` | No |  |
-| `trip_id` | ``$STRING`` | No |  |
+| `direction` | `string` | No |  |
+| `line` | `table` | No |  |
+| `location` | `table` | No |  |
+| `next_stopover` | `table` | No |  |
+| `trip_id` | `string` | No |  |
 
 ### Operations
 
@@ -400,12 +400,12 @@ local stop = client:Stop(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `product` | ``$OBJECT`` | No |  |
-| `station` | ``$OBJECT`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `id` | `string` | No |  |
+| `location` | `table` | No |  |
+| `name` | `string` | No |  |
+| `product` | `table` | No |  |
+| `station` | `table` | No |  |
+| `type` | `string` | No |  |
 
 ### Operations
 
@@ -457,12 +457,12 @@ local trip = client:Trip(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `destination` | ``$OBJECT`` | No |  |
-| `direction` | ``$STRING`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `line` | ``$OBJECT`` | No |  |
-| `origin` | ``$OBJECT`` | No |  |
-| `stopover` | ``$ARRAY`` | No |  |
+| `destination` | `table` | No |  |
+| `direction` | `string` | No |  |
+| `id` | `string` | No |  |
+| `line` | `table` | No |  |
+| `origin` | `table` | No |  |
+| `stopover` | `table` | No |  |
 
 ### Operations
 

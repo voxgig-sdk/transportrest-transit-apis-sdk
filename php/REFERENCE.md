@@ -8,7 +8,7 @@ Complete API reference for the TransportrestTransitApis PHP SDK.
 ### Constructor
 
 ```php
-require_once __DIR__ . '/transportrest-transit-apis_sdk.php';
+require_once __DIR__ . '/transportresttransitapis_sdk.php';
 
 $client = new TransportrestTransitApisSDK($options);
 ```
@@ -69,11 +69,11 @@ Create a new `StopEntity` instance. Pass `null` for no initial data.
 
 Create a new `TripEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): TransportrestTransitApisUtility`
 
 Return a copy of the SDK utility object.
 
@@ -116,41 +116,41 @@ $arrival = $client->Arrival();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delay` | ``$INTEGER`` | No |  |
-| `direction` | ``$STRING`` | No |  |
-| `line` | ``$OBJECT`` | No |  |
-| `planned_platform` | ``$STRING`` | No |  |
-| `planned_when` | ``$STRING`` | No |  |
-| `platform` | ``$STRING`` | No |  |
-| `stop` | ``$OBJECT`` | No |  |
-| `trip_id` | ``$STRING`` | No |  |
-| `when` | ``$STRING`` | No |  |
+| `delay` | `int` | No |  |
+| `direction` | `string` | No |  |
+| `line` | `array` | No |  |
+| `planned_platform` | `string` | No |  |
+| `planned_when` | `string` | No |  |
+| `platform` | `string` | No |  |
+| `stop` | `array` | No |  |
+| `trip_id` | `string` | No |  |
+| `when` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Arrival()->list([]);
+$results = $client->Arrival()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -159,7 +159,7 @@ Set the entity match criteria.
 Create a new `ArrivalEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -176,41 +176,41 @@ $departure = $client->Departure();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delay` | ``$INTEGER`` | No |  |
-| `direction` | ``$STRING`` | No |  |
-| `line` | ``$OBJECT`` | No |  |
-| `planned_platform` | ``$STRING`` | No |  |
-| `planned_when` | ``$STRING`` | No |  |
-| `platform` | ``$STRING`` | No |  |
-| `stop` | ``$OBJECT`` | No |  |
-| `trip_id` | ``$STRING`` | No |  |
-| `when` | ``$STRING`` | No |  |
+| `delay` | `int` | No |  |
+| `direction` | `string` | No |  |
+| `line` | `array` | No |  |
+| `planned_platform` | `string` | No |  |
+| `planned_when` | `string` | No |  |
+| `platform` | `string` | No |  |
+| `stop` | `array` | No |  |
+| `trip_id` | `string` | No |  |
+| `when` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Departure()->list([]);
+$results = $client->Departure()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -219,7 +219,7 @@ Set the entity match criteria.
 Create a new `DepartureEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -236,35 +236,35 @@ $journey = $client->Journey();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `leg` | ``$ARRAY`` | No |  |
-| `refresh_token` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `leg` | `array` | No |  |
+| `refresh_token` | `string` | No |  |
+| `type` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Journey()->list([]);
+$results = $client->Journey()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -273,7 +273,7 @@ Set the entity match criteria.
 Create a new `JourneyEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -290,37 +290,37 @@ $location = $client->Location();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `product` | ``$OBJECT`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `id` | `string` | No |  |
+| `location` | `array` | No |  |
+| `name` | `string` | No |  |
+| `product` | `array` | No |  |
+| `type` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Location()->list([]);
+$results = $client->Location()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -329,7 +329,7 @@ Set the entity match criteria.
 Create a new `LocationEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -346,37 +346,37 @@ $radar = $client->Radar();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `direction` | ``$STRING`` | No |  |
-| `line` | ``$OBJECT`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `next_stopover` | ``$ARRAY`` | No |  |
-| `trip_id` | ``$STRING`` | No |  |
+| `direction` | `string` | No |  |
+| `line` | `array` | No |  |
+| `location` | `array` | No |  |
+| `next_stopover` | `array` | No |  |
+| `trip_id` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Radar()->list([]);
+$results = $client->Radar()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -385,7 +385,7 @@ Set the entity match criteria.
 Create a new `RadarEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -402,12 +402,12 @@ $stop = $client->Stop();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `product` | ``$OBJECT`` | No |  |
-| `station` | ``$OBJECT`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `id` | `string` | No |  |
+| `location` | `array` | No |  |
+| `name` | `string` | No |  |
+| `product` | `array` | No |  |
+| `station` | `array` | No |  |
+| `type` | `string` | No |  |
 
 ### Operations
 
@@ -421,19 +421,19 @@ $result = $client->Stop()->load(["id" => "stop_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -442,7 +442,7 @@ Set the entity match criteria.
 Create a new `StopEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -459,12 +459,12 @@ $trip = $client->Trip();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `destination` | ``$OBJECT`` | No |  |
-| `direction` | ``$STRING`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `line` | ``$OBJECT`` | No |  |
-| `origin` | ``$OBJECT`` | No |  |
-| `stopover` | ``$ARRAY`` | No |  |
+| `destination` | `array` | No |  |
+| `direction` | `string` | No |  |
+| `id` | `string` | No |  |
+| `line` | `array` | No |  |
+| `origin` | `array` | No |  |
+| `stopover` | `array` | No |  |
 
 ### Operations
 
@@ -478,19 +478,19 @@ $result = $client->Trip()->load(["id" => "trip_id"]);
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -499,7 +499,7 @@ Set the entity match criteria.
 Create a new `TripEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

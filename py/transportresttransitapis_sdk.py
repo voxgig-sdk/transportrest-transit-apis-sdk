@@ -221,43 +221,43 @@ class TransportrestTransitApisSDK:
 
 
     def Arrival(self, data=None) -> "ArrivalEntity":
-        """Entity factory: client.Arrival().list({}) / client.Arrival().load({"id": ...})."""
+        """Entity factory: client.Arrival().list() / client.Arrival().load({"id": ...})."""
         from entity.arrival_entity import ArrivalEntity
         return ArrivalEntity(self, data)
 
 
     def Departure(self, data=None) -> "DepartureEntity":
-        """Entity factory: client.Departure().list({}) / client.Departure().load({"id": ...})."""
+        """Entity factory: client.Departure().list() / client.Departure().load({"id": ...})."""
         from entity.departure_entity import DepartureEntity
         return DepartureEntity(self, data)
 
 
     def Journey(self, data=None) -> "JourneyEntity":
-        """Entity factory: client.Journey().list({}) / client.Journey().load({"id": ...})."""
+        """Entity factory: client.Journey().list() / client.Journey().load({"id": ...})."""
         from entity.journey_entity import JourneyEntity
         return JourneyEntity(self, data)
 
 
     def Location(self, data=None) -> "LocationEntity":
-        """Entity factory: client.Location().list({}) / client.Location().load({"id": ...})."""
+        """Entity factory: client.Location().list() / client.Location().load({"id": ...})."""
         from entity.location_entity import LocationEntity
         return LocationEntity(self, data)
 
 
     def Radar(self, data=None) -> "RadarEntity":
-        """Entity factory: client.Radar().list({}) / client.Radar().load({"id": ...})."""
+        """Entity factory: client.Radar().list() / client.Radar().load({"id": ...})."""
         from entity.radar_entity import RadarEntity
         return RadarEntity(self, data)
 
 
     def Stop(self, data=None) -> "StopEntity":
-        """Entity factory: client.Stop().list({}) / client.Stop().load({"id": ...})."""
+        """Entity factory: client.Stop().list() / client.Stop().load({"id": ...})."""
         from entity.stop_entity import StopEntity
         return StopEntity(self, data)
 
 
     def Trip(self, data=None) -> "TripEntity":
-        """Entity factory: client.Trip().list({}) / client.Trip().load({"id": ...})."""
+        """Entity factory: client.Trip().list() / client.Trip().load({"id": ...})."""
         from entity.trip_entity import TripEntity
         return TripEntity(self, data)
 

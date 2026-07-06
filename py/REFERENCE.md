@@ -8,7 +8,7 @@ Complete API reference for the TransportrestTransitApis Python SDK.
 ### Constructor
 
 ```python
-from transportrest-transit-apis_sdk import TransportrestTransitApisSDK
+from transportresttransitapis_sdk import TransportrestTransitApisSDK
 
 client = TransportrestTransitApisSDK(options)
 ```
@@ -111,24 +111,24 @@ arrival = client.Arrival()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delay` | ``$INTEGER`` | No |  |
-| `direction` | ``$STRING`` | No |  |
-| `line` | ``$OBJECT`` | No |  |
-| `planned_platform` | ``$STRING`` | No |  |
-| `planned_when` | ``$STRING`` | No |  |
-| `platform` | ``$STRING`` | No |  |
-| `stop` | ``$OBJECT`` | No |  |
-| `trip_id` | ``$STRING`` | No |  |
-| `when` | ``$STRING`` | No |  |
+| `delay` | `int` | No |  |
+| `direction` | `str` | No |  |
+| `line` | `dict` | No |  |
+| `planned_platform` | `str` | No |  |
+| `planned_when` | `str` | No |  |
+| `platform` | `str` | No |  |
+| `stop` | `dict` | No |  |
+| `trip_id` | `str` | No |  |
+| `when` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Arrival().list({})
+results = client.Arrival().list()
 for arrival in results:
     print(arrival)
 ```
@@ -172,24 +172,24 @@ departure = client.Departure()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delay` | ``$INTEGER`` | No |  |
-| `direction` | ``$STRING`` | No |  |
-| `line` | ``$OBJECT`` | No |  |
-| `planned_platform` | ``$STRING`` | No |  |
-| `planned_when` | ``$STRING`` | No |  |
-| `platform` | ``$STRING`` | No |  |
-| `stop` | ``$OBJECT`` | No |  |
-| `trip_id` | ``$STRING`` | No |  |
-| `when` | ``$STRING`` | No |  |
+| `delay` | `int` | No |  |
+| `direction` | `str` | No |  |
+| `line` | `dict` | No |  |
+| `planned_platform` | `str` | No |  |
+| `planned_when` | `str` | No |  |
+| `platform` | `str` | No |  |
+| `stop` | `dict` | No |  |
+| `trip_id` | `str` | No |  |
+| `when` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Departure().list({})
+results = client.Departure().list()
 for departure in results:
     print(departure)
 ```
@@ -233,18 +233,18 @@ journey = client.Journey()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `leg` | ``$ARRAY`` | No |  |
-| `refresh_token` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `leg` | `list` | No |  |
+| `refresh_token` | `str` | No |  |
+| `type` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Journey().list({})
+results = client.Journey().list()
 for journey in results:
     print(journey)
 ```
@@ -288,20 +288,20 @@ location = client.Location()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `product` | ``$OBJECT`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `id` | `str` | No |  |
+| `location` | `dict` | No |  |
+| `name` | `str` | No |  |
+| `product` | `dict` | No |  |
+| `type` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Location().list({})
+results = client.Location().list()
 for location in results:
     print(location)
 ```
@@ -345,20 +345,20 @@ radar = client.Radar()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `direction` | ``$STRING`` | No |  |
-| `line` | ``$OBJECT`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `next_stopover` | ``$ARRAY`` | No |  |
-| `trip_id` | ``$STRING`` | No |  |
+| `direction` | `str` | No |  |
+| `line` | `dict` | No |  |
+| `location` | `dict` | No |  |
+| `next_stopover` | `list` | No |  |
+| `trip_id` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Radar().list({})
+results = client.Radar().list()
 for radar in results:
     print(radar)
 ```
@@ -402,12 +402,12 @@ stop = client.Stop()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `product` | ``$OBJECT`` | No |  |
-| `station` | ``$OBJECT`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `id` | `str` | No |  |
+| `location` | `dict` | No |  |
+| `name` | `str` | No |  |
+| `product` | `dict` | No |  |
+| `station` | `dict` | No |  |
+| `type` | `str` | No |  |
 
 ### Operations
 
@@ -458,12 +458,12 @@ trip = client.Trip()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `destination` | ``$OBJECT`` | No |  |
-| `direction` | ``$STRING`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `line` | ``$OBJECT`` | No |  |
-| `origin` | ``$OBJECT`` | No |  |
-| `stopover` | ``$ARRAY`` | No |  |
+| `destination` | `dict` | No |  |
+| `direction` | `str` | No |  |
+| `id` | `str` | No |  |
+| `line` | `dict` | No |  |
+| `origin` | `dict` | No |  |
+| `stopover` | `list` | No |  |
 
 ### Operations
 

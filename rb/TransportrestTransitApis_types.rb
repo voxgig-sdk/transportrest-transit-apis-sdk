@@ -125,7 +125,7 @@ Journey = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Journey#list (any subset of Journey fields).
+# Request payload for Journey#list.
 #
 # @!attribute [rw] leg
 #   @return [Array, nil]
@@ -167,7 +167,7 @@ Location = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Location#list (any subset of Location fields).
+# Request payload for Location#list.
 #
 # @!attribute [rw] id
 #   @return [String, nil]
@@ -217,7 +217,7 @@ Radar = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Radar#list (any subset of Radar fields).
+# Request payload for Radar#list.
 #
 # @!attribute [rw] direction
 #   @return [String, nil]

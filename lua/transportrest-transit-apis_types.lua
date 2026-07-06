@@ -40,6 +40,9 @@
 ---@field type? string
 
 ---@class JourneyListMatch
+---@field leg? table
+---@field refresh_token? string
+---@field type? string
 
 ---@class Location
 ---@field id? string
@@ -49,6 +52,11 @@
 ---@field type? string
 
 ---@class LocationListMatch
+---@field id? string
+---@field location? table
+---@field name? string
+---@field product? table
+---@field type? string
 
 ---@class Radar
 ---@field direction? string
@@ -58,6 +66,11 @@
 ---@field trip_id? string
 
 ---@class RadarListMatch
+---@field direction? string
+---@field line? table
+---@field location? table
+---@field next_stopover? table
+---@field trip_id? string
 
 ---@class Stop
 ---@field id? string

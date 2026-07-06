@@ -8,7 +8,7 @@ Complete API reference for the TransportrestTransitApis Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'transportrest-transit-apis_sdk'
+require_relative 'TransportrestTransitApis_sdk'
 
 client = TransportrestTransitApisSDK.new(options)
 ```
@@ -117,24 +117,24 @@ arrival = client.Arrival
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delay` | ``$INTEGER`` | No |  |
-| `direction` | ``$STRING`` | No |  |
-| `line` | ``$OBJECT`` | No |  |
-| `planned_platform` | ``$STRING`` | No |  |
-| `planned_when` | ``$STRING`` | No |  |
-| `platform` | ``$STRING`` | No |  |
-| `stop` | ``$OBJECT`` | No |  |
-| `trip_id` | ``$STRING`` | No |  |
-| `when` | ``$STRING`` | No |  |
+| `delay` | `Integer` | No |  |
+| `direction` | `String` | No |  |
+| `line` | `Hash` | No |  |
+| `planned_platform` | `String` | No |  |
+| `planned_when` | `String` | No |  |
+| `platform` | `String` | No |  |
+| `stop` | `Hash` | No |  |
+| `trip_id` | `String` | No |  |
+| `when` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Arrival.list(nil)
+results = client.Arrival.list
 ```
 
 ### Common Methods
@@ -177,24 +177,24 @@ departure = client.Departure
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delay` | ``$INTEGER`` | No |  |
-| `direction` | ``$STRING`` | No |  |
-| `line` | ``$OBJECT`` | No |  |
-| `planned_platform` | ``$STRING`` | No |  |
-| `planned_when` | ``$STRING`` | No |  |
-| `platform` | ``$STRING`` | No |  |
-| `stop` | ``$OBJECT`` | No |  |
-| `trip_id` | ``$STRING`` | No |  |
-| `when` | ``$STRING`` | No |  |
+| `delay` | `Integer` | No |  |
+| `direction` | `String` | No |  |
+| `line` | `Hash` | No |  |
+| `planned_platform` | `String` | No |  |
+| `planned_when` | `String` | No |  |
+| `platform` | `String` | No |  |
+| `stop` | `Hash` | No |  |
+| `trip_id` | `String` | No |  |
+| `when` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Departure.list(nil)
+results = client.Departure.list
 ```
 
 ### Common Methods
@@ -237,18 +237,18 @@ journey = client.Journey
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `leg` | ``$ARRAY`` | No |  |
-| `refresh_token` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `leg` | `Array` | No |  |
+| `refresh_token` | `String` | No |  |
+| `type` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Journey.list(nil)
+results = client.Journey.list
 ```
 
 ### Common Methods
@@ -291,20 +291,20 @@ location = client.Location
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `product` | ``$OBJECT`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `id` | `String` | No |  |
+| `location` | `Hash` | No |  |
+| `name` | `String` | No |  |
+| `product` | `Hash` | No |  |
+| `type` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Location.list(nil)
+results = client.Location.list
 ```
 
 ### Common Methods
@@ -347,20 +347,20 @@ radar = client.Radar
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `direction` | ``$STRING`` | No |  |
-| `line` | ``$OBJECT`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `next_stopover` | ``$ARRAY`` | No |  |
-| `trip_id` | ``$STRING`` | No |  |
+| `direction` | `String` | No |  |
+| `line` | `Hash` | No |  |
+| `location` | `Hash` | No |  |
+| `next_stopover` | `Array` | No |  |
+| `trip_id` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Radar.list(nil)
+results = client.Radar.list
 ```
 
 ### Common Methods
@@ -403,12 +403,12 @@ stop = client.Stop
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `product` | ``$OBJECT`` | No |  |
-| `station` | ``$OBJECT`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `id` | `String` | No |  |
+| `location` | `Hash` | No |  |
+| `name` | `String` | No |  |
+| `product` | `Hash` | No |  |
+| `station` | `Hash` | No |  |
+| `type` | `String` | No |  |
 
 ### Operations
 
@@ -460,12 +460,12 @@ trip = client.Trip
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `destination` | ``$OBJECT`` | No |  |
-| `direction` | ``$STRING`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `line` | ``$OBJECT`` | No |  |
-| `origin` | ``$OBJECT`` | No |  |
-| `stopover` | ``$ARRAY`` | No |  |
+| `destination` | `Hash` | No |  |
+| `direction` | `String` | No |  |
+| `id` | `String` | No |  |
+| `line` | `Hash` | No |  |
+| `origin` | `Hash` | No |  |
+| `stopover` | `Array` | No |  |
 
 ### Operations
 

@@ -43,7 +43,11 @@ export interface Journey {
   type?: string
 }
 
-export type JourneyListMatch = Partial<Journey>
+export interface JourneyListMatch {
+  leg?: any[]
+  refresh_token?: string
+  type?: string
+}
 
 export interface Location {
   id?: string
@@ -53,7 +57,13 @@ export interface Location {
   type?: string
 }
 
-export type LocationListMatch = Partial<Location>
+export interface LocationListMatch {
+  id?: string
+  location?: Record<string, any>
+  name?: string
+  product?: Record<string, any>
+  type?: string
+}
 
 export interface Radar {
   direction?: string
@@ -63,7 +73,13 @@ export interface Radar {
   trip_id?: string
 }
 
-export type RadarListMatch = Partial<Radar>
+export interface RadarListMatch {
+  direction?: string
+  line?: Record<string, any>
+  location?: Record<string, any>
+  next_stopover?: any[]
+  trip_id?: string
+}
 
 export interface Stop {
   id?: string

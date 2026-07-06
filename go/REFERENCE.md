@@ -121,15 +121,15 @@ arrival := client.Arrival(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delay` | ``$INTEGER`` | No |  |
-| `direction` | ``$STRING`` | No |  |
-| `line` | ``$OBJECT`` | No |  |
-| `planned_platform` | ``$STRING`` | No |  |
-| `planned_when` | ``$STRING`` | No |  |
-| `platform` | ``$STRING`` | No |  |
-| `stop` | ``$OBJECT`` | No |  |
-| `trip_id` | ``$STRING`` | No |  |
-| `when` | ``$STRING`` | No |  |
+| `delay` | `int` | No |  |
+| `direction` | `string` | No |  |
+| `line` | `map[string]any` | No |  |
+| `planned_platform` | `string` | No |  |
+| `planned_when` | `string` | No |  |
+| `platform` | `string` | No |  |
+| `stop` | `map[string]any` | No |  |
+| `trip_id` | `string` | No |  |
+| `when` | `string` | No |  |
 
 ### Operations
 
@@ -175,15 +175,15 @@ departure := client.Departure(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delay` | ``$INTEGER`` | No |  |
-| `direction` | ``$STRING`` | No |  |
-| `line` | ``$OBJECT`` | No |  |
-| `planned_platform` | ``$STRING`` | No |  |
-| `planned_when` | ``$STRING`` | No |  |
-| `platform` | ``$STRING`` | No |  |
-| `stop` | ``$OBJECT`` | No |  |
-| `trip_id` | ``$STRING`` | No |  |
-| `when` | ``$STRING`` | No |  |
+| `delay` | `int` | No |  |
+| `direction` | `string` | No |  |
+| `line` | `map[string]any` | No |  |
+| `planned_platform` | `string` | No |  |
+| `planned_when` | `string` | No |  |
+| `platform` | `string` | No |  |
+| `stop` | `map[string]any` | No |  |
+| `trip_id` | `string` | No |  |
+| `when` | `string` | No |  |
 
 ### Operations
 
@@ -229,9 +229,9 @@ journey := client.Journey(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `leg` | ``$ARRAY`` | No |  |
-| `refresh_token` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `leg` | `[]any` | No |  |
+| `refresh_token` | `string` | No |  |
+| `type` | `string` | No |  |
 
 ### Operations
 
@@ -277,11 +277,11 @@ location := client.Location(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `product` | ``$OBJECT`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `id` | `string` | No |  |
+| `location` | `map[string]any` | No |  |
+| `name` | `string` | No |  |
+| `product` | `map[string]any` | No |  |
+| `type` | `string` | No |  |
 
 ### Operations
 
@@ -327,11 +327,11 @@ radar := client.Radar(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `direction` | ``$STRING`` | No |  |
-| `line` | ``$OBJECT`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `next_stopover` | ``$ARRAY`` | No |  |
-| `trip_id` | ``$STRING`` | No |  |
+| `direction` | `string` | No |  |
+| `line` | `map[string]any` | No |  |
+| `location` | `map[string]any` | No |  |
+| `next_stopover` | `[]any` | No |  |
+| `trip_id` | `string` | No |  |
 
 ### Operations
 
@@ -377,12 +377,12 @@ stop := client.Stop(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `product` | ``$OBJECT`` | No |  |
-| `station` | ``$OBJECT`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `id` | `string` | No |  |
+| `location` | `map[string]any` | No |  |
+| `name` | `string` | No |  |
+| `product` | `map[string]any` | No |  |
+| `station` | `map[string]any` | No |  |
+| `type` | `string` | No |  |
 
 ### Operations
 
@@ -428,12 +428,12 @@ trip := client.Trip(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `destination` | ``$OBJECT`` | No |  |
-| `direction` | ``$STRING`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `line` | ``$OBJECT`` | No |  |
-| `origin` | ``$OBJECT`` | No |  |
-| `stopover` | ``$ARRAY`` | No |  |
+| `destination` | `map[string]any` | No |  |
+| `direction` | `string` | No |  |
+| `id` | `string` | No |  |
+| `line` | `map[string]any` | No |  |
+| `origin` | `map[string]any` | No |  |
+| `stopover` | `[]any` | No |  |
 
 ### Operations
 

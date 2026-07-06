@@ -60,7 +60,7 @@ class Journey
     public ?string $type = null;
 }
 
-/** Match filter for Journey#list (any subset of Journey fields). */
+/** Request payload for Journey#list. */
 class JourneyListMatch
 {
     public ?array $leg = null;
@@ -78,7 +78,7 @@ class Location
     public ?string $type = null;
 }
 
-/** Match filter for Location#list (any subset of Location fields). */
+/** Request payload for Location#list. */
 class LocationListMatch
 {
     public ?string $id = null;
@@ -98,7 +98,7 @@ class Radar
     public ?string $trip_id = null;
 }
 
-/** Match filter for Radar#list (any subset of Radar fields). */
+/** Request payload for Radar#list. */
 class RadarListMatch
 {
     public ?string $direction = null;

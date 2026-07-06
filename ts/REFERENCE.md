@@ -188,15 +188,15 @@ const arrival = client.Arrival()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delay` | ``$INTEGER`` | No |  |
-| `direction` | ``$STRING`` | No |  |
-| `line` | ``$OBJECT`` | No |  |
-| `planned_platform` | ``$STRING`` | No |  |
-| `planned_when` | ``$STRING`` | No |  |
-| `platform` | ``$STRING`` | No |  |
-| `stop` | ``$OBJECT`` | No |  |
-| `trip_id` | ``$STRING`` | No |  |
-| `when` | ``$STRING`` | No |  |
+| `delay` | `number` | No |  |
+| `direction` | `string` | No |  |
+| `line` | `Record<string, any>` | No |  |
+| `planned_platform` | `string` | No |  |
+| `planned_when` | `string` | No |  |
+| `platform` | `string` | No |  |
+| `stop` | `Record<string, any>` | No |  |
+| `trip_id` | `string` | No |  |
+| `when` | `string` | No |  |
 
 ### Operations
 
@@ -246,15 +246,15 @@ const departure = client.Departure()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delay` | ``$INTEGER`` | No |  |
-| `direction` | ``$STRING`` | No |  |
-| `line` | ``$OBJECT`` | No |  |
-| `planned_platform` | ``$STRING`` | No |  |
-| `planned_when` | ``$STRING`` | No |  |
-| `platform` | ``$STRING`` | No |  |
-| `stop` | ``$OBJECT`` | No |  |
-| `trip_id` | ``$STRING`` | No |  |
-| `when` | ``$STRING`` | No |  |
+| `delay` | `number` | No |  |
+| `direction` | `string` | No |  |
+| `line` | `Record<string, any>` | No |  |
+| `planned_platform` | `string` | No |  |
+| `planned_when` | `string` | No |  |
+| `platform` | `string` | No |  |
+| `stop` | `Record<string, any>` | No |  |
+| `trip_id` | `string` | No |  |
+| `when` | `string` | No |  |
 
 ### Operations
 
@@ -304,9 +304,9 @@ const journey = client.Journey()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `leg` | ``$ARRAY`` | No |  |
-| `refresh_token` | ``$STRING`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `leg` | `any[]` | No |  |
+| `refresh_token` | `string` | No |  |
+| `type` | `string` | No |  |
 
 ### Operations
 
@@ -356,11 +356,11 @@ const location = client.Location()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `product` | ``$OBJECT`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `id` | `string` | No |  |
+| `location` | `Record<string, any>` | No |  |
+| `name` | `string` | No |  |
+| `product` | `Record<string, any>` | No |  |
+| `type` | `string` | No |  |
 
 ### Operations
 
@@ -410,11 +410,11 @@ const radar = client.Radar()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `direction` | ``$STRING`` | No |  |
-| `line` | ``$OBJECT`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `next_stopover` | ``$ARRAY`` | No |  |
-| `trip_id` | ``$STRING`` | No |  |
+| `direction` | `string` | No |  |
+| `line` | `Record<string, any>` | No |  |
+| `location` | `Record<string, any>` | No |  |
+| `next_stopover` | `any[]` | No |  |
+| `trip_id` | `string` | No |  |
 
 ### Operations
 
@@ -464,12 +464,12 @@ const stop = client.Stop()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | ``$STRING`` | No |  |
-| `location` | ``$OBJECT`` | No |  |
-| `name` | ``$STRING`` | No |  |
-| `product` | ``$OBJECT`` | No |  |
-| `station` | ``$OBJECT`` | No |  |
-| `type` | ``$STRING`` | No |  |
+| `id` | `string` | No |  |
+| `location` | `Record<string, any>` | No |  |
+| `name` | `string` | No |  |
+| `product` | `Record<string, any>` | No |  |
+| `station` | `Record<string, any>` | No |  |
+| `type` | `string` | No |  |
 
 ### Operations
 
@@ -519,12 +519,12 @@ const trip = client.Trip()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `destination` | ``$OBJECT`` | No |  |
-| `direction` | ``$STRING`` | No |  |
-| `id` | ``$STRING`` | No |  |
-| `line` | ``$OBJECT`` | No |  |
-| `origin` | ``$OBJECT`` | No |  |
-| `stopover` | ``$ARRAY`` | No |  |
+| `destination` | `Record<string, any>` | No |  |
+| `direction` | `string` | No |  |
+| `id` | `string` | No |  |
+| `line` | `Record<string, any>` | No |  |
+| `origin` | `Record<string, any>` | No |  |
+| `stopover` | `any[]` | No |  |
 
 ### Operations
 
