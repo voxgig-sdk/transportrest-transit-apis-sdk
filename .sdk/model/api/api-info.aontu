@@ -40,9 +40,9 @@ main: {
           url: "https://v1.nottingham-city.transport.rest"
         }
       ]
+      summary: "Provides transit APIs for different regions such as Germany, Poland, Berlin-Brandenburg, Schleswig-Holstein, Europe, and England."
       title: "transport.rest transit APIs"
       version: "1.0.0"
+      website: "https://v6.db.transport.rest"
     }
   }
-}
-

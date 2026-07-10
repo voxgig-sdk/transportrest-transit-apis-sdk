@@ -115,6 +115,7 @@ same parameters as `Direct()`.
 
 ```go
 arrival := client.Arrival(nil)
+fmt.Println(arrival.GetName()) // "arrival"
 ```
 
 ### Fields
@@ -139,6 +140,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Arrival(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -169,6 +174,7 @@ Return the entity name.
 
 ```go
 departure := client.Departure(nil)
+fmt.Println(departure.GetName()) // "departure"
 ```
 
 ### Fields
@@ -193,6 +199,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Departure(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -223,6 +233,7 @@ Return the entity name.
 
 ```go
 journey := client.Journey(nil)
+fmt.Println(journey.GetName()) // "journey"
 ```
 
 ### Fields
@@ -241,6 +252,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Journey(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -271,6 +286,7 @@ Return the entity name.
 
 ```go
 location := client.Location(nil)
+fmt.Println(location.GetName()) // "location"
 ```
 
 ### Fields
@@ -291,6 +307,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Location(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -321,6 +341,7 @@ Return the entity name.
 
 ```go
 radar := client.Radar(nil)
+fmt.Println(radar.GetName()) // "radar"
 ```
 
 ### Fields
@@ -341,6 +362,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Radar(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -371,6 +396,7 @@ Return the entity name.
 
 ```go
 stop := client.Stop(nil)
+fmt.Println(stop.GetName()) // "stop"
 ```
 
 ### Fields
@@ -392,6 +418,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Stop(nil).Load(map[string]any{"id": "stop_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -422,6 +452,7 @@ Return the entity name.
 
 ```go
 trip := client.Trip(nil)
+fmt.Println(trip.GetName()) // "trip"
 ```
 
 ### Fields
@@ -443,6 +474,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Trip(nil).Load(map[string]any{"id": "trip_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods

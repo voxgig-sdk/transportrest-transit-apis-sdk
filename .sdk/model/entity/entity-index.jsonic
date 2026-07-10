@@ -1,9 +1,0 @@
-# Entity Models
-
-@"arrival.jsonic"
-@"departure.jsonic"
-@"journey.jsonic"
-@"location.jsonic"
-@"radar.jsonic"
-@"stop.jsonic"
-@"trip.jsonic"
