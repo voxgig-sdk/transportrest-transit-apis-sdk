@@ -10,6 +10,13 @@ class TransportrestTransitApisMakePoint
     public static function call(TransportrestTransitApisContext $ctx): array
     {
         if (isset($ctx->out['point'])) {
+            // A PrePoint feature hook (e.g. rbac) can short-circuit endpoint
+            // resolution by placing an error in ctx.out.point; surface it as
+            // the pipeline error so the network is never touched (the PHP
+            // analogue of the TS `ctx.out.point instanceof Error` check).
+            if ($ctx->out['point'] instanceof TransportrestTransitApisError) {
+                return [null, $ctx->out['point']];
+            }
             $ctx->point = $ctx->out['point'];
             return [$ctx->point, null];
         }
