@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- TransportrestTransitApis SDK exists test
 
 local sdk = require("transportrest-transit-apis_sdk")
 
