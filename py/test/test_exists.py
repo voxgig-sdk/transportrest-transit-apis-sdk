@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# TransportrestTransitApis SDK exists test
 
 import pytest
 from transportresttransitapis_sdk import TransportrestTransitApisSDK

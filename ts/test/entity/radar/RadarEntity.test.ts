@@ -26,8 +26,8 @@ import {
 describe('RadarEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when TRANSPORTRESTTRANSITAPIS_TEST_LIVE=TRUE.
-  afterEach(liveDelay('TRANSPORTRESTTRANSITAPIS_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when TRANSPORTREST_TRANSIT_APIS_TEST_LIVE=TRUE.
+  afterEach(liveDelay('TRANSPORTREST_TRANSIT_APIS_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = TransportrestTransitApisSDK.test()
@@ -63,7 +63,7 @@ describe('RadarEntity', async () => {
     const radar_ref01_ent = client.Radar()
     const radar_ref01_match: any = {}
 
-    const radar_ref01_list = await radar_ref01_ent.list(radar_ref01_match)
+    const radar_ref01_list = (await radar_ref01_ent.list(radar_ref01_match)).map((e: any) => e.data())
 
 
   })

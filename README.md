@@ -23,7 +23,7 @@ support (`list`, `load`):
 
 ```ts
 const client = new TransportrestTransitApisSDK()
-const items = await client.Arrival().list()
+const items = await client.Arrival().list({ stop_id: "example" })
 ```
 
 Thinking in entities keeps the mental model small — for people and AI agents alike —
@@ -38,18 +38,27 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = TransportrestTransitApisSDK.test()
-const arrivals = await client.Arrival().list()
-// arrivals is an array of bare Arrival records populated with mock data
-console.log(arrivals)
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = TransportrestTransitApisSDK.test({
+  entity: {
+    location: {
+      test01: { id: 'test01' },
+    },
+  },
+})
+const locations = await client.Location().list()
+// locations is an array of Location entities, populated with mock data
+// — call locations[0].data() for the record itself
+console.log(locations)
 ```
 
 ### Python
 
 ```python
 client = TransportrestTransitApisSDK.test()
-arrivals = client.Arrival().list()
-print(arrivals)
+locations = client.Location().list()
+print(locations)
 ```
 
 ### PHP
@@ -57,16 +66,16 @@ print(arrivals)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = TransportrestTransitApisSDK::test([
-    "entity" => ["arrival" => ["test01" => []]],
+    "entity" => ["location" => ["test01" => []]],
 ]);
-$arrivals = $client->Arrival()->list();
+$locations = $client->Location()->list();
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.Arrival(nil).List(
+result, err := client.Location(nil).List(
     nil, nil,
 )
 ```
@@ -76,16 +85,16 @@ result, err := client.Arrival(nil).List(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = TransportrestTransitApisSDK.test({
-  "entity" => { "arrival" => { "test01" => {} } },
+  "entity" => { "location" => { "test01" => {} } },
 })
-arrivals = client.Arrival.list()
+locations = client.Location.list()
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local results, err = client:Arrival():list()
+local results, err = client:Location():list()
 ```
 
 ## Packages
@@ -110,8 +119,8 @@ import { TransportrestTransitApisSDK } from '@voxgig-sdk/transportrest-transit-a
 
 const client = new TransportrestTransitApisSDK()
 
-// List all arrivals (returns Arrival[])
-const arrivals = await client.Arrival().list()
+// List all arrivals (returns ArrivalEntity[] — .data() for the record)
+const arrivals = await client.Arrival().list({ stop_id: "example" })
 for (const arrival of arrivals) {
   console.log(arrival)
 }
@@ -176,7 +185,7 @@ from transportresttransitapis_sdk import TransportrestTransitApisSDK
 client = TransportrestTransitApisSDK()
 
 # List all arrivals (returns a list, raises on error)
-arrivals = client.Arrival().list()
+arrivals = client.Arrival().list({"stop_id": "example"})
 for arrival in arrivals:
     print(arrival)
 ```
@@ -349,6 +358,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://transport.rest/](https://transport.rest/)
 

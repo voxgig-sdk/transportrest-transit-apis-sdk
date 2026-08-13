@@ -6,12 +6,12 @@ main: kit: entity: journey: {
 
   fields: [
     {
-      name: "leg"
+      name: "legs"
       req: false
       type: "`$ARRAY`"
     }
     {
-      name: "refresh_token"
+      name: "refreshToken"
       req: false
       type: "`$STRING`"
     }
@@ -95,7 +95,7 @@ main: kit: entity: journey: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.journeys`"
           }
         }
       ]

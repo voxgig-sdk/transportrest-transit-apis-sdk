@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import TransportrestTransitApisControl
-from core.error import TransportrestTransitApisError
-from core.result import TransportrestTransitApisResult
-from core.spec import TransportrestTransitApisSpec
+from transportresttransitapis_sdk.config import make_config
+from transportresttransitapis_sdk.features import _make_feature
+from transportresttransitapis_sdk.core.control import TransportrestTransitApisControl
+from transportresttransitapis_sdk.core.error import TransportrestTransitApisError
+from transportresttransitapis_sdk.core.result import TransportrestTransitApisResult
+from transportresttransitapis_sdk.core.spec import TransportrestTransitApisSpec
 
 
 # True when this SDK was generated with the named feature.

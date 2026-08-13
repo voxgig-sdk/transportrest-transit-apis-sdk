@@ -33,7 +33,7 @@ class TripEntityTest extends TestCase
         // The basic flow consumes synthetic IDs from the fixture. In live mode
         // without an *_ENTID env override, those IDs hit the live API and 4xx.
         if (!empty($setup["synthetic_only"])) {
-            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set TRANSPORTRESTTRANSITAPIS_TEST_TRIP_ENTID JSON to run live");
+            $this->markTestSkipped("live entity test uses synthetic IDs from fixture — set TRANSPORTREST_TRANSIT_APIS_TEST_TRIP_ENTID JSON to run live");
             return;
         }
         $client = $setup["client"];
@@ -52,7 +52,7 @@ class TripEntityTest extends TestCase
             "id" => $trip_ref01_data["id"],
         ];
         $trip_ref01_data_dt0_loaded = $trip_ref01_ent->load($trip_ref01_match_dt0, null);
-        $trip_ref01_data_dt0_load_result = Helpers::to_map($trip_ref01_data_dt0_loaded);
+        $trip_ref01_data_dt0_load_result = Helpers::to_map(is_object($trip_ref01_data_dt0_loaded) && method_exists($trip_ref01_data_dt0_loaded, 'data_get') ? $trip_ref01_data_dt0_loaded->data_get() : $trip_ref01_data_dt0_loaded);
         $this->assertNotNull($trip_ref01_data_dt0_load_result);
         $this->assertEquals($trip_ref01_data_dt0_load_result["id"], $trip_ref01_data["id"]);
 
@@ -81,22 +81,22 @@ function trip_basic_setup($extra)
     // Detect ENTID env override before envOverride consumes it. When live
     // mode is on without a real override, the basic test runs against synthetic
     // IDs from the fixture and 4xx's. Surface this so the test can skip.
-    $entid_env_raw = getenv("TRANSPORTRESTTRANSITAPIS_TEST_TRIP_ENTID");
+    $entid_env_raw = getenv("TRANSPORTREST_TRANSIT_APIS_TEST_TRIP_ENTID");
     $idmap_overridden = $entid_env_raw !== false && str_starts_with(trim($entid_env_raw), "{");
 
     $env = Runner::env_override([
-        "TRANSPORTRESTTRANSITAPIS_TEST_TRIP_ENTID" => $idmap,
-        "TRANSPORTRESTTRANSITAPIS_TEST_LIVE" => "FALSE",
-        "TRANSPORTRESTTRANSITAPIS_TEST_EXPLAIN" => "FALSE",
+        "TRANSPORTREST_TRANSIT_APIS_TEST_TRIP_ENTID" => $idmap,
+        "TRANSPORTREST_TRANSIT_APIS_TEST_LIVE" => "FALSE",
+        "TRANSPORTREST_TRANSIT_APIS_TEST_EXPLAIN" => "FALSE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
-        $env["TRANSPORTRESTTRANSITAPIS_TEST_TRIP_ENTID"]);
+        $env["TRANSPORTREST_TRANSIT_APIS_TEST_TRIP_ENTID"]);
     if ($idmap_resolved === null) {
         $idmap_resolved = Helpers::to_map($idmap);
     }
 
-    if ($env["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] === "TRUE") {
+    if ($env["TRANSPORTREST_TRANSIT_APIS_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
             ],
@@ -105,13 +105,13 @@ function trip_basic_setup($extra)
         $client = new TransportrestTransitApisSDK(Helpers::to_map($merged_opts));
     }
 
-    $live = $env["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] === "TRUE";
+    $live = $env["TRANSPORTREST_TRANSIT_APIS_TEST_LIVE"] === "TRUE";
     return [
         "client" => $client,
         "data" => $entity_data,
         "idmap" => $idmap_resolved,
         "env" => $env,
-        "explain" => $env["TRANSPORTRESTTRANSITAPIS_TEST_EXPLAIN"] === "TRUE",
+        "explain" => $env["TRANSPORTREST_TRANSIT_APIS_TEST_EXPLAIN"] === "TRUE",
         "live" => $live,
         "synthetic_only" => $live && !$idmap_overridden,
         "now" => (int)(microtime(true) * 1000),

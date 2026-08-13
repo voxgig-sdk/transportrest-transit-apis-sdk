@@ -54,7 +54,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local arrivals, err = client:Arrival():list()
+local locations, err = client:Location():list()
 if err then error(err) end
 ```
 
@@ -112,7 +112,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Arrival():list()
+local result, err = client:Location():list()
 -- result is the returned data; err is set on failure
 ```
 
@@ -226,9 +226,9 @@ data **directly** — there is no wrapper:
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
-    local arrival, err = client:Arrival():load()
+    local stop, err = client:Stop():load({ id = "example_id" })
     if err then error(err) end
-    -- arrival is the loaded record
+    -- stop is the loaded record
 
 Only `direct()` returns a response envelope — a `table` with `ok`,
 `status`, `headers`, and `data` keys.
@@ -242,11 +242,11 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 | `delay` |  |
 | `direction` |  |
 | `line` |  |
-| `planned_platform` |  |
-| `planned_when` |  |
+| `plannedPlatform` |  |
+| `plannedWhen` |  |
 | `platform` |  |
 | `stop` |  |
-| `trip_id` |  |
+| `tripId` |  |
 | `when` |  |
 
 Operations: List.
@@ -260,11 +260,11 @@ API path: `/stops/{id}/arrivals`
 | `delay` |  |
 | `direction` |  |
 | `line` |  |
-| `planned_platform` |  |
-| `planned_when` |  |
+| `plannedPlatform` |  |
+| `plannedWhen` |  |
 | `platform` |  |
 | `stop` |  |
-| `trip_id` |  |
+| `tripId` |  |
 | `when` |  |
 
 Operations: List.
@@ -275,8 +275,8 @@ API path: `/stops/{id}/departures`
 
 | Field | Description |
 | --- | --- |
-| `leg` |  |
-| `refresh_token` |  |
+| `legs` |  |
+| `refreshToken` |  |
 | `type` |  |
 
 Operations: List.
@@ -290,7 +290,7 @@ API path: `/journeys`
 | `id` |  |
 | `location` |  |
 | `name` |  |
-| `product` |  |
+| `products` |  |
 | `type` |  |
 
 Operations: List.
@@ -304,8 +304,8 @@ API path: `/locations`
 | `direction` |  |
 | `line` |  |
 | `location` |  |
-| `next_stopover` |  |
-| `trip_id` |  |
+| `nextStopovers` |  |
+| `tripId` |  |
 
 Operations: List.
 
@@ -318,7 +318,7 @@ API path: `/radar`
 | `id` |  |
 | `location` |  |
 | `name` |  |
-| `product` |  |
+| `products` |  |
 | `station` |  |
 | `type` |  |
 
@@ -335,7 +335,7 @@ API path: `/stops/{id}`
 | `id` |  |
 | `line` |  |
 | `origin` |  |
-| `stopover` |  |
+| `stopovers` |  |
 
 Operations: Load.
 
@@ -363,11 +363,11 @@ Create an instance: `local arrival = client:Arrival(nil)`
 | `delay` | `number` |  |
 | `direction` | `string` |  |
 | `line` | `table` |  |
-| `planned_platform` | `string` |  |
-| `planned_when` | `string` |  |
+| `plannedPlatform` | `string` |  |
+| `plannedWhen` | `string` |  |
 | `platform` | `string` |  |
 | `stop` | `table` |  |
-| `trip_id` | `string` |  |
+| `tripId` | `string` |  |
 | `when` | `string` |  |
 
 #### Example: List
@@ -394,11 +394,11 @@ Create an instance: `local departure = client:Departure(nil)`
 | `delay` | `number` |  |
 | `direction` | `string` |  |
 | `line` | `table` |  |
-| `planned_platform` | `string` |  |
-| `planned_when` | `string` |  |
+| `plannedPlatform` | `string` |  |
+| `plannedWhen` | `string` |  |
 | `platform` | `string` |  |
 | `stop` | `table` |  |
-| `trip_id` | `string` |  |
+| `tripId` | `string` |  |
 | `when` | `string` |  |
 
 #### Example: List
@@ -422,8 +422,8 @@ Create an instance: `local journey = client:Journey(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `leg` | `table` |  |
-| `refresh_token` | `string` |  |
+| `legs` | `table` |  |
+| `refreshToken` | `string` |  |
 | `type` | `string` |  |
 
 #### Example: List
@@ -450,7 +450,7 @@ Create an instance: `local location = client:Location(nil)`
 | `id` | `string` |  |
 | `location` | `table` |  |
 | `name` | `string` |  |
-| `product` | `table` |  |
+| `products` | `table` |  |
 | `type` | `string` |  |
 
 #### Example: List
@@ -477,8 +477,8 @@ Create an instance: `local radar = client:Radar(nil)`
 | `direction` | `string` |  |
 | `line` | `table` |  |
 | `location` | `table` |  |
-| `next_stopover` | `table` |  |
-| `trip_id` | `string` |  |
+| `nextStopovers` | `table` |  |
+| `tripId` | `string` |  |
 
 #### Example: List
 
@@ -504,7 +504,7 @@ Create an instance: `local stop = client:Stop(nil)`
 | `id` | `string` |  |
 | `location` | `table` |  |
 | `name` | `string` |  |
-| `product` | `table` |  |
+| `products` | `table` |  |
 | `station` | `table` |  |
 | `type` | `string` |  |
 
@@ -534,7 +534,7 @@ Create an instance: `local trip = client:Trip(nil)`
 | `id` | `string` |  |
 | `line` | `table` |  |
 | `origin` | `table` |  |
-| `stopover` | `table` |  |
+| `stopovers` | `table` |  |
 
 #### Example: Load
 
@@ -619,11 +619,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local arrival = client:Arrival()
-arrival:list()
+local location = client:Location()
+location:list()
 
--- arrival:data_get() now returns the arrival data from the last list
--- arrival:match_get() returns the last match criteria
+-- location:data_get() now returns the location data from the last list
+-- location:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

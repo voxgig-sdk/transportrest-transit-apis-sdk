@@ -191,11 +191,11 @@ const arrival = client.Arrival()
 | `delay` | `number` | No |  |
 | `direction` | `string` | No |  |
 | `line` | `Record<string, any>` | No |  |
-| `planned_platform` | `string` | No |  |
-| `planned_when` | `string` | No |  |
+| `plannedPlatform` | `string` | No |  |
+| `plannedWhen` | `string` | No |  |
 | `platform` | `string` | No |  |
 | `stop` | `Record<string, any>` | No |  |
-| `trip_id` | `string` | No |  |
+| `tripId` | `string` | No |  |
 | `when` | `string` | No |  |
 
 ### Operations
@@ -205,7 +205,7 @@ const arrival = client.Arrival()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Arrival().list()
+const results = await client.Arrival().list({ stop_id: "example" })
 ```
 
 ### Common Methods
@@ -249,11 +249,11 @@ const departure = client.Departure()
 | `delay` | `number` | No |  |
 | `direction` | `string` | No |  |
 | `line` | `Record<string, any>` | No |  |
-| `planned_platform` | `string` | No |  |
-| `planned_when` | `string` | No |  |
+| `plannedPlatform` | `string` | No |  |
+| `plannedWhen` | `string` | No |  |
 | `platform` | `string` | No |  |
 | `stop` | `Record<string, any>` | No |  |
-| `trip_id` | `string` | No |  |
+| `tripId` | `string` | No |  |
 | `when` | `string` | No |  |
 
 ### Operations
@@ -263,7 +263,7 @@ const departure = client.Departure()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Departure().list()
+const results = await client.Departure().list({ stop_id: "example" })
 ```
 
 ### Common Methods
@@ -304,8 +304,8 @@ const journey = client.Journey()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `leg` | `any[]` | No |  |
-| `refresh_token` | `string` | No |  |
+| `legs` | `any[]` | No |  |
+| `refreshToken` | `string` | No |  |
 | `type` | `string` | No |  |
 
 ### Operations
@@ -359,7 +359,7 @@ const location = client.Location()
 | `id` | `string` | No |  |
 | `location` | `Record<string, any>` | No |  |
 | `name` | `string` | No |  |
-| `product` | `Record<string, any>` | No |  |
+| `products` | `Record<string, any>` | No |  |
 | `type` | `string` | No |  |
 
 ### Operations
@@ -413,8 +413,8 @@ const radar = client.Radar()
 | `direction` | `string` | No |  |
 | `line` | `Record<string, any>` | No |  |
 | `location` | `Record<string, any>` | No |  |
-| `next_stopover` | `any[]` | No |  |
-| `trip_id` | `string` | No |  |
+| `nextStopovers` | `any[]` | No |  |
+| `tripId` | `string` | No |  |
 
 ### Operations
 
@@ -467,7 +467,7 @@ const stop = client.Stop()
 | `id` | `string` | No |  |
 | `location` | `Record<string, any>` | No |  |
 | `name` | `string` | No |  |
-| `product` | `Record<string, any>` | No |  |
+| `products` | `Record<string, any>` | No |  |
 | `station` | `Record<string, any>` | No |  |
 | `type` | `string` | No |  |
 
@@ -524,7 +524,7 @@ const trip = client.Trip()
 | `id` | `string` | No |  |
 | `line` | `Record<string, any>` | No |  |
 | `origin` | `Record<string, any>` | No |  |
-| `stopover` | `any[]` | No |  |
+| `stopovers` | `any[]` | No |  |
 
 ### Operations
 

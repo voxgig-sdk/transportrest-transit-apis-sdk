@@ -37,7 +37,7 @@ class JourneyEntity extends TransportrestTransitApisEntityBase<Journey> {
 
 
 
-  async list(this: any, reqmatch?: JourneyListMatch, ctrl?: Control): Promise<Journey[]> {
+  async list(this: any, reqmatch?: JourneyListMatch, ctrl?: Control): Promise<JourneyEntity[]> {
 
     const utility = this._utility
 

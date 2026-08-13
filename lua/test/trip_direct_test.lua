@@ -70,11 +70,11 @@ function trip_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["TRANSPORTRESTTRANSITAPIS_TEST_TRIP_ENTID"] = {},
-    ["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] = "FALSE",
+    ["TRANSPORTREST_TRANSIT_APIS_TEST_TRIP_ENTID"] = {},
+    ["TRANSPORTREST_TRANSIT_APIS_TEST_LIVE"] = "FALSE",
   })
 
-  local live = env["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] == "TRUE"
+  local live = env["TRANSPORTREST_TRANSIT_APIS_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {

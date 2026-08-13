@@ -37,7 +37,7 @@ class LocationEntity extends TransportrestTransitApisEntityBase<Location> {
 
 
 
-  async list(this: any, reqmatch?: LocationListMatch, ctrl?: Control): Promise<Location[]> {
+  async list(this: any, reqmatch?: LocationListMatch, ctrl?: Control): Promise<LocationEntity[]> {
 
     const utility = this._utility
 

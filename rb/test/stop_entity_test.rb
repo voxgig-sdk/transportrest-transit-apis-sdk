@@ -26,7 +26,7 @@ class StopEntityTest < Minitest::Test
     # The basic flow consumes synthetic IDs from the fixture. In live mode
     # without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup[:synthetic_only]
-      skip "live entity test uses synthetic IDs from fixture — set TRANSPORTRESTTRANSITAPIS_TEST_STOP_ENTID JSON to run live"
+      skip "live entity test uses synthetic IDs from fixture — set TRANSPORTREST_TRANSIT_APIS_TEST_STOP_ENTID JSON to run live"
       return
     end
     client = setup[:client]
@@ -45,7 +45,7 @@ class StopEntityTest < Minitest::Test
       "id" => stop_ref01_data["id"],
     }
     stop_ref01_data_dt0_loaded = stop_ref01_ent.load(stop_ref01_match_dt0, nil)
-    stop_ref01_data_dt0_load_result = Helpers.to_map(stop_ref01_data_dt0_loaded)
+    stop_ref01_data_dt0_load_result = Helpers.to_map(stop_ref01_data_dt0_loaded.respond_to?(:data_get) ? stop_ref01_data_dt0_loaded.data_get : stop_ref01_data_dt0_loaded)
     assert !stop_ref01_data_dt0_load_result.nil?
     assert_equal stop_ref01_data_dt0_load_result["id"], stop_ref01_data["id"]
 
@@ -78,22 +78,22 @@ def stop_basic_setup(extra)
   # Detect ENTID env override before envOverride consumes it. When live
   # mode is on without a real override, the basic test runs against synthetic
   # IDs from the fixture and 4xx's. Surface this so the test can skip.
-  entid_env_raw = ENV["TRANSPORTRESTTRANSITAPIS_TEST_STOP_ENTID"]
+  entid_env_raw = ENV["TRANSPORTREST_TRANSIT_APIS_TEST_STOP_ENTID"]
   idmap_overridden = !entid_env_raw.nil? && entid_env_raw.strip.start_with?("{")
 
   env = Runner.env_override({
-    "TRANSPORTRESTTRANSITAPIS_TEST_STOP_ENTID" => idmap,
-    "TRANSPORTRESTTRANSITAPIS_TEST_LIVE" => "FALSE",
-    "TRANSPORTRESTTRANSITAPIS_TEST_EXPLAIN" => "FALSE",
+    "TRANSPORTREST_TRANSIT_APIS_TEST_STOP_ENTID" => idmap,
+    "TRANSPORTREST_TRANSIT_APIS_TEST_LIVE" => "FALSE",
+    "TRANSPORTREST_TRANSIT_APIS_TEST_EXPLAIN" => "FALSE",
   })
 
   idmap_resolved = Helpers.to_map(
-    env["TRANSPORTRESTTRANSITAPIS_TEST_STOP_ENTID"])
+    env["TRANSPORTREST_TRANSIT_APIS_TEST_STOP_ENTID"])
   if idmap_resolved.nil?
     idmap_resolved = Helpers.to_map(idmap)
   end
 
-  if env["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] == "TRUE"
+  if env["TRANSPORTREST_TRANSIT_APIS_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
       },
@@ -102,13 +102,13 @@ def stop_basic_setup(extra)
     client = TransportrestTransitApisSDK.new(Helpers.to_map(merged_opts))
   end
 
-  live = env["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] == "TRUE"
+  live = env["TRANSPORTREST_TRANSIT_APIS_TEST_LIVE"] == "TRUE"
   {
     client: client,
     data: entity_data,
     idmap: idmap_resolved,
     env: env,
-    explain: env["TRANSPORTRESTTRANSITAPIS_TEST_EXPLAIN"] == "TRUE",
+    explain: env["TRANSPORTREST_TRANSIT_APIS_TEST_EXPLAIN"] == "TRUE",
     live: live,
     synthetic_only: live && !idmap_overridden,
     now: (Time.now.to_f * 1000).to_i,

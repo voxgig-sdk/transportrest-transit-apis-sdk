@@ -53,14 +53,14 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "planned_platform",
+            ["name"] = "plannedPlatform",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 3,
           },
           {
             ["active"] = true,
-            ["name"] = "planned_when",
+            ["name"] = "plannedWhen",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 4,
@@ -81,7 +81,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "trip_id",
+            ["name"] = "tripId",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 7,
@@ -143,6 +143,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/stops/{id}/arrivals",
                 ["parts"] = {
@@ -165,7 +166,7 @@ local function make_config()
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
+                  ["res"] = "`body.arrivals`",
                 },
                 ["index$"] = 0,
               },
@@ -206,14 +207,14 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "planned_platform",
+            ["name"] = "plannedPlatform",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 3,
           },
           {
             ["active"] = true,
-            ["name"] = "planned_when",
+            ["name"] = "plannedWhen",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 4,
@@ -234,7 +235,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "trip_id",
+            ["name"] = "tripId",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 7,
@@ -305,6 +306,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/stops/{id}/departures",
                 ["parts"] = {
@@ -328,7 +330,7 @@ local function make_config()
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
+                  ["res"] = "`body.departures`",
                 },
                 ["index$"] = 0,
               },
@@ -348,14 +350,14 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "leg",
+            ["name"] = "legs",
             ["req"] = false,
             ["type"] = "`$ARRAY`",
             ["index$"] = 0,
           },
           {
             ["active"] = true,
-            ["name"] = "refresh_token",
+            ["name"] = "refreshToken",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 1,
@@ -432,6 +434,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/journeys",
                 ["parts"] = {
@@ -449,7 +452,7 @@ local function make_config()
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
+                  ["res"] = "`body.journeys`",
                 },
                 ["index$"] = 0,
               },
@@ -486,7 +489,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "product",
+            ["name"] = "products",
             ["req"] = false,
             ["type"] = "`$OBJECT`",
             ["index$"] = 3,
@@ -556,6 +559,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/locations",
                 ["parts"] = {
@@ -609,14 +613,14 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "next_stopover",
+            ["name"] = "nextStopovers",
             ["req"] = false,
             ["type"] = "`$ARRAY`",
             ["index$"] = 3,
           },
           {
             ["active"] = true,
-            ["name"] = "trip_id",
+            ["name"] = "tripId",
             ["req"] = false,
             ["type"] = "`$STRING`",
             ["index$"] = 4,
@@ -675,6 +679,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/radar",
                 ["parts"] = {
@@ -691,7 +696,7 @@ local function make_config()
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
+                  ["res"] = "`body.movements`",
                 },
                 ["index$"] = 0,
               },
@@ -728,7 +733,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "product",
+            ["name"] = "products",
             ["req"] = false,
             ["type"] = "`$OBJECT`",
             ["index$"] = 3,
@@ -770,6 +775,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/stops/{id}",
                 ["parts"] = {
@@ -834,7 +840,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "stopover",
+            ["name"] = "stopovers",
             ["req"] = false,
             ["type"] = "`$ARRAY`",
             ["index$"] = 5,
@@ -880,6 +886,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/trips/{id}",
                 ["parts"] = {

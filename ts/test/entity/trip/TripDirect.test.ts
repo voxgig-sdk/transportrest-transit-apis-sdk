@@ -19,11 +19,15 @@ import {
 describe('TripDirect', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when TRANSPORTRESTTRANSITAPIS_TEST_LIVE=TRUE.
-  afterEach(liveDelay('TRANSPORTRESTTRANSITAPIS_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when TRANSPORTREST_TRANSIT_APIS_TEST_LIVE=TRUE.
+  afterEach(liveDelay('TRANSPORTREST_TRANSIT_APIS_TEST_LIVE'))
 
   test('direct-exists', async () => {
     const sdk = new TransportrestTransitApisSDK({
+      // Concrete base: a live construction must satisfy any server
+      // variables a templated base URL declares; overriding base with a
+      // literal (as the direct flow tests do) sidesteps the requirement.
+      base: 'http://localhost:8080',
       system: { fetch: async () => ({}) }
     })
     assert('function' === typeof sdk.direct)
@@ -78,17 +82,17 @@ function directSetup(mockres?: any) {
   const calls: any[] = []
 
   const env = envOverride({
-    'TRANSPORTRESTTRANSITAPIS_TEST_TRIP_ENTID': {},
-    'TRANSPORTRESTTRANSITAPIS_TEST_LIVE': 'FALSE',
+    'TRANSPORTREST_TRANSIT_APIS_TEST_TRIP_ENTID': {},
+    'TRANSPORTREST_TRANSIT_APIS_TEST_LIVE': 'FALSE',
   })
 
-  const live = 'TRUE' === env.TRANSPORTRESTTRANSITAPIS_TEST_LIVE
+  const live = 'TRUE' === env.TRANSPORTREST_TRANSIT_APIS_TEST_LIVE
 
   if (live) {
     const client = new TransportrestTransitApisSDK({
     })
 
-    let idmap: any = env['TRANSPORTRESTTRANSITAPIS_TEST_TRIP_ENTID']
+    let idmap: any = env['TRANSPORTREST_TRANSIT_APIS_TEST_TRIP_ENTID']
     if ('string' === typeof idmap && idmap.startsWith('{')) {
       idmap = JSON.parse(idmap)
     }

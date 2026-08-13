@@ -9,6 +9,7 @@ guide: {
     path: "/stops/{id}/arrivals": {
       rename: param: "id": *"stop_id"
       op: list: method: *GET
+      op: list: transform: res: *("`body.arrivals`")|top
     }
   }
 
@@ -16,12 +17,14 @@ guide: {
     path: "/stops/{id}/departures": {
       rename: param: "id": *"stop_id"
       op: list: method: *GET
+      op: list: transform: res: *("`body.departures`")|top
     }
   }
 
   entity: journey: {
     path: "/journeys": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.journeys`")|top
     }
   }
 
@@ -34,6 +37,7 @@ guide: {
   entity: radar: {
     path: "/radar": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.movements`")|top
     }
   }
 

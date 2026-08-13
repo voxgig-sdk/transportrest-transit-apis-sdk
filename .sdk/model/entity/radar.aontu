@@ -21,12 +21,12 @@ main: kit: entity: radar: {
       type: "`$OBJECT`"
     }
     {
-      name: "next_stopover"
+      name: "nextStopovers"
       req: false
       type: "`$ARRAY`"
     }
     {
-      name: "trip_id"
+      name: "tripId"
       req: false
       type: "`$STRING`"
     }
@@ -94,7 +94,7 @@ main: kit: entity: radar: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.movements`"
           }
         }
       ]

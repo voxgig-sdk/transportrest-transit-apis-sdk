@@ -59,14 +59,14 @@ class TransportrestTransitApisConfig
             ],
             [
               'active' => true,
-              'name' => 'planned_platform',
+              'name' => 'plannedPlatform',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 3,
             ],
             [
               'active' => true,
-              'name' => 'planned_when',
+              'name' => 'plannedWhen',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 4,
@@ -87,7 +87,7 @@ class TransportrestTransitApisConfig
             ],
             [
               'active' => true,
-              'name' => 'trip_id',
+              'name' => 'tripId',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 7,
@@ -149,6 +149,7 @@ class TransportrestTransitApisConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/stops/{id}/arrivals',
                   'parts' => [
@@ -171,7 +172,7 @@ class TransportrestTransitApisConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.arrivals`',
                   ],
                   'index$' => 0,
                 ],
@@ -212,14 +213,14 @@ class TransportrestTransitApisConfig
             ],
             [
               'active' => true,
-              'name' => 'planned_platform',
+              'name' => 'plannedPlatform',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 3,
             ],
             [
               'active' => true,
-              'name' => 'planned_when',
+              'name' => 'plannedWhen',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 4,
@@ -240,7 +241,7 @@ class TransportrestTransitApisConfig
             ],
             [
               'active' => true,
-              'name' => 'trip_id',
+              'name' => 'tripId',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 7,
@@ -311,6 +312,7 @@ class TransportrestTransitApisConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/stops/{id}/departures',
                   'parts' => [
@@ -334,7 +336,7 @@ class TransportrestTransitApisConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.departures`',
                   ],
                   'index$' => 0,
                 ],
@@ -354,14 +356,14 @@ class TransportrestTransitApisConfig
           'fields' => [
             [
               'active' => true,
-              'name' => 'leg',
+              'name' => 'legs',
               'req' => false,
               'type' => '`$ARRAY`',
               'index$' => 0,
             ],
             [
               'active' => true,
-              'name' => 'refresh_token',
+              'name' => 'refreshToken',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 1,
@@ -438,6 +440,7 @@ class TransportrestTransitApisConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/journeys',
                   'parts' => [
@@ -455,7 +458,7 @@ class TransportrestTransitApisConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.journeys`',
                   ],
                   'index$' => 0,
                 ],
@@ -492,7 +495,7 @@ class TransportrestTransitApisConfig
             ],
             [
               'active' => true,
-              'name' => 'product',
+              'name' => 'products',
               'req' => false,
               'type' => '`$OBJECT`',
               'index$' => 3,
@@ -562,6 +565,7 @@ class TransportrestTransitApisConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/locations',
                   'parts' => [
@@ -615,14 +619,14 @@ class TransportrestTransitApisConfig
             ],
             [
               'active' => true,
-              'name' => 'next_stopover',
+              'name' => 'nextStopovers',
               'req' => false,
               'type' => '`$ARRAY`',
               'index$' => 3,
             ],
             [
               'active' => true,
-              'name' => 'trip_id',
+              'name' => 'tripId',
               'req' => false,
               'type' => '`$STRING`',
               'index$' => 4,
@@ -681,6 +685,7 @@ class TransportrestTransitApisConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/radar',
                   'parts' => [
@@ -697,7 +702,7 @@ class TransportrestTransitApisConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.movements`',
                   ],
                   'index$' => 0,
                 ],
@@ -734,7 +739,7 @@ class TransportrestTransitApisConfig
             ],
             [
               'active' => true,
-              'name' => 'product',
+              'name' => 'products',
               'req' => false,
               'type' => '`$OBJECT`',
               'index$' => 3,
@@ -776,6 +781,7 @@ class TransportrestTransitApisConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/stops/{id}',
                   'parts' => [
@@ -840,7 +846,7 @@ class TransportrestTransitApisConfig
             ],
             [
               'active' => true,
-              'name' => 'stopover',
+              'name' => 'stopovers',
               'req' => false,
               'type' => '`$ARRAY`',
               'index$' => 5,
@@ -886,6 +892,7 @@ class TransportrestTransitApisConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/trips/{id}',
                   'parts' => [

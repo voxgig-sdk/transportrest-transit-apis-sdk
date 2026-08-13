@@ -68,12 +68,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-arrivals, err := client.Arrival(nil).List(nil, nil)
+locations, err := client.Location(nil).List(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = arrivals
+_ = locations
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -137,13 +137,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-arrival, err := client.Arrival(nil).List(
+location, err := client.Location(nil).List(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(arrival) // the returned mock data
+fmt.Println(location) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -271,11 +271,11 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 | `"delay"` |  |
 | `"direction"` |  |
 | `"line"` |  |
-| `"planned_platform"` |  |
-| `"planned_when"` |  |
+| `"plannedPlatform"` |  |
+| `"plannedWhen"` |  |
 | `"platform"` |  |
 | `"stop"` |  |
-| `"trip_id"` |  |
+| `"tripId"` |  |
 | `"when"` |  |
 
 Operations: List.
@@ -289,11 +289,11 @@ API path: `/stops/{id}/arrivals`
 | `"delay"` |  |
 | `"direction"` |  |
 | `"line"` |  |
-| `"planned_platform"` |  |
-| `"planned_when"` |  |
+| `"plannedPlatform"` |  |
+| `"plannedWhen"` |  |
 | `"platform"` |  |
 | `"stop"` |  |
-| `"trip_id"` |  |
+| `"tripId"` |  |
 | `"when"` |  |
 
 Operations: List.
@@ -304,8 +304,8 @@ API path: `/stops/{id}/departures`
 
 | Field | Description |
 | --- | --- |
-| `"leg"` |  |
-| `"refresh_token"` |  |
+| `"legs"` |  |
+| `"refreshToken"` |  |
 | `"type"` |  |
 
 Operations: List.
@@ -319,7 +319,7 @@ API path: `/journeys`
 | `"id"` |  |
 | `"location"` |  |
 | `"name"` |  |
-| `"product"` |  |
+| `"products"` |  |
 | `"type"` |  |
 
 Operations: List.
@@ -333,8 +333,8 @@ API path: `/locations`
 | `"direction"` |  |
 | `"line"` |  |
 | `"location"` |  |
-| `"next_stopover"` |  |
-| `"trip_id"` |  |
+| `"nextStopovers"` |  |
+| `"tripId"` |  |
 
 Operations: List.
 
@@ -347,7 +347,7 @@ API path: `/radar`
 | `"id"` |  |
 | `"location"` |  |
 | `"name"` |  |
-| `"product"` |  |
+| `"products"` |  |
 | `"station"` |  |
 | `"type"` |  |
 
@@ -364,7 +364,7 @@ API path: `/stops/{id}`
 | `"id"` |  |
 | `"line"` |  |
 | `"origin"` |  |
-| `"stopover"` |  |
+| `"stopovers"` |  |
 
 Operations: Load.
 
@@ -392,11 +392,11 @@ Create an instance: `arrival := client.Arrival(nil)`
 | `delay` | `int` |  |
 | `direction` | `string` |  |
 | `line` | `map[string]any` |  |
-| `planned_platform` | `string` |  |
-| `planned_when` | `string` |  |
+| `plannedPlatform` | `string` |  |
+| `plannedWhen` | `string` |  |
 | `platform` | `string` |  |
 | `stop` | `map[string]any` |  |
-| `trip_id` | `string` |  |
+| `tripId` | `string` |  |
 | `when` | `string` |  |
 
 #### Example: List
@@ -427,11 +427,11 @@ Create an instance: `departure := client.Departure(nil)`
 | `delay` | `int` |  |
 | `direction` | `string` |  |
 | `line` | `map[string]any` |  |
-| `planned_platform` | `string` |  |
-| `planned_when` | `string` |  |
+| `plannedPlatform` | `string` |  |
+| `plannedWhen` | `string` |  |
 | `platform` | `string` |  |
 | `stop` | `map[string]any` |  |
-| `trip_id` | `string` |  |
+| `tripId` | `string` |  |
 | `when` | `string` |  |
 
 #### Example: List
@@ -459,8 +459,8 @@ Create an instance: `journey := client.Journey(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `leg` | `[]any` |  |
-| `refresh_token` | `string` |  |
+| `legs` | `[]any` |  |
+| `refreshToken` | `string` |  |
 | `type` | `string` |  |
 
 #### Example: List
@@ -491,7 +491,7 @@ Create an instance: `location := client.Location(nil)`
 | `id` | `string` |  |
 | `location` | `map[string]any` |  |
 | `name` | `string` |  |
-| `product` | `map[string]any` |  |
+| `products` | `map[string]any` |  |
 | `type` | `string` |  |
 
 #### Example: List
@@ -522,8 +522,8 @@ Create an instance: `radar := client.Radar(nil)`
 | `direction` | `string` |  |
 | `line` | `map[string]any` |  |
 | `location` | `map[string]any` |  |
-| `next_stopover` | `[]any` |  |
-| `trip_id` | `string` |  |
+| `nextStopovers` | `[]any` |  |
+| `tripId` | `string` |  |
 
 #### Example: List
 
@@ -553,7 +553,7 @@ Create an instance: `stop := client.Stop(nil)`
 | `id` | `string` |  |
 | `location` | `map[string]any` |  |
 | `name` | `string` |  |
-| `product` | `map[string]any` |  |
+| `products` | `map[string]any` |  |
 | `station` | `map[string]any` |  |
 | `type` | `string` |  |
 
@@ -587,7 +587,7 @@ Create an instance: `trip := client.Trip(nil)`
 | `id` | `string` |  |
 | `line` | `map[string]any` |  |
 | `origin` | `map[string]any` |  |
-| `stopover` | `[]any` |  |
+| `stopovers` | `[]any` |  |
 
 #### Example: Load
 
@@ -673,11 +673,11 @@ Entity instances are stateful. After a successful `List`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-arrival := client.Arrival(nil)
-arrival.List(nil, nil)
+location := client.Location(nil)
+location.List(nil, nil)
 
-// arrival.Data() now returns the arrival data from the last list
-// arrival.Match() returns the last match criteria
+// location.Data() now returns the location data from the last list
+// location.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

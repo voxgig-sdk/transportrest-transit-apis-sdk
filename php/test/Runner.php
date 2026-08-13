@@ -43,8 +43,8 @@ class TransportrestTransitApisTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('TRANSPORTRESTTRANSITAPIS_TEST_LIVE');
-        $override = self::getenv('TRANSPORTRESTTRANSITAPIS_TEST_OVERRIDE');
+        $live = self::getenv('TRANSPORTREST_TRANSIT_APIS_TEST_LIVE');
+        $override = self::getenv('TRANSPORTREST_TRANSIT_APIS_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class TransportrestTransitApisTestRunner
             }
         }
 
-        $explain = self::getenv('TRANSPORTRESTTRANSITAPIS_TEST_EXPLAIN');
+        $explain = self::getenv('TRANSPORTREST_TRANSIT_APIS_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['TRANSPORTRESTTRANSITAPIS_TEST_EXPLAIN'] = $explain;
+            $m['TRANSPORTREST_TRANSIT_APIS_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

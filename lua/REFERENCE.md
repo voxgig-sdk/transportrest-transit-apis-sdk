@@ -117,11 +117,11 @@ local arrival = client:Arrival(nil)
 | `delay` | `number` | No |  |
 | `direction` | `string` | No |  |
 | `line` | `table` | No |  |
-| `planned_platform` | `string` | No |  |
-| `planned_when` | `string` | No |  |
+| `plannedPlatform` | `string` | No |  |
+| `plannedWhen` | `string` | No |  |
 | `platform` | `string` | No |  |
 | `stop` | `table` | No |  |
-| `trip_id` | `string` | No |  |
+| `tripId` | `string` | No |  |
 | `when` | `string` | No |  |
 
 ### Operations
@@ -177,11 +177,11 @@ local departure = client:Departure(nil)
 | `delay` | `number` | No |  |
 | `direction` | `string` | No |  |
 | `line` | `table` | No |  |
-| `planned_platform` | `string` | No |  |
-| `planned_when` | `string` | No |  |
+| `plannedPlatform` | `string` | No |  |
+| `plannedWhen` | `string` | No |  |
 | `platform` | `string` | No |  |
 | `stop` | `table` | No |  |
-| `trip_id` | `string` | No |  |
+| `tripId` | `string` | No |  |
 | `when` | `string` | No |  |
 
 ### Operations
@@ -234,8 +234,8 @@ local journey = client:Journey(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `leg` | `table` | No |  |
-| `refresh_token` | `string` | No |  |
+| `legs` | `table` | No |  |
+| `refreshToken` | `string` | No |  |
 | `type` | `string` | No |  |
 
 ### Operations
@@ -291,7 +291,7 @@ local location = client:Location(nil)
 | `id` | `string` | No |  |
 | `location` | `table` | No |  |
 | `name` | `string` | No |  |
-| `product` | `table` | No |  |
+| `products` | `table` | No |  |
 | `type` | `string` | No |  |
 
 ### Operations
@@ -347,8 +347,8 @@ local radar = client:Radar(nil)
 | `direction` | `string` | No |  |
 | `line` | `table` | No |  |
 | `location` | `table` | No |  |
-| `next_stopover` | `table` | No |  |
-| `trip_id` | `string` | No |  |
+| `nextStopovers` | `table` | No |  |
+| `tripId` | `string` | No |  |
 
 ### Operations
 
@@ -403,7 +403,7 @@ local stop = client:Stop(nil)
 | `id` | `string` | No |  |
 | `location` | `table` | No |  |
 | `name` | `string` | No |  |
-| `product` | `table` | No |  |
+| `products` | `table` | No |  |
 | `station` | `table` | No |  |
 | `type` | `string` | No |  |
 
@@ -462,7 +462,7 @@ local trip = client:Trip(nil)
 | `id` | `string` | No |  |
 | `line` | `table` | No |  |
 | `origin` | `table` | No |  |
-| `stopover` | `table` | No |  |
+| `stopovers` | `table` | No |  |
 
 ### Operations
 

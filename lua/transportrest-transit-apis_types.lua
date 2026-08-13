@@ -10,11 +10,11 @@
 ---@field delay? number
 ---@field direction? string
 ---@field line? table
----@field planned_platform? string
----@field planned_when? string
+---@field plannedPlatform? string
+---@field plannedWhen? string
 ---@field platform? string
 ---@field stop? table
----@field trip_id? string
+---@field tripId? string
 ---@field when? string
 
 ---@class ArrivalListMatch
@@ -24,59 +24,59 @@
 ---@field delay? number
 ---@field direction? string
 ---@field line? table
----@field planned_platform? string
----@field planned_when? string
+---@field plannedPlatform? string
+---@field plannedWhen? string
 ---@field platform? string
 ---@field stop? table
----@field trip_id? string
+---@field tripId? string
 ---@field when? string
 
 ---@class DepartureListMatch
 ---@field stop_id string
 
 ---@class Journey
----@field leg? table
----@field refresh_token? string
+---@field legs? table
+---@field refreshToken? string
 ---@field type? string
 
 ---@class JourneyListMatch
----@field leg? table
----@field refresh_token? string
+---@field legs? table
+---@field refreshToken? string
 ---@field type? string
 
 ---@class Location
 ---@field id? string
 ---@field location? table
 ---@field name? string
----@field product? table
+---@field products? table
 ---@field type? string
 
 ---@class LocationListMatch
 ---@field id? string
 ---@field location? table
 ---@field name? string
----@field product? table
+---@field products? table
 ---@field type? string
 
 ---@class Radar
 ---@field direction? string
 ---@field line? table
 ---@field location? table
----@field next_stopover? table
----@field trip_id? string
+---@field nextStopovers? table
+---@field tripId? string
 
 ---@class RadarListMatch
 ---@field direction? string
 ---@field line? table
 ---@field location? table
----@field next_stopover? table
----@field trip_id? string
+---@field nextStopovers? table
+---@field tripId? string
 
 ---@class Stop
 ---@field id? string
 ---@field location? table
 ---@field name? string
----@field product? table
+---@field products? table
 ---@field station? table
 ---@field type? string
 
@@ -89,7 +89,7 @@
 ---@field id? string
 ---@field line? table
 ---@field origin? table
----@field stopover? table
+---@field stopovers? table
 
 ---@class TripLoadMatch
 ---@field id string

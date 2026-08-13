@@ -54,14 +54,14 @@ module TransportrestTransitApisConfig
             },
             {
               "active" => true,
-              "name" => "planned_platform",
+              "name" => "plannedPlatform",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 3,
             },
             {
               "active" => true,
-              "name" => "planned_when",
+              "name" => "plannedWhen",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 4,
@@ -82,7 +82,7 @@ module TransportrestTransitApisConfig
             },
             {
               "active" => true,
-              "name" => "trip_id",
+              "name" => "tripId",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 7,
@@ -144,6 +144,7 @@ module TransportrestTransitApisConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/stops/{id}/arrivals",
                   "parts" => [
@@ -166,7 +167,7 @@ module TransportrestTransitApisConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.arrivals`",
                   },
                   "index$" => 0,
                 },
@@ -207,14 +208,14 @@ module TransportrestTransitApisConfig
             },
             {
               "active" => true,
-              "name" => "planned_platform",
+              "name" => "plannedPlatform",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 3,
             },
             {
               "active" => true,
-              "name" => "planned_when",
+              "name" => "plannedWhen",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 4,
@@ -235,7 +236,7 @@ module TransportrestTransitApisConfig
             },
             {
               "active" => true,
-              "name" => "trip_id",
+              "name" => "tripId",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 7,
@@ -306,6 +307,7 @@ module TransportrestTransitApisConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/stops/{id}/departures",
                   "parts" => [
@@ -329,7 +331,7 @@ module TransportrestTransitApisConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.departures`",
                   },
                   "index$" => 0,
                 },
@@ -349,14 +351,14 @@ module TransportrestTransitApisConfig
           "fields" => [
             {
               "active" => true,
-              "name" => "leg",
+              "name" => "legs",
               "req" => false,
               "type" => "`$ARRAY`",
               "index$" => 0,
             },
             {
               "active" => true,
-              "name" => "refresh_token",
+              "name" => "refreshToken",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 1,
@@ -433,6 +435,7 @@ module TransportrestTransitApisConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/journeys",
                   "parts" => [
@@ -450,7 +453,7 @@ module TransportrestTransitApisConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.journeys`",
                   },
                   "index$" => 0,
                 },
@@ -487,7 +490,7 @@ module TransportrestTransitApisConfig
             },
             {
               "active" => true,
-              "name" => "product",
+              "name" => "products",
               "req" => false,
               "type" => "`$OBJECT`",
               "index$" => 3,
@@ -557,6 +560,7 @@ module TransportrestTransitApisConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/locations",
                   "parts" => [
@@ -610,14 +614,14 @@ module TransportrestTransitApisConfig
             },
             {
               "active" => true,
-              "name" => "next_stopover",
+              "name" => "nextStopovers",
               "req" => false,
               "type" => "`$ARRAY`",
               "index$" => 3,
             },
             {
               "active" => true,
-              "name" => "trip_id",
+              "name" => "tripId",
               "req" => false,
               "type" => "`$STRING`",
               "index$" => 4,
@@ -676,6 +680,7 @@ module TransportrestTransitApisConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/radar",
                   "parts" => [
@@ -692,7 +697,7 @@ module TransportrestTransitApisConfig
                   },
                   "transform" => {
                     "req" => "`reqdata`",
-                    "res" => "`body`",
+                    "res" => "`body.movements`",
                   },
                   "index$" => 0,
                 },
@@ -729,7 +734,7 @@ module TransportrestTransitApisConfig
             },
             {
               "active" => true,
-              "name" => "product",
+              "name" => "products",
               "req" => false,
               "type" => "`$OBJECT`",
               "index$" => 3,
@@ -771,6 +776,7 @@ module TransportrestTransitApisConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/stops/{id}",
                   "parts" => [
@@ -835,7 +841,7 @@ module TransportrestTransitApisConfig
             },
             {
               "active" => true,
-              "name" => "stopover",
+              "name" => "stopovers",
               "req" => false,
               "type" => "`$ARRAY`",
               "index$" => 5,
@@ -881,6 +887,7 @@ module TransportrestTransitApisConfig
                       },
                     ],
                   },
+                  "kind" => "http",
                   "method" => "GET",
                   "orig" => "/trips/{id}",
                   "parts" => [

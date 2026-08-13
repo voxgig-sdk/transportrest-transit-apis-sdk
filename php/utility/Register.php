@@ -23,6 +23,7 @@ require_once __DIR__ . '/MakeUrl.php';
 require_once __DIR__ . '/Param.php';
 require_once __DIR__ . '/PrepareAuth.php';
 require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
 require_once __DIR__ . '/PrepareHeaders.php';
 require_once __DIR__ . '/PrepareMethod.php';
 require_once __DIR__ . '/PrepareParams.php';
@@ -59,6 +60,8 @@ TransportrestTransitApisUtility::setRegistrar(function (TransportrestTransitApis
     $u->prepare_params = [TransportrestTransitApisPrepareParams::class, 'call'];
     $u->prepare_path = [TransportrestTransitApisPreparePath::class, 'call'];
     $u->prepare_query = [TransportrestTransitApisPrepareQuery::class, 'call'];
+    $u->graphql_body = [TransportrestTransitApisGraphql::class, 'body'];
+    $u->graphql_errors = [TransportrestTransitApisGraphql::class, 'errors'];
     $u->result_basic = [TransportrestTransitApisResultBasic::class, 'call'];
     $u->result_body = [TransportrestTransitApisResultBody::class, 'call'];
     $u->result_headers = [TransportrestTransitApisResultHeaders::class, 'call'];

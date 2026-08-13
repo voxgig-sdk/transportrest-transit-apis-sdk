@@ -29,7 +29,7 @@ describe("TripEntity", function()
     -- The basic flow consumes synthetic IDs from the fixture. In live mode
     -- without an *_ENTID env override, those IDs hit the live API and 4xx.
     if setup.synthetic_only then
-      pending("live entity test uses synthetic IDs from fixture — set TRANSPORTRESTTRANSITAPIS_TEST_TRIP_ENTID JSON to run live")
+      pending("live entity test uses synthetic IDs from fixture — set TRANSPORTREST_TRANSIT_APIS_TEST_TRIP_ENTID JSON to run live")
       return
     end
     local client = setup.client
@@ -49,7 +49,7 @@ describe("TripEntity", function()
     }
     local trip_ref01_data_dt0_loaded, err = trip_ref01_ent:load(trip_ref01_match_dt0, nil)
     assert.is_nil(err)
-    local trip_ref01_data_dt0_load_result = helpers.to_map(trip_ref01_data_dt0_loaded)
+    local trip_ref01_data_dt0_load_result = helpers.to_map(type(trip_ref01_data_dt0_loaded) == 'table' and trip_ref01_data_dt0_loaded.data_get and trip_ref01_data_dt0_loaded:data_get() or trip_ref01_data_dt0_loaded)
     assert.is_not_nil(trip_ref01_data_dt0_load_result)
     assert.are.equal(trip_ref01_data_dt0_load_result["id"], trip_ref01_data["id"])
 
@@ -88,22 +88,22 @@ function trip_basic_setup(extra)
   -- Detect ENTID env override before envOverride consumes it. When live
   -- mode is on without a real override, the basic test runs against synthetic
   -- IDs from the fixture and 4xx's. Surface this so the test can skip.
-  local entid_env_raw = os.getenv("TRANSPORTRESTTRANSITAPIS_TEST_TRIP_ENTID")
+  local entid_env_raw = os.getenv("TRANSPORTREST_TRANSIT_APIS_TEST_TRIP_ENTID")
   local idmap_overridden = entid_env_raw ~= nil and entid_env_raw:match("^%s*{") ~= nil
 
   local env = runner.env_override({
-    ["TRANSPORTRESTTRANSITAPIS_TEST_TRIP_ENTID"] = idmap,
-    ["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] = "FALSE",
-    ["TRANSPORTRESTTRANSITAPIS_TEST_EXPLAIN"] = "FALSE",
+    ["TRANSPORTREST_TRANSIT_APIS_TEST_TRIP_ENTID"] = idmap,
+    ["TRANSPORTREST_TRANSIT_APIS_TEST_LIVE"] = "FALSE",
+    ["TRANSPORTREST_TRANSIT_APIS_TEST_EXPLAIN"] = "FALSE",
   })
 
   local idmap_resolved = helpers.to_map(
-    env["TRANSPORTRESTTRANSITAPIS_TEST_TRIP_ENTID"])
+    env["TRANSPORTREST_TRANSIT_APIS_TEST_TRIP_ENTID"])
   if idmap_resolved == nil then
     idmap_resolved = helpers.to_map(idmap)
   end
 
-  if env["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] == "TRUE" then
+  if env["TRANSPORTREST_TRANSIT_APIS_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
       },
@@ -112,13 +112,13 @@ function trip_basic_setup(extra)
     client = sdk.new(helpers.to_map(merged_opts))
   end
 
-  local live = env["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] == "TRUE"
+  local live = env["TRANSPORTREST_TRANSIT_APIS_TEST_LIVE"] == "TRUE"
   return {
     client = client,
     data = entity_data,
     idmap = idmap_resolved,
     env = env,
-    explain = env["TRANSPORTRESTTRANSITAPIS_TEST_EXPLAIN"] == "TRUE",
+    explain = env["TRANSPORTREST_TRANSIT_APIS_TEST_EXPLAIN"] == "TRUE",
     live = live,
     synthetic_only = live and not idmap_overridden,
     now = os.time() * 1000,

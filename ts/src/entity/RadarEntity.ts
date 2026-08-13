@@ -37,7 +37,7 @@ class RadarEntity extends TransportrestTransitApisEntityBase<Radar> {
 
 
 
-  async list(this: any, reqmatch?: RadarListMatch, ctrl?: Control): Promise<Radar[]> {
+  async list(this: any, reqmatch?: RadarListMatch, ctrl?: Control): Promise<RadarEntity[]> {
 
     const utility = this._utility
 

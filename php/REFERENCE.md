@@ -119,11 +119,11 @@ $arrival = $client->Arrival();
 | `delay` | `int` | No |  |
 | `direction` | `string` | No |  |
 | `line` | `array` | No |  |
-| `planned_platform` | `string` | No |  |
-| `planned_when` | `string` | No |  |
+| `plannedPlatform` | `string` | No |  |
+| `plannedWhen` | `string` | No |  |
 | `platform` | `string` | No |  |
 | `stop` | `array` | No |  |
-| `trip_id` | `string` | No |  |
+| `tripId` | `string` | No |  |
 | `when` | `string` | No |  |
 
 ### Operations
@@ -179,11 +179,11 @@ $departure = $client->Departure();
 | `delay` | `int` | No |  |
 | `direction` | `string` | No |  |
 | `line` | `array` | No |  |
-| `planned_platform` | `string` | No |  |
-| `planned_when` | `string` | No |  |
+| `plannedPlatform` | `string` | No |  |
+| `plannedWhen` | `string` | No |  |
 | `platform` | `string` | No |  |
 | `stop` | `array` | No |  |
-| `trip_id` | `string` | No |  |
+| `tripId` | `string` | No |  |
 | `when` | `string` | No |  |
 
 ### Operations
@@ -236,8 +236,8 @@ $journey = $client->Journey();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `leg` | `array` | No |  |
-| `refresh_token` | `string` | No |  |
+| `legs` | `array` | No |  |
+| `refreshToken` | `string` | No |  |
 | `type` | `string` | No |  |
 
 ### Operations
@@ -293,7 +293,7 @@ $location = $client->Location();
 | `id` | `string` | No |  |
 | `location` | `array` | No |  |
 | `name` | `string` | No |  |
-| `product` | `array` | No |  |
+| `products` | `array` | No |  |
 | `type` | `string` | No |  |
 
 ### Operations
@@ -349,8 +349,8 @@ $radar = $client->Radar();
 | `direction` | `string` | No |  |
 | `line` | `array` | No |  |
 | `location` | `array` | No |  |
-| `next_stopover` | `array` | No |  |
-| `trip_id` | `string` | No |  |
+| `nextStopovers` | `array` | No |  |
+| `tripId` | `string` | No |  |
 
 ### Operations
 
@@ -405,7 +405,7 @@ $stop = $client->Stop();
 | `id` | `string` | No |  |
 | `location` | `array` | No |  |
 | `name` | `string` | No |  |
-| `product` | `array` | No |  |
+| `products` | `array` | No |  |
 | `station` | `array` | No |  |
 | `type` | `string` | No |  |
 
@@ -464,7 +464,7 @@ $trip = $client->Trip();
 | `id` | `string` | No |  |
 | `line` | `array` | No |  |
 | `origin` | `array` | No |  |
-| `stopover` | `array` | No |  |
+| `stopovers` | `array` | No |  |
 
 ### Operations
 

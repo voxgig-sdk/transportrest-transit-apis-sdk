@@ -7,7 +7,7 @@
         "id": "TRIP00",
         "line": {},
         "origin": {},
-        "stopover": []
+        "stopovers": []
       },
       "TRIP01": {
         "destination": {},
@@ -15,7 +15,7 @@
         "id": "TRIP01",
         "line": {},
         "origin": {},
-        "stopover": []
+        "stopovers": []
       },
       "TRIP02": {
         "destination": {},
@@ -23,7 +23,7 @@
         "id": "TRIP02",
         "line": {},
         "origin": {},
-        "stopover": []
+        "stopovers": []
       }
     }
   },
@@ -34,7 +34,7 @@
         "direction": "sf1",
         "line": {},
         "origin": {},
-        "stopover": []
+        "stopovers": []
       }
     }
   }

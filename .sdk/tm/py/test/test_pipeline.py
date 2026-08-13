@@ -16,11 +16,11 @@
 import pytest
 
 from projectname_sdk import TransportrestTransitApisSDK
-from core.error import TransportrestTransitApisError
-from core.result import TransportrestTransitApisResult
-from core.response import TransportrestTransitApisResponse
-from core.spec import TransportrestTransitApisSpec
-from feature.base_feature import TransportrestTransitApisBaseFeature
+from projectname_sdk.core.error import TransportrestTransitApisError
+from projectname_sdk.core.result import TransportrestTransitApisResult
+from projectname_sdk.core.response import TransportrestTransitApisResponse
+from projectname_sdk.core.spec import TransportrestTransitApisSpec
+from projectname_sdk.feature.base_feature import TransportrestTransitApisBaseFeature
 
 
 def _client():

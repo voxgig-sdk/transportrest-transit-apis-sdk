@@ -43,7 +43,7 @@ error — iterate it directly.
 
 ```python
 try:
-    arrivals = client.Arrival().list()
+    arrivals = client.Arrival().list({"stop_id": "example"})
     for arrival in arrivals:
         print(arrival)
 except Exception as err:
@@ -57,8 +57,8 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    arrivals = client.Arrival().list()
-    print(arrivals)
+    locations = client.Location().list()
+    print(locations)
 except Exception as err:
     print(f"list failed: {err}")
 ```
@@ -124,9 +124,10 @@ Create a mock client for unit testing — no server required:
 ```python
 client = TransportrestTransitApisSDK.test()
 
-# Entity ops return the bare record and raise on error.
-arrival = client.Arrival().list()
-# arrival contains the mock response record
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
+location = client.Location().list()
+# location contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -227,7 +228,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -252,11 +253,11 @@ On error, `ok` is `False` and `err` contains the error value.
 | `delay` |  |
 | `direction` |  |
 | `line` |  |
-| `planned_platform` |  |
-| `planned_when` |  |
+| `plannedPlatform` |  |
+| `plannedWhen` |  |
 | `platform` |  |
 | `stop` |  |
-| `trip_id` |  |
+| `tripId` |  |
 | `when` |  |
 
 Operations: List.
@@ -270,11 +271,11 @@ API path: `/stops/{id}/arrivals`
 | `delay` |  |
 | `direction` |  |
 | `line` |  |
-| `planned_platform` |  |
-| `planned_when` |  |
+| `plannedPlatform` |  |
+| `plannedWhen` |  |
 | `platform` |  |
 | `stop` |  |
-| `trip_id` |  |
+| `tripId` |  |
 | `when` |  |
 
 Operations: List.
@@ -285,8 +286,8 @@ API path: `/stops/{id}/departures`
 
 | Field | Description |
 | --- | --- |
-| `leg` |  |
-| `refresh_token` |  |
+| `legs` |  |
+| `refreshToken` |  |
 | `type` |  |
 
 Operations: List.
@@ -300,7 +301,7 @@ API path: `/journeys`
 | `id` |  |
 | `location` |  |
 | `name` |  |
-| `product` |  |
+| `products` |  |
 | `type` |  |
 
 Operations: List.
@@ -314,8 +315,8 @@ API path: `/locations`
 | `direction` |  |
 | `line` |  |
 | `location` |  |
-| `next_stopover` |  |
-| `trip_id` |  |
+| `nextStopovers` |  |
+| `tripId` |  |
 
 Operations: List.
 
@@ -328,7 +329,7 @@ API path: `/radar`
 | `id` |  |
 | `location` |  |
 | `name` |  |
-| `product` |  |
+| `products` |  |
 | `station` |  |
 | `type` |  |
 
@@ -345,7 +346,7 @@ API path: `/stops/{id}`
 | `id` |  |
 | `line` |  |
 | `origin` |  |
-| `stopover` |  |
+| `stopovers` |  |
 
 Operations: Load.
 
@@ -373,17 +374,17 @@ Create an instance: `arrival = client.Arrival()`
 | `delay` | `int` |  |
 | `direction` | `str` |  |
 | `line` | `dict` |  |
-| `planned_platform` | `str` |  |
-| `planned_when` | `str` |  |
+| `plannedPlatform` | `str` |  |
+| `plannedWhen` | `str` |  |
 | `platform` | `str` |  |
 | `stop` | `dict` |  |
-| `trip_id` | `str` |  |
+| `tripId` | `str` |  |
 | `when` | `str` |  |
 
 #### Example: List
 
 ```python
-arrivals = client.Arrival().list()
+arrivals = client.Arrival().list({"stop_id": "example"})
 ```
 
 
@@ -404,17 +405,17 @@ Create an instance: `departure = client.Departure()`
 | `delay` | `int` |  |
 | `direction` | `str` |  |
 | `line` | `dict` |  |
-| `planned_platform` | `str` |  |
-| `planned_when` | `str` |  |
+| `plannedPlatform` | `str` |  |
+| `plannedWhen` | `str` |  |
 | `platform` | `str` |  |
 | `stop` | `dict` |  |
-| `trip_id` | `str` |  |
+| `tripId` | `str` |  |
 | `when` | `str` |  |
 
 #### Example: List
 
 ```python
-departures = client.Departure().list()
+departures = client.Departure().list({"stop_id": "example"})
 ```
 
 
@@ -432,8 +433,8 @@ Create an instance: `journey = client.Journey()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `leg` | `list` |  |
-| `refresh_token` | `str` |  |
+| `legs` | `list` |  |
+| `refreshToken` | `str` |  |
 | `type` | `str` |  |
 
 #### Example: List
@@ -460,7 +461,7 @@ Create an instance: `location = client.Location()`
 | `id` | `str` |  |
 | `location` | `dict` |  |
 | `name` | `str` |  |
-| `product` | `dict` |  |
+| `products` | `dict` |  |
 | `type` | `str` |  |
 
 #### Example: List
@@ -487,8 +488,8 @@ Create an instance: `radar = client.Radar()`
 | `direction` | `str` |  |
 | `line` | `dict` |  |
 | `location` | `dict` |  |
-| `next_stopover` | `list` |  |
-| `trip_id` | `str` |  |
+| `nextStopovers` | `list` |  |
+| `tripId` | `str` |  |
 
 #### Example: List
 
@@ -514,7 +515,7 @@ Create an instance: `stop = client.Stop()`
 | `id` | `str` |  |
 | `location` | `dict` |  |
 | `name` | `str` |  |
-| `product` | `dict` |  |
+| `products` | `dict` |  |
 | `station` | `dict` |  |
 | `type` | `str` |  |
 
@@ -544,7 +545,7 @@ Create an instance: `trip = client.Trip()`
 | `id` | `str` |  |
 | `line` | `dict` |  |
 | `origin` | `dict` |  |
-| `stopover` | `list` |  |
+| `stopovers` | `list` |  |
 
 #### Example: Load
 
@@ -628,11 +629,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-arrival = client.Arrival()
-arrival.list()
+location = client.Location()
+location.list()
 
-# arrival.data_get() now returns the arrival data from the last list
-# arrival.match_get() returns the last match criteria
+# location.data_get() now returns the location data from the last list
+# location.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

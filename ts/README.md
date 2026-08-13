@@ -35,10 +35,12 @@ const client = new TransportrestTransitApisSDK()
 
 ### 2. List arrival records
 
-`list()` resolves to an array of Arrival objects — iterate it directly:
+`list()` resolves to an array of Arrival ENTITIES — every operation
+resolves to entities, not raw records. Iterate them directly, and call
+`.data()` on one for the record it holds:
 
 ```ts
-const arrivals = await client.Arrival().list()
+const arrivals = await client.Arrival().list({ stop_id: "example" })
 
 for (const arrival of arrivals) {
   console.log(arrival)
@@ -52,8 +54,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const arrivals = await client.Arrival().list()
-  console.log(arrivals)
+  const locations = await client.Location().list()
+  console.log(locations)
 } catch (err) {
   console.error('list failed:', err)
 }
@@ -119,9 +121,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = TransportrestTransitApisSDK.test()
 
-const arrival = await client.Arrival().list()
-// arrival is a bare entity populated with mock response data
-console.log(arrival)
+const location = await client.Location().list()
+// location is the entity, populated with mock response data
+// — call location.data() for the record itself
+console.log(location)
 ```
 
 You can also use the instance method:
@@ -136,14 +139,14 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Arrival()
+const entity = client.Location()
 
 // First call runs the operation and stores its result
 await entity.list()
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
-console.log(data)
+console.log(data.id)
 ```
 
 ### Add custom middleware
@@ -295,11 +298,11 @@ The `prepare()` method returns:
 | `delay` |  |
 | `direction` |  |
 | `line` |  |
-| `planned_platform` |  |
-| `planned_when` |  |
+| `plannedPlatform` |  |
+| `plannedWhen` |  |
 | `platform` |  |
 | `stop` |  |
-| `trip_id` |  |
+| `tripId` |  |
 | `when` |  |
 
 Operations: list.
@@ -313,11 +316,11 @@ API path: `/stops/{id}/arrivals`
 | `delay` |  |
 | `direction` |  |
 | `line` |  |
-| `planned_platform` |  |
-| `planned_when` |  |
+| `plannedPlatform` |  |
+| `plannedWhen` |  |
 | `platform` |  |
 | `stop` |  |
-| `trip_id` |  |
+| `tripId` |  |
 | `when` |  |
 
 Operations: list.
@@ -328,8 +331,8 @@ API path: `/stops/{id}/departures`
 
 | Field | Description |
 | --- | --- |
-| `leg` |  |
-| `refresh_token` |  |
+| `legs` |  |
+| `refreshToken` |  |
 | `type` |  |
 
 Operations: list.
@@ -343,7 +346,7 @@ API path: `/journeys`
 | `id` |  |
 | `location` |  |
 | `name` |  |
-| `product` |  |
+| `products` |  |
 | `type` |  |
 
 Operations: list.
@@ -357,8 +360,8 @@ API path: `/locations`
 | `direction` |  |
 | `line` |  |
 | `location` |  |
-| `next_stopover` |  |
-| `trip_id` |  |
+| `nextStopovers` |  |
+| `tripId` |  |
 
 Operations: list.
 
@@ -371,7 +374,7 @@ API path: `/radar`
 | `id` |  |
 | `location` |  |
 | `name` |  |
-| `product` |  |
+| `products` |  |
 | `station` |  |
 | `type` |  |
 
@@ -388,7 +391,7 @@ API path: `/stops/{id}`
 | `id` |  |
 | `line` |  |
 | `origin` |  |
-| `stopover` |  |
+| `stopovers` |  |
 
 Operations: load.
 
@@ -416,17 +419,17 @@ Create an instance: `const arrival = client.Arrival()`
 | `delay` | `number` |  |
 | `direction` | `string` |  |
 | `line` | `Record<string, any>` |  |
-| `planned_platform` | `string` |  |
-| `planned_when` | `string` |  |
+| `plannedPlatform` | `string` |  |
+| `plannedWhen` | `string` |  |
 | `platform` | `string` |  |
 | `stop` | `Record<string, any>` |  |
-| `trip_id` | `string` |  |
+| `tripId` | `string` |  |
 | `when` | `string` |  |
 
 #### Example: List
 
 ```ts
-const arrivals = await client.Arrival().list()
+const arrivals = await client.Arrival().list({ stop_id: "example" })
 ```
 
 
@@ -447,17 +450,17 @@ Create an instance: `const departure = client.Departure()`
 | `delay` | `number` |  |
 | `direction` | `string` |  |
 | `line` | `Record<string, any>` |  |
-| `planned_platform` | `string` |  |
-| `planned_when` | `string` |  |
+| `plannedPlatform` | `string` |  |
+| `plannedWhen` | `string` |  |
 | `platform` | `string` |  |
 | `stop` | `Record<string, any>` |  |
-| `trip_id` | `string` |  |
+| `tripId` | `string` |  |
 | `when` | `string` |  |
 
 #### Example: List
 
 ```ts
-const departures = await client.Departure().list()
+const departures = await client.Departure().list({ stop_id: "example" })
 ```
 
 
@@ -475,8 +478,8 @@ Create an instance: `const journey = client.Journey()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `leg` | `any[]` |  |
-| `refresh_token` | `string` |  |
+| `legs` | `any[]` |  |
+| `refreshToken` | `string` |  |
 | `type` | `string` |  |
 
 #### Example: List
@@ -503,7 +506,7 @@ Create an instance: `const location = client.Location()`
 | `id` | `string` |  |
 | `location` | `Record<string, any>` |  |
 | `name` | `string` |  |
-| `product` | `Record<string, any>` |  |
+| `products` | `Record<string, any>` |  |
 | `type` | `string` |  |
 
 #### Example: List
@@ -530,8 +533,8 @@ Create an instance: `const radar = client.Radar()`
 | `direction` | `string` |  |
 | `line` | `Record<string, any>` |  |
 | `location` | `Record<string, any>` |  |
-| `next_stopover` | `any[]` |  |
-| `trip_id` | `string` |  |
+| `nextStopovers` | `any[]` |  |
+| `tripId` | `string` |  |
 
 #### Example: List
 
@@ -557,7 +560,7 @@ Create an instance: `const stop = client.Stop()`
 | `id` | `string` |  |
 | `location` | `Record<string, any>` |  |
 | `name` | `string` |  |
-| `product` | `Record<string, any>` |  |
+| `products` | `Record<string, any>` |  |
 | `station` | `Record<string, any>` |  |
 | `type` | `string` |  |
 
@@ -587,7 +590,7 @@ Create an instance: `const trip = client.Trip()`
 | `id` | `string` |  |
 | `line` | `Record<string, any>` |  |
 | `origin` | `Record<string, any>` |  |
-| `stopover` | `any[]` |  |
+| `stopovers` | `any[]` |  |
 
 #### Example: Load
 
@@ -665,11 +668,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const arrival = client.Arrival()
-await arrival.list()
+const location = client.Location()
+await location.list()
 
-// arrival.data() now returns the arrival data from the last `list`
-// arrival.match() returns the last match criteria
+// location.data() now returns the location data from the last `list`
+// location.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

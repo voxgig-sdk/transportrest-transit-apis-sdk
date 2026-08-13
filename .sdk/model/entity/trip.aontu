@@ -31,7 +31,7 @@ main: kit: entity: trip: {
       type: "`$OBJECT`"
     }
     {
-      name: "stopover"
+      name: "stopovers"
       req: false
       type: "`$ARRAY`"
     }

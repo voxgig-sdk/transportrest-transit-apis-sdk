@@ -21,12 +21,12 @@ main: kit: entity: departure: {
       type: "`$OBJECT`"
     }
     {
-      name: "planned_platform"
+      name: "plannedPlatform"
       req: false
       type: "`$STRING`"
     }
     {
-      name: "planned_when"
+      name: "plannedWhen"
       req: false
       type: "`$STRING`"
     }
@@ -41,7 +41,7 @@ main: kit: entity: departure: {
       type: "`$OBJECT`"
     }
     {
-      name: "trip_id"
+      name: "tripId"
       req: false
       type: "`$STRING`"
     }
@@ -125,7 +125,7 @@ main: kit: entity: departure: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.departures`"
           }
         }
       ]

@@ -37,7 +37,7 @@ class ArrivalEntity extends TransportrestTransitApisEntityBase<Arrival> {
 
 
 
-  async list(this: any, reqmatch?: ArrivalListMatch, ctrl?: Control): Promise<Arrival[]> {
+  async list(this: any, reqmatch?: ArrivalListMatch, ctrl?: Control): Promise<ArrivalEntity[]> {
 
     const utility = this._utility
 

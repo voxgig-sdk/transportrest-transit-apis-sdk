@@ -43,7 +43,8 @@ func TestStopDirect(t *testing.T) {
 		if setup.live {
 			// Live mode is lenient: synthetic IDs frequently 4xx. Skip
 			// rather than fail when the load endpoint isn't reachable with
-			// the IDs we can construct from setup.idmap.
+			// the IDs we can construct from setup.idmap — unless the model
+			// sets main.kit.test.live.strict.
 			if err != nil {
 				t.Skipf("load call failed (likely synthetic IDs against live API): %v", err)
 			}
@@ -108,11 +109,11 @@ func stopDirectSetup(mockres any) *stopDirectSetupResult {
 	calls := &[]map[string]any{}
 
 	env := envOverride(map[string]any{
-		"TRANSPORTRESTTRANSITAPIS_TEST_STOP_ENTID": map[string]any{},
-		"TRANSPORTRESTTRANSITAPIS_TEST_LIVE":    "FALSE",
+		"TRANSPORTREST_TRANSIT_APIS_TEST_STOP_ENTID": map[string]any{},
+		"TRANSPORTREST_TRANSIT_APIS_TEST_LIVE":    "FALSE",
 	})
 
-	live := env["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] == "TRUE"
+	live := env["TRANSPORTREST_TRANSIT_APIS_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
@@ -120,7 +121,7 @@ func stopDirectSetup(mockres any) *stopDirectSetupResult {
 		client := sdk.NewTransportrestTransitApisSDK(mergedOpts)
 
 		idmap := map[string]any{}
-		if entidRaw, ok := env["TRANSPORTRESTTRANSITAPIS_TEST_STOP_ENTID"]; ok {
+		if entidRaw, ok := env["TRANSPORTREST_TRANSIT_APIS_TEST_STOP_ENTID"]; ok {
 			if entidStr, ok := entidRaw.(string); ok && strings.HasPrefix(entidStr, "{") {
 				json.Unmarshal([]byte(entidStr), &idmap)
 			} else if entidMap, ok := entidRaw.(map[string]any); ok {

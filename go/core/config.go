@@ -53,14 +53,14 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "planned_platform",
+						"name": "plannedPlatform",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 3,
 					},
 					map[string]any{
 						"active": true,
-						"name": "planned_when",
+						"name": "plannedWhen",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 4,
@@ -81,7 +81,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "trip_id",
+						"name": "tripId",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 7,
@@ -143,6 +143,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/stops/{id}/arrivals",
 								"parts": []any{
@@ -165,12 +166,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.arrivals`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{
@@ -206,14 +206,14 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "planned_platform",
+						"name": "plannedPlatform",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 3,
 					},
 					map[string]any{
 						"active": true,
-						"name": "planned_when",
+						"name": "plannedWhen",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 4,
@@ -234,7 +234,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "trip_id",
+						"name": "tripId",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 7,
@@ -305,6 +305,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/stops/{id}/departures",
 								"parts": []any{
@@ -328,12 +329,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.departures`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{
@@ -348,14 +348,14 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "leg",
+						"name": "legs",
 						"req": false,
 						"type": "`$ARRAY`",
 						"index$": 0,
 					},
 					map[string]any{
 						"active": true,
-						"name": "refresh_token",
+						"name": "refreshToken",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 1,
@@ -432,6 +432,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/journeys",
 								"parts": []any{
@@ -449,12 +450,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.journeys`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{
@@ -486,7 +486,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "product",
+						"name": "products",
 						"req": false,
 						"type": "`$OBJECT`",
 						"index$": 3,
@@ -556,6 +556,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/locations",
 								"parts": []any{
@@ -577,7 +578,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{
@@ -609,14 +609,14 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "next_stopover",
+						"name": "nextStopovers",
 						"req": false,
 						"type": "`$ARRAY`",
 						"index$": 3,
 					},
 					map[string]any{
 						"active": true,
-						"name": "trip_id",
+						"name": "tripId",
 						"req": false,
 						"type": "`$STRING`",
 						"index$": 4,
@@ -675,6 +675,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/radar",
 								"parts": []any{
@@ -691,12 +692,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.movements`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{
@@ -728,7 +728,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "product",
+						"name": "products",
 						"req": false,
 						"type": "`$OBJECT`",
 						"index$": 3,
@@ -770,6 +770,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/stops/{id}",
 								"parts": []any{
@@ -788,7 +789,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -834,7 +834,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "stopover",
+						"name": "stopovers",
 						"req": false,
 						"type": "`$ARRAY`",
 						"index$": 5,
@@ -880,6 +880,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/trips/{id}",
 								"parts": []any{
@@ -900,7 +901,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{

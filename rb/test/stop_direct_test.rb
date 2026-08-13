@@ -67,11 +67,11 @@ def stop_direct_setup(mockres)
   calls = []
 
   env = Runner.env_override({
-    "TRANSPORTRESTTRANSITAPIS_TEST_STOP_ENTID" => {},
-    "TRANSPORTRESTTRANSITAPIS_TEST_LIVE" => "FALSE",
+    "TRANSPORTREST_TRANSIT_APIS_TEST_STOP_ENTID" => {},
+    "TRANSPORTREST_TRANSIT_APIS_TEST_LIVE" => "FALSE",
   })
 
-  live = env["TRANSPORTRESTTRANSITAPIS_TEST_LIVE"] == "TRUE"
+  live = env["TRANSPORTREST_TRANSIT_APIS_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {

@@ -53,7 +53,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $arrivals = $client->Arrival()->list();
+    $locations = $client->Location()->list();
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -125,9 +125,10 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = TransportrestTransitApisSDK::test();
 
-// Entity ops return the bare mock record (throws on error).
-$arrival = $client->Arrival()->list();
-print_r($arrival);
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$location = $client->Location()->list();
+print_r($location);
 ```
 
 ### Use a custom fetch function
@@ -231,7 +232,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -256,11 +257,11 @@ On error, `ok` is `false` and `$err` contains the error value.
 | `delay` |  |
 | `direction` |  |
 | `line` |  |
-| `planned_platform` |  |
-| `planned_when` |  |
+| `plannedPlatform` |  |
+| `plannedWhen` |  |
 | `platform` |  |
 | `stop` |  |
-| `trip_id` |  |
+| `tripId` |  |
 | `when` |  |
 
 Operations: List.
@@ -274,11 +275,11 @@ API path: `/stops/{id}/arrivals`
 | `delay` |  |
 | `direction` |  |
 | `line` |  |
-| `planned_platform` |  |
-| `planned_when` |  |
+| `plannedPlatform` |  |
+| `plannedWhen` |  |
 | `platform` |  |
 | `stop` |  |
-| `trip_id` |  |
+| `tripId` |  |
 | `when` |  |
 
 Operations: List.
@@ -289,8 +290,8 @@ API path: `/stops/{id}/departures`
 
 | Field | Description |
 | --- | --- |
-| `leg` |  |
-| `refresh_token` |  |
+| `legs` |  |
+| `refreshToken` |  |
 | `type` |  |
 
 Operations: List.
@@ -304,7 +305,7 @@ API path: `/journeys`
 | `id` |  |
 | `location` |  |
 | `name` |  |
-| `product` |  |
+| `products` |  |
 | `type` |  |
 
 Operations: List.
@@ -318,8 +319,8 @@ API path: `/locations`
 | `direction` |  |
 | `line` |  |
 | `location` |  |
-| `next_stopover` |  |
-| `trip_id` |  |
+| `nextStopovers` |  |
+| `tripId` |  |
 
 Operations: List.
 
@@ -332,7 +333,7 @@ API path: `/radar`
 | `id` |  |
 | `location` |  |
 | `name` |  |
-| `product` |  |
+| `products` |  |
 | `station` |  |
 | `type` |  |
 
@@ -349,7 +350,7 @@ API path: `/stops/{id}`
 | `id` |  |
 | `line` |  |
 | `origin` |  |
-| `stopover` |  |
+| `stopovers` |  |
 
 Operations: Load.
 
@@ -377,11 +378,11 @@ Create an instance: `$arrival = $client->Arrival();`
 | `delay` | `int` |  |
 | `direction` | `string` |  |
 | `line` | `array` |  |
-| `planned_platform` | `string` |  |
-| `planned_when` | `string` |  |
+| `plannedPlatform` | `string` |  |
+| `plannedWhen` | `string` |  |
 | `platform` | `string` |  |
 | `stop` | `array` |  |
-| `trip_id` | `string` |  |
+| `tripId` | `string` |  |
 | `when` | `string` |  |
 
 #### Example: List
@@ -409,11 +410,11 @@ Create an instance: `$departure = $client->Departure();`
 | `delay` | `int` |  |
 | `direction` | `string` |  |
 | `line` | `array` |  |
-| `planned_platform` | `string` |  |
-| `planned_when` | `string` |  |
+| `plannedPlatform` | `string` |  |
+| `plannedWhen` | `string` |  |
 | `platform` | `string` |  |
 | `stop` | `array` |  |
-| `trip_id` | `string` |  |
+| `tripId` | `string` |  |
 | `when` | `string` |  |
 
 #### Example: List
@@ -438,8 +439,8 @@ Create an instance: `$journey = $client->Journey();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `leg` | `array` |  |
-| `refresh_token` | `string` |  |
+| `legs` | `array` |  |
+| `refreshToken` | `string` |  |
 | `type` | `string` |  |
 
 #### Example: List
@@ -467,7 +468,7 @@ Create an instance: `$location = $client->Location();`
 | `id` | `string` |  |
 | `location` | `array` |  |
 | `name` | `string` |  |
-| `product` | `array` |  |
+| `products` | `array` |  |
 | `type` | `string` |  |
 
 #### Example: List
@@ -495,8 +496,8 @@ Create an instance: `$radar = $client->Radar();`
 | `direction` | `string` |  |
 | `line` | `array` |  |
 | `location` | `array` |  |
-| `next_stopover` | `array` |  |
-| `trip_id` | `string` |  |
+| `nextStopovers` | `array` |  |
+| `tripId` | `string` |  |
 
 #### Example: List
 
@@ -523,14 +524,14 @@ Create an instance: `$stop = $client->Stop();`
 | `id` | `string` |  |
 | `location` | `array` |  |
 | `name` | `string` |  |
-| `product` | `array` |  |
+| `products` | `array` |  |
 | `station` | `array` |  |
 | `type` | `string` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Stop record (throws on error).
+// load() returns the ENTITY — call data_get() for the Stop record (throws on error).
 $stop = $client->Stop()->load(["id" => "stop_id"]);
 ```
 
@@ -554,12 +555,12 @@ Create an instance: `$trip = $client->Trip();`
 | `id` | `string` |  |
 | `line` | `array` |  |
 | `origin` | `array` |  |
-| `stopover` | `array` |  |
+| `stopovers` | `array` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Trip record (throws on error).
+// load() returns the ENTITY — call data_get() for the Trip record (throws on error).
 $trip = $client->Trip()->load(["id" => "trip_id"]);
 ```
 
@@ -640,11 +641,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$arrival = $client->Arrival();
-$arrival->list();
+$location = $client->Location();
+$location->list();
 
-// $arrival->data_get() now returns the arrival data from the last list
-// $arrival->match_get() returns the last match criteria
+// $location->data_get() now returns the location data from the last list
+// $location->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

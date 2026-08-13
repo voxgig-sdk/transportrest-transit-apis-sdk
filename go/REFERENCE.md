@@ -125,11 +125,11 @@ fmt.Println(arrival.GetName()) // "arrival"
 | `delay` | `int` | No |  |
 | `direction` | `string` | No |  |
 | `line` | `map[string]any` | No |  |
-| `planned_platform` | `string` | No |  |
-| `planned_when` | `string` | No |  |
+| `plannedPlatform` | `string` | No |  |
+| `plannedWhen` | `string` | No |  |
 | `platform` | `string` | No |  |
 | `stop` | `map[string]any` | No |  |
-| `trip_id` | `string` | No |  |
+| `tripId` | `string` | No |  |
 | `when` | `string` | No |  |
 
 ### Operations
@@ -184,11 +184,11 @@ fmt.Println(departure.GetName()) // "departure"
 | `delay` | `int` | No |  |
 | `direction` | `string` | No |  |
 | `line` | `map[string]any` | No |  |
-| `planned_platform` | `string` | No |  |
-| `planned_when` | `string` | No |  |
+| `plannedPlatform` | `string` | No |  |
+| `plannedWhen` | `string` | No |  |
 | `platform` | `string` | No |  |
 | `stop` | `map[string]any` | No |  |
-| `trip_id` | `string` | No |  |
+| `tripId` | `string` | No |  |
 | `when` | `string` | No |  |
 
 ### Operations
@@ -240,8 +240,8 @@ fmt.Println(journey.GetName()) // "journey"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `leg` | `[]any` | No |  |
-| `refresh_token` | `string` | No |  |
+| `legs` | `[]any` | No |  |
+| `refreshToken` | `string` | No |  |
 | `type` | `string` | No |  |
 
 ### Operations
@@ -296,7 +296,7 @@ fmt.Println(location.GetName()) // "location"
 | `id` | `string` | No |  |
 | `location` | `map[string]any` | No |  |
 | `name` | `string` | No |  |
-| `product` | `map[string]any` | No |  |
+| `products` | `map[string]any` | No |  |
 | `type` | `string` | No |  |
 
 ### Operations
@@ -351,8 +351,8 @@ fmt.Println(radar.GetName()) // "radar"
 | `direction` | `string` | No |  |
 | `line` | `map[string]any` | No |  |
 | `location` | `map[string]any` | No |  |
-| `next_stopover` | `[]any` | No |  |
-| `trip_id` | `string` | No |  |
+| `nextStopovers` | `[]any` | No |  |
+| `tripId` | `string` | No |  |
 
 ### Operations
 
@@ -406,7 +406,7 @@ fmt.Println(stop.GetName()) // "stop"
 | `id` | `string` | No |  |
 | `location` | `map[string]any` | No |  |
 | `name` | `string` | No |  |
-| `product` | `map[string]any` | No |  |
+| `products` | `map[string]any` | No |  |
 | `station` | `map[string]any` | No |  |
 | `type` | `string` | No |  |
 
@@ -464,7 +464,7 @@ fmt.Println(trip.GetName()) // "trip"
 | `id` | `string` | No |  |
 | `line` | `map[string]any` | No |  |
 | `origin` | `map[string]any` | No |  |
-| `stopover` | `[]any` | No |  |
+| `stopovers` | `[]any` | No |  |
 
 ### Operations
 

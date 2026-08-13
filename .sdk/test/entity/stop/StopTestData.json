@@ -5,7 +5,7 @@
         "id": "STOP00",
         "location": {},
         "name": "s3e",
-        "product": {},
+        "products": {},
         "station": {},
         "type": "s41"
       },
@@ -13,7 +13,7 @@
         "id": "STOP01",
         "location": {},
         "name": "s7a",
-        "product": {},
+        "products": {},
         "station": {},
         "type": "s7d"
       },
@@ -21,7 +21,7 @@
         "id": "STOP02",
         "location": {},
         "name": "sb6",
-        "product": {},
+        "products": {},
         "station": {},
         "type": "sb9"
       }
@@ -32,7 +32,7 @@
       "stop_ref01": {
         "location": {},
         "name": "sf2",
-        "product": {},
+        "products": {},
         "station": {},
         "type": "sf5"
       }

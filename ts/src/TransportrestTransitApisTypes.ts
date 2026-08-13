@@ -9,11 +9,11 @@ export interface Arrival {
   delay?: number
   direction?: string
   line?: Record<string, any>
-  planned_platform?: string
-  planned_when?: string
+  plannedPlatform?: string
+  plannedWhen?: string
   platform?: string
   stop?: Record<string, any>
-  trip_id?: string
+  tripId?: string
   when?: string
 }
 
@@ -25,11 +25,11 @@ export interface Departure {
   delay?: number
   direction?: string
   line?: Record<string, any>
-  planned_platform?: string
-  planned_when?: string
+  plannedPlatform?: string
+  plannedWhen?: string
   platform?: string
   stop?: Record<string, any>
-  trip_id?: string
+  tripId?: string
   when?: string
 }
 
@@ -38,14 +38,14 @@ export interface DepartureListMatch {
 }
 
 export interface Journey {
-  leg?: any[]
-  refresh_token?: string
+  legs?: any[]
+  refreshToken?: string
   type?: string
 }
 
 export interface JourneyListMatch {
-  leg?: any[]
-  refresh_token?: string
+  legs?: any[]
+  refreshToken?: string
   type?: string
 }
 
@@ -53,7 +53,7 @@ export interface Location {
   id?: string
   location?: Record<string, any>
   name?: string
-  product?: Record<string, any>
+  products?: Record<string, any>
   type?: string
 }
 
@@ -61,7 +61,7 @@ export interface LocationListMatch {
   id?: string
   location?: Record<string, any>
   name?: string
-  product?: Record<string, any>
+  products?: Record<string, any>
   type?: string
 }
 
@@ -69,23 +69,23 @@ export interface Radar {
   direction?: string
   line?: Record<string, any>
   location?: Record<string, any>
-  next_stopover?: any[]
-  trip_id?: string
+  nextStopovers?: any[]
+  tripId?: string
 }
 
 export interface RadarListMatch {
   direction?: string
   line?: Record<string, any>
   location?: Record<string, any>
-  next_stopover?: any[]
-  trip_id?: string
+  nextStopovers?: any[]
+  tripId?: string
 }
 
 export interface Stop {
   id?: string
   location?: Record<string, any>
   name?: string
-  product?: Record<string, any>
+  products?: Record<string, any>
   station?: Record<string, any>
   type?: string
 }
@@ -100,7 +100,7 @@ export interface Trip {
   id?: string
   line?: Record<string, any>
   origin?: Record<string, any>
-  stopover?: any[]
+  stopovers?: any[]
 }
 
 export interface TripLoadMatch {

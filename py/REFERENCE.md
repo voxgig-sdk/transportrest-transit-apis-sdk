@@ -114,11 +114,11 @@ arrival = client.Arrival()
 | `delay` | `int` | No |  |
 | `direction` | `str` | No |  |
 | `line` | `dict` | No |  |
-| `planned_platform` | `str` | No |  |
-| `planned_when` | `str` | No |  |
+| `plannedPlatform` | `str` | No |  |
+| `plannedWhen` | `str` | No |  |
 | `platform` | `str` | No |  |
 | `stop` | `dict` | No |  |
-| `trip_id` | `str` | No |  |
+| `tripId` | `str` | No |  |
 | `when` | `str` | No |  |
 
 ### Operations
@@ -128,7 +128,7 @@ arrival = client.Arrival()
 List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Arrival().list()
+results = client.Arrival().list({"stop_id": "example"})
 for arrival in results:
     print(arrival)
 ```
@@ -175,11 +175,11 @@ departure = client.Departure()
 | `delay` | `int` | No |  |
 | `direction` | `str` | No |  |
 | `line` | `dict` | No |  |
-| `planned_platform` | `str` | No |  |
-| `planned_when` | `str` | No |  |
+| `plannedPlatform` | `str` | No |  |
+| `plannedWhen` | `str` | No |  |
 | `platform` | `str` | No |  |
 | `stop` | `dict` | No |  |
-| `trip_id` | `str` | No |  |
+| `tripId` | `str` | No |  |
 | `when` | `str` | No |  |
 
 ### Operations
@@ -189,7 +189,7 @@ departure = client.Departure()
 List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Departure().list()
+results = client.Departure().list({"stop_id": "example"})
 for departure in results:
     print(departure)
 ```
@@ -233,8 +233,8 @@ journey = client.Journey()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `leg` | `list` | No |  |
-| `refresh_token` | `str` | No |  |
+| `legs` | `list` | No |  |
+| `refreshToken` | `str` | No |  |
 | `type` | `str` | No |  |
 
 ### Operations
@@ -291,7 +291,7 @@ location = client.Location()
 | `id` | `str` | No |  |
 | `location` | `dict` | No |  |
 | `name` | `str` | No |  |
-| `product` | `dict` | No |  |
+| `products` | `dict` | No |  |
 | `type` | `str` | No |  |
 
 ### Operations
@@ -348,8 +348,8 @@ radar = client.Radar()
 | `direction` | `str` | No |  |
 | `line` | `dict` | No |  |
 | `location` | `dict` | No |  |
-| `next_stopover` | `list` | No |  |
-| `trip_id` | `str` | No |  |
+| `nextStopovers` | `list` | No |  |
+| `tripId` | `str` | No |  |
 
 ### Operations
 
@@ -405,7 +405,7 @@ stop = client.Stop()
 | `id` | `str` | No |  |
 | `location` | `dict` | No |  |
 | `name` | `str` | No |  |
-| `product` | `dict` | No |  |
+| `products` | `dict` | No |  |
 | `station` | `dict` | No |  |
 | `type` | `str` | No |  |
 
@@ -463,7 +463,7 @@ trip = client.Trip()
 | `id` | `str` | No |  |
 | `line` | `dict` | No |  |
 | `origin` | `dict` | No |  |
-| `stopover` | `list` | No |  |
+| `stopovers` | `list` | No |  |
 
 ### Operations
 

@@ -23,8 +23,8 @@ module TransportrestTransitApisTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("TRANSPORTRESTTRANSITAPIS_TEST_LIVE")
-    override = getenv("TRANSPORTRESTTRANSITAPIS_TEST_OVERRIDE")
+    live = getenv("TRANSPORTREST_TRANSIT_APIS_TEST_LIVE")
+    override = getenv("TRANSPORTREST_TRANSIT_APIS_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module TransportrestTransitApisTestRunner
       end
     end
 
-    explain = getenv("TRANSPORTRESTTRANSITAPIS_TEST_EXPLAIN")
-    m["TRANSPORTRESTTRANSITAPIS_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("TRANSPORTREST_TRANSIT_APIS_TEST_EXPLAIN")
+    m["TRANSPORTREST_TRANSIT_APIS_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

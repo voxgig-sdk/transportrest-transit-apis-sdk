@@ -19,10 +19,10 @@
 # @!attribute [rw] line
 #   @return [Hash, nil]
 #
-# @!attribute [rw] planned_platform
+# @!attribute [rw] plannedPlatform
 #   @return [String, nil]
 #
-# @!attribute [rw] planned_when
+# @!attribute [rw] plannedWhen
 #   @return [String, nil]
 #
 # @!attribute [rw] platform
@@ -31,7 +31,7 @@
 # @!attribute [rw] stop
 #   @return [Hash, nil]
 #
-# @!attribute [rw] trip_id
+# @!attribute [rw] tripId
 #   @return [String, nil]
 #
 # @!attribute [rw] when
@@ -40,11 +40,11 @@ Arrival = Struct.new(
   :delay,
   :direction,
   :line,
-  :planned_platform,
-  :planned_when,
+  :plannedPlatform,
+  :plannedWhen,
   :platform,
   :stop,
-  :trip_id,
+  :tripId,
   :when,
   keyword_init: true
 )
@@ -69,10 +69,10 @@ ArrivalListMatch = Struct.new(
 # @!attribute [rw] line
 #   @return [Hash, nil]
 #
-# @!attribute [rw] planned_platform
+# @!attribute [rw] plannedPlatform
 #   @return [String, nil]
 #
-# @!attribute [rw] planned_when
+# @!attribute [rw] plannedWhen
 #   @return [String, nil]
 #
 # @!attribute [rw] platform
@@ -81,7 +81,7 @@ ArrivalListMatch = Struct.new(
 # @!attribute [rw] stop
 #   @return [Hash, nil]
 #
-# @!attribute [rw] trip_id
+# @!attribute [rw] tripId
 #   @return [String, nil]
 #
 # @!attribute [rw] when
@@ -90,11 +90,11 @@ Departure = Struct.new(
   :delay,
   :direction,
   :line,
-  :planned_platform,
-  :planned_when,
+  :plannedPlatform,
+  :plannedWhen,
   :platform,
   :stop,
-  :trip_id,
+  :tripId,
   :when,
   keyword_init: true
 )
@@ -110,34 +110,34 @@ DepartureListMatch = Struct.new(
 
 # Journey entity data model.
 #
-# @!attribute [rw] leg
+# @!attribute [rw] legs
 #   @return [Array, nil]
 #
-# @!attribute [rw] refresh_token
+# @!attribute [rw] refreshToken
 #   @return [String, nil]
 #
 # @!attribute [rw] type
 #   @return [String, nil]
 Journey = Struct.new(
-  :leg,
-  :refresh_token,
+  :legs,
+  :refreshToken,
   :type,
   keyword_init: true
 )
 
 # Request payload for Journey#list.
 #
-# @!attribute [rw] leg
+# @!attribute [rw] legs
 #   @return [Array, nil]
 #
-# @!attribute [rw] refresh_token
+# @!attribute [rw] refreshToken
 #   @return [String, nil]
 #
 # @!attribute [rw] type
 #   @return [String, nil]
 JourneyListMatch = Struct.new(
-  :leg,
-  :refresh_token,
+  :legs,
+  :refreshToken,
   :type,
   keyword_init: true
 )
@@ -153,7 +153,7 @@ JourneyListMatch = Struct.new(
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] product
+# @!attribute [rw] products
 #   @return [Hash, nil]
 #
 # @!attribute [rw] type
@@ -162,7 +162,7 @@ Location = Struct.new(
   :id,
   :location,
   :name,
-  :product,
+  :products,
   :type,
   keyword_init: true
 )
@@ -178,7 +178,7 @@ Location = Struct.new(
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] product
+# @!attribute [rw] products
 #   @return [Hash, nil]
 #
 # @!attribute [rw] type
@@ -187,7 +187,7 @@ LocationListMatch = Struct.new(
   :id,
   :location,
   :name,
-  :product,
+  :products,
   :type,
   keyword_init: true
 )
@@ -203,17 +203,17 @@ LocationListMatch = Struct.new(
 # @!attribute [rw] location
 #   @return [Hash, nil]
 #
-# @!attribute [rw] next_stopover
+# @!attribute [rw] nextStopovers
 #   @return [Array, nil]
 #
-# @!attribute [rw] trip_id
+# @!attribute [rw] tripId
 #   @return [String, nil]
 Radar = Struct.new(
   :direction,
   :line,
   :location,
-  :next_stopover,
-  :trip_id,
+  :nextStopovers,
+  :tripId,
   keyword_init: true
 )
 
@@ -228,17 +228,17 @@ Radar = Struct.new(
 # @!attribute [rw] location
 #   @return [Hash, nil]
 #
-# @!attribute [rw] next_stopover
+# @!attribute [rw] nextStopovers
 #   @return [Array, nil]
 #
-# @!attribute [rw] trip_id
+# @!attribute [rw] tripId
 #   @return [String, nil]
 RadarListMatch = Struct.new(
   :direction,
   :line,
   :location,
-  :next_stopover,
-  :trip_id,
+  :nextStopovers,
+  :tripId,
   keyword_init: true
 )
 
@@ -253,7 +253,7 @@ RadarListMatch = Struct.new(
 # @!attribute [rw] name
 #   @return [String, nil]
 #
-# @!attribute [rw] product
+# @!attribute [rw] products
 #   @return [Hash, nil]
 #
 # @!attribute [rw] station
@@ -265,7 +265,7 @@ Stop = Struct.new(
   :id,
   :location,
   :name,
-  :product,
+  :products,
   :station,
   :type,
   keyword_init: true
@@ -297,7 +297,7 @@ StopLoadMatch = Struct.new(
 # @!attribute [rw] origin
 #   @return [Hash, nil]
 #
-# @!attribute [rw] stopover
+# @!attribute [rw] stopovers
 #   @return [Array, nil]
 Trip = Struct.new(
   :destination,
@@ -305,7 +305,7 @@ Trip = Struct.new(
   :id,
   :line,
   :origin,
-  :stopover,
+  :stopovers,
   keyword_init: true
 )
 

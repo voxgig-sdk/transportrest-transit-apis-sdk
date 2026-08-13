@@ -51,7 +51,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  arrivals = client.Arrival.list()
+  locations = client.Location.list()
 rescue => err
   warn "list failed: #{err}"
 end
@@ -119,9 +119,10 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = TransportrestTransitApisSDK.test
 
-# Entity ops return the bare mock record (raises on error).
-arrival = client.Arrival.list()
-puts arrival
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+location = client.Location.list()
+puts location
 ```
 
 ### Use a custom fetch function
@@ -246,11 +247,11 @@ returns a result `Hash` with these keys:
 | `delay` |  |
 | `direction` |  |
 | `line` |  |
-| `planned_platform` |  |
-| `planned_when` |  |
+| `plannedPlatform` |  |
+| `plannedWhen` |  |
 | `platform` |  |
 | `stop` |  |
-| `trip_id` |  |
+| `tripId` |  |
 | `when` |  |
 
 Operations: List.
@@ -264,11 +265,11 @@ API path: `/stops/{id}/arrivals`
 | `delay` |  |
 | `direction` |  |
 | `line` |  |
-| `planned_platform` |  |
-| `planned_when` |  |
+| `plannedPlatform` |  |
+| `plannedWhen` |  |
 | `platform` |  |
 | `stop` |  |
-| `trip_id` |  |
+| `tripId` |  |
 | `when` |  |
 
 Operations: List.
@@ -279,8 +280,8 @@ API path: `/stops/{id}/departures`
 
 | Field | Description |
 | --- | --- |
-| `leg` |  |
-| `refresh_token` |  |
+| `legs` |  |
+| `refreshToken` |  |
 | `type` |  |
 
 Operations: List.
@@ -294,7 +295,7 @@ API path: `/journeys`
 | `id` |  |
 | `location` |  |
 | `name` |  |
-| `product` |  |
+| `products` |  |
 | `type` |  |
 
 Operations: List.
@@ -308,8 +309,8 @@ API path: `/locations`
 | `direction` |  |
 | `line` |  |
 | `location` |  |
-| `next_stopover` |  |
-| `trip_id` |  |
+| `nextStopovers` |  |
+| `tripId` |  |
 
 Operations: List.
 
@@ -322,7 +323,7 @@ API path: `/radar`
 | `id` |  |
 | `location` |  |
 | `name` |  |
-| `product` |  |
+| `products` |  |
 | `station` |  |
 | `type` |  |
 
@@ -339,7 +340,7 @@ API path: `/stops/{id}`
 | `id` |  |
 | `line` |  |
 | `origin` |  |
-| `stopover` |  |
+| `stopovers` |  |
 
 Operations: Load.
 
@@ -367,11 +368,11 @@ Create an instance: `arrival = client.Arrival`
 | `delay` | `Integer` |  |
 | `direction` | `String` |  |
 | `line` | `Hash` |  |
-| `planned_platform` | `String` |  |
-| `planned_when` | `String` |  |
+| `plannedPlatform` | `String` |  |
+| `plannedWhen` | `String` |  |
 | `platform` | `String` |  |
 | `stop` | `Hash` |  |
-| `trip_id` | `String` |  |
+| `tripId` | `String` |  |
 | `when` | `String` |  |
 
 #### Example: List
@@ -399,11 +400,11 @@ Create an instance: `departure = client.Departure`
 | `delay` | `Integer` |  |
 | `direction` | `String` |  |
 | `line` | `Hash` |  |
-| `planned_platform` | `String` |  |
-| `planned_when` | `String` |  |
+| `plannedPlatform` | `String` |  |
+| `plannedWhen` | `String` |  |
 | `platform` | `String` |  |
 | `stop` | `Hash` |  |
-| `trip_id` | `String` |  |
+| `tripId` | `String` |  |
 | `when` | `String` |  |
 
 #### Example: List
@@ -428,8 +429,8 @@ Create an instance: `journey = client.Journey`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `leg` | `Array` |  |
-| `refresh_token` | `String` |  |
+| `legs` | `Array` |  |
+| `refreshToken` | `String` |  |
 | `type` | `String` |  |
 
 #### Example: List
@@ -457,7 +458,7 @@ Create an instance: `location = client.Location`
 | `id` | `String` |  |
 | `location` | `Hash` |  |
 | `name` | `String` |  |
-| `product` | `Hash` |  |
+| `products` | `Hash` |  |
 | `type` | `String` |  |
 
 #### Example: List
@@ -485,8 +486,8 @@ Create an instance: `radar = client.Radar`
 | `direction` | `String` |  |
 | `line` | `Hash` |  |
 | `location` | `Hash` |  |
-| `next_stopover` | `Array` |  |
-| `trip_id` | `String` |  |
+| `nextStopovers` | `Array` |  |
+| `tripId` | `String` |  |
 
 #### Example: List
 
@@ -513,14 +514,14 @@ Create an instance: `stop = client.Stop`
 | `id` | `String` |  |
 | `location` | `Hash` |  |
 | `name` | `String` |  |
-| `product` | `Hash` |  |
+| `products` | `Hash` |  |
 | `station` | `Hash` |  |
 | `type` | `String` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Stop record (raises on error).
+# load returns the ENTITY — call data_get for the Stop record (raises on error).
 stop = client.Stop.load({ "id" => "stop_id" })
 ```
 
@@ -544,12 +545,12 @@ Create an instance: `trip = client.Trip`
 | `id` | `String` |  |
 | `line` | `Hash` |  |
 | `origin` | `Hash` |  |
-| `stopover` | `Array` |  |
+| `stopovers` | `Array` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Trip record (raises on error).
+# load returns the ENTITY — call data_get for the Trip record (raises on error).
 trip = client.Trip.load({ "id" => "trip_id" })
 ```
 
@@ -630,11 +631,11 @@ Entity instances are stateful. After a successful `list`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-arrival = client.Arrival
-arrival.list()
+location = client.Location
+location.list()
 
-# arrival.data_get now returns the arrival data from the last list
-# arrival.match_get returns the last match criteria
+# location.data_get now returns the location data from the last list
+# location.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

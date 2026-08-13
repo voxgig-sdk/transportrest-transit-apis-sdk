@@ -120,11 +120,11 @@ arrival = client.Arrival
 | `delay` | `Integer` | No |  |
 | `direction` | `String` | No |  |
 | `line` | `Hash` | No |  |
-| `planned_platform` | `String` | No |  |
-| `planned_when` | `String` | No |  |
+| `plannedPlatform` | `String` | No |  |
+| `plannedWhen` | `String` | No |  |
 | `platform` | `String` | No |  |
 | `stop` | `Hash` | No |  |
-| `trip_id` | `String` | No |  |
+| `tripId` | `String` | No |  |
 | `when` | `String` | No |  |
 
 ### Operations
@@ -180,11 +180,11 @@ departure = client.Departure
 | `delay` | `Integer` | No |  |
 | `direction` | `String` | No |  |
 | `line` | `Hash` | No |  |
-| `planned_platform` | `String` | No |  |
-| `planned_when` | `String` | No |  |
+| `plannedPlatform` | `String` | No |  |
+| `plannedWhen` | `String` | No |  |
 | `platform` | `String` | No |  |
 | `stop` | `Hash` | No |  |
-| `trip_id` | `String` | No |  |
+| `tripId` | `String` | No |  |
 | `when` | `String` | No |  |
 
 ### Operations
@@ -237,8 +237,8 @@ journey = client.Journey
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `leg` | `Array` | No |  |
-| `refresh_token` | `String` | No |  |
+| `legs` | `Array` | No |  |
+| `refreshToken` | `String` | No |  |
 | `type` | `String` | No |  |
 
 ### Operations
@@ -294,7 +294,7 @@ location = client.Location
 | `id` | `String` | No |  |
 | `location` | `Hash` | No |  |
 | `name` | `String` | No |  |
-| `product` | `Hash` | No |  |
+| `products` | `Hash` | No |  |
 | `type` | `String` | No |  |
 
 ### Operations
@@ -350,8 +350,8 @@ radar = client.Radar
 | `direction` | `String` | No |  |
 | `line` | `Hash` | No |  |
 | `location` | `Hash` | No |  |
-| `next_stopover` | `Array` | No |  |
-| `trip_id` | `String` | No |  |
+| `nextStopovers` | `Array` | No |  |
+| `tripId` | `String` | No |  |
 
 ### Operations
 
@@ -406,7 +406,7 @@ stop = client.Stop
 | `id` | `String` | No |  |
 | `location` | `Hash` | No |  |
 | `name` | `String` | No |  |
-| `product` | `Hash` | No |  |
+| `products` | `Hash` | No |  |
 | `station` | `Hash` | No |  |
 | `type` | `String` | No |  |
 
@@ -465,7 +465,7 @@ trip = client.Trip
 | `id` | `String` | No |  |
 | `line` | `Hash` | No |  |
 | `origin` | `Hash` | No |  |
-| `stopover` | `Array` | No |  |
+| `stopovers` | `Array` | No |  |
 
 ### Operations
 

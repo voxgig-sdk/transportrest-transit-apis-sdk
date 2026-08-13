@@ -26,8 +26,8 @@ import {
 describe('DepartureEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when TRANSPORTRESTTRANSITAPIS_TEST_LIVE=TRUE.
-  afterEach(liveDelay('TRANSPORTRESTTRANSITAPIS_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when TRANSPORTREST_TRANSIT_APIS_TEST_LIVE=TRUE.
+  afterEach(liveDelay('TRANSPORTREST_TRANSIT_APIS_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = TransportrestTransitApisSDK.test()
@@ -64,7 +64,7 @@ describe('DepartureEntity', async () => {
     const departure_ref01_match: any = {}
     departure_ref01_match['stop_id'] = setup.idmap['stop01']
 
-    const departure_ref01_list = await departure_ref01_ent.list(departure_ref01_match)
+    const departure_ref01_list = (await departure_ref01_ent.list(departure_ref01_match)).map((e: any) => e.data())
 
 
   })

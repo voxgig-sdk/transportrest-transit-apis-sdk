@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from transportresttransitapis_sdk.utility.voxgig_struct import voxgig_struct as vs
 from transportresttransitapis_sdk import TransportrestTransitApisSDK
-from core import helpers
+from transportresttransitapis_sdk.core import helpers
 from test import runner
 
 
@@ -58,11 +58,11 @@ def _journey_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "TRANSPORTRESTTRANSITAPIS_TEST_JOURNEY_ENTID": {},
-        "TRANSPORTRESTTRANSITAPIS_TEST_LIVE": "FALSE",
+        "TRANSPORTREST_TRANSIT_APIS_TEST_JOURNEY_ENTID": {},
+        "TRANSPORTREST_TRANSIT_APIS_TEST_LIVE": "FALSE",
     })
 
-    live = env.get("TRANSPORTRESTTRANSITAPIS_TEST_LIVE") == "TRUE"
+    live = env.get("TRANSPORTREST_TRANSIT_APIS_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {

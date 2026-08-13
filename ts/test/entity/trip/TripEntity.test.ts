@@ -26,8 +26,8 @@ import {
 describe('TripEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when TRANSPORTRESTTRANSITAPIS_TEST_LIVE=TRUE.
-  afterEach(liveDelay('TRANSPORTRESTTRANSITAPIS_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when TRANSPORTREST_TRANSIT_APIS_TEST_LIVE=TRUE.
+  afterEach(liveDelay('TRANSPORTREST_TRANSIT_APIS_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = TransportrestTransitApisSDK.test()
@@ -63,7 +63,7 @@ describe('TripEntity', async () => {
     const trip_ref01_ent = client.Trip()
     const trip_ref01_match_dt0: any = {}
     trip_ref01_match_dt0.id = trip_ref01_data.id
-    const trip_ref01_data_dt0 = await trip_ref01_ent.load(trip_ref01_match_dt0)
+    const trip_ref01_data_dt0 = (await trip_ref01_ent.load(trip_ref01_match_dt0)).data()
     assert(trip_ref01_data_dt0.id === trip_ref01_data.id)
 
 

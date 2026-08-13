@@ -18,11 +18,11 @@ class Arrival
     public ?int $delay = null;
     public ?string $direction = null;
     public ?array $line = null;
-    public ?string $planned_platform = null;
-    public ?string $planned_when = null;
+    public ?string $plannedPlatform = null;
+    public ?string $plannedWhen = null;
     public ?string $platform = null;
     public ?array $stop = null;
-    public ?string $trip_id = null;
+    public ?string $tripId = null;
     public ?string $when = null;
 }
 
@@ -38,11 +38,11 @@ class Departure
     public ?int $delay = null;
     public ?string $direction = null;
     public ?array $line = null;
-    public ?string $planned_platform = null;
-    public ?string $planned_when = null;
+    public ?string $plannedPlatform = null;
+    public ?string $plannedWhen = null;
     public ?string $platform = null;
     public ?array $stop = null;
-    public ?string $trip_id = null;
+    public ?string $tripId = null;
     public ?string $when = null;
 }
 
@@ -55,16 +55,16 @@ class DepartureListMatch
 /** Journey entity data model. */
 class Journey
 {
-    public ?array $leg = null;
-    public ?string $refresh_token = null;
+    public ?array $legs = null;
+    public ?string $refreshToken = null;
     public ?string $type = null;
 }
 
 /** Request payload for Journey#list. */
 class JourneyListMatch
 {
-    public ?array $leg = null;
-    public ?string $refresh_token = null;
+    public ?array $legs = null;
+    public ?string $refreshToken = null;
     public ?string $type = null;
 }
 
@@ -74,7 +74,7 @@ class Location
     public ?string $id = null;
     public ?array $location = null;
     public ?string $name = null;
-    public ?array $product = null;
+    public ?array $products = null;
     public ?string $type = null;
 }
 
@@ -84,7 +84,7 @@ class LocationListMatch
     public ?string $id = null;
     public ?array $location = null;
     public ?string $name = null;
-    public ?array $product = null;
+    public ?array $products = null;
     public ?string $type = null;
 }
 
@@ -94,8 +94,8 @@ class Radar
     public ?string $direction = null;
     public ?array $line = null;
     public ?array $location = null;
-    public ?array $next_stopover = null;
-    public ?string $trip_id = null;
+    public ?array $nextStopovers = null;
+    public ?string $tripId = null;
 }
 
 /** Request payload for Radar#list. */
@@ -104,8 +104,8 @@ class RadarListMatch
     public ?string $direction = null;
     public ?array $line = null;
     public ?array $location = null;
-    public ?array $next_stopover = null;
-    public ?string $trip_id = null;
+    public ?array $nextStopovers = null;
+    public ?string $tripId = null;
 }
 
 /** Stop entity data model. */
@@ -114,7 +114,7 @@ class Stop
     public ?string $id = null;
     public ?array $location = null;
     public ?string $name = null;
-    public ?array $product = null;
+    public ?array $products = null;
     public ?array $station = null;
     public ?string $type = null;
 }
@@ -133,7 +133,7 @@ class Trip
     public ?string $id = null;
     public ?array $line = null;
     public ?array $origin = null;
-    public ?array $stopover = null;
+    public ?array $stopovers = null;
 }
 
 /** Request payload for Trip#load. */
