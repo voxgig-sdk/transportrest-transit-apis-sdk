@@ -40,7 +40,7 @@ class JourneyEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = TransportrestTransitApisConfig::make_config();
+        $cfg = TransportrestTransitApisConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = TransportrestTransitApisSDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];

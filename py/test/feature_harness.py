@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from transportresttransitapis_sdk.config import make_config
+from transportresttransitapis_sdk.config import shared_config
 from transportresttransitapis_sdk.features import _make_feature
 from transportresttransitapis_sdk.core.control import TransportrestTransitApisControl
 from transportresttransitapis_sdk.core.error import TransportrestTransitApisError
@@ -24,7 +24,7 @@ from transportresttransitapis_sdk.core.spec import TransportrestTransitApisSpec
 
 # True when this SDK was generated with the named feature.
 def has_feature(name):
-    feature = make_config().get("feature")
+    feature = shared_config().get("feature")
     return isinstance(feature, dict) and feature.get(name) is not None
 
 

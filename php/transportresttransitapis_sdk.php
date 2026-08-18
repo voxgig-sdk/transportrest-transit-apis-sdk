@@ -40,7 +40,7 @@ class TransportrestTransitApisSDK
         $utility = new TransportrestTransitApisUtility();
         $this->_utility = $utility;
 
-        $config = TransportrestTransitApisConfig::make_config();
+        $config = TransportrestTransitApisConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

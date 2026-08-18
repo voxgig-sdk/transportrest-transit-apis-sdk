@@ -28,7 +28,7 @@ class TransportrestTransitApisSDK
     utility = TransportrestTransitApisUtility.new
     @_utility = utility
 
-    config = TransportrestTransitApisConfig.make_config
+    config = TransportrestTransitApisConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,
