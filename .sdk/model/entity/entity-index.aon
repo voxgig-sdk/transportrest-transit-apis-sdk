@@ -1,0 +1,9 @@
+# Entity Models
+
+@"arrival.aon"
+@"departure.aon"
+@"journey.aon"
+@"location.aon"
+@"radar.aon"
+@"stop.aon"
+@"trip.aon"

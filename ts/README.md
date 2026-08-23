@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -295,15 +295,15 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `delay` |  |
-| `direction` |  |
+| `delay` | Delay in seconds |
+| `direction` | Direction of the trip |
 | `line` |  |
-| `plannedPlatform` |  |
-| `plannedWhen` |  |
-| `platform` |  |
+| `plannedPlatform` | Originally planned platform |
+| `plannedWhen` | Originally planned arrival time |
+| `platform` | Arrival platform |
 | `stop` |  |
-| `tripId` |  |
-| `when` |  |
+| `tripId` | Trip identifier |
+| `when` | Scheduled arrival time |
 
 Operations: list.
 
@@ -313,15 +313,15 @@ API path: `/stops/{id}/arrivals`
 
 | Field | Description |
 | --- | --- |
-| `delay` |  |
-| `direction` |  |
+| `delay` | Delay in seconds |
+| `direction` | Direction of the trip |
 | `line` |  |
-| `plannedPlatform` |  |
-| `plannedWhen` |  |
-| `platform` |  |
+| `plannedPlatform` | Originally planned platform |
+| `plannedWhen` | Originally planned departure time |
+| `platform` | Departure platform |
 | `stop` |  |
-| `tripId` |  |
-| `when` |  |
+| `tripId` | Trip identifier |
+| `when` | Scheduled departure time |
 
 Operations: list.
 
@@ -331,8 +331,8 @@ API path: `/stops/{id}/departures`
 
 | Field | Description |
 | --- | --- |
-| `legs` |  |
-| `refreshToken` |  |
+| `legs` | Journey legs |
+| `refreshToken` | Token to refresh this journey |
 | `type` |  |
 
 Operations: list.
@@ -343,11 +343,11 @@ API path: `/journeys`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
+| `id` | Unique identifier for the location |
 | `location` |  |
-| `name` |  |
-| `products` |  |
-| `type` |  |
+| `name` | Name of the location |
+| `products` | Available products at this location |
+| `type` | Type of location |
 
 Operations: list.
 
@@ -357,11 +357,11 @@ API path: `/locations`
 
 | Field | Description |
 | --- | --- |
-| `direction` |  |
+| `direction` | Direction of the movement |
 | `line` |  |
 | `location` |  |
 | `nextStopovers` |  |
-| `tripId` |  |
+| `tripId` | Trip identifier |
 
 Operations: list.
 
@@ -371,11 +371,11 @@ API path: `/radar`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
+| `id` | Unique identifier for the stop |
 | `location` |  |
-| `name` |  |
-| `products` |  |
-| `station` |  |
+| `name` | Name of the stop |
+| `products` | Available products at this stop |
+| `station` | Parent station if applicable |
 | `type` |  |
 
 Operations: load.
@@ -387,8 +387,8 @@ API path: `/stops/{id}`
 | Field | Description |
 | --- | --- |
 | `destination` |  |
-| `direction` |  |
-| `id` |  |
+| `direction` | Direction of the trip |
+| `id` | Trip identifier |
 | `line` |  |
 | `origin` |  |
 | `stopovers` |  |
@@ -416,15 +416,15 @@ Create an instance: `const arrival = client.Arrival()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `delay` | `number` |  |
-| `direction` | `string` |  |
+| `delay` | `number` | Delay in seconds |
+| `direction` | `string` | Direction of the trip |
 | `line` | `Record<string, any>` |  |
-| `plannedPlatform` | `string` |  |
-| `plannedWhen` | `string` |  |
-| `platform` | `string` |  |
+| `plannedPlatform` | `string` | Originally planned platform |
+| `plannedWhen` | `string` | Originally planned arrival time |
+| `platform` | `string` | Arrival platform |
 | `stop` | `Record<string, any>` |  |
-| `tripId` | `string` |  |
-| `when` | `string` |  |
+| `tripId` | `string` | Trip identifier |
+| `when` | `string` | Scheduled arrival time |
 
 #### Example: List
 
@@ -447,15 +447,15 @@ Create an instance: `const departure = client.Departure()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `delay` | `number` |  |
-| `direction` | `string` |  |
+| `delay` | `number` | Delay in seconds |
+| `direction` | `string` | Direction of the trip |
 | `line` | `Record<string, any>` |  |
-| `plannedPlatform` | `string` |  |
-| `plannedWhen` | `string` |  |
-| `platform` | `string` |  |
+| `plannedPlatform` | `string` | Originally planned platform |
+| `plannedWhen` | `string` | Originally planned departure time |
+| `platform` | `string` | Departure platform |
 | `stop` | `Record<string, any>` |  |
-| `tripId` | `string` |  |
-| `when` | `string` |  |
+| `tripId` | `string` | Trip identifier |
+| `when` | `string` | Scheduled departure time |
 
 #### Example: List
 
@@ -478,8 +478,8 @@ Create an instance: `const journey = client.Journey()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `legs` | `any[]` |  |
-| `refreshToken` | `string` |  |
+| `legs` | `any[]` | Journey legs |
+| `refreshToken` | `string` | Token to refresh this journey |
 | `type` | `string` |  |
 
 #### Example: List
@@ -503,11 +503,11 @@ Create an instance: `const location = client.Location()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `string` |  |
+| `id` | `string` | Unique identifier for the location |
 | `location` | `Record<string, any>` |  |
-| `name` | `string` |  |
-| `products` | `Record<string, any>` |  |
-| `type` | `string` |  |
+| `name` | `string` | Name of the location |
+| `products` | `Record<string, any>` | Available products at this location |
+| `type` | `string` | Type of location |
 
 #### Example: List
 
@@ -530,11 +530,11 @@ Create an instance: `const radar = client.Radar()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `direction` | `string` |  |
+| `direction` | `string` | Direction of the movement |
 | `line` | `Record<string, any>` |  |
 | `location` | `Record<string, any>` |  |
 | `nextStopovers` | `any[]` |  |
-| `tripId` | `string` |  |
+| `tripId` | `string` | Trip identifier |
 
 #### Example: List
 
@@ -557,11 +557,11 @@ Create an instance: `const stop = client.Stop()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `string` |  |
+| `id` | `string` | Unique identifier for the stop |
 | `location` | `Record<string, any>` |  |
-| `name` | `string` |  |
-| `products` | `Record<string, any>` |  |
-| `station` | `Record<string, any>` |  |
+| `name` | `string` | Name of the stop |
+| `products` | `Record<string, any>` | Available products at this stop |
+| `station` | `Record<string, any>` | Parent station if applicable |
 | `type` | `string` |  |
 
 #### Example: Load
@@ -586,8 +586,8 @@ Create an instance: `const trip = client.Trip()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `destination` | `Record<string, any>` |  |
-| `direction` | `string` |  |
-| `id` | `string` |  |
+| `direction` | `string` | Direction of the trip |
+| `id` | `string` | Trip identifier |
 | `line` | `Record<string, any>` |  |
 | `origin` | `Record<string, any>` |  |
 | `stopovers` | `any[]` |  |

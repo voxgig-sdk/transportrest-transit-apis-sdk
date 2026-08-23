@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "TransportrestTransitApis",
+			"slug": "transportrest-transit-apis",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -39,10 +42,12 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "delay",
+						"short": "Delay in seconds",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "direction",
+						"short": "Direction of the trip",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -51,14 +56,17 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "plannedPlatform",
+						"short": "Originally planned platform",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "plannedWhen",
+						"short": "Originally planned arrival time",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "platform",
+						"short": "Arrival platform",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -67,10 +75,12 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "tripId",
+						"short": "Trip identifier",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "when",
+						"short": "Scheduled arrival time",
 						"type": "`$STRING`",
 					},
 				},
@@ -155,10 +165,12 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "delay",
+						"short": "Delay in seconds",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "direction",
+						"short": "Direction of the trip",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -167,14 +179,17 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "plannedPlatform",
+						"short": "Originally planned platform",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "plannedWhen",
+						"short": "Originally planned departure time",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "platform",
+						"short": "Departure platform",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -183,10 +198,12 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "tripId",
+						"short": "Trip identifier",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "when",
+						"short": "Scheduled departure time",
 						"type": "`$STRING`",
 					},
 				},
@@ -279,10 +296,12 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "legs",
+						"short": "Journey legs",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "refreshToken",
+						"short": "Token to refresh this journey",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -375,6 +394,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "id",
+						"short": "Unique identifier for the location",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -383,14 +403,17 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Name of the location",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "products",
+						"short": "Available products at this location",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "type",
+						"short": "Type of location",
 						"type": "`$STRING`",
 					},
 				},
@@ -472,6 +495,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "direction",
+						"short": "Direction of the movement",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -488,6 +512,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "tripId",
+						"short": "Trip identifier",
 						"type": "`$STRING`",
 					},
 				},
@@ -568,6 +593,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "id",
+						"short": "Unique identifier for the stop",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -576,14 +602,17 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "name",
+						"short": "Name of the stop",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "products",
+						"short": "Available products at this stop",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "station",
+						"short": "Parent station if applicable",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
@@ -642,10 +671,12 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"name": "direction",
+						"short": "Direction of the trip",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "id",
+						"short": "Trip identifier",
 						"type": "`$STRING`",
 					},
 					map[string]any{

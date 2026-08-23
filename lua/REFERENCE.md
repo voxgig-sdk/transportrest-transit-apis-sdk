@@ -114,15 +114,15 @@ local arrival = client:Arrival(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delay` | `number` | No |  |
-| `direction` | `string` | No |  |
+| `delay` | `number` | No | Delay in seconds |
+| `direction` | `string` | No | Direction of the trip |
 | `line` | `table` | No |  |
-| `plannedPlatform` | `string` | No |  |
-| `plannedWhen` | `string` | No |  |
-| `platform` | `string` | No |  |
+| `plannedPlatform` | `string` | No | Originally planned platform |
+| `plannedWhen` | `string` | No | Originally planned arrival time |
+| `platform` | `string` | No | Arrival platform |
 | `stop` | `table` | No |  |
-| `tripId` | `string` | No |  |
-| `when` | `string` | No |  |
+| `tripId` | `string` | No | Trip identifier |
+| `when` | `string` | No | Scheduled arrival time |
 
 ### Operations
 
@@ -174,15 +174,15 @@ local departure = client:Departure(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delay` | `number` | No |  |
-| `direction` | `string` | No |  |
+| `delay` | `number` | No | Delay in seconds |
+| `direction` | `string` | No | Direction of the trip |
 | `line` | `table` | No |  |
-| `plannedPlatform` | `string` | No |  |
-| `plannedWhen` | `string` | No |  |
-| `platform` | `string` | No |  |
+| `plannedPlatform` | `string` | No | Originally planned platform |
+| `plannedWhen` | `string` | No | Originally planned departure time |
+| `platform` | `string` | No | Departure platform |
 | `stop` | `table` | No |  |
-| `tripId` | `string` | No |  |
-| `when` | `string` | No |  |
+| `tripId` | `string` | No | Trip identifier |
+| `when` | `string` | No | Scheduled departure time |
 
 ### Operations
 
@@ -234,8 +234,8 @@ local journey = client:Journey(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `legs` | `table` | No |  |
-| `refreshToken` | `string` | No |  |
+| `legs` | `table` | No | Journey legs |
+| `refreshToken` | `string` | No | Token to refresh this journey |
 | `type` | `string` | No |  |
 
 ### Operations
@@ -288,11 +288,11 @@ local location = client:Location(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `string` | No |  |
+| `id` | `string` | No | Unique identifier for the location |
 | `location` | `table` | No |  |
-| `name` | `string` | No |  |
-| `products` | `table` | No |  |
-| `type` | `string` | No |  |
+| `name` | `string` | No | Name of the location |
+| `products` | `table` | No | Available products at this location |
+| `type` | `string` | No | Type of location |
 
 ### Operations
 
@@ -344,11 +344,11 @@ local radar = client:Radar(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `direction` | `string` | No |  |
+| `direction` | `string` | No | Direction of the movement |
 | `line` | `table` | No |  |
 | `location` | `table` | No |  |
 | `nextStopovers` | `table` | No |  |
-| `tripId` | `string` | No |  |
+| `tripId` | `string` | No | Trip identifier |
 
 ### Operations
 
@@ -400,11 +400,11 @@ local stop = client:Stop(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `string` | No |  |
+| `id` | `string` | No | Unique identifier for the stop |
 | `location` | `table` | No |  |
-| `name` | `string` | No |  |
-| `products` | `table` | No |  |
-| `station` | `table` | No |  |
+| `name` | `string` | No | Name of the stop |
+| `products` | `table` | No | Available products at this stop |
+| `station` | `table` | No | Parent station if applicable |
 | `type` | `string` | No |  |
 
 ### Operations
@@ -458,8 +458,8 @@ local trip = client:Trip(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `destination` | `table` | No |  |
-| `direction` | `string` | No |  |
-| `id` | `string` | No |  |
+| `direction` | `string` | No | Direction of the trip |
+| `id` | `string` | No | Trip identifier |
 | `line` | `table` | No |  |
 | `origin` | `table` | No |  |
 | `stopovers` | `table` | No |  |

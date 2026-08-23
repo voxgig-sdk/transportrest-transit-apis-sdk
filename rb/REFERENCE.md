@@ -117,15 +117,15 @@ arrival = client.Arrival
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delay` | `Integer` | No |  |
-| `direction` | `String` | No |  |
+| `delay` | `Integer` | No | Delay in seconds |
+| `direction` | `String` | No | Direction of the trip |
 | `line` | `Hash` | No |  |
-| `plannedPlatform` | `String` | No |  |
-| `plannedWhen` | `String` | No |  |
-| `platform` | `String` | No |  |
+| `plannedPlatform` | `String` | No | Originally planned platform |
+| `plannedWhen` | `String` | No | Originally planned arrival time |
+| `platform` | `String` | No | Arrival platform |
 | `stop` | `Hash` | No |  |
-| `tripId` | `String` | No |  |
-| `when` | `String` | No |  |
+| `tripId` | `String` | No | Trip identifier |
+| `when` | `String` | No | Scheduled arrival time |
 
 ### Operations
 
@@ -177,15 +177,15 @@ departure = client.Departure
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delay` | `Integer` | No |  |
-| `direction` | `String` | No |  |
+| `delay` | `Integer` | No | Delay in seconds |
+| `direction` | `String` | No | Direction of the trip |
 | `line` | `Hash` | No |  |
-| `plannedPlatform` | `String` | No |  |
-| `plannedWhen` | `String` | No |  |
-| `platform` | `String` | No |  |
+| `plannedPlatform` | `String` | No | Originally planned platform |
+| `plannedWhen` | `String` | No | Originally planned departure time |
+| `platform` | `String` | No | Departure platform |
 | `stop` | `Hash` | No |  |
-| `tripId` | `String` | No |  |
-| `when` | `String` | No |  |
+| `tripId` | `String` | No | Trip identifier |
+| `when` | `String` | No | Scheduled departure time |
 
 ### Operations
 
@@ -237,8 +237,8 @@ journey = client.Journey
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `legs` | `Array` | No |  |
-| `refreshToken` | `String` | No |  |
+| `legs` | `Array` | No | Journey legs |
+| `refreshToken` | `String` | No | Token to refresh this journey |
 | `type` | `String` | No |  |
 
 ### Operations
@@ -291,11 +291,11 @@ location = client.Location
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `String` | No |  |
+| `id` | `String` | No | Unique identifier for the location |
 | `location` | `Hash` | No |  |
-| `name` | `String` | No |  |
-| `products` | `Hash` | No |  |
-| `type` | `String` | No |  |
+| `name` | `String` | No | Name of the location |
+| `products` | `Hash` | No | Available products at this location |
+| `type` | `String` | No | Type of location |
 
 ### Operations
 
@@ -347,11 +347,11 @@ radar = client.Radar
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `direction` | `String` | No |  |
+| `direction` | `String` | No | Direction of the movement |
 | `line` | `Hash` | No |  |
 | `location` | `Hash` | No |  |
 | `nextStopovers` | `Array` | No |  |
-| `tripId` | `String` | No |  |
+| `tripId` | `String` | No | Trip identifier |
 
 ### Operations
 
@@ -403,11 +403,11 @@ stop = client.Stop
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `String` | No |  |
+| `id` | `String` | No | Unique identifier for the stop |
 | `location` | `Hash` | No |  |
-| `name` | `String` | No |  |
-| `products` | `Hash` | No |  |
-| `station` | `Hash` | No |  |
+| `name` | `String` | No | Name of the stop |
+| `products` | `Hash` | No | Available products at this stop |
+| `station` | `Hash` | No | Parent station if applicable |
 | `type` | `String` | No |  |
 
 ### Operations
@@ -461,8 +461,8 @@ trip = client.Trip
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `destination` | `Hash` | No |  |
-| `direction` | `String` | No |  |
-| `id` | `String` | No |  |
+| `direction` | `String` | No | Direction of the trip |
+| `id` | `String` | No | Trip identifier |
 | `line` | `Hash` | No |  |
 | `origin` | `Hash` | No |  |
 | `stopovers` | `Array` | No |  |

@@ -36,12 +36,14 @@
               "active": true,
               "name": "delay",
               "req": false,
+              "short": "Delay in seconds",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "direction",
               "req": false,
+              "short": "Direction of the trip",
               "type": "`$STRING`"
             },
             {
@@ -54,18 +56,21 @@
               "active": true,
               "name": "plannedPlatform",
               "req": false,
+              "short": "Originally planned platform",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "plannedWhen",
               "req": false,
+              "short": "Originally planned arrival time",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "platform",
               "req": false,
+              "short": "Arrival platform",
               "type": "`$STRING`"
             },
             {
@@ -78,12 +83,14 @@
               "active": true,
               "name": "tripId",
               "req": false,
+              "short": "Trip identifier",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "when",
               "req": false,
+              "short": "Scheduled arrival time",
               "type": "`$STRING`"
             }
           ],
@@ -182,12 +189,14 @@
               "active": true,
               "name": "delay",
               "req": false,
+              "short": "Delay in seconds",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "direction",
               "req": false,
+              "short": "Direction of the trip",
               "type": "`$STRING`"
             },
             {
@@ -200,18 +209,21 @@
               "active": true,
               "name": "plannedPlatform",
               "req": false,
+              "short": "Originally planned platform",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "plannedWhen",
               "req": false,
+              "short": "Originally planned departure time",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "platform",
               "req": false,
+              "short": "Departure platform",
               "type": "`$STRING`"
             },
             {
@@ -224,12 +236,14 @@
               "active": true,
               "name": "tripId",
               "req": false,
+              "short": "Trip identifier",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "when",
               "req": false,
+              "short": "Scheduled departure time",
               "type": "`$STRING`"
             }
           ],
@@ -338,12 +352,14 @@
               "active": true,
               "name": "legs",
               "req": false,
+              "short": "Journey legs",
               "type": "`$ARRAY`"
             },
             {
               "active": true,
               "name": "refreshToken",
               "req": false,
+              "short": "Token to refresh this journey",
               "type": "`$STRING`"
             },
             {
@@ -455,6 +471,7 @@
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Unique identifier for the location",
               "type": "`$STRING`"
             },
             {
@@ -467,18 +484,21 @@
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Name of the location",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "products",
               "req": false,
+              "short": "Available products at this location",
               "type": "`$OBJECT`"
             },
             {
               "active": true,
               "name": "type",
               "req": false,
+              "short": "Type of location",
               "type": "`$STRING`"
             }
           ],
@@ -580,6 +600,7 @@
               "active": true,
               "name": "direction",
               "req": false,
+              "short": "Direction of the movement",
               "type": "`$STRING`"
             },
             {
@@ -604,6 +625,7 @@
               "active": true,
               "name": "tripId",
               "req": false,
+              "short": "Trip identifier",
               "type": "`$STRING`"
             }
           ],
@@ -697,6 +719,7 @@
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Unique identifier for the stop",
               "type": "`$STRING`"
             },
             {
@@ -709,18 +732,21 @@
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Name of the stop",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "products",
               "req": false,
+              "short": "Available products at this stop",
               "type": "`$OBJECT`"
             },
             {
               "active": true,
               "name": "station",
               "req": false,
+              "short": "Parent station if applicable",
               "type": "`$OBJECT`"
             },
             {
@@ -795,12 +821,14 @@
               "active": true,
               "name": "direction",
               "req": false,
+              "short": "Direction of the trip",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "id",
               "req": false,
+              "short": "Trip identifier",
               "type": "`$STRING`"
             },
             {

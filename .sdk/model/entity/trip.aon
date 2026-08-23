@@ -1,0 +1,105 @@
+# Entity: trip
+
+main: kit: entity: trip: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "destination"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "direction"
+      req: false
+      short: "Direction of the trip"
+      type: "`$STRING`"
+    }
+    {
+      name: "id"
+      req: false
+      short: "Trip identifier"
+      type: "`$STRING`"
+    }
+    {
+      name: "line"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "origin"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "stopovers"
+      req: false
+      type: "`$ARRAY`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "trip"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                kind: "param"
+                name: "id"
+                orig: "id"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                kind: "query"
+                name: "line_name"
+                orig: "line_name"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: true
+                kind: "query"
+                name: "stopover"
+                orig: "stopover"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/trips/{id}"
+          parts: [
+            "trips"
+            "{id}"
+          ]
+          select: {
+            exist: [
+              "id"
+              "line_name"
+              "stopover"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

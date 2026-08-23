@@ -6,7 +6,7 @@ The Golang SDK for the TransportrestTransitApis API — an entity-oriented clien
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.Arrival(nil)` — each with the same small set of operations (`List`, `Load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -268,15 +268,15 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"delay"` |  |
-| `"direction"` |  |
+| `"delay"` | Delay in seconds |
+| `"direction"` | Direction of the trip |
 | `"line"` |  |
-| `"plannedPlatform"` |  |
-| `"plannedWhen"` |  |
-| `"platform"` |  |
+| `"plannedPlatform"` | Originally planned platform |
+| `"plannedWhen"` | Originally planned arrival time |
+| `"platform"` | Arrival platform |
 | `"stop"` |  |
-| `"tripId"` |  |
-| `"when"` |  |
+| `"tripId"` | Trip identifier |
+| `"when"` | Scheduled arrival time |
 
 Operations: List.
 
@@ -286,15 +286,15 @@ API path: `/stops/{id}/arrivals`
 
 | Field | Description |
 | --- | --- |
-| `"delay"` |  |
-| `"direction"` |  |
+| `"delay"` | Delay in seconds |
+| `"direction"` | Direction of the trip |
 | `"line"` |  |
-| `"plannedPlatform"` |  |
-| `"plannedWhen"` |  |
-| `"platform"` |  |
+| `"plannedPlatform"` | Originally planned platform |
+| `"plannedWhen"` | Originally planned departure time |
+| `"platform"` | Departure platform |
 | `"stop"` |  |
-| `"tripId"` |  |
-| `"when"` |  |
+| `"tripId"` | Trip identifier |
+| `"when"` | Scheduled departure time |
 
 Operations: List.
 
@@ -304,8 +304,8 @@ API path: `/stops/{id}/departures`
 
 | Field | Description |
 | --- | --- |
-| `"legs"` |  |
-| `"refreshToken"` |  |
+| `"legs"` | Journey legs |
+| `"refreshToken"` | Token to refresh this journey |
 | `"type"` |  |
 
 Operations: List.
@@ -316,11 +316,11 @@ API path: `/journeys`
 
 | Field | Description |
 | --- | --- |
-| `"id"` |  |
+| `"id"` | Unique identifier for the location |
 | `"location"` |  |
-| `"name"` |  |
-| `"products"` |  |
-| `"type"` |  |
+| `"name"` | Name of the location |
+| `"products"` | Available products at this location |
+| `"type"` | Type of location |
 
 Operations: List.
 
@@ -330,11 +330,11 @@ API path: `/locations`
 
 | Field | Description |
 | --- | --- |
-| `"direction"` |  |
+| `"direction"` | Direction of the movement |
 | `"line"` |  |
 | `"location"` |  |
 | `"nextStopovers"` |  |
-| `"tripId"` |  |
+| `"tripId"` | Trip identifier |
 
 Operations: List.
 
@@ -344,11 +344,11 @@ API path: `/radar`
 
 | Field | Description |
 | --- | --- |
-| `"id"` |  |
+| `"id"` | Unique identifier for the stop |
 | `"location"` |  |
-| `"name"` |  |
-| `"products"` |  |
-| `"station"` |  |
+| `"name"` | Name of the stop |
+| `"products"` | Available products at this stop |
+| `"station"` | Parent station if applicable |
 | `"type"` |  |
 
 Operations: Load.
@@ -360,8 +360,8 @@ API path: `/stops/{id}`
 | Field | Description |
 | --- | --- |
 | `"destination"` |  |
-| `"direction"` |  |
-| `"id"` |  |
+| `"direction"` | Direction of the trip |
+| `"id"` | Trip identifier |
 | `"line"` |  |
 | `"origin"` |  |
 | `"stopovers"` |  |
@@ -389,15 +389,15 @@ Create an instance: `arrival := client.Arrival(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `delay` | `int` |  |
-| `direction` | `string` |  |
+| `delay` | `int` | Delay in seconds |
+| `direction` | `string` | Direction of the trip |
 | `line` | `map[string]any` |  |
-| `plannedPlatform` | `string` |  |
-| `plannedWhen` | `string` |  |
-| `platform` | `string` |  |
+| `plannedPlatform` | `string` | Originally planned platform |
+| `plannedWhen` | `string` | Originally planned arrival time |
+| `platform` | `string` | Arrival platform |
 | `stop` | `map[string]any` |  |
-| `tripId` | `string` |  |
-| `when` | `string` |  |
+| `tripId` | `string` | Trip identifier |
+| `when` | `string` | Scheduled arrival time |
 
 #### Example: List
 
@@ -424,15 +424,15 @@ Create an instance: `departure := client.Departure(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `delay` | `int` |  |
-| `direction` | `string` |  |
+| `delay` | `int` | Delay in seconds |
+| `direction` | `string` | Direction of the trip |
 | `line` | `map[string]any` |  |
-| `plannedPlatform` | `string` |  |
-| `plannedWhen` | `string` |  |
-| `platform` | `string` |  |
+| `plannedPlatform` | `string` | Originally planned platform |
+| `plannedWhen` | `string` | Originally planned departure time |
+| `platform` | `string` | Departure platform |
 | `stop` | `map[string]any` |  |
-| `tripId` | `string` |  |
-| `when` | `string` |  |
+| `tripId` | `string` | Trip identifier |
+| `when` | `string` | Scheduled departure time |
 
 #### Example: List
 
@@ -459,8 +459,8 @@ Create an instance: `journey := client.Journey(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `legs` | `[]any` |  |
-| `refreshToken` | `string` |  |
+| `legs` | `[]any` | Journey legs |
+| `refreshToken` | `string` | Token to refresh this journey |
 | `type` | `string` |  |
 
 #### Example: List
@@ -488,11 +488,11 @@ Create an instance: `location := client.Location(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `string` |  |
+| `id` | `string` | Unique identifier for the location |
 | `location` | `map[string]any` |  |
-| `name` | `string` |  |
-| `products` | `map[string]any` |  |
-| `type` | `string` |  |
+| `name` | `string` | Name of the location |
+| `products` | `map[string]any` | Available products at this location |
+| `type` | `string` | Type of location |
 
 #### Example: List
 
@@ -519,11 +519,11 @@ Create an instance: `radar := client.Radar(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `direction` | `string` |  |
+| `direction` | `string` | Direction of the movement |
 | `line` | `map[string]any` |  |
 | `location` | `map[string]any` |  |
 | `nextStopovers` | `[]any` |  |
-| `tripId` | `string` |  |
+| `tripId` | `string` | Trip identifier |
 
 #### Example: List
 
@@ -550,11 +550,11 @@ Create an instance: `stop := client.Stop(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `string` |  |
+| `id` | `string` | Unique identifier for the stop |
 | `location` | `map[string]any` |  |
-| `name` | `string` |  |
-| `products` | `map[string]any` |  |
-| `station` | `map[string]any` |  |
+| `name` | `string` | Name of the stop |
+| `products` | `map[string]any` | Available products at this stop |
+| `station` | `map[string]any` | Parent station if applicable |
 | `type` | `string` |  |
 
 #### Example: Load
@@ -583,8 +583,8 @@ Create an instance: `trip := client.Trip(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `destination` | `map[string]any` |  |
-| `direction` | `string` |  |
-| `id` | `string` |  |
+| `direction` | `string` | Direction of the trip |
+| `id` | `string` | Trip identifier |
 | `line` | `map[string]any` |  |
 | `origin` | `map[string]any` |  |
 | `stopovers` | `[]any` |  |

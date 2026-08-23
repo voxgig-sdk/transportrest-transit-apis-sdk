@@ -244,15 +244,15 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `delay` |  |
-| `direction` |  |
+| `delay` | Delay in seconds |
+| `direction` | Direction of the trip |
 | `line` |  |
-| `plannedPlatform` |  |
-| `plannedWhen` |  |
-| `platform` |  |
+| `plannedPlatform` | Originally planned platform |
+| `plannedWhen` | Originally planned arrival time |
+| `platform` | Arrival platform |
 | `stop` |  |
-| `tripId` |  |
-| `when` |  |
+| `tripId` | Trip identifier |
+| `when` | Scheduled arrival time |
 
 Operations: List.
 
@@ -262,15 +262,15 @@ API path: `/stops/{id}/arrivals`
 
 | Field | Description |
 | --- | --- |
-| `delay` |  |
-| `direction` |  |
+| `delay` | Delay in seconds |
+| `direction` | Direction of the trip |
 | `line` |  |
-| `plannedPlatform` |  |
-| `plannedWhen` |  |
-| `platform` |  |
+| `plannedPlatform` | Originally planned platform |
+| `plannedWhen` | Originally planned departure time |
+| `platform` | Departure platform |
 | `stop` |  |
-| `tripId` |  |
-| `when` |  |
+| `tripId` | Trip identifier |
+| `when` | Scheduled departure time |
 
 Operations: List.
 
@@ -280,8 +280,8 @@ API path: `/stops/{id}/departures`
 
 | Field | Description |
 | --- | --- |
-| `legs` |  |
-| `refreshToken` |  |
+| `legs` | Journey legs |
+| `refreshToken` | Token to refresh this journey |
 | `type` |  |
 
 Operations: List.
@@ -292,11 +292,11 @@ API path: `/journeys`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
+| `id` | Unique identifier for the location |
 | `location` |  |
-| `name` |  |
-| `products` |  |
-| `type` |  |
+| `name` | Name of the location |
+| `products` | Available products at this location |
+| `type` | Type of location |
 
 Operations: List.
 
@@ -306,11 +306,11 @@ API path: `/locations`
 
 | Field | Description |
 | --- | --- |
-| `direction` |  |
+| `direction` | Direction of the movement |
 | `line` |  |
 | `location` |  |
 | `nextStopovers` |  |
-| `tripId` |  |
+| `tripId` | Trip identifier |
 
 Operations: List.
 
@@ -320,11 +320,11 @@ API path: `/radar`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
+| `id` | Unique identifier for the stop |
 | `location` |  |
-| `name` |  |
-| `products` |  |
-| `station` |  |
+| `name` | Name of the stop |
+| `products` | Available products at this stop |
+| `station` | Parent station if applicable |
 | `type` |  |
 
 Operations: Load.
@@ -336,8 +336,8 @@ API path: `/stops/{id}`
 | Field | Description |
 | --- | --- |
 | `destination` |  |
-| `direction` |  |
-| `id` |  |
+| `direction` | Direction of the trip |
+| `id` | Trip identifier |
 | `line` |  |
 | `origin` |  |
 | `stopovers` |  |
@@ -365,15 +365,15 @@ Create an instance: `arrival = client.Arrival`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `delay` | `Integer` |  |
-| `direction` | `String` |  |
+| `delay` | `Integer` | Delay in seconds |
+| `direction` | `String` | Direction of the trip |
 | `line` | `Hash` |  |
-| `plannedPlatform` | `String` |  |
-| `plannedWhen` | `String` |  |
-| `platform` | `String` |  |
+| `plannedPlatform` | `String` | Originally planned platform |
+| `plannedWhen` | `String` | Originally planned arrival time |
+| `platform` | `String` | Arrival platform |
 | `stop` | `Hash` |  |
-| `tripId` | `String` |  |
-| `when` | `String` |  |
+| `tripId` | `String` | Trip identifier |
+| `when` | `String` | Scheduled arrival time |
 
 #### Example: List
 
@@ -397,15 +397,15 @@ Create an instance: `departure = client.Departure`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `delay` | `Integer` |  |
-| `direction` | `String` |  |
+| `delay` | `Integer` | Delay in seconds |
+| `direction` | `String` | Direction of the trip |
 | `line` | `Hash` |  |
-| `plannedPlatform` | `String` |  |
-| `plannedWhen` | `String` |  |
-| `platform` | `String` |  |
+| `plannedPlatform` | `String` | Originally planned platform |
+| `plannedWhen` | `String` | Originally planned departure time |
+| `platform` | `String` | Departure platform |
 | `stop` | `Hash` |  |
-| `tripId` | `String` |  |
-| `when` | `String` |  |
+| `tripId` | `String` | Trip identifier |
+| `when` | `String` | Scheduled departure time |
 
 #### Example: List
 
@@ -429,8 +429,8 @@ Create an instance: `journey = client.Journey`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `legs` | `Array` |  |
-| `refreshToken` | `String` |  |
+| `legs` | `Array` | Journey legs |
+| `refreshToken` | `String` | Token to refresh this journey |
 | `type` | `String` |  |
 
 #### Example: List
@@ -455,11 +455,11 @@ Create an instance: `location = client.Location`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `String` |  |
+| `id` | `String` | Unique identifier for the location |
 | `location` | `Hash` |  |
-| `name` | `String` |  |
-| `products` | `Hash` |  |
-| `type` | `String` |  |
+| `name` | `String` | Name of the location |
+| `products` | `Hash` | Available products at this location |
+| `type` | `String` | Type of location |
 
 #### Example: List
 
@@ -483,11 +483,11 @@ Create an instance: `radar = client.Radar`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `direction` | `String` |  |
+| `direction` | `String` | Direction of the movement |
 | `line` | `Hash` |  |
 | `location` | `Hash` |  |
 | `nextStopovers` | `Array` |  |
-| `tripId` | `String` |  |
+| `tripId` | `String` | Trip identifier |
 
 #### Example: List
 
@@ -511,11 +511,11 @@ Create an instance: `stop = client.Stop`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `String` |  |
+| `id` | `String` | Unique identifier for the stop |
 | `location` | `Hash` |  |
-| `name` | `String` |  |
-| `products` | `Hash` |  |
-| `station` | `Hash` |  |
+| `name` | `String` | Name of the stop |
+| `products` | `Hash` | Available products at this stop |
+| `station` | `Hash` | Parent station if applicable |
 | `type` | `String` |  |
 
 #### Example: Load
@@ -541,8 +541,8 @@ Create an instance: `trip = client.Trip`
 | Field | Type | Description |
 | --- | --- | --- |
 | `destination` | `Hash` |  |
-| `direction` | `String` |  |
-| `id` | `String` |  |
+| `direction` | `String` | Direction of the trip |
+| `id` | `String` | Trip identifier |
 | `line` | `Hash` |  |
 | `origin` | `Hash` |  |
 | `stopovers` | `Array` |  |

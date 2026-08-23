@@ -1,0 +1,109 @@
+# Entity: journey
+
+main: kit: entity: journey: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "legs"
+      req: false
+      short: "Journey legs"
+      type: "`$ARRAY`"
+    }
+    {
+      name: "refreshToken"
+      req: false
+      short: "Token to refresh this journey"
+      type: "`$STRING`"
+    }
+    {
+      name: "type"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "journey"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "arrival"
+                orig: "arrival"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "departure"
+                orig: "departure"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: "900000003201"
+                kind: "query"
+                name: "from"
+                orig: "from"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                example: 3
+                kind: "query"
+                name: "result"
+                orig: "result"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                example: false
+                kind: "query"
+                name: "stopover"
+                orig: "stopover"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                example: "900000100003"
+                kind: "query"
+                name: "to"
+                orig: "to"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/journeys"
+          parts: [
+            "journeys"
+          ]
+          select: {
+            exist: [
+              "arrival"
+              "departure"
+              "from"
+              "result"
+              "stopover"
+              "to"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.journeys`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

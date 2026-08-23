@@ -188,15 +188,15 @@ const arrival = client.Arrival()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delay` | `number` | No |  |
-| `direction` | `string` | No |  |
+| `delay` | `number` | No | Delay in seconds |
+| `direction` | `string` | No | Direction of the trip |
 | `line` | `Record<string, any>` | No |  |
-| `plannedPlatform` | `string` | No |  |
-| `plannedWhen` | `string` | No |  |
-| `platform` | `string` | No |  |
+| `plannedPlatform` | `string` | No | Originally planned platform |
+| `plannedWhen` | `string` | No | Originally planned arrival time |
+| `platform` | `string` | No | Arrival platform |
 | `stop` | `Record<string, any>` | No |  |
-| `tripId` | `string` | No |  |
-| `when` | `string` | No |  |
+| `tripId` | `string` | No | Trip identifier |
+| `when` | `string` | No | Scheduled arrival time |
 
 ### Operations
 
@@ -246,15 +246,15 @@ const departure = client.Departure()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delay` | `number` | No |  |
-| `direction` | `string` | No |  |
+| `delay` | `number` | No | Delay in seconds |
+| `direction` | `string` | No | Direction of the trip |
 | `line` | `Record<string, any>` | No |  |
-| `plannedPlatform` | `string` | No |  |
-| `plannedWhen` | `string` | No |  |
-| `platform` | `string` | No |  |
+| `plannedPlatform` | `string` | No | Originally planned platform |
+| `plannedWhen` | `string` | No | Originally planned departure time |
+| `platform` | `string` | No | Departure platform |
 | `stop` | `Record<string, any>` | No |  |
-| `tripId` | `string` | No |  |
-| `when` | `string` | No |  |
+| `tripId` | `string` | No | Trip identifier |
+| `when` | `string` | No | Scheduled departure time |
 
 ### Operations
 
@@ -304,8 +304,8 @@ const journey = client.Journey()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `legs` | `any[]` | No |  |
-| `refreshToken` | `string` | No |  |
+| `legs` | `any[]` | No | Journey legs |
+| `refreshToken` | `string` | No | Token to refresh this journey |
 | `type` | `string` | No |  |
 
 ### Operations
@@ -356,11 +356,11 @@ const location = client.Location()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `string` | No |  |
+| `id` | `string` | No | Unique identifier for the location |
 | `location` | `Record<string, any>` | No |  |
-| `name` | `string` | No |  |
-| `products` | `Record<string, any>` | No |  |
-| `type` | `string` | No |  |
+| `name` | `string` | No | Name of the location |
+| `products` | `Record<string, any>` | No | Available products at this location |
+| `type` | `string` | No | Type of location |
 
 ### Operations
 
@@ -410,11 +410,11 @@ const radar = client.Radar()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `direction` | `string` | No |  |
+| `direction` | `string` | No | Direction of the movement |
 | `line` | `Record<string, any>` | No |  |
 | `location` | `Record<string, any>` | No |  |
 | `nextStopovers` | `any[]` | No |  |
-| `tripId` | `string` | No |  |
+| `tripId` | `string` | No | Trip identifier |
 
 ### Operations
 
@@ -464,11 +464,11 @@ const stop = client.Stop()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `string` | No |  |
+| `id` | `string` | No | Unique identifier for the stop |
 | `location` | `Record<string, any>` | No |  |
-| `name` | `string` | No |  |
-| `products` | `Record<string, any>` | No |  |
-| `station` | `Record<string, any>` | No |  |
+| `name` | `string` | No | Name of the stop |
+| `products` | `Record<string, any>` | No | Available products at this stop |
+| `station` | `Record<string, any>` | No | Parent station if applicable |
 | `type` | `string` | No |  |
 
 ### Operations
@@ -520,8 +520,8 @@ const trip = client.Trip()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `destination` | `Record<string, any>` | No |  |
-| `direction` | `string` | No |  |
-| `id` | `string` | No |  |
+| `direction` | `string` | No | Direction of the trip |
+| `id` | `string` | No | Trip identifier |
 | `line` | `Record<string, any>` | No |  |
 | `origin` | `Record<string, any>` | No |  |
 | `stopovers` | `any[]` | No |  |

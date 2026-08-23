@@ -254,15 +254,15 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `delay` |  |
-| `direction` |  |
+| `delay` | Delay in seconds |
+| `direction` | Direction of the trip |
 | `line` |  |
-| `plannedPlatform` |  |
-| `plannedWhen` |  |
-| `platform` |  |
+| `plannedPlatform` | Originally planned platform |
+| `plannedWhen` | Originally planned arrival time |
+| `platform` | Arrival platform |
 | `stop` |  |
-| `tripId` |  |
-| `when` |  |
+| `tripId` | Trip identifier |
+| `when` | Scheduled arrival time |
 
 Operations: List.
 
@@ -272,15 +272,15 @@ API path: `/stops/{id}/arrivals`
 
 | Field | Description |
 | --- | --- |
-| `delay` |  |
-| `direction` |  |
+| `delay` | Delay in seconds |
+| `direction` | Direction of the trip |
 | `line` |  |
-| `plannedPlatform` |  |
-| `plannedWhen` |  |
-| `platform` |  |
+| `plannedPlatform` | Originally planned platform |
+| `plannedWhen` | Originally planned departure time |
+| `platform` | Departure platform |
 | `stop` |  |
-| `tripId` |  |
-| `when` |  |
+| `tripId` | Trip identifier |
+| `when` | Scheduled departure time |
 
 Operations: List.
 
@@ -290,8 +290,8 @@ API path: `/stops/{id}/departures`
 
 | Field | Description |
 | --- | --- |
-| `legs` |  |
-| `refreshToken` |  |
+| `legs` | Journey legs |
+| `refreshToken` | Token to refresh this journey |
 | `type` |  |
 
 Operations: List.
@@ -302,11 +302,11 @@ API path: `/journeys`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
+| `id` | Unique identifier for the location |
 | `location` |  |
-| `name` |  |
-| `products` |  |
-| `type` |  |
+| `name` | Name of the location |
+| `products` | Available products at this location |
+| `type` | Type of location |
 
 Operations: List.
 
@@ -316,11 +316,11 @@ API path: `/locations`
 
 | Field | Description |
 | --- | --- |
-| `direction` |  |
+| `direction` | Direction of the movement |
 | `line` |  |
 | `location` |  |
 | `nextStopovers` |  |
-| `tripId` |  |
+| `tripId` | Trip identifier |
 
 Operations: List.
 
@@ -330,11 +330,11 @@ API path: `/radar`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
+| `id` | Unique identifier for the stop |
 | `location` |  |
-| `name` |  |
-| `products` |  |
-| `station` |  |
+| `name` | Name of the stop |
+| `products` | Available products at this stop |
+| `station` | Parent station if applicable |
 | `type` |  |
 
 Operations: Load.
@@ -346,8 +346,8 @@ API path: `/stops/{id}`
 | Field | Description |
 | --- | --- |
 | `destination` |  |
-| `direction` |  |
-| `id` |  |
+| `direction` | Direction of the trip |
+| `id` | Trip identifier |
 | `line` |  |
 | `origin` |  |
 | `stopovers` |  |
@@ -375,15 +375,15 @@ Create an instance: `$arrival = $client->Arrival();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `delay` | `int` |  |
-| `direction` | `string` |  |
+| `delay` | `int` | Delay in seconds |
+| `direction` | `string` | Direction of the trip |
 | `line` | `array` |  |
-| `plannedPlatform` | `string` |  |
-| `plannedWhen` | `string` |  |
-| `platform` | `string` |  |
+| `plannedPlatform` | `string` | Originally planned platform |
+| `plannedWhen` | `string` | Originally planned arrival time |
+| `platform` | `string` | Arrival platform |
 | `stop` | `array` |  |
-| `tripId` | `string` |  |
-| `when` | `string` |  |
+| `tripId` | `string` | Trip identifier |
+| `when` | `string` | Scheduled arrival time |
 
 #### Example: List
 
@@ -407,15 +407,15 @@ Create an instance: `$departure = $client->Departure();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `delay` | `int` |  |
-| `direction` | `string` |  |
+| `delay` | `int` | Delay in seconds |
+| `direction` | `string` | Direction of the trip |
 | `line` | `array` |  |
-| `plannedPlatform` | `string` |  |
-| `plannedWhen` | `string` |  |
-| `platform` | `string` |  |
+| `plannedPlatform` | `string` | Originally planned platform |
+| `plannedWhen` | `string` | Originally planned departure time |
+| `platform` | `string` | Departure platform |
 | `stop` | `array` |  |
-| `tripId` | `string` |  |
-| `when` | `string` |  |
+| `tripId` | `string` | Trip identifier |
+| `when` | `string` | Scheduled departure time |
 
 #### Example: List
 
@@ -439,8 +439,8 @@ Create an instance: `$journey = $client->Journey();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `legs` | `array` |  |
-| `refreshToken` | `string` |  |
+| `legs` | `array` | Journey legs |
+| `refreshToken` | `string` | Token to refresh this journey |
 | `type` | `string` |  |
 
 #### Example: List
@@ -465,11 +465,11 @@ Create an instance: `$location = $client->Location();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `string` |  |
+| `id` | `string` | Unique identifier for the location |
 | `location` | `array` |  |
-| `name` | `string` |  |
-| `products` | `array` |  |
-| `type` | `string` |  |
+| `name` | `string` | Name of the location |
+| `products` | `array` | Available products at this location |
+| `type` | `string` | Type of location |
 
 #### Example: List
 
@@ -493,11 +493,11 @@ Create an instance: `$radar = $client->Radar();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `direction` | `string` |  |
+| `direction` | `string` | Direction of the movement |
 | `line` | `array` |  |
 | `location` | `array` |  |
 | `nextStopovers` | `array` |  |
-| `tripId` | `string` |  |
+| `tripId` | `string` | Trip identifier |
 
 #### Example: List
 
@@ -521,11 +521,11 @@ Create an instance: `$stop = $client->Stop();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `string` |  |
+| `id` | `string` | Unique identifier for the stop |
 | `location` | `array` |  |
-| `name` | `string` |  |
-| `products` | `array` |  |
-| `station` | `array` |  |
+| `name` | `string` | Name of the stop |
+| `products` | `array` | Available products at this stop |
+| `station` | `array` | Parent station if applicable |
 | `type` | `string` |  |
 
 #### Example: Load
@@ -551,8 +551,8 @@ Create an instance: `$trip = $client->Trip();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `destination` | `array` |  |
-| `direction` | `string` |  |
-| `id` | `string` |  |
+| `direction` | `string` | Direction of the trip |
+| `id` | `string` | Trip identifier |
 | `line` | `array` |  |
 | `origin` | `array` |  |
 | `stopovers` | `array` |  |

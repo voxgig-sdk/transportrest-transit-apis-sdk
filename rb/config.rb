@@ -19,6 +19,9 @@ module TransportrestTransitApisConfig
     {
       "main" => {
         "name" => "TransportrestTransitApis",
+        "slug" => "transportrest-transit-apis",
+        "version" => "0.0.1",
+        "target" => "rb",
       },
       "feature" => {
         "test" => {
@@ -47,10 +50,12 @@ module TransportrestTransitApisConfig
           "fields" => [
             {
               "name" => "delay",
+              "short" => "Delay in seconds",
               "type" => "`$INTEGER`",
             },
             {
               "name" => "direction",
+              "short" => "Direction of the trip",
               "type" => "`$STRING`",
             },
             {
@@ -59,14 +64,17 @@ module TransportrestTransitApisConfig
             },
             {
               "name" => "plannedPlatform",
+              "short" => "Originally planned platform",
               "type" => "`$STRING`",
             },
             {
               "name" => "plannedWhen",
+              "short" => "Originally planned arrival time",
               "type" => "`$STRING`",
             },
             {
               "name" => "platform",
+              "short" => "Arrival platform",
               "type" => "`$STRING`",
             },
             {
@@ -75,10 +83,12 @@ module TransportrestTransitApisConfig
             },
             {
               "name" => "tripId",
+              "short" => "Trip identifier",
               "type" => "`$STRING`",
             },
             {
               "name" => "when",
+              "short" => "Scheduled arrival time",
               "type" => "`$STRING`",
             },
           ],
@@ -163,10 +173,12 @@ module TransportrestTransitApisConfig
           "fields" => [
             {
               "name" => "delay",
+              "short" => "Delay in seconds",
               "type" => "`$INTEGER`",
             },
             {
               "name" => "direction",
+              "short" => "Direction of the trip",
               "type" => "`$STRING`",
             },
             {
@@ -175,14 +187,17 @@ module TransportrestTransitApisConfig
             },
             {
               "name" => "plannedPlatform",
+              "short" => "Originally planned platform",
               "type" => "`$STRING`",
             },
             {
               "name" => "plannedWhen",
+              "short" => "Originally planned departure time",
               "type" => "`$STRING`",
             },
             {
               "name" => "platform",
+              "short" => "Departure platform",
               "type" => "`$STRING`",
             },
             {
@@ -191,10 +206,12 @@ module TransportrestTransitApisConfig
             },
             {
               "name" => "tripId",
+              "short" => "Trip identifier",
               "type" => "`$STRING`",
             },
             {
               "name" => "when",
+              "short" => "Scheduled departure time",
               "type" => "`$STRING`",
             },
           ],
@@ -287,10 +304,12 @@ module TransportrestTransitApisConfig
           "fields" => [
             {
               "name" => "legs",
+              "short" => "Journey legs",
               "type" => "`$ARRAY`",
             },
             {
               "name" => "refreshToken",
+              "short" => "Token to refresh this journey",
               "type" => "`$STRING`",
             },
             {
@@ -383,6 +402,7 @@ module TransportrestTransitApisConfig
           "fields" => [
             {
               "name" => "id",
+              "short" => "Unique identifier for the location",
               "type" => "`$STRING`",
             },
             {
@@ -391,14 +411,17 @@ module TransportrestTransitApisConfig
             },
             {
               "name" => "name",
+              "short" => "Name of the location",
               "type" => "`$STRING`",
             },
             {
               "name" => "products",
+              "short" => "Available products at this location",
               "type" => "`$OBJECT`",
             },
             {
               "name" => "type",
+              "short" => "Type of location",
               "type" => "`$STRING`",
             },
           ],
@@ -480,6 +503,7 @@ module TransportrestTransitApisConfig
           "fields" => [
             {
               "name" => "direction",
+              "short" => "Direction of the movement",
               "type" => "`$STRING`",
             },
             {
@@ -496,6 +520,7 @@ module TransportrestTransitApisConfig
             },
             {
               "name" => "tripId",
+              "short" => "Trip identifier",
               "type" => "`$STRING`",
             },
           ],
@@ -576,6 +601,7 @@ module TransportrestTransitApisConfig
           "fields" => [
             {
               "name" => "id",
+              "short" => "Unique identifier for the stop",
               "type" => "`$STRING`",
             },
             {
@@ -584,14 +610,17 @@ module TransportrestTransitApisConfig
             },
             {
               "name" => "name",
+              "short" => "Name of the stop",
               "type" => "`$STRING`",
             },
             {
               "name" => "products",
+              "short" => "Available products at this stop",
               "type" => "`$OBJECT`",
             },
             {
               "name" => "station",
+              "short" => "Parent station if applicable",
               "type" => "`$OBJECT`",
             },
             {
@@ -650,10 +679,12 @@ module TransportrestTransitApisConfig
             },
             {
               "name" => "direction",
+              "short" => "Direction of the trip",
               "type" => "`$STRING`",
             },
             {
               "name" => "id",
+              "short" => "Trip identifier",
               "type" => "`$STRING`",
             },
             {

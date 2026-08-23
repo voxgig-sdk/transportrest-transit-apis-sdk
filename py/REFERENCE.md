@@ -111,15 +111,15 @@ arrival = client.Arrival()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delay` | `int` | No |  |
-| `direction` | `str` | No |  |
+| `delay` | `int` | No | Delay in seconds |
+| `direction` | `str` | No | Direction of the trip |
 | `line` | `dict` | No |  |
-| `plannedPlatform` | `str` | No |  |
-| `plannedWhen` | `str` | No |  |
-| `platform` | `str` | No |  |
+| `plannedPlatform` | `str` | No | Originally planned platform |
+| `plannedWhen` | `str` | No | Originally planned arrival time |
+| `platform` | `str` | No | Arrival platform |
 | `stop` | `dict` | No |  |
-| `tripId` | `str` | No |  |
-| `when` | `str` | No |  |
+| `tripId` | `str` | No | Trip identifier |
+| `when` | `str` | No | Scheduled arrival time |
 
 ### Operations
 
@@ -172,15 +172,15 @@ departure = client.Departure()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delay` | `int` | No |  |
-| `direction` | `str` | No |  |
+| `delay` | `int` | No | Delay in seconds |
+| `direction` | `str` | No | Direction of the trip |
 | `line` | `dict` | No |  |
-| `plannedPlatform` | `str` | No |  |
-| `plannedWhen` | `str` | No |  |
-| `platform` | `str` | No |  |
+| `plannedPlatform` | `str` | No | Originally planned platform |
+| `plannedWhen` | `str` | No | Originally planned departure time |
+| `platform` | `str` | No | Departure platform |
 | `stop` | `dict` | No |  |
-| `tripId` | `str` | No |  |
-| `when` | `str` | No |  |
+| `tripId` | `str` | No | Trip identifier |
+| `when` | `str` | No | Scheduled departure time |
 
 ### Operations
 
@@ -233,8 +233,8 @@ journey = client.Journey()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `legs` | `list` | No |  |
-| `refreshToken` | `str` | No |  |
+| `legs` | `list` | No | Journey legs |
+| `refreshToken` | `str` | No | Token to refresh this journey |
 | `type` | `str` | No |  |
 
 ### Operations
@@ -288,11 +288,11 @@ location = client.Location()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `str` | No |  |
+| `id` | `str` | No | Unique identifier for the location |
 | `location` | `dict` | No |  |
-| `name` | `str` | No |  |
-| `products` | `dict` | No |  |
-| `type` | `str` | No |  |
+| `name` | `str` | No | Name of the location |
+| `products` | `dict` | No | Available products at this location |
+| `type` | `str` | No | Type of location |
 
 ### Operations
 
@@ -345,11 +345,11 @@ radar = client.Radar()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `direction` | `str` | No |  |
+| `direction` | `str` | No | Direction of the movement |
 | `line` | `dict` | No |  |
 | `location` | `dict` | No |  |
 | `nextStopovers` | `list` | No |  |
-| `tripId` | `str` | No |  |
+| `tripId` | `str` | No | Trip identifier |
 
 ### Operations
 
@@ -402,11 +402,11 @@ stop = client.Stop()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `str` | No |  |
+| `id` | `str` | No | Unique identifier for the stop |
 | `location` | `dict` | No |  |
-| `name` | `str` | No |  |
-| `products` | `dict` | No |  |
-| `station` | `dict` | No |  |
+| `name` | `str` | No | Name of the stop |
+| `products` | `dict` | No | Available products at this stop |
+| `station` | `dict` | No | Parent station if applicable |
 | `type` | `str` | No |  |
 
 ### Operations
@@ -459,8 +459,8 @@ trip = client.Trip()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `destination` | `dict` | No |  |
-| `direction` | `str` | No |  |
-| `id` | `str` | No |  |
+| `direction` | `str` | No | Direction of the trip |
+| `id` | `str` | No | Trip identifier |
 | `line` | `dict` | No |  |
 | `origin` | `dict` | No |  |
 | `stopovers` | `list` | No |  |

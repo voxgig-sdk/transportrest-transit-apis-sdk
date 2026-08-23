@@ -1,0 +1,108 @@
+# Entity: radar
+
+main: kit: entity: radar: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "direction"
+      req: false
+      short: "Direction of the movement"
+      type: "`$STRING`"
+    }
+    {
+      name: "line"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "location"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "nextStopovers"
+      req: false
+      type: "`$ARRAY`"
+    }
+    {
+      name: "tripId"
+      req: false
+      short: "Trip identifier"
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "radar"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                kind: "query"
+                name: "east"
+                orig: "east"
+                reqd: true
+                type: "`$NUMBER`"
+              }
+              {
+                kind: "query"
+                name: "north"
+                orig: "north"
+                reqd: true
+                type: "`$NUMBER`"
+              }
+              {
+                example: 256
+                kind: "query"
+                name: "result"
+                orig: "result"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "south"
+                orig: "south"
+                reqd: true
+                type: "`$NUMBER`"
+              }
+              {
+                kind: "query"
+                name: "west"
+                orig: "west"
+                reqd: true
+                type: "`$NUMBER`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/radar"
+          parts: [
+            "radar"
+          ]
+          select: {
+            exist: [
+              "east"
+              "north"
+              "result"
+              "south"
+              "west"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body.movements`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

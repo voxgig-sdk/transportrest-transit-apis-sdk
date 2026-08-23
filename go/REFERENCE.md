@@ -122,15 +122,15 @@ fmt.Println(arrival.GetName()) // "arrival"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delay` | `int` | No |  |
-| `direction` | `string` | No |  |
+| `delay` | `int` | No | Delay in seconds |
+| `direction` | `string` | No | Direction of the trip |
 | `line` | `map[string]any` | No |  |
-| `plannedPlatform` | `string` | No |  |
-| `plannedWhen` | `string` | No |  |
-| `platform` | `string` | No |  |
+| `plannedPlatform` | `string` | No | Originally planned platform |
+| `plannedWhen` | `string` | No | Originally planned arrival time |
+| `platform` | `string` | No | Arrival platform |
 | `stop` | `map[string]any` | No |  |
-| `tripId` | `string` | No |  |
-| `when` | `string` | No |  |
+| `tripId` | `string` | No | Trip identifier |
+| `when` | `string` | No | Scheduled arrival time |
 
 ### Operations
 
@@ -181,15 +181,15 @@ fmt.Println(departure.GetName()) // "departure"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delay` | `int` | No |  |
-| `direction` | `string` | No |  |
+| `delay` | `int` | No | Delay in seconds |
+| `direction` | `string` | No | Direction of the trip |
 | `line` | `map[string]any` | No |  |
-| `plannedPlatform` | `string` | No |  |
-| `plannedWhen` | `string` | No |  |
-| `platform` | `string` | No |  |
+| `plannedPlatform` | `string` | No | Originally planned platform |
+| `plannedWhen` | `string` | No | Originally planned departure time |
+| `platform` | `string` | No | Departure platform |
 | `stop` | `map[string]any` | No |  |
-| `tripId` | `string` | No |  |
-| `when` | `string` | No |  |
+| `tripId` | `string` | No | Trip identifier |
+| `when` | `string` | No | Scheduled departure time |
 
 ### Operations
 
@@ -240,8 +240,8 @@ fmt.Println(journey.GetName()) // "journey"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `legs` | `[]any` | No |  |
-| `refreshToken` | `string` | No |  |
+| `legs` | `[]any` | No | Journey legs |
+| `refreshToken` | `string` | No | Token to refresh this journey |
 | `type` | `string` | No |  |
 
 ### Operations
@@ -293,11 +293,11 @@ fmt.Println(location.GetName()) // "location"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `string` | No |  |
+| `id` | `string` | No | Unique identifier for the location |
 | `location` | `map[string]any` | No |  |
-| `name` | `string` | No |  |
-| `products` | `map[string]any` | No |  |
-| `type` | `string` | No |  |
+| `name` | `string` | No | Name of the location |
+| `products` | `map[string]any` | No | Available products at this location |
+| `type` | `string` | No | Type of location |
 
 ### Operations
 
@@ -348,11 +348,11 @@ fmt.Println(radar.GetName()) // "radar"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `direction` | `string` | No |  |
+| `direction` | `string` | No | Direction of the movement |
 | `line` | `map[string]any` | No |  |
 | `location` | `map[string]any` | No |  |
 | `nextStopovers` | `[]any` | No |  |
-| `tripId` | `string` | No |  |
+| `tripId` | `string` | No | Trip identifier |
 
 ### Operations
 
@@ -403,11 +403,11 @@ fmt.Println(stop.GetName()) // "stop"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `string` | No |  |
+| `id` | `string` | No | Unique identifier for the stop |
 | `location` | `map[string]any` | No |  |
-| `name` | `string` | No |  |
-| `products` | `map[string]any` | No |  |
-| `station` | `map[string]any` | No |  |
+| `name` | `string` | No | Name of the stop |
+| `products` | `map[string]any` | No | Available products at this stop |
+| `station` | `map[string]any` | No | Parent station if applicable |
 | `type` | `string` | No |  |
 
 ### Operations
@@ -460,8 +460,8 @@ fmt.Println(trip.GetName()) // "trip"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `destination` | `map[string]any` | No |  |
-| `direction` | `string` | No |  |
-| `id` | `string` | No |  |
+| `direction` | `string` | No | Direction of the trip |
+| `id` | `string` | No | Trip identifier |
 | `line` | `map[string]any` | No |  |
 | `origin` | `map[string]any` | No |  |
 | `stopovers` | `[]any` | No |  |

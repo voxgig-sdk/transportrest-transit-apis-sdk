@@ -116,15 +116,15 @@ $arrival = $client->Arrival();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delay` | `int` | No |  |
-| `direction` | `string` | No |  |
+| `delay` | `int` | No | Delay in seconds |
+| `direction` | `string` | No | Direction of the trip |
 | `line` | `array` | No |  |
-| `plannedPlatform` | `string` | No |  |
-| `plannedWhen` | `string` | No |  |
-| `platform` | `string` | No |  |
+| `plannedPlatform` | `string` | No | Originally planned platform |
+| `plannedWhen` | `string` | No | Originally planned arrival time |
+| `platform` | `string` | No | Arrival platform |
 | `stop` | `array` | No |  |
-| `tripId` | `string` | No |  |
-| `when` | `string` | No |  |
+| `tripId` | `string` | No | Trip identifier |
+| `when` | `string` | No | Scheduled arrival time |
 
 ### Operations
 
@@ -176,15 +176,15 @@ $departure = $client->Departure();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `delay` | `int` | No |  |
-| `direction` | `string` | No |  |
+| `delay` | `int` | No | Delay in seconds |
+| `direction` | `string` | No | Direction of the trip |
 | `line` | `array` | No |  |
-| `plannedPlatform` | `string` | No |  |
-| `plannedWhen` | `string` | No |  |
-| `platform` | `string` | No |  |
+| `plannedPlatform` | `string` | No | Originally planned platform |
+| `plannedWhen` | `string` | No | Originally planned departure time |
+| `platform` | `string` | No | Departure platform |
 | `stop` | `array` | No |  |
-| `tripId` | `string` | No |  |
-| `when` | `string` | No |  |
+| `tripId` | `string` | No | Trip identifier |
+| `when` | `string` | No | Scheduled departure time |
 
 ### Operations
 
@@ -236,8 +236,8 @@ $journey = $client->Journey();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `legs` | `array` | No |  |
-| `refreshToken` | `string` | No |  |
+| `legs` | `array` | No | Journey legs |
+| `refreshToken` | `string` | No | Token to refresh this journey |
 | `type` | `string` | No |  |
 
 ### Operations
@@ -290,11 +290,11 @@ $location = $client->Location();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `string` | No |  |
+| `id` | `string` | No | Unique identifier for the location |
 | `location` | `array` | No |  |
-| `name` | `string` | No |  |
-| `products` | `array` | No |  |
-| `type` | `string` | No |  |
+| `name` | `string` | No | Name of the location |
+| `products` | `array` | No | Available products at this location |
+| `type` | `string` | No | Type of location |
 
 ### Operations
 
@@ -346,11 +346,11 @@ $radar = $client->Radar();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `direction` | `string` | No |  |
+| `direction` | `string` | No | Direction of the movement |
 | `line` | `array` | No |  |
 | `location` | `array` | No |  |
 | `nextStopovers` | `array` | No |  |
-| `tripId` | `string` | No |  |
+| `tripId` | `string` | No | Trip identifier |
 
 ### Operations
 
@@ -402,11 +402,11 @@ $stop = $client->Stop();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `id` | `string` | No |  |
+| `id` | `string` | No | Unique identifier for the stop |
 | `location` | `array` | No |  |
-| `name` | `string` | No |  |
-| `products` | `array` | No |  |
-| `station` | `array` | No |  |
+| `name` | `string` | No | Name of the stop |
+| `products` | `array` | No | Available products at this stop |
+| `station` | `array` | No | Parent station if applicable |
 | `type` | `string` | No |  |
 
 ### Operations
@@ -460,8 +460,8 @@ $trip = $client->Trip();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `destination` | `array` | No |  |
-| `direction` | `string` | No |  |
-| `id` | `string` | No |  |
+| `direction` | `string` | No | Direction of the trip |
+| `id` | `string` | No | Trip identifier |
 | `line` | `array` | No |  |
 | `origin` | `array` | No |  |
 | `stopovers` | `array` | No |  |

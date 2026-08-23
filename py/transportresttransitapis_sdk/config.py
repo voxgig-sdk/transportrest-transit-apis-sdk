@@ -28,6 +28,9 @@ def make_config():
     return {
         "main": {
             "name": "TransportrestTransitApis",
+            "slug": "transportrest-transit-apis",
+            "version": "0.0.1",
+            "target": "py",
         },
         "feature": {
             "test": {
@@ -56,10 +59,12 @@ def make_config():
         "fields": [
           {
             "name": "delay",
+            "short": "Delay in seconds",
             "type": "`$INTEGER`",
           },
           {
             "name": "direction",
+            "short": "Direction of the trip",
             "type": "`$STRING`",
           },
           {
@@ -68,14 +73,17 @@ def make_config():
           },
           {
             "name": "plannedPlatform",
+            "short": "Originally planned platform",
             "type": "`$STRING`",
           },
           {
             "name": "plannedWhen",
+            "short": "Originally planned arrival time",
             "type": "`$STRING`",
           },
           {
             "name": "platform",
+            "short": "Arrival platform",
             "type": "`$STRING`",
           },
           {
@@ -84,10 +92,12 @@ def make_config():
           },
           {
             "name": "tripId",
+            "short": "Trip identifier",
             "type": "`$STRING`",
           },
           {
             "name": "when",
+            "short": "Scheduled arrival time",
             "type": "`$STRING`",
           },
         ],
@@ -172,10 +182,12 @@ def make_config():
         "fields": [
           {
             "name": "delay",
+            "short": "Delay in seconds",
             "type": "`$INTEGER`",
           },
           {
             "name": "direction",
+            "short": "Direction of the trip",
             "type": "`$STRING`",
           },
           {
@@ -184,14 +196,17 @@ def make_config():
           },
           {
             "name": "plannedPlatform",
+            "short": "Originally planned platform",
             "type": "`$STRING`",
           },
           {
             "name": "plannedWhen",
+            "short": "Originally planned departure time",
             "type": "`$STRING`",
           },
           {
             "name": "platform",
+            "short": "Departure platform",
             "type": "`$STRING`",
           },
           {
@@ -200,10 +215,12 @@ def make_config():
           },
           {
             "name": "tripId",
+            "short": "Trip identifier",
             "type": "`$STRING`",
           },
           {
             "name": "when",
+            "short": "Scheduled departure time",
             "type": "`$STRING`",
           },
         ],
@@ -296,10 +313,12 @@ def make_config():
         "fields": [
           {
             "name": "legs",
+            "short": "Journey legs",
             "type": "`$ARRAY`",
           },
           {
             "name": "refreshToken",
+            "short": "Token to refresh this journey",
             "type": "`$STRING`",
           },
           {
@@ -392,6 +411,7 @@ def make_config():
         "fields": [
           {
             "name": "id",
+            "short": "Unique identifier for the location",
             "type": "`$STRING`",
           },
           {
@@ -400,14 +420,17 @@ def make_config():
           },
           {
             "name": "name",
+            "short": "Name of the location",
             "type": "`$STRING`",
           },
           {
             "name": "products",
+            "short": "Available products at this location",
             "type": "`$OBJECT`",
           },
           {
             "name": "type",
+            "short": "Type of location",
             "type": "`$STRING`",
           },
         ],
@@ -489,6 +512,7 @@ def make_config():
         "fields": [
           {
             "name": "direction",
+            "short": "Direction of the movement",
             "type": "`$STRING`",
           },
           {
@@ -505,6 +529,7 @@ def make_config():
           },
           {
             "name": "tripId",
+            "short": "Trip identifier",
             "type": "`$STRING`",
           },
         ],
@@ -585,6 +610,7 @@ def make_config():
         "fields": [
           {
             "name": "id",
+            "short": "Unique identifier for the stop",
             "type": "`$STRING`",
           },
           {
@@ -593,14 +619,17 @@ def make_config():
           },
           {
             "name": "name",
+            "short": "Name of the stop",
             "type": "`$STRING`",
           },
           {
             "name": "products",
+            "short": "Available products at this stop",
             "type": "`$OBJECT`",
           },
           {
             "name": "station",
+            "short": "Parent station if applicable",
             "type": "`$OBJECT`",
           },
           {
@@ -659,10 +688,12 @@ def make_config():
           },
           {
             "name": "direction",
+            "short": "Direction of the trip",
             "type": "`$STRING`",
           },
           {
             "name": "id",
+            "short": "Trip identifier",
             "type": "`$STRING`",
           },
           {

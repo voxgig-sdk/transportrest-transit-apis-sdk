@@ -1,0 +1,119 @@
+# Entity: location
+
+main: kit: entity: location: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "id"
+      req: false
+      short: "Unique identifier for the location"
+      type: "`$STRING`"
+    }
+    {
+      name: "location"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "name"
+      req: false
+      short: "Name of the location"
+      type: "`$STRING`"
+    }
+    {
+      name: "products"
+      req: false
+      short: "Available products at this location"
+      type: "`$OBJECT`"
+    }
+    {
+      name: "type"
+      req: false
+      short: "Type of location"
+      type: "`$STRING`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "location"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: true
+                kind: "query"
+                name: "address"
+                orig: "address"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                example: true
+                kind: "query"
+                name: "poi"
+                orig: "poi"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                example: "Berlin"
+                kind: "query"
+                name: "query"
+                orig: "query"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                example: 10
+                kind: "query"
+                name: "result"
+                orig: "result"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                example: true
+                kind: "query"
+                name: "stop"
+                orig: "stop"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/locations"
+          parts: [
+            "locations"
+          ]
+          select: {
+            exist: [
+              "address"
+              "poi"
+              "query"
+              "result"
+              "stop"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

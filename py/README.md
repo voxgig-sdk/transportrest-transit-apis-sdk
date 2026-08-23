@@ -250,15 +250,15 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `delay` |  |
-| `direction` |  |
+| `delay` | Delay in seconds |
+| `direction` | Direction of the trip |
 | `line` |  |
-| `plannedPlatform` |  |
-| `plannedWhen` |  |
-| `platform` |  |
+| `plannedPlatform` | Originally planned platform |
+| `plannedWhen` | Originally planned arrival time |
+| `platform` | Arrival platform |
 | `stop` |  |
-| `tripId` |  |
-| `when` |  |
+| `tripId` | Trip identifier |
+| `when` | Scheduled arrival time |
 
 Operations: List.
 
@@ -268,15 +268,15 @@ API path: `/stops/{id}/arrivals`
 
 | Field | Description |
 | --- | --- |
-| `delay` |  |
-| `direction` |  |
+| `delay` | Delay in seconds |
+| `direction` | Direction of the trip |
 | `line` |  |
-| `plannedPlatform` |  |
-| `plannedWhen` |  |
-| `platform` |  |
+| `plannedPlatform` | Originally planned platform |
+| `plannedWhen` | Originally planned departure time |
+| `platform` | Departure platform |
 | `stop` |  |
-| `tripId` |  |
-| `when` |  |
+| `tripId` | Trip identifier |
+| `when` | Scheduled departure time |
 
 Operations: List.
 
@@ -286,8 +286,8 @@ API path: `/stops/{id}/departures`
 
 | Field | Description |
 | --- | --- |
-| `legs` |  |
-| `refreshToken` |  |
+| `legs` | Journey legs |
+| `refreshToken` | Token to refresh this journey |
 | `type` |  |
 
 Operations: List.
@@ -298,11 +298,11 @@ API path: `/journeys`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
+| `id` | Unique identifier for the location |
 | `location` |  |
-| `name` |  |
-| `products` |  |
-| `type` |  |
+| `name` | Name of the location |
+| `products` | Available products at this location |
+| `type` | Type of location |
 
 Operations: List.
 
@@ -312,11 +312,11 @@ API path: `/locations`
 
 | Field | Description |
 | --- | --- |
-| `direction` |  |
+| `direction` | Direction of the movement |
 | `line` |  |
 | `location` |  |
 | `nextStopovers` |  |
-| `tripId` |  |
+| `tripId` | Trip identifier |
 
 Operations: List.
 
@@ -326,11 +326,11 @@ API path: `/radar`
 
 | Field | Description |
 | --- | --- |
-| `id` |  |
+| `id` | Unique identifier for the stop |
 | `location` |  |
-| `name` |  |
-| `products` |  |
-| `station` |  |
+| `name` | Name of the stop |
+| `products` | Available products at this stop |
+| `station` | Parent station if applicable |
 | `type` |  |
 
 Operations: Load.
@@ -342,8 +342,8 @@ API path: `/stops/{id}`
 | Field | Description |
 | --- | --- |
 | `destination` |  |
-| `direction` |  |
-| `id` |  |
+| `direction` | Direction of the trip |
+| `id` | Trip identifier |
 | `line` |  |
 | `origin` |  |
 | `stopovers` |  |
@@ -371,15 +371,15 @@ Create an instance: `arrival = client.Arrival()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `delay` | `int` |  |
-| `direction` | `str` |  |
+| `delay` | `int` | Delay in seconds |
+| `direction` | `str` | Direction of the trip |
 | `line` | `dict` |  |
-| `plannedPlatform` | `str` |  |
-| `plannedWhen` | `str` |  |
-| `platform` | `str` |  |
+| `plannedPlatform` | `str` | Originally planned platform |
+| `plannedWhen` | `str` | Originally planned arrival time |
+| `platform` | `str` | Arrival platform |
 | `stop` | `dict` |  |
-| `tripId` | `str` |  |
-| `when` | `str` |  |
+| `tripId` | `str` | Trip identifier |
+| `when` | `str` | Scheduled arrival time |
 
 #### Example: List
 
@@ -402,15 +402,15 @@ Create an instance: `departure = client.Departure()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `delay` | `int` |  |
-| `direction` | `str` |  |
+| `delay` | `int` | Delay in seconds |
+| `direction` | `str` | Direction of the trip |
 | `line` | `dict` |  |
-| `plannedPlatform` | `str` |  |
-| `plannedWhen` | `str` |  |
-| `platform` | `str` |  |
+| `plannedPlatform` | `str` | Originally planned platform |
+| `plannedWhen` | `str` | Originally planned departure time |
+| `platform` | `str` | Departure platform |
 | `stop` | `dict` |  |
-| `tripId` | `str` |  |
-| `when` | `str` |  |
+| `tripId` | `str` | Trip identifier |
+| `when` | `str` | Scheduled departure time |
 
 #### Example: List
 
@@ -433,8 +433,8 @@ Create an instance: `journey = client.Journey()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `legs` | `list` |  |
-| `refreshToken` | `str` |  |
+| `legs` | `list` | Journey legs |
+| `refreshToken` | `str` | Token to refresh this journey |
 | `type` | `str` |  |
 
 #### Example: List
@@ -458,11 +458,11 @@ Create an instance: `location = client.Location()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `str` |  |
+| `id` | `str` | Unique identifier for the location |
 | `location` | `dict` |  |
-| `name` | `str` |  |
-| `products` | `dict` |  |
-| `type` | `str` |  |
+| `name` | `str` | Name of the location |
+| `products` | `dict` | Available products at this location |
+| `type` | `str` | Type of location |
 
 #### Example: List
 
@@ -485,11 +485,11 @@ Create an instance: `radar = client.Radar()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `direction` | `str` |  |
+| `direction` | `str` | Direction of the movement |
 | `line` | `dict` |  |
 | `location` | `dict` |  |
 | `nextStopovers` | `list` |  |
-| `tripId` | `str` |  |
+| `tripId` | `str` | Trip identifier |
 
 #### Example: List
 
@@ -512,11 +512,11 @@ Create an instance: `stop = client.Stop()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `id` | `str` |  |
+| `id` | `str` | Unique identifier for the stop |
 | `location` | `dict` |  |
-| `name` | `str` |  |
-| `products` | `dict` |  |
-| `station` | `dict` |  |
+| `name` | `str` | Name of the stop |
+| `products` | `dict` | Available products at this stop |
+| `station` | `dict` | Parent station if applicable |
 | `type` | `str` |  |
 
 #### Example: Load
@@ -541,8 +541,8 @@ Create an instance: `trip = client.Trip()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `destination` | `dict` |  |
-| `direction` | `str` |  |
-| `id` | `str` |  |
+| `direction` | `str` | Direction of the trip |
+| `id` | `str` | Trip identifier |
 | `line` | `dict` |  |
 | `origin` | `dict` |  |
 | `stopovers` | `list` |  |
