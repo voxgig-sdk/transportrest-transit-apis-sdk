@@ -28,6 +28,7 @@ module TransportrestTransitApisConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {
