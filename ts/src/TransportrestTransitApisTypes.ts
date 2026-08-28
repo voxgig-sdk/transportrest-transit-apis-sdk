@@ -19,6 +19,9 @@ export interface Arrival {
 
 export interface ArrivalListMatch {
   stop_id: string
+  duration?: number
+  result?: number
+  when?: string
 }
 
 export interface Departure {
@@ -35,6 +38,10 @@ export interface Departure {
 
 export interface DepartureListMatch {
   stop_id: string
+  direction?: string
+  duration?: number
+  result?: number
+  when?: string
 }
 
 export interface Journey {
@@ -44,9 +51,12 @@ export interface Journey {
 }
 
 export interface JourneyListMatch {
-  legs?: any[]
-  refreshToken?: string
-  type?: string
+  arrival?: string
+  departure?: string
+  from: string
+  result?: number
+  stopover?: boolean
+  to: string
 }
 
 export interface Location {
@@ -58,11 +68,11 @@ export interface Location {
 }
 
 export interface LocationListMatch {
-  id?: string
-  location?: Record<string, any>
-  name?: string
-  products?: Record<string, any>
-  type?: string
+  address?: boolean
+  poi?: boolean
+  query: string
+  result?: number
+  stop?: boolean
 }
 
 export interface Radar {
@@ -74,11 +84,11 @@ export interface Radar {
 }
 
 export interface RadarListMatch {
-  direction?: string
-  line?: Record<string, any>
-  location?: Record<string, any>
-  nextStopovers?: any[]
-  tripId?: string
+  east: number
+  north: number
+  result?: number
+  south: number
+  west: number
 }
 
 export interface Stop {
@@ -105,5 +115,7 @@ export interface Trip {
 
 export interface TripLoadMatch {
   id: string
+  line_name?: string
+  stopover?: boolean
 }
 

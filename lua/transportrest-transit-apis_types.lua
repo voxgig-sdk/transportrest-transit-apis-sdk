@@ -19,6 +19,9 @@
 
 ---@class ArrivalListMatch
 ---@field stop_id string
+---@field duration? number
+---@field result? number
+---@field when? string
 
 ---@class Departure
 ---@field delay? number
@@ -33,6 +36,10 @@
 
 ---@class DepartureListMatch
 ---@field stop_id string
+---@field direction? string
+---@field duration? number
+---@field result? number
+---@field when? string
 
 ---@class Journey
 ---@field legs? table
@@ -40,9 +47,12 @@
 ---@field type? string
 
 ---@class JourneyListMatch
----@field legs? table
----@field refreshToken? string
----@field type? string
+---@field arrival? string
+---@field departure? string
+---@field from string
+---@field result? number
+---@field stopover? boolean
+---@field to string
 
 ---@class Location
 ---@field id? string
@@ -52,11 +62,11 @@
 ---@field type? string
 
 ---@class LocationListMatch
----@field id? string
----@field location? table
----@field name? string
----@field products? table
----@field type? string
+---@field address? boolean
+---@field poi? boolean
+---@field query string
+---@field result? number
+---@field stop? boolean
 
 ---@class Radar
 ---@field direction? string
@@ -66,11 +76,11 @@
 ---@field tripId? string
 
 ---@class RadarListMatch
----@field direction? string
----@field line? table
----@field location? table
----@field nextStopovers? table
----@field tripId? string
+---@field east number
+---@field north number
+---@field result? number
+---@field south number
+---@field west number
 
 ---@class Stop
 ---@field id? string
@@ -93,6 +103,8 @@
 
 ---@class TripLoadMatch
 ---@field id string
+---@field line_name? string
+---@field stopover? boolean
 
 local M = {}
 

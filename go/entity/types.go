@@ -28,6 +28,9 @@ type Arrival struct {
 // ArrivalListMatch is the typed request payload for Arrival.ListTyped.
 type ArrivalListMatch struct {
 	StopId string `json:"stop_id"`
+	Duration *int `json:"duration,omitempty"`
+	Result *int `json:"result,omitempty"`
+	When *string `json:"when,omitempty"`
 }
 
 // Departure is the typed data model for the departure entity.
@@ -46,6 +49,10 @@ type Departure struct {
 // DepartureListMatch is the typed request payload for Departure.ListTyped.
 type DepartureListMatch struct {
 	StopId string `json:"stop_id"`
+	Direction *string `json:"direction,omitempty"`
+	Duration *int `json:"duration,omitempty"`
+	Result *int `json:"result,omitempty"`
+	When *string `json:"when,omitempty"`
 }
 
 // Journey is the typed data model for the journey entity.
@@ -57,9 +64,12 @@ type Journey struct {
 
 // JourneyListMatch is the typed request payload for Journey.ListTyped.
 type JourneyListMatch struct {
-	Legs *[]any `json:"legs,omitempty"`
-	RefreshToken *string `json:"refreshToken,omitempty"`
-	Type *string `json:"type,omitempty"`
+	Arrival *string `json:"arrival,omitempty"`
+	Departure *string `json:"departure,omitempty"`
+	From string `json:"from"`
+	Result *int `json:"result,omitempty"`
+	Stopover *bool `json:"stopover,omitempty"`
+	To string `json:"to"`
 }
 
 // Location is the typed data model for the location entity.
@@ -73,11 +83,11 @@ type Location struct {
 
 // LocationListMatch is the typed request payload for Location.ListTyped.
 type LocationListMatch struct {
-	Id *string `json:"id,omitempty"`
-	Location *map[string]any `json:"location,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Products *map[string]any `json:"products,omitempty"`
-	Type *string `json:"type,omitempty"`
+	Address *bool `json:"address,omitempty"`
+	Poi *bool `json:"poi,omitempty"`
+	Query string `json:"query"`
+	Result *int `json:"result,omitempty"`
+	Stop *bool `json:"stop,omitempty"`
 }
 
 // Radar is the typed data model for the radar entity.
@@ -91,11 +101,11 @@ type Radar struct {
 
 // RadarListMatch is the typed request payload for Radar.ListTyped.
 type RadarListMatch struct {
-	Direction *string `json:"direction,omitempty"`
-	Line *map[string]any `json:"line,omitempty"`
-	Location *map[string]any `json:"location,omitempty"`
-	NextStopovers *[]any `json:"nextStopovers,omitempty"`
-	TripId *string `json:"tripId,omitempty"`
+	East float64 `json:"east"`
+	North float64 `json:"north"`
+	Result *int `json:"result,omitempty"`
+	South float64 `json:"south"`
+	West float64 `json:"west"`
 }
 
 // Stop is the typed data model for the stop entity.
@@ -126,6 +136,8 @@ type Trip struct {
 // TripLoadMatch is the typed request payload for Trip.LoadTyped.
 type TripLoadMatch struct {
 	Id string `json:"id"`
+	LineName *string `json:"line_name,omitempty"`
+	Stopover *bool `json:"stopover,omitempty"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

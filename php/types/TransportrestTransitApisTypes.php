@@ -30,6 +30,9 @@ class Arrival
 class ArrivalListMatch
 {
     public string $stop_id;
+    public ?int $duration = null;
+    public ?int $result = null;
+    public ?string $when = null;
 }
 
 /** Departure entity data model. */
@@ -50,6 +53,10 @@ class Departure
 class DepartureListMatch
 {
     public string $stop_id;
+    public ?string $direction = null;
+    public ?int $duration = null;
+    public ?int $result = null;
+    public ?string $when = null;
 }
 
 /** Journey entity data model. */
@@ -63,9 +70,12 @@ class Journey
 /** Request payload for Journey#list. */
 class JourneyListMatch
 {
-    public ?array $legs = null;
-    public ?string $refreshToken = null;
-    public ?string $type = null;
+    public ?string $arrival = null;
+    public ?string $departure = null;
+    public string $from;
+    public ?int $result = null;
+    public ?bool $stopover = null;
+    public string $to;
 }
 
 /** Location entity data model. */
@@ -81,11 +91,11 @@ class Location
 /** Request payload for Location#list. */
 class LocationListMatch
 {
-    public ?string $id = null;
-    public ?array $location = null;
-    public ?string $name = null;
-    public ?array $products = null;
-    public ?string $type = null;
+    public ?bool $address = null;
+    public ?bool $poi = null;
+    public string $query;
+    public ?int $result = null;
+    public ?bool $stop = null;
 }
 
 /** Radar entity data model. */
@@ -101,11 +111,11 @@ class Radar
 /** Request payload for Radar#list. */
 class RadarListMatch
 {
-    public ?string $direction = null;
-    public ?array $line = null;
-    public ?array $location = null;
-    public ?array $nextStopovers = null;
-    public ?string $tripId = null;
+    public float $east;
+    public float $north;
+    public ?int $result = null;
+    public float $south;
+    public float $west;
 }
 
 /** Stop entity data model. */
@@ -140,5 +150,7 @@ class Trip
 class TripLoadMatch
 {
     public string $id;
+    public ?string $line_name = null;
+    public ?bool $stopover = null;
 }
 

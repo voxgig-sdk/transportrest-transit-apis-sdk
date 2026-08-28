@@ -440,7 +440,7 @@ Create an instance: `journey = client.Journey()`
 #### Example: List
 
 ```python
-journeys = client.Journey().list()
+journeys = client.Journey().list({"from": "example", "to": "example"})
 ```
 
 
@@ -467,7 +467,7 @@ Create an instance: `location = client.Location()`
 #### Example: List
 
 ```python
-locations = client.Location().list()
+locations = client.Location().list({"query": "example"})
 ```
 
 
@@ -494,7 +494,7 @@ Create an instance: `radar = client.Radar()`
 #### Example: List
 
 ```python
-radars = client.Radar().list()
+radars = client.Radar().list({"east": 1, "north": 1, "south": 1, "west": 1})
 ```
 
 
@@ -552,6 +552,29 @@ Create an instance: `trip = client.Trip()`
 ```python
 trip = client.Trip().load({"id": "trip_id"})
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced

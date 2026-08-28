@@ -53,8 +53,20 @@ Arrival = Struct.new(
 #
 # @!attribute [rw] stop_id
 #   @return [String]
+#
+# @!attribute [rw] duration
+#   @return [Integer, nil]
+#
+# @!attribute [rw] result
+#   @return [Integer, nil]
+#
+# @!attribute [rw] when
+#   @return [String, nil]
 ArrivalListMatch = Struct.new(
   :stop_id,
+  :duration,
+  :result,
+  :when,
   keyword_init: true
 )
 
@@ -103,8 +115,24 @@ Departure = Struct.new(
 #
 # @!attribute [rw] stop_id
 #   @return [String]
+#
+# @!attribute [rw] direction
+#   @return [String, nil]
+#
+# @!attribute [rw] duration
+#   @return [Integer, nil]
+#
+# @!attribute [rw] result
+#   @return [Integer, nil]
+#
+# @!attribute [rw] when
+#   @return [String, nil]
 DepartureListMatch = Struct.new(
   :stop_id,
+  :direction,
+  :duration,
+  :result,
+  :when,
   keyword_init: true
 )
 
@@ -127,18 +155,30 @@ Journey = Struct.new(
 
 # Request payload for Journey#list.
 #
-# @!attribute [rw] legs
-#   @return [Array, nil]
-#
-# @!attribute [rw] refreshToken
+# @!attribute [rw] arrival
 #   @return [String, nil]
 #
-# @!attribute [rw] type
+# @!attribute [rw] departure
 #   @return [String, nil]
+#
+# @!attribute [rw] from
+#   @return [String]
+#
+# @!attribute [rw] result
+#   @return [Integer, nil]
+#
+# @!attribute [rw] stopover
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] to
+#   @return [String]
 JourneyListMatch = Struct.new(
-  :legs,
-  :refreshToken,
-  :type,
+  :arrival,
+  :departure,
+  :from,
+  :result,
+  :stopover,
+  :to,
   keyword_init: true
 )
 
@@ -169,26 +209,26 @@ Location = Struct.new(
 
 # Request payload for Location#list.
 #
-# @!attribute [rw] id
-#   @return [String, nil]
+# @!attribute [rw] address
+#   @return [Boolean, nil]
 #
-# @!attribute [rw] location
-#   @return [Hash, nil]
+# @!attribute [rw] poi
+#   @return [Boolean, nil]
 #
-# @!attribute [rw] name
-#   @return [String, nil]
+# @!attribute [rw] query
+#   @return [String]
 #
-# @!attribute [rw] products
-#   @return [Hash, nil]
+# @!attribute [rw] result
+#   @return [Integer, nil]
 #
-# @!attribute [rw] type
-#   @return [String, nil]
+# @!attribute [rw] stop
+#   @return [Boolean, nil]
 LocationListMatch = Struct.new(
-  :id,
-  :location,
-  :name,
-  :products,
-  :type,
+  :address,
+  :poi,
+  :query,
+  :result,
+  :stop,
   keyword_init: true
 )
 
@@ -219,26 +259,26 @@ Radar = Struct.new(
 
 # Request payload for Radar#list.
 #
-# @!attribute [rw] direction
-#   @return [String, nil]
+# @!attribute [rw] east
+#   @return [Float]
 #
-# @!attribute [rw] line
-#   @return [Hash, nil]
+# @!attribute [rw] north
+#   @return [Float]
 #
-# @!attribute [rw] location
-#   @return [Hash, nil]
+# @!attribute [rw] result
+#   @return [Integer, nil]
 #
-# @!attribute [rw] nextStopovers
-#   @return [Array, nil]
+# @!attribute [rw] south
+#   @return [Float]
 #
-# @!attribute [rw] tripId
-#   @return [String, nil]
+# @!attribute [rw] west
+#   @return [Float]
 RadarListMatch = Struct.new(
-  :direction,
-  :line,
-  :location,
-  :nextStopovers,
-  :tripId,
+  :east,
+  :north,
+  :result,
+  :south,
+  :west,
   keyword_init: true
 )
 
@@ -313,8 +353,16 @@ Trip = Struct.new(
 #
 # @!attribute [rw] id
 #   @return [String]
+#
+# @!attribute [rw] line_name
+#   @return [String, nil]
+#
+# @!attribute [rw] stopover
+#   @return [Boolean, nil]
 TripLoadMatch = Struct.new(
   :id,
+  :line_name,
+  :stopover,
   keyword_init: true
 )
 

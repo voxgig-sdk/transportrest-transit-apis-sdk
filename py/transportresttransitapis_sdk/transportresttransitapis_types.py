@@ -28,8 +28,14 @@ class Arrival(TypedDict, total=False):
     when: str
 
 
-class ArrivalListMatch(TypedDict):
+class ArrivalListMatchRequired(TypedDict):
     stop_id: str
+
+
+class ArrivalListMatch(ArrivalListMatchRequired, total=False):
+    duration: int
+    result: int
+    when: str
 
 
 class Departure(TypedDict, total=False):
@@ -44,8 +50,15 @@ class Departure(TypedDict, total=False):
     when: str
 
 
-class DepartureListMatch(TypedDict):
+class DepartureListMatchRequired(TypedDict):
     stop_id: str
+
+
+class DepartureListMatch(DepartureListMatchRequired, total=False):
+    direction: str
+    duration: int
+    result: int
+    when: str
 
 
 class Journey(TypedDict, total=False):
@@ -54,10 +67,15 @@ class Journey(TypedDict, total=False):
     type: str
 
 
-class JourneyListMatch(TypedDict, total=False):
-    legs: list
-    refreshToken: str
-    type: str
+class JourneyListMatchRequired(TypedDict):
+    to: str
+
+
+class JourneyListMatch(JourneyListMatchRequired, total=False):
+    arrival: str
+    departure: str
+    result: int
+    stopover: bool
 
 
 class Location(TypedDict, total=False):
@@ -68,12 +86,15 @@ class Location(TypedDict, total=False):
     type: str
 
 
-class LocationListMatch(TypedDict, total=False):
-    id: str
-    location: dict
-    name: str
-    products: dict
-    type: str
+class LocationListMatchRequired(TypedDict):
+    query: str
+
+
+class LocationListMatch(LocationListMatchRequired, total=False):
+    address: bool
+    poi: bool
+    result: int
+    stop: bool
 
 
 class Radar(TypedDict, total=False):
@@ -84,12 +105,15 @@ class Radar(TypedDict, total=False):
     tripId: str
 
 
-class RadarListMatch(TypedDict, total=False):
-    direction: str
-    line: dict
-    location: dict
-    nextStopovers: list
-    tripId: str
+class RadarListMatchRequired(TypedDict):
+    east: float
+    north: float
+    south: float
+    west: float
+
+
+class RadarListMatch(RadarListMatchRequired, total=False):
+    result: int
 
 
 class Stop(TypedDict, total=False):
@@ -114,5 +138,10 @@ class Trip(TypedDict, total=False):
     stopovers: list
 
 
-class TripLoadMatch(TypedDict):
+class TripLoadMatchRequired(TypedDict):
     id: str
+
+
+class TripLoadMatch(TripLoadMatchRequired, total=False):
+    line_name: str
+    stopover: bool
