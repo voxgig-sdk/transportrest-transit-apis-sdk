@@ -82,8 +82,10 @@ main: kit: entity: journey: {
           }
           method: "GET"
           orig: "/journeys"
-          parts: [
-            "journeys"
+          segments: [
+            {
+              lit: "journeys"
+            }
           ]
           select: {
             exist: [

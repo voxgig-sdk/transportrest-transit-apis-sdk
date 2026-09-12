@@ -93,8 +93,10 @@ main: kit: entity: location: {
           }
           method: "GET"
           orig: "/locations"
-          parts: [
-            "locations"
+          segments: [
+            {
+              lit: "locations"
+            }
           ]
           select: {
             exist: [

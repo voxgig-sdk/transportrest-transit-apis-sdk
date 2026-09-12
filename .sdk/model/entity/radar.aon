@@ -82,8 +82,10 @@ main: kit: entity: radar: {
           }
           method: "GET"
           orig: "/radar"
-          parts: [
-            "radar"
+          segments: [
+            {
+              lit: "radar"
+            }
           ]
           select: {
             exist: [

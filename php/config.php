@@ -83,6 +83,7 @@ class TransportrestTransitApisConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'plannedWhen',
               'short' => 'Originally planned arrival time',
               'type' => '`$STRING`',
@@ -102,6 +103,7 @@ class TransportrestTransitApisConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'when',
               'short' => 'Scheduled arrival time',
               'type' => '`$STRING`',
@@ -150,14 +152,20 @@ class TransportrestTransitApisConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/stops/{id}/arrivals',
-                  'parts' => [
-                    'stops',
-                    '{stop_id}',
-                    'arrivals',
-                  ],
                   'rename' => [
                     'param' => [
                       'id' => 'stop_id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'stops',
+                    ],
+                    [
+                      'var' => 'stop_id',
+                    ],
+                    [
+                      'lit' => 'arrivals',
                     ],
                   ],
                   'select' => [
@@ -171,6 +179,11 @@ class TransportrestTransitApisConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.arrivals`',
+                  ],
+                  'parts' => [
+                    'stops',
+                    '{stop_id}',
+                    'arrivals',
                   ],
                 ],
               ],
@@ -206,6 +219,7 @@ class TransportrestTransitApisConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'plannedWhen',
               'short' => 'Originally planned departure time',
               'type' => '`$STRING`',
@@ -225,6 +239,7 @@ class TransportrestTransitApisConfig
               'type' => '`$STRING`',
             ],
             [
+              'format' => 'date-time',
               'name' => 'when',
               'short' => 'Scheduled departure time',
               'type' => '`$STRING`',
@@ -280,14 +295,20 @@ class TransportrestTransitApisConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/stops/{id}/departures',
-                  'parts' => [
-                    'stops',
-                    '{stop_id}',
-                    'departures',
-                  ],
                   'rename' => [
                     'param' => [
                       'id' => 'stop_id',
+                    ],
+                  ],
+                  'segments' => [
+                    [
+                      'lit' => 'stops',
+                    ],
+                    [
+                      'var' => 'stop_id',
+                    ],
+                    [
+                      'lit' => 'departures',
                     ],
                   ],
                   'select' => [
@@ -302,6 +323,11 @@ class TransportrestTransitApisConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.departures`',
+                  ],
+                  'parts' => [
+                    'stops',
+                    '{stop_id}',
+                    'departures',
                   ],
                 ],
               ],
@@ -388,8 +414,10 @@ class TransportrestTransitApisConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/journeys',
-                  'parts' => [
-                    'journeys',
+                  'segments' => [
+                    [
+                      'lit' => 'journeys',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -404,6 +432,9 @@ class TransportrestTransitApisConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.journeys`',
+                  ],
+                  'parts' => [
+                    'journeys',
                   ],
                 ],
               ],
@@ -439,6 +470,10 @@ class TransportrestTransitApisConfig
               'short' => 'Type of location',
               'type' => '`$STRING`',
             ],
+          ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
           ],
           'name' => 'location',
           'op' => [
@@ -490,8 +525,10 @@ class TransportrestTransitApisConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/locations',
-                  'parts' => [
-                    'locations',
+                  'segments' => [
+                    [
+                      'lit' => 'locations',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -505,6 +542,9 @@ class TransportrestTransitApisConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'locations',
                   ],
                 ],
               ],
@@ -588,8 +628,10 @@ class TransportrestTransitApisConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/radar',
-                  'parts' => [
-                    'radar',
+                  'segments' => [
+                    [
+                      'lit' => 'radar',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -603,6 +645,9 @@ class TransportrestTransitApisConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.movements`',
+                  ],
+                  'parts' => [
+                    'radar',
                   ],
                 ],
               ],
@@ -643,6 +688,10 @@ class TransportrestTransitApisConfig
               'type' => '`$STRING`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'stop',
           'op' => [
             'load' => [
@@ -665,9 +714,13 @@ class TransportrestTransitApisConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/stops/{id}',
-                  'parts' => [
-                    'stops',
-                    '{id}',
+                  'segments' => [
+                    [
+                      'lit' => 'stops',
+                    ],
+                    [
+                      'var' => 'id',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -677,6 +730,10 @@ class TransportrestTransitApisConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'stops',
+                    '{id}',
                   ],
                 ],
               ],
@@ -715,6 +772,10 @@ class TransportrestTransitApisConfig
               'type' => '`$ARRAY`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'trip',
           'op' => [
             'load' => [
@@ -751,9 +812,13 @@ class TransportrestTransitApisConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/trips/{id}',
-                  'parts' => [
-                    'trips',
-                    '{id}',
+                  'segments' => [
+                    [
+                      'lit' => 'trips',
+                    ],
+                    [
+                      'var' => 'id',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -765,6 +830,10 @@ class TransportrestTransitApisConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'trips',
+                    '{id}',
                   ],
                 ],
               ],

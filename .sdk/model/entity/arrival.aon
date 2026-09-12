@@ -29,6 +29,7 @@ main: kit: entity: arrival: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "plannedWhen"
       req: false
       short: "Originally planned arrival time"
@@ -52,6 +53,7 @@ main: kit: entity: arrival: {
       type: "`$STRING`"
     }
     {
+      format: "date-time"
       name: "when"
       req: false
       short: "Scheduled arrival time"
@@ -103,16 +105,22 @@ main: kit: entity: arrival: {
           }
           method: "GET"
           orig: "/stops/{id}/arrivals"
-          parts: [
-            "stops"
-            "{stop_id}"
-            "arrivals"
-          ]
           rename: {
             param: {
               id: "stop_id"
             }
           }
+          segments: [
+            {
+              lit: "stops"
+            }
+            {
+              var: "stop_id"
+            }
+            {
+              lit: "arrivals"
+            }
+          ]
           select: {
             exist: [
               "duration"

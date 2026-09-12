@@ -98,7 +98,7 @@ func TestArrivalEntity(t *testing.T) {
 		client := setup.client
 
 		// Bootstrap entity data from existing test data (no create step in flow).
-		arrivalRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath("existing.arrival", setup.data)))
+		arrivalRef01DataRaw := vs.Items(core.ToMapAny(vs.GetPath(setup.data, "existing.arrival")))
 		var arrivalRef01Data map[string]any
 		if len(arrivalRef01DataRaw) > 0 {
 			arrivalRef01Data = core.ToMapAny(arrivalRef01DataRaw[0][1])
@@ -149,7 +149,7 @@ func arrivalBasicSetup(extra map[string]any) *entityTestSetup {
 	client := sdk.TestSDK(options, extra)
 
 	// Generate idmap via transform, matching TS pattern.
-	idmap := vs.Transform(
+	idmap, _ := vs.Transform(
 		[]any{"arrival01", "arrival02", "arrival03", "stop01", "stop02", "stop03"},
 		map[string]any{
 			"`$PACK`": []any{"", map[string]any{
@@ -177,10 +177,22 @@ func arrivalBasicSetup(extra map[string]any) *entityTestSetup {
 	}
 
 	if env["TRANSPORTREST_TRANSIT_APIS_TEST_LIVE"] == "TRUE" {
+		// An empty map, not a nil one: Merge returns nil when its last entry
+		// is nil, and BasicSetup is normally called with no extras - so a
+		// bare nil silently discarded the apikey and server values below.
+		extraOpts := extra
+		if extraOpts == nil {
+			extraOpts = map[string]any{}
+		}
+
 		mergedOpts := vs.Merge([]any{
+			// liveClientOptions() FIRST, so the generated fields below win:
+			// sdk-test-control.json's test.client.options adds to the live
+			// client, it does not redirect it.
+			liveClientOptions(),
 			map[string]any{
 			},
-			extra,
+			extraOpts,
 		})
 		client = sdk.NewTransportrestTransitApisSDK(core.ToMapAny(mergedOpts))
 	}

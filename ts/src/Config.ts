@@ -10,6 +10,17 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS: Record<string, any[]> = {
+  
+}
+
+
 class Config {
 
   makeFeature(this: any, fn: string) {
@@ -104,6 +115,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "plannedWhen",
           "short": "Originally planned arrival time",
           "type": "`$STRING`"
@@ -123,6 +135,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "when",
           "short": "Scheduled arrival time",
           "type": "`$STRING`"
@@ -171,16 +184,22 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/stops/{id}/arrivals",
-              "parts": [
-                "stops",
-                "{stop_id}",
-                "arrivals"
-              ],
               "rename": {
                 "param": {
                   "id": "stop_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "stops"
+                },
+                {
+                  "var": "stop_id"
+                },
+                {
+                  "lit": "arrivals"
+                }
+              ],
               "select": {
                 "exist": [
                   "duration",
@@ -192,7 +211,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.arrivals`"
-              }
+              },
+              "parts": [
+                "stops",
+                "{stop_id}",
+                "arrivals"
+              ]
             }
           ]
         }
@@ -227,6 +251,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "plannedWhen",
           "short": "Originally planned departure time",
           "type": "`$STRING`"
@@ -246,6 +271,7 @@ class Config {
           "type": "`$STRING`"
         },
         {
+          "format": "date-time",
           "name": "when",
           "short": "Scheduled departure time",
           "type": "`$STRING`"
@@ -301,16 +327,22 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/stops/{id}/departures",
-              "parts": [
-                "stops",
-                "{stop_id}",
-                "departures"
-              ],
               "rename": {
                 "param": {
                   "id": "stop_id"
                 }
               },
+              "segments": [
+                {
+                  "lit": "stops"
+                },
+                {
+                  "var": "stop_id"
+                },
+                {
+                  "lit": "departures"
+                }
+              ],
               "select": {
                 "exist": [
                   "direction",
@@ -323,7 +355,12 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.departures`"
-              }
+              },
+              "parts": [
+                "stops",
+                "{stop_id}",
+                "departures"
+              ]
             }
           ]
         }
@@ -409,8 +446,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/journeys",
-              "parts": [
-                "journeys"
+              "segments": [
+                {
+                  "lit": "journeys"
+                }
               ],
               "select": {
                 "exist": [
@@ -425,7 +464,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.journeys`"
-              }
+              },
+              "parts": [
+                "journeys"
+              ]
             }
           ]
         }
@@ -461,6 +503,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "location",
       "op": {
         "list": {
@@ -511,8 +557,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/locations",
-              "parts": [
-                "locations"
+              "segments": [
+                {
+                  "lit": "locations"
+                }
               ],
               "select": {
                 "exist": [
@@ -526,7 +574,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "locations"
+              ]
             }
           ]
         }
@@ -609,8 +660,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/radar",
-              "parts": [
-                "radar"
+              "segments": [
+                {
+                  "lit": "radar"
+                }
               ],
               "select": {
                 "exist": [
@@ -624,7 +677,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.movements`"
-              }
+              },
+              "parts": [
+                "radar"
+              ]
             }
           ]
         }
@@ -664,6 +720,10 @@ class Config {
           "type": "`$STRING`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "stop",
       "op": {
         "load": {
@@ -686,9 +746,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/stops/{id}",
-              "parts": [
-                "stops",
-                "{id}"
+              "segments": [
+                {
+                  "lit": "stops"
+                },
+                {
+                  "var": "id"
+                }
               ],
               "select": {
                 "exist": [
@@ -698,7 +762,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "stops",
+                "{id}"
+              ]
             }
           ]
         }
@@ -736,6 +804,10 @@ class Config {
           "type": "`$ARRAY`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "trip",
       "op": {
         "load": {
@@ -772,9 +844,13 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/trips/{id}",
-              "parts": [
-                "trips",
-                "{id}"
+              "segments": [
+                {
+                  "lit": "trips"
+                },
+                {
+                  "var": "id"
+                }
               ],
               "select": {
                 "exist": [
@@ -786,7 +862,11 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "trips",
+                "{id}"
+              ]
             }
           ]
         }
@@ -802,6 +882,7 @@ class Config {
 const config = new Config()
 
 export {
-  config
+  config,
+  FEATURE_PLUGINS,
 }
 

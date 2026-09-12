@@ -1,6 +1,14 @@
 # TransportrestTransitApis SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -78,6 +86,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "plannedWhen",
             "short": "Originally planned arrival time",
             "type": "`$STRING`",
@@ -97,6 +106,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "when",
             "short": "Scheduled arrival time",
             "type": "`$STRING`",
@@ -145,16 +155,22 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/stops/{id}/arrivals",
-                "parts": [
-                  "stops",
-                  "{stop_id}",
-                  "arrivals",
-                ],
                 "rename": {
                   "param": {
                     "id": "stop_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "stops",
+                  },
+                  {
+                    "var": "stop_id",
+                  },
+                  {
+                    "lit": "arrivals",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "duration",
@@ -167,6 +183,11 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.arrivals`",
                 },
+                "parts": [
+                  "stops",
+                  "{stop_id}",
+                  "arrivals",
+                ],
               },
             ],
           },
@@ -201,6 +222,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "plannedWhen",
             "short": "Originally planned departure time",
             "type": "`$STRING`",
@@ -220,6 +242,7 @@ def make_config():
             "type": "`$STRING`",
           },
           {
+            "format": "date-time",
             "name": "when",
             "short": "Scheduled departure time",
             "type": "`$STRING`",
@@ -275,16 +298,22 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/stops/{id}/departures",
-                "parts": [
-                  "stops",
-                  "{stop_id}",
-                  "departures",
-                ],
                 "rename": {
                   "param": {
                     "id": "stop_id",
                   },
                 },
+                "segments": [
+                  {
+                    "lit": "stops",
+                  },
+                  {
+                    "var": "stop_id",
+                  },
+                  {
+                    "lit": "departures",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "direction",
@@ -298,6 +327,11 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.departures`",
                 },
+                "parts": [
+                  "stops",
+                  "{stop_id}",
+                  "departures",
+                ],
               },
             ],
           },
@@ -383,8 +417,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/journeys",
-                "parts": [
-                  "journeys",
+                "segments": [
+                  {
+                    "lit": "journeys",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -400,6 +436,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.journeys`",
                 },
+                "parts": [
+                  "journeys",
+                ],
               },
             ],
           },
@@ -435,6 +474,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "location",
         "op": {
           "list": {
@@ -485,8 +528,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/locations",
-                "parts": [
-                  "locations",
+                "segments": [
+                  {
+                    "lit": "locations",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -501,6 +546,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "locations",
+                ],
               },
             ],
           },
@@ -583,8 +631,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/radar",
-                "parts": [
-                  "radar",
+                "segments": [
+                  {
+                    "lit": "radar",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -599,6 +649,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.movements`",
                 },
+                "parts": [
+                  "radar",
+                ],
               },
             ],
           },
@@ -638,6 +691,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "stop",
         "op": {
           "load": {
@@ -660,9 +717,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/stops/{id}",
-                "parts": [
-                  "stops",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "stops",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -673,6 +734,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "stops",
+                  "{id}",
+                ],
               },
             ],
           },
@@ -710,6 +775,10 @@ def make_config():
             "type": "`$ARRAY`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "trip",
         "op": {
           "load": {
@@ -746,9 +815,13 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/trips/{id}",
-                "parts": [
-                  "trips",
-                  "{id}",
+                "segments": [
+                  {
+                    "lit": "trips",
+                  },
+                  {
+                    "var": "id",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -761,6 +834,10 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "trips",
+                  "{id}",
+                ],
               },
             ],
           },
