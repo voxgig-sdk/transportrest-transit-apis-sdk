@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { TransportrestTransitApisSDK } from '@voxgig-sdk/transportrest-transit-apis'
+import { TransportrestTransitApisSDK } from '@voxgig-sdk/transportrest-transit-apis-sdk'
 
 const client = new TransportrestTransitApisSDK()
 ```
@@ -681,7 +681,7 @@ transportrest-transit-apis/
 Import the SDK from the package root:
 
 ```ts
-import { TransportrestTransitApisSDK } from '@voxgig-sdk/transportrest-transit-apis'
+import { TransportrestTransitApisSDK } from '@voxgig-sdk/transportrest-transit-apis-sdk'
 ```
 
 ### Entity state

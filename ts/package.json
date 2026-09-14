@@ -1,5 +1,5 @@
 {
-  "name": "@voxgig-sdk/transportrest-transit-apis",
+  "name": "@voxgig-sdk/transportrest-transit-apis-sdk",
   "version": "0.0.1",
   "description": "Unofficial generated TypeScript SDK for the transport.rest transit APIs public API. Not affiliated with or endorsed by the upstream API provider.",
   "keywords": [

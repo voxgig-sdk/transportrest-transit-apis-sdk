@@ -105,7 +105,7 @@ local results, err = client:Location():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/transportrest-transit-apis` | publish pending — [install from git tag](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/releases) |
+| TypeScript | `@voxgig-sdk/transportrest-transit-apis-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/releases) |
 | Python | `voxgig-sdk-transportrest-transit-apis` | publish pending — [install from git tag](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/releases) |
 | PHP | `voxgig-sdk/transportrest-transit-apis` | publish pending — [install from git tag](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/transportrest-transit-apis-sdk/go` | `go get github.com/voxgig-sdk/transportrest-transit-apis-sdk/go@latest` |
@@ -119,7 +119,7 @@ local results, err = client:Location():list()
 ### TypeScript
 
 ```ts
-import { TransportrestTransitApisSDK } from '@voxgig-sdk/transportrest-transit-apis'
+import { TransportrestTransitApisSDK } from '@voxgig-sdk/transportrest-transit-apis-sdk'
 
 const client = new TransportrestTransitApisSDK()
 
