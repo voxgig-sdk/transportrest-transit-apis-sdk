@@ -2,7 +2,7 @@
   "existing": {
     "departure": {
       "DEPARTURE00": {
-        "delay": "s5a",
+        "delay": 90,
         "direction": "s5b",
         "line": {},
         "plannedPlatform": "s5d",
@@ -14,7 +14,7 @@
         "stop_id": "STOP01"
       },
       "DEPARTURE01": {
-        "delay": "sb4",
+        "delay": 180,
         "direction": "sb5",
         "line": {},
         "plannedPlatform": "sb7",
@@ -26,7 +26,7 @@
         "stop_id": "STOP01"
       },
       "DEPARTURE02": {
-        "delay": "s10e",
+        "delay": 270,
         "direction": "s10f",
         "line": {},
         "plannedPlatform": "s111",
@@ -42,7 +42,7 @@
   "new": {
     "departure": {
       "departure_ref01": {
-        "delay": "s168",
+        "delay": 360,
         "direction": "s169",
         "line": {},
         "plannedPlatform": "s16b",
@@ -51,6 +51,207 @@
         "stop": {},
         "tripId": "s16f",
         "when": "s170"
+      }
+    }
+  },
+  "requests": {
+    "GET /stops/{id}/departures": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getDepartures",
+        "parameters": [
+          {
+            "description": "Stop/station ID",
+            "example": "900000003201",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Date and time for which to get departures (ISO 8601 format)",
+            "in": "query",
+            "name": "when",
+            "required": false,
+            "schema": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Duration in minutes for which to get departures",
+            "in": "query",
+            "name": "duration",
+            "required": false,
+            "schema": {
+              "default": 120,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Maximum number of departures to return",
+            "in": "query",
+            "name": "results",
+            "required": false,
+            "schema": {
+              "default": 10,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Filter departures by direction (stop ID)",
+            "in": "query",
+            "name": "direction",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "departures": {
+                      "items": {
+                        "properties": {
+                          "delay": {
+                            "description": "Delay in seconds",
+                            "type": "integer"
+                          },
+                          "direction": {
+                            "description": "Direction of the trip",
+                            "type": "string"
+                          },
+                          "line": {
+                            "properties": {
+                              "id": {
+                                "description": "Line identifier",
+                                "type": "string"
+                              },
+                              "mode": {
+                                "description": "Mode of transport",
+                                "type": "string"
+                              },
+                              "name": {
+                                "description": "Line name",
+                                "type": "string"
+                              },
+                              "operator": {
+                                "description": "Operating company",
+                                "type": "object"
+                              },
+                              "product": {
+                                "description": "Product type",
+                                "type": "string"
+                              },
+                              "type": {
+                                "enum": [
+                                  "line"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "plannedPlatform": {
+                            "description": "Originally planned platform",
+                            "type": "string"
+                          },
+                          "plannedWhen": {
+                            "description": "Originally planned departure time",
+                            "format": "date-time",
+                            "type": "string"
+                          },
+                          "platform": {
+                            "description": "Departure platform",
+                            "type": "string"
+                          },
+                          "stop": {
+                            "properties": {
+                              "id": {
+                                "description": "Unique identifier for the stop",
+                                "type": "string"
+                              },
+                              "location": {
+                                "properties": {
+                                  "latitude": {
+                                    "description": "Latitude coordinate",
+                                    "format": "double",
+                                    "type": "number"
+                                  },
+                                  "longitude": {
+                                    "description": "Longitude coordinate",
+                                    "format": "double",
+                                    "type": "number"
+                                  },
+                                  "type": {
+                                    "enum": [
+                                      "location"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "type": "object"
+                              },
+                              "name": {
+                                "description": "Name of the stop",
+                                "type": "string"
+                              },
+                              "products": {
+                                "description": "Available products at this stop",
+                                "type": "object"
+                              },
+                              "station": {
+                                "description": "Parent station if applicable",
+                                "type": "object"
+                              },
+                              "type": {
+                                "enum": [
+                                  "stop",
+                                  "station"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "tripId": {
+                            "description": "Trip identifier",
+                            "type": "string"
+                          },
+                          "when": {
+                            "description": "Scheduled departure time",
+                            "format": "date-time",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response with departures"
+          },
+          "404": {
+            "description": "Stop not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "securitySource": "unspecified"
       }
     }
   }

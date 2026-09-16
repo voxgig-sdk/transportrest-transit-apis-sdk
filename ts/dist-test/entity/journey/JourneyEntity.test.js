@@ -40,6 +40,8 @@ const node_path_1 = __importDefault(require("node:path"));
 const Fs = __importStar(require("node:fs"));
 const node_test_1 = require("node:test");
 const node_assert_1 = __importDefault(require("node:assert"));
+const live_runner_1 = require("../../live-runner");
+const live_entity_1 = require("../../live-entity");
 const __1 = require("../../..");
 const utility_1 = require("../../utility");
 // AFTER the imports on purpose: TypeScript hoists `import` above any
@@ -59,16 +61,12 @@ const utility_1 = require("../../utility");
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.TRANSPORTREST_TRANSIT_APIS_TEST_LIVE;
         for (const op of ['list']) {
-            if ((0, utility_1.maybeSkipControl)(t, 'entityOp', 'journey.' + op, live))
+            if (!live && (0, utility_1.maybeSkipControl)(t, 'entityOp', 'journey.' + op, live))
                 return;
         }
         const setup = basicSetup();
-        // The basic flow consumes synthetic IDs and field values from the
-        // fixture (entity TestData.json). Those don't exist on the live API.
-        // Skip live runs unless the user provided a real ENTID env override.
-        if (setup.syntheticOnly) {
-            t.skip('live entity test uses synthetic IDs from fixture — set TRANSPORTREST_TRANSIT_APIS_TEST_JOURNEY_ENTID JSON to run live');
-            return;
+        if (setup.live) {
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": [{ "active": true, "name": "legs", "req": false, "short": "Journey legs", "type": "`$ARRAY`", "index$": 0 }, { "active": true, "name": "refreshToken", "req": false, "short": "Token to refresh this journey", "type": "`$STRING`", "index$": 1 }, { "active": true, "name": "type", "req": false, "type": "`$STRING`", "index$": 2 }], "name": "journey", "op": { "list": { "input": "data", "name": "list", "points": [{ "active": true, "args": { "query": [{ "active": true, "kind": "query", "name": "arrival", "orig": "arrival", "reqd": false, "type": "`$STRING`", "index$": 0 }, { "active": true, "kind": "query", "name": "departure", "orig": "departure", "reqd": false, "type": "`$STRING`", "index$": 1 }, { "active": true, "example": "900000003201", "kind": "query", "name": "from", "orig": "from", "reqd": true, "type": "`$STRING`", "index$": 2 }, { "active": true, "example": 3, "kind": "query", "name": "result", "orig": "result", "reqd": false, "type": "`$INTEGER`", "index$": 3 }, { "active": true, "example": false, "kind": "query", "name": "stopover", "orig": "stopover", "reqd": false, "type": "`$BOOLEAN`", "index$": 4 }, { "active": true, "example": "900000100003", "kind": "query", "name": "to", "orig": "to", "reqd": true, "type": "`$STRING`", "index$": 5 }] }, "contract": { "id": "GET /journeys", "json": "{\"operationId\":\"getJourneys\",\"parameters\":[{\"description\":\"Origin location ID or coordinates\",\"example\":\"900000003201\",\"in\":\"query\",\"name\":\"from\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Destination location ID or coordinates\",\"example\":\"900000100003\",\"in\":\"query\",\"name\":\"to\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Desired departure time (ISO 8601 format)\",\"in\":\"query\",\"name\":\"departure\",\"required\":false,\"schema\":{\"format\":\"date-time\",\"type\":\"string\"}},{\"description\":\"Desired arrival time (ISO 8601 format)\",\"in\":\"query\",\"name\":\"arrival\",\"required\":false,\"schema\":{\"format\":\"date-time\",\"type\":\"string\"}},{\"description\":\"Number of journey results to return\",\"in\":\"query\",\"name\":\"results\",\"required\":false,\"schema\":{\"default\":3,\"minimum\":1,\"type\":\"integer\"}},{\"description\":\"Include stopovers in journey details\",\"in\":\"query\",\"name\":\"stopovers\",\"required\":false,\"schema\":{\"default\":false,\"type\":\"boolean\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"journeys\":{\"items\":{\"properties\":{\"legs\":{\"description\":\"Journey legs\",\"items\":{\"properties\":{\"arrival\":{\"description\":\"Arrival time\",\"format\":\"date-time\",\"type\":\"string\"},\"departure\":{\"description\":\"Departure time\",\"format\":\"date-time\",\"type\":\"string\"},\"destination\":{\"properties\":{\"id\":{\"description\":\"Unique identifier for the stop\",\"type\":\"string\"},\"location\":{\"properties\":{\"latitude\":{\"description\":\"Latitude coordinate\",\"format\":\"double\",\"type\":\"number\"},\"longitude\":{\"description\":\"Longitude coordinate\",\"format\":\"double\",\"type\":\"number\"},\"type\":{\"enum\":[\"location\"],\"type\":\"string\"}},\"type\":\"object\"},\"name\":{\"description\":\"Name of the stop\",\"type\":\"string\"},\"products\":{\"description\":\"Available products at this stop\",\"type\":\"object\"},\"station\":{\"description\":\"Parent station if applicable\",\"type\":\"object\"},\"type\":{\"enum\":[\"stop\",\"station\"],\"type\":\"string\"}},\"type\":\"object\"},\"direction\":{\"description\":\"Direction of the leg\",\"type\":\"string\"},\"line\":{\"properties\":{\"id\":{\"description\":\"Line identifier\",\"type\":\"string\"},\"mode\":{\"description\":\"Mode of transport\",\"type\":\"string\"},\"name\":{\"description\":\"Line name\",\"type\":\"string\"},\"operator\":{\"description\":\"Operating company\",\"type\":\"object\"},\"product\":{\"description\":\"Product type\",\"type\":\"string\"},\"type\":{\"enum\":[\"line\"],\"type\":\"string\"}},\"type\":\"object\"},\"origin\":{\"properties\":{\"id\":{\"description\":\"Unique identifier for the stop\",\"type\":\"string\"},\"location\":{\"properties\":{\"latitude\":{\"description\":\"Latitude coordinate\",\"format\":\"double\",\"type\":\"number\"},\"longitude\":{\"description\":\"Longitude coordinate\",\"format\":\"double\",\"type\":\"number\"},\"type\":{\"enum\":[\"location\"],\"type\":\"string\"}},\"type\":\"object\"},\"name\":{\"description\":\"Name of the stop\",\"type\":\"string\"},\"products\":{\"description\":\"Available products at this stop\",\"type\":\"object\"},\"station\":{\"description\":\"Parent station if applicable\",\"type\":\"object\"},\"type\":{\"enum\":[\"stop\",\"station\"],\"type\":\"string\"}},\"type\":\"object\"},\"plannedArrival\":{\"description\":\"Planned arrival time\",\"format\":\"date-time\",\"type\":\"string\"},\"plannedDeparture\":{\"description\":\"Planned departure time\",\"format\":\"date-time\",\"type\":\"string\"},\"stopovers\":{\"items\":{\"properties\":{\"arrival\":{\"format\":\"date-time\",\"type\":\"string\"},\"departure\":{\"format\":\"date-time\",\"type\":\"string\"},\"plannedArrival\":{\"format\":\"date-time\",\"type\":\"string\"},\"plannedDeparture\":{\"format\":\"date-time\",\"type\":\"string\"},\"stop\":{\"properties\":{\"id\":{\"description\":\"Unique identifier for the stop\",\"type\":\"string\"},\"location\":{\"properties\":{\"latitude\":{\"description\":\"Latitude coordinate\",\"format\":\"double\",\"type\":\"number\"},\"longitude\":{\"description\":\"Longitude coordinate\",\"format\":\"double\",\"type\":\"number\"},\"type\":{\"enum\":[\"location\"],\"type\":\"string\"}},\"type\":\"object\"},\"name\":{\"description\":\"Name of the stop\",\"type\":\"string\"},\"products\":{\"description\":\"Available products at this stop\",\"type\":\"object\"},\"station\":{\"description\":\"Parent station if applicable\",\"type\":\"object\"},\"type\":{\"enum\":[\"stop\",\"station\"],\"type\":\"string\"}},\"type\":\"object\"}},\"type\":\"object\"},\"type\":\"array\"}},\"type\":\"object\"},\"type\":\"array\"},\"refreshToken\":{\"description\":\"Token to refresh this journey\",\"type\":\"string\"},\"type\":{\"enum\":[\"journey\"],\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}},\"type\":\"object\"}}},\"description\":\"Successful response with journeys\"},\"400\":{\"description\":\"Bad request - invalid parameters\"},\"500\":{\"description\":\"Internal server error\"}},\"securitySource\":\"unspecified\"}", "source": "openapi3", "version": 1 }, "kind": "http", "method": "GET", "orig": "/journeys", "segments": [{ "lit": "journeys" }], "select": { "exist": ["arrival", "departure", "from", "result", "stopover", "to"] }, "transform": { "req": "`reqdata`", "res": "`body.journeys`" }, "index$": 0 }], "key$": "list" } }, "relations": { "ancestors": [] }, "key$": "journey", "name__orig": "journey", "Name": "Journey", "name_": "journey", "name-": "journey", "NAME": "JOURNEY", "index$": 2 }, { "active": true, "entity": "journey", "key$": "BasicJourneyFlow", "kind": "basic", "name": "BasicJourneyFlow", "param": {}, "step": [{ "active": true, "data": {}, "input": {}, "match": {}, "op": "list", "spec": [], "valid": [{ "apply": "ItemExists", "def": { "ref": "journey_ref01" } }], "index$": 0 }] }, 'Journey');
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -101,12 +99,6 @@ function basicSetup(extra) {
                 '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
             }]
     });
-    // Detect whether the user provided a real ENTID JSON via env var. The
-    // basic flow consumes synthetic IDs from the fixture file; without an
-    // override those synthetic IDs reach the live API and 4xx. Surface this
-    // to the test so it can skip rather than fail.
-    const idmapEnvVal = process.env['TRANSPORTREST_TRANSIT_APIS_TEST_JOURNEY_ENTID'];
-    const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{');
     const env = (0, utility_1.envOverride)({
         'TRANSPORTREST_TRANSIT_APIS_TEST_JOURNEY_ENTID': idmap,
         'TRANSPORTREST_TRANSIT_APIS_TEST_LIVE': 'FALSE',
@@ -114,7 +106,13 @@ function basicSetup(extra) {
     });
     idmap = env['TRANSPORTREST_TRANSIT_APIS_TEST_JOURNEY_ENTID'];
     const live = 'TRUE' === env.TRANSPORTREST_TRANSIT_APIS_TEST_LIVE;
+    const transport = (0, live_runner_1.createLiveTransport)();
     if (live) {
+        const rawIds = process.env['TRANSPORTREST_TRANSIT_APIS_TEST_JOURNEY_ENTID'];
+        idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {};
+        if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+            throw new Error('Live ENTID must be a JSON object');
+        }
         client = new __1.TransportrestTransitApisSDK(merge([
             // FIRST, so the generated fields below win: sdk-test-control.json's
             // test.client.options adds to the live client, it does not redirect it.
@@ -125,7 +123,8 @@ function basicSetup(extra) {
             // argument at all - so a bare 'extra' silently discarded the apikey
             // and server values above and handed the SDK undefined. Harmless
             // while there was nothing in that object; not harmless now.
-            extra || {}
+            extra || {},
+            { system: { fetch: transport.fetch } }
         ]));
     }
     const setup = {
@@ -137,7 +136,7 @@ function basicSetup(extra) {
         data: entityData,
         explain: 'TRUE' === env.TRANSPORTREST_TRANSIT_APIS_TEST_EXPLAIN,
         live,
-        syntheticOnly: live && !idmapOverridden,
+        transport,
         now: Date.now(),
     };
     return setup;

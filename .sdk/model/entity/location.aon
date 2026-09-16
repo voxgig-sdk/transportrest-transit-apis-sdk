@@ -91,6 +91,12 @@ main: kit: entity: location: {
               }
             ]
           }
+          contract: {
+            id: "GET /locations"
+            json: "{\"operationId\":\"searchLocations\",\"parameters\":[{\"description\":\"Search query for locations\",\"example\":\"Berlin\",\"in\":\"query\",\"name\":\"query\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Number of results to return\",\"in\":\"query\",\"name\":\"results\",\"required\":false,\"schema\":{\"default\":10,\"maximum\":100,\"minimum\":1,\"type\":\"integer\"}},{\"description\":\"Include stops/stations in results\",\"in\":\"query\",\"name\":\"stops\",\"required\":false,\"schema\":{\"default\":true,\"type\":\"boolean\"}},{\"description\":\"Include addresses in results\",\"in\":\"query\",\"name\":\"addresses\",\"required\":false,\"schema\":{\"default\":true,\"type\":\"boolean\"}},{\"description\":\"Include points of interest in results\",\"in\":\"query\",\"name\":\"poi\",\"required\":false,\"schema\":{\"default\":true,\"type\":\"boolean\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"items\":{\"properties\":{\"id\":{\"description\":\"Unique identifier for the location\",\"type\":\"string\"},\"location\":{\"properties\":{\"latitude\":{\"description\":\"Latitude coordinate\",\"format\":\"double\",\"type\":\"number\"},\"longitude\":{\"description\":\"Longitude coordinate\",\"format\":\"double\",\"type\":\"number\"},\"type\":{\"enum\":[\"location\"],\"type\":\"string\"}},\"type\":\"object\"},\"name\":{\"description\":\"Name of the location\",\"type\":\"string\"},\"products\":{\"description\":\"Available products at this location\",\"type\":\"object\"},\"type\":{\"description\":\"Type of location\",\"enum\":[\"stop\",\"station\",\"location\",\"address\",\"poi\"],\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"}}},\"description\":\"Successful response with locations\"},\"400\":{\"description\":\"Bad request - invalid parameters\"},\"500\":{\"description\":\"Internal server error\"}},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/locations"
           segments: [

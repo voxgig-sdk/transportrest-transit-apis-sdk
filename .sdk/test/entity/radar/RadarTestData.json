@@ -34,5 +34,228 @@
         "tripId": "scc"
       }
     }
+  },
+  "requests": {
+    "GET /radar": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getRadar",
+        "parameters": [
+          {
+            "description": "Northern latitude boundary",
+            "in": "query",
+            "name": "north",
+            "required": true,
+            "schema": {
+              "format": "double",
+              "type": "number"
+            }
+          },
+          {
+            "description": "Western longitude boundary",
+            "in": "query",
+            "name": "west",
+            "required": true,
+            "schema": {
+              "format": "double",
+              "type": "number"
+            }
+          },
+          {
+            "description": "Southern latitude boundary",
+            "in": "query",
+            "name": "south",
+            "required": true,
+            "schema": {
+              "format": "double",
+              "type": "number"
+            }
+          },
+          {
+            "description": "Eastern longitude boundary",
+            "in": "query",
+            "name": "east",
+            "required": true,
+            "schema": {
+              "format": "double",
+              "type": "number"
+            }
+          },
+          {
+            "description": "Maximum number of vehicles to return",
+            "in": "query",
+            "name": "results",
+            "required": false,
+            "schema": {
+              "default": 256,
+              "type": "integer"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "movements": {
+                      "items": {
+                        "properties": {
+                          "direction": {
+                            "description": "Direction of the movement",
+                            "type": "string"
+                          },
+                          "line": {
+                            "properties": {
+                              "id": {
+                                "description": "Line identifier",
+                                "type": "string"
+                              },
+                              "mode": {
+                                "description": "Mode of transport",
+                                "type": "string"
+                              },
+                              "name": {
+                                "description": "Line name",
+                                "type": "string"
+                              },
+                              "operator": {
+                                "description": "Operating company",
+                                "type": "object"
+                              },
+                              "product": {
+                                "description": "Product type",
+                                "type": "string"
+                              },
+                              "type": {
+                                "enum": [
+                                  "line"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "location": {
+                            "properties": {
+                              "latitude": {
+                                "description": "Latitude coordinate",
+                                "format": "double",
+                                "type": "number"
+                              },
+                              "longitude": {
+                                "description": "Longitude coordinate",
+                                "format": "double",
+                                "type": "number"
+                              },
+                              "type": {
+                                "enum": [
+                                  "location"
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            "type": "object"
+                          },
+                          "nextStopovers": {
+                            "items": {
+                              "properties": {
+                                "arrival": {
+                                  "format": "date-time",
+                                  "type": "string"
+                                },
+                                "departure": {
+                                  "format": "date-time",
+                                  "type": "string"
+                                },
+                                "plannedArrival": {
+                                  "format": "date-time",
+                                  "type": "string"
+                                },
+                                "plannedDeparture": {
+                                  "format": "date-time",
+                                  "type": "string"
+                                },
+                                "stop": {
+                                  "properties": {
+                                    "id": {
+                                      "description": "Unique identifier for the stop",
+                                      "type": "string"
+                                    },
+                                    "location": {
+                                      "properties": {
+                                        "latitude": {
+                                          "description": "Latitude coordinate",
+                                          "format": "double",
+                                          "type": "number"
+                                        },
+                                        "longitude": {
+                                          "description": "Longitude coordinate",
+                                          "format": "double",
+                                          "type": "number"
+                                        },
+                                        "type": {
+                                          "enum": [
+                                            "location"
+                                          ],
+                                          "type": "string"
+                                        }
+                                      },
+                                      "type": "object"
+                                    },
+                                    "name": {
+                                      "description": "Name of the stop",
+                                      "type": "string"
+                                    },
+                                    "products": {
+                                      "description": "Available products at this stop",
+                                      "type": "object"
+                                    },
+                                    "station": {
+                                      "description": "Parent station if applicable",
+                                      "type": "object"
+                                    },
+                                    "type": {
+                                      "enum": [
+                                        "stop",
+                                        "station"
+                                      ],
+                                      "type": "string"
+                                    }
+                                  },
+                                  "type": "object"
+                                }
+                              },
+                              "type": "object"
+                            },
+                            "type": "array"
+                          },
+                          "tripId": {
+                            "description": "Trip identifier",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response with vehicles"
+          },
+          "400": {
+            "description": "Bad request - invalid parameters"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "securitySource": "unspecified"
+      }
+    }
   }
 }

@@ -1,12 +1,18 @@
 # TransportrestTransitApis SDK feature factory
 
 from transportresttransitapis_sdk.feature.base_feature import TransportrestTransitApisBaseFeature
+from transportresttransitapis_sdk.feature.ratelimit_feature import TransportrestTransitApisRatelimitFeature
+from transportresttransitapis_sdk.feature.retry_feature import TransportrestTransitApisRetryFeature
 from transportresttransitapis_sdk.feature.test_feature import TransportrestTransitApisTestFeature
+from transportresttransitapis_sdk.feature.timeout_feature import TransportrestTransitApisTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: TransportrestTransitApisBaseFeature(),
+    "ratelimit": lambda: TransportrestTransitApisRatelimitFeature(),
+    "retry": lambda: TransportrestTransitApisRetryFeature(),
     "test": lambda: TransportrestTransitApisTestFeature(),
+    "timeout": lambda: TransportrestTransitApisTimeoutFeature(),
 }
 
 
