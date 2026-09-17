@@ -127,27 +127,27 @@ class Config {
 
     entity: {
       
-      arrival: {
-      },
-
-      departure: {
-      },
-
-      journey: {
-      },
-
-      location: {
-      },
-
-      radar: {
-      },
-
-      stop: {
-      },
-
-      trip: {
-      },
-
+        arrival: {
+        },
+  
+        departure: {
+        },
+  
+        journey: {
+        },
+  
+        location: {
+        },
+  
+        radar: {
+        },
+  
+        stop: {
+        },
+  
+        trip: {
+        },
+  
     }
   }
 

@@ -105,12 +105,12 @@ local results, err = client:Location():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/transportrest-transit-apis-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/releases) |
-| Python | `voxgig-sdk-transportrest-transit-apis` | publish pending — [install from git tag](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/releases) |
-| PHP | `voxgig-sdk/transportrest-transit-apis` | publish pending — [install from git tag](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/releases) |
+| TypeScript | `@voxgig-sdk/transportrest-transit-apis-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/tags) |
+| Python | `voxgig-sdk-transportrest-transit-apis` | publish pending — [install from git tag](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/tags) |
+| PHP | `voxgig-sdk/transportrest-transit-apis` | publish pending — [install from git tag](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/transportrest-transit-apis-sdk/go` | `go get github.com/voxgig-sdk/transportrest-transit-apis-sdk/go@latest` |
-| Ruby | `voxgig-sdk-transportrest-transit-apis` | publish pending — [install from git tag](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/releases) |
-| Lua | `voxgig-sdk-transportrest-transit-apis` | publish pending — [install from git tag](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/releases) |
+| Ruby | `voxgig-sdk-transportrest-transit-apis` | publish pending — [install from git tag](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/tags) |
+| Lua | `voxgig-sdk-transportrest-transit-apis` | publish pending — [install from git tag](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/transportrest-transit-apis-sdk/go-cli` | `go install github.com/voxgig-sdk/transportrest-transit-apis-sdk/go-cli/cmd/transportrest-transit-apis@latest` |
 | Go MCP server | `github.com/voxgig-sdk/transportrest-transit-apis-sdk/go-mcp` | `go get github.com/voxgig-sdk/transportrest-transit-apis-sdk/go-mcp@latest` |
 
