@@ -19,7 +19,6 @@ import type {
   RadarListMatch,
 } from '../TransportrestTransitApisTypes'
 
-// TODO: needs Entity superclass
 class RadarEntity extends TransportrestTransitApisEntityBase<Radar> {
 
   constructor(client: TransportrestTransitApisSDK, entopts: any) {

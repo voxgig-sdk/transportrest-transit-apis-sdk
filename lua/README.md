@@ -43,7 +43,7 @@ local arrivals, err = client:Arrival():list()
 if err then error(err) end
 
 for _, item in ipairs(arrivals) do
-  print(item["direction"])
+  print(item)
 end
 ```
 

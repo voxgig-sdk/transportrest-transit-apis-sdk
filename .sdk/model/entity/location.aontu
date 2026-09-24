@@ -1,0 +1,131 @@
+# Entity: location
+
+main: kit: entity: location: {
+
+  alias: field: {}
+
+  fields: {
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      sh: "Unique identifier for the location"
+      t: "`$STRING`"
+    }
+    location: {
+      h: "Location"
+      n: "location"
+      r: false
+      t: "`$OBJECT`"
+    }
+    name: {
+      h: "Name"
+      n: "name"
+      r: false
+      sh: "Name of the location"
+      t: "`$STRING`"
+    }
+    products: {
+      h: "Products"
+      n: "products"
+      r: false
+      sh: "Available products at this location"
+      t: "`$OBJECT`"
+    }
+    type: {
+      h: "Type"
+      n: "type"
+      r: false
+      sh: "Type of location"
+      t: "`$STRING`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "location"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /locations"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: true
+                k: "query"
+                n: "address"
+                or: "address"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: true
+                k: "query"
+                n: "poi"
+                or: "poi"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: "Berlin"
+                k: "query"
+                n: "query"
+                or: "query"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: 10
+                k: "query"
+                n: "result"
+                or: "result"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: true
+                k: "query"
+                n: "stop"
+                or: "stop"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/locations"
+          q: {
+            exist: [
+              "address"
+              "poi"
+              "query"
+              "result"
+              "stop"
+            ]
+          }
+          s: [
+            {
+              lit: "locations"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -1,0 +1,120 @@
+# Entity: radar
+
+main: kit: entity: radar: {
+
+  alias: field: {}
+
+  fields: {
+    direction: {
+      h: "Direction"
+      n: "direction"
+      r: false
+      sh: "Direction of the movement"
+      t: "`$STRING`"
+    }
+    line: {
+      h: "Line"
+      n: "line"
+      r: false
+      t: "`$OBJECT`"
+    }
+    location: {
+      h: "Location"
+      n: "location"
+      r: false
+      t: "`$OBJECT`"
+    }
+    nextStopovers: {
+      h: "Next Stopovers"
+      n: "nextStopovers"
+      r: false
+      t: "`$ARRAY`"
+    }
+    tripId: {
+      h: "Trip Id"
+      n: "tripId"
+      r: false
+      sh: "Trip identifier"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "radar"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /radar"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "east"
+                or: "east"
+                r: true
+                t: "`$NUMBER`"
+              }
+              {
+                k: "query"
+                n: "north"
+                or: "north"
+                r: true
+                t: "`$NUMBER`"
+              }
+              {
+                ex: 256
+                k: "query"
+                n: "result"
+                or: "result"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "south"
+                or: "south"
+                r: true
+                t: "`$NUMBER`"
+              }
+              {
+                k: "query"
+                n: "west"
+                or: "west"
+                r: true
+                t: "`$NUMBER`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/radar"
+          q: {
+            exist: [
+              "east"
+              "north"
+              "result"
+              "south"
+              "west"
+            ]
+          }
+          s: [
+            {
+              lit: "radar"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.movements`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

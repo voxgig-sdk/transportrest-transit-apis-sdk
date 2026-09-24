@@ -19,7 +19,6 @@ import type {
   ArrivalListMatch,
 } from '../TransportrestTransitApisTypes'
 
-// TODO: needs Entity superclass
 class ArrivalEntity extends TransportrestTransitApisEntityBase<Arrival> {
 
   constructor(client: TransportrestTransitApisSDK, entopts: any) {

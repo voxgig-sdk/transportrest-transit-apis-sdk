@@ -1,0 +1,169 @@
+# Entity: departure
+
+main: kit: entity: departure: {
+
+  alias: field: {}
+
+  fields: {
+    delay: {
+      h: "Delay"
+      n: "delay"
+      r: false
+      sh: "Delay in seconds"
+      t: "`$INTEGER`"
+    }
+    direction: {
+      h: "Direction"
+      n: "direction"
+      r: false
+      sh: "Direction of the trip"
+      t: "`$STRING`"
+    }
+    line: {
+      h: "Line"
+      n: "line"
+      r: false
+      t: "`$OBJECT`"
+    }
+    plannedPlatform: {
+      h: "Planned Platform"
+      n: "plannedPlatform"
+      r: false
+      sh: "Originally planned platform"
+      t: "`$STRING`"
+    }
+    plannedWhen: {
+      fo: "date-time"
+      h: "Planned When"
+      n: "plannedWhen"
+      r: false
+      sh: "Originally planned departure time"
+      t: "`$STRING`"
+    }
+    platform: {
+      h: "Platform"
+      n: "platform"
+      r: false
+      sh: "Departure platform"
+      t: "`$STRING`"
+    }
+    stop: {
+      h: "Stop"
+      n: "stop"
+      r: false
+      t: "`$OBJECT`"
+    }
+    tripId: {
+      h: "Trip Id"
+      n: "tripId"
+      r: false
+      sh: "Trip identifier"
+      t: "`$STRING`"
+    }
+    when: {
+      fo: "date-time"
+      h: "When"
+      n: "when"
+      r: false
+      sh: "Scheduled departure time"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "departure"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /stops/{id}/departures"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                ex: "900000003201"
+                k: "param"
+                n: "stop_id"
+                or: "id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "direction"
+                or: "direction"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: 120
+                k: "query"
+                n: "duration"
+                or: "duration"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 10
+                k: "query"
+                n: "result"
+                or: "result"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                k: "query"
+                n: "when"
+                or: "when"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/stops/{id}/departures"
+          q: {
+            exist: [
+              "direction"
+              "duration"
+              "result"
+              "stop_id"
+              "when"
+            ]
+          }
+          r: {
+            param: {
+              id: "stop_id"
+            }
+          }
+          s: [
+            {
+              lit: "stops"
+            }
+            {
+              var: "stop_id"
+            }
+            {
+              lit: "departures"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.departures`"
+          }
+        }
+      ]
+    }
+  }
+
+
+  relations: ancestors: [
+    [path("$.main.kit.entity.stop")]
+  ]
+
+}

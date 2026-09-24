@@ -19,7 +19,6 @@ import type {
   LocationListMatch,
 } from '../TransportrestTransitApisTypes'
 
-// TODO: needs Entity superclass
 class LocationEntity extends TransportrestTransitApisEntityBase<Location> {
 
   constructor(client: TransportrestTransitApisSDK, entopts: any) {

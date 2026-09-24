@@ -97,48 +97,57 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "delay",
-						"short": "Delay in seconds",
+						"title": "Delay",
 						"type": "`$INTEGER`",
+						"short": "Delay in seconds",
 					},
 					map[string]any{
 						"name": "direction",
-						"short": "Direction of the trip",
+						"title": "Direction",
 						"type": "`$STRING`",
+						"short": "Direction of the trip",
 					},
 					map[string]any{
 						"name": "line",
+						"title": "Line",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "plannedPlatform",
-						"short": "Originally planned platform",
+						"title": "Planned Platform",
 						"type": "`$STRING`",
+						"short": "Originally planned platform",
 					},
 					map[string]any{
-						"format": "date-time",
 						"name": "plannedWhen",
-						"short": "Originally planned arrival time",
+						"title": "Planned When",
 						"type": "`$STRING`",
+						"short": "Originally planned arrival time",
+						"format": "date-time",
 					},
 					map[string]any{
 						"name": "platform",
-						"short": "Arrival platform",
+						"title": "Platform",
 						"type": "`$STRING`",
+						"short": "Arrival platform",
 					},
 					map[string]any{
 						"name": "stop",
+						"title": "Stop",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "tripId",
-						"short": "Trip identifier",
+						"title": "Trip Id",
 						"type": "`$STRING`",
+						"short": "Trip identifier",
 					},
 					map[string]any{
-						"format": "date-time",
 						"name": "when",
-						"short": "Scheduled arrival time",
+						"title": "When",
 						"type": "`$STRING`",
+						"short": "Scheduled arrival time",
+						"format": "date-time",
 					},
 				},
 				"name": "arrival",
@@ -148,47 +157,9 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "stop_id",
-											"orig": "id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-									"query": []any{
-										map[string]any{
-											"example": 120,
-											"kind": "query",
-											"name": "duration",
-											"orig": "duration",
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"example": 10,
-											"kind": "query",
-											"name": "result",
-											"orig": "result",
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "when",
-											"orig": "when",
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/stops/{id}/arrivals",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"id": "stop_id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "stops",
@@ -200,6 +171,53 @@ func MakeConfig() map[string]any {
 										"lit": "arrivals",
 									},
 								},
+								"parts": []any{
+									"stops",
+									"{stop_id}",
+									"arrivals",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"id": "stop_id",
+									},
+								},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.arrivals`",
+								},
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "stop_id",
+											"orig": "id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+									"query": []any{
+										map[string]any{
+											"name": "duration",
+											"orig": "duration",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 120,
+										},
+										map[string]any{
+											"name": "result",
+											"orig": "result",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 10,
+										},
+										map[string]any{
+											"name": "when",
+											"orig": "when",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"duration",
@@ -208,15 +226,6 @@ func MakeConfig() map[string]any {
 										"when",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.arrivals`",
-								},
-								"parts": []any{
-									"stops",
-									"{stop_id}",
-									"arrivals",
-								},
 							},
 						},
 					},
@@ -224,7 +233,7 @@ func MakeConfig() map[string]any {
 				"relations": map[string]any{
 					"ancestors": []any{
 						[]any{
-							"stop",
+							"$.main.kit.entity.stop",
 						},
 					},
 				},
@@ -233,48 +242,57 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "delay",
-						"short": "Delay in seconds",
+						"title": "Delay",
 						"type": "`$INTEGER`",
+						"short": "Delay in seconds",
 					},
 					map[string]any{
 						"name": "direction",
-						"short": "Direction of the trip",
+						"title": "Direction",
 						"type": "`$STRING`",
+						"short": "Direction of the trip",
 					},
 					map[string]any{
 						"name": "line",
+						"title": "Line",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "plannedPlatform",
-						"short": "Originally planned platform",
+						"title": "Planned Platform",
 						"type": "`$STRING`",
+						"short": "Originally planned platform",
 					},
 					map[string]any{
-						"format": "date-time",
 						"name": "plannedWhen",
-						"short": "Originally planned departure time",
+						"title": "Planned When",
 						"type": "`$STRING`",
+						"short": "Originally planned departure time",
+						"format": "date-time",
 					},
 					map[string]any{
 						"name": "platform",
-						"short": "Departure platform",
+						"title": "Platform",
 						"type": "`$STRING`",
+						"short": "Departure platform",
 					},
 					map[string]any{
 						"name": "stop",
+						"title": "Stop",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "tripId",
-						"short": "Trip identifier",
+						"title": "Trip Id",
 						"type": "`$STRING`",
+						"short": "Trip identifier",
 					},
 					map[string]any{
-						"format": "date-time",
 						"name": "when",
-						"short": "Scheduled departure time",
+						"title": "When",
 						"type": "`$STRING`",
+						"short": "Scheduled departure time",
+						"format": "date-time",
 					},
 				},
 				"name": "departure",
@@ -284,54 +302,9 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"example": "900000003201",
-											"kind": "param",
-											"name": "stop_id",
-											"orig": "id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "direction",
-											"orig": "direction",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": 120,
-											"kind": "query",
-											"name": "duration",
-											"orig": "duration",
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"example": 10,
-											"kind": "query",
-											"name": "result",
-											"orig": "result",
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "when",
-											"orig": "when",
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/stops/{id}/departures",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"id": "stop_id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"lit": "stops",
@@ -343,6 +316,60 @@ func MakeConfig() map[string]any {
 										"lit": "departures",
 									},
 								},
+								"parts": []any{
+									"stops",
+									"{stop_id}",
+									"departures",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"id": "stop_id",
+									},
+								},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.departures`",
+								},
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "stop_id",
+											"orig": "id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+											"example": "900000003201",
+										},
+									},
+									"query": []any{
+										map[string]any{
+											"name": "direction",
+											"orig": "direction",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "duration",
+											"orig": "duration",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 120,
+										},
+										map[string]any{
+											"name": "result",
+											"orig": "result",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 10,
+										},
+										map[string]any{
+											"name": "when",
+											"orig": "when",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"direction",
@@ -352,15 +379,6 @@ func MakeConfig() map[string]any {
 										"when",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.departures`",
-								},
-								"parts": []any{
-									"stops",
-									"{stop_id}",
-									"departures",
-								},
 							},
 						},
 					},
@@ -368,7 +386,7 @@ func MakeConfig() map[string]any {
 				"relations": map[string]any{
 					"ancestors": []any{
 						[]any{
-							"stop",
+							"$.main.kit.entity.stop",
 						},
 					},
 				},
@@ -377,16 +395,19 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "legs",
-						"short": "Journey legs",
+						"title": "Legs",
 						"type": "`$ARRAY`",
+						"short": "Journey legs",
 					},
 					map[string]any{
 						"name": "refreshToken",
-						"short": "Token to refresh this journey",
+						"title": "Refresh Token",
 						"type": "`$STRING`",
+						"short": "Token to refresh this journey",
 					},
 					map[string]any{
 						"name": "type",
+						"title": "Type",
 						"type": "`$STRING`",
 					},
 				},
@@ -397,58 +418,66 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "arrival",
-											"orig": "arrival",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "departure",
-											"orig": "departure",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "900000003201",
-											"kind": "query",
-											"name": "from",
-											"orig": "from",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": 3,
-											"kind": "query",
-											"name": "result",
-											"orig": "result",
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"example": false,
-											"kind": "query",
-											"name": "stopover",
-											"orig": "stopover",
-											"type": "`$BOOLEAN`",
-										},
-										map[string]any{
-											"example": "900000100003",
-											"kind": "query",
-											"name": "to",
-											"orig": "to",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/journeys",
 								"segments": []any{
 									map[string]any{
 										"lit": "journeys",
+									},
+								},
+								"parts": []any{
+									"journeys",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.journeys`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "arrival",
+											"orig": "arrival",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "departure",
+											"orig": "departure",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "from",
+											"orig": "from",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "900000003201",
+										},
+										map[string]any{
+											"name": "result",
+											"orig": "result",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 3,
+										},
+										map[string]any{
+											"name": "stopover",
+											"orig": "stopover",
+											"type": "`$BOOLEAN`",
+											"kind": "query",
+											"example": false,
+										},
+										map[string]any{
+											"name": "to",
+											"orig": "to",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "900000100003",
+										},
 									},
 								},
 								"select": map[string]any{
@@ -460,13 +489,6 @@ func MakeConfig() map[string]any {
 										"stopover",
 										"to",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.journeys`",
-								},
-								"parts": []any{
-									"journeys",
 								},
 							},
 						},
@@ -480,27 +502,32 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "id",
-						"short": "Unique identifier for the location",
+						"title": "Id",
 						"type": "`$STRING`",
+						"short": "Unique identifier for the location",
 					},
 					map[string]any{
 						"name": "location",
+						"title": "Location",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "name",
-						"short": "Name of the location",
+						"title": "Name",
 						"type": "`$STRING`",
+						"short": "Name of the location",
 					},
 					map[string]any{
 						"name": "products",
-						"short": "Available products at this location",
+						"title": "Products",
 						"type": "`$OBJECT`",
+						"short": "Available products at this location",
 					},
 					map[string]any{
 						"name": "type",
-						"short": "Type of location",
+						"title": "Type",
 						"type": "`$STRING`",
+						"short": "Type of location",
 					},
 				},
 				"id": map[string]any{
@@ -514,52 +541,60 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": true,
-											"kind": "query",
-											"name": "address",
-											"orig": "address",
-											"type": "`$BOOLEAN`",
-										},
-										map[string]any{
-											"example": true,
-											"kind": "query",
-											"name": "poi",
-											"orig": "poi",
-											"type": "`$BOOLEAN`",
-										},
-										map[string]any{
-											"example": "Berlin",
-											"kind": "query",
-											"name": "query",
-											"orig": "query",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": 10,
-											"kind": "query",
-											"name": "result",
-											"orig": "result",
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"example": true,
-											"kind": "query",
-											"name": "stop",
-											"orig": "stop",
-											"type": "`$BOOLEAN`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/locations",
 								"segments": []any{
 									map[string]any{
 										"lit": "locations",
+									},
+								},
+								"parts": []any{
+									"locations",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "address",
+											"orig": "address",
+											"type": "`$BOOLEAN`",
+											"kind": "query",
+											"example": true,
+										},
+										map[string]any{
+											"name": "poi",
+											"orig": "poi",
+											"type": "`$BOOLEAN`",
+											"kind": "query",
+											"example": true,
+										},
+										map[string]any{
+											"name": "query",
+											"orig": "query",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "Berlin",
+										},
+										map[string]any{
+											"name": "result",
+											"orig": "result",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 10,
+										},
+										map[string]any{
+											"name": "stop",
+											"orig": "stop",
+											"type": "`$BOOLEAN`",
+											"kind": "query",
+											"example": true,
+										},
 									},
 								},
 								"select": map[string]any{
@@ -570,13 +605,6 @@ func MakeConfig() map[string]any {
 										"result",
 										"stop",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"parts": []any{
-									"locations",
 								},
 							},
 						},
@@ -590,25 +618,30 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "direction",
-						"short": "Direction of the movement",
+						"title": "Direction",
 						"type": "`$STRING`",
+						"short": "Direction of the movement",
 					},
 					map[string]any{
 						"name": "line",
+						"title": "Line",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "location",
+						"title": "Location",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "nextStopovers",
+						"title": "Next Stopovers",
 						"type": "`$ARRAY`",
 					},
 					map[string]any{
 						"name": "tripId",
-						"short": "Trip identifier",
+						"title": "Trip Id",
 						"type": "`$STRING`",
+						"short": "Trip identifier",
 					},
 				},
 				"name": "radar",
@@ -618,51 +651,59 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "east",
-											"orig": "east",
-											"reqd": true,
-											"type": "`$NUMBER`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "north",
-											"orig": "north",
-											"reqd": true,
-											"type": "`$NUMBER`",
-										},
-										map[string]any{
-											"example": 256,
-											"kind": "query",
-											"name": "result",
-											"orig": "result",
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "south",
-											"orig": "south",
-											"reqd": true,
-											"type": "`$NUMBER`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "west",
-											"orig": "west",
-											"reqd": true,
-											"type": "`$NUMBER`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/radar",
 								"segments": []any{
 									map[string]any{
 										"lit": "radar",
+									},
+								},
+								"parts": []any{
+									"radar",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.movements`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "east",
+											"orig": "east",
+											"type": "`$NUMBER`",
+											"kind": "query",
+											"reqd": true,
+										},
+										map[string]any{
+											"name": "north",
+											"orig": "north",
+											"type": "`$NUMBER`",
+											"kind": "query",
+											"reqd": true,
+										},
+										map[string]any{
+											"name": "result",
+											"orig": "result",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 256,
+										},
+										map[string]any{
+											"name": "south",
+											"orig": "south",
+											"type": "`$NUMBER`",
+											"kind": "query",
+											"reqd": true,
+										},
+										map[string]any{
+											"name": "west",
+											"orig": "west",
+											"type": "`$NUMBER`",
+											"kind": "query",
+											"reqd": true,
+										},
 									},
 								},
 								"select": map[string]any{
@@ -673,13 +714,6 @@ func MakeConfig() map[string]any {
 										"south",
 										"west",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.movements`",
-								},
-								"parts": []any{
-									"radar",
 								},
 							},
 						},
@@ -693,30 +727,36 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "id",
-						"short": "Unique identifier for the stop",
+						"title": "Id",
 						"type": "`$STRING`",
+						"short": "Unique identifier for the stop",
 					},
 					map[string]any{
 						"name": "location",
+						"title": "Location",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "name",
-						"short": "Name of the stop",
+						"title": "Name",
 						"type": "`$STRING`",
+						"short": "Name of the stop",
 					},
 					map[string]any{
 						"name": "products",
-						"short": "Available products at this stop",
+						"title": "Products",
 						"type": "`$OBJECT`",
+						"short": "Available products at this stop",
 					},
 					map[string]any{
 						"name": "station",
-						"short": "Parent station if applicable",
+						"title": "Station",
 						"type": "`$OBJECT`",
+						"short": "Parent station if applicable",
 					},
 					map[string]any{
 						"name": "type",
+						"title": "Type",
 						"type": "`$STRING`",
 					},
 				},
@@ -731,18 +771,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"example": "900000003201",
-											"kind": "param",
-											"name": "id",
-											"orig": "id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/stops/{id}",
@@ -754,18 +782,31 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
-									},
+								"parts": []any{
+									"stops",
+									"{id}",
 								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"stops",
-									"{id}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+											"example": "900000003201",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+									},
 								},
 							},
 						},
@@ -779,28 +820,34 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "destination",
+						"title": "Destination",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "direction",
-						"short": "Direction of the trip",
+						"title": "Direction",
 						"type": "`$STRING`",
+						"short": "Direction of the trip",
 					},
 					map[string]any{
 						"name": "id",
-						"short": "Trip identifier",
+						"title": "Id",
 						"type": "`$STRING`",
+						"short": "Trip identifier",
 					},
 					map[string]any{
 						"name": "line",
+						"title": "Line",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "origin",
+						"title": "Origin",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "stopovers",
+						"title": "Stopovers",
 						"type": "`$ARRAY`",
 					},
 				},
@@ -815,32 +862,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"kind": "param",
-											"name": "id",
-											"orig": "id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "line_name",
-											"orig": "line_name",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": true,
-											"kind": "query",
-											"name": "stopover",
-											"orig": "stopover",
-											"type": "`$BOOLEAN`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/trips/{id}",
@@ -852,20 +873,47 @@ func MakeConfig() map[string]any {
 										"var": "id",
 									},
 								},
+								"parts": []any{
+									"trips",
+									"{id}",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "id",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+										},
+									},
+									"query": []any{
+										map[string]any{
+											"name": "line_name",
+											"orig": "line_name",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "stopover",
+											"orig": "stopover",
+											"type": "`$BOOLEAN`",
+											"kind": "query",
+											"example": true,
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"id",
 										"line_name",
 										"stopover",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"parts": []any{
-									"trips",
-									"{id}",
 								},
 							},
 						},

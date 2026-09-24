@@ -19,7 +19,6 @@ import type {
   DepartureListMatch,
 } from '../TransportrestTransitApisTypes'
 
-// TODO: needs Entity superclass
 class DepartureEntity extends TransportrestTransitApisEntityBase<Departure> {
 
   constructor(client: TransportrestTransitApisSDK, entopts: any) {

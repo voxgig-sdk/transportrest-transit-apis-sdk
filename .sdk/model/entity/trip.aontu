@@ -1,0 +1,120 @@
+# Entity: trip
+
+main: kit: entity: trip: {
+
+  alias: field: {}
+
+  fields: {
+    destination: {
+      h: "Destination"
+      n: "destination"
+      r: false
+      t: "`$OBJECT`"
+    }
+    direction: {
+      h: "Direction"
+      n: "direction"
+      r: false
+      sh: "Direction of the trip"
+      t: "`$STRING`"
+    }
+    id: {
+      h: "Id"
+      n: "id"
+      r: false
+      sh: "Trip identifier"
+      t: "`$STRING`"
+    }
+    line: {
+      h: "Line"
+      n: "line"
+      r: false
+      t: "`$OBJECT`"
+    }
+    origin: {
+      h: "Origin"
+      n: "origin"
+      r: false
+      t: "`$OBJECT`"
+    }
+    stopovers: {
+      h: "Stopovers"
+      n: "stopovers"
+      r: false
+      t: "`$ARRAY`"
+    }
+  }
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "trip"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /trips/{id}"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            params: [
+              {
+                k: "param"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+            query: [
+              {
+                k: "query"
+                n: "line_name"
+                or: "line_name"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: true
+                k: "query"
+                n: "stopover"
+                or: "stopover"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/trips/{id}"
+          q: {
+            exist: [
+              "id"
+              "line_name"
+              "stopover"
+            ]
+          }
+          s: [
+            {
+              lit: "trips"
+            }
+            {
+              var: "id"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

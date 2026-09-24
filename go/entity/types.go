@@ -1,7 +1,7 @@
 // Typed models for the TransportrestTransitApis SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,15 +14,6 @@ import (
 
 // Arrival is the typed data model for the arrival entity.
 type Arrival struct {
-	Delay *int `json:"delay,omitempty"`
-	Direction *string `json:"direction,omitempty"`
-	Line *map[string]any `json:"line,omitempty"`
-	PlannedPlatform *string `json:"plannedPlatform,omitempty"`
-	PlannedWhen *string `json:"plannedWhen,omitempty"`
-	Platform *string `json:"platform,omitempty"`
-	Stop *map[string]any `json:"stop,omitempty"`
-	TripId *string `json:"tripId,omitempty"`
-	When *string `json:"when,omitempty"`
 }
 
 // ArrivalListMatch is the typed request payload for Arrival.ListTyped.
@@ -35,15 +26,6 @@ type ArrivalListMatch struct {
 
 // Departure is the typed data model for the departure entity.
 type Departure struct {
-	Delay *int `json:"delay,omitempty"`
-	Direction *string `json:"direction,omitempty"`
-	Line *map[string]any `json:"line,omitempty"`
-	PlannedPlatform *string `json:"plannedPlatform,omitempty"`
-	PlannedWhen *string `json:"plannedWhen,omitempty"`
-	Platform *string `json:"platform,omitempty"`
-	Stop *map[string]any `json:"stop,omitempty"`
-	TripId *string `json:"tripId,omitempty"`
-	When *string `json:"when,omitempty"`
 }
 
 // DepartureListMatch is the typed request payload for Departure.ListTyped.
@@ -57,9 +39,6 @@ type DepartureListMatch struct {
 
 // Journey is the typed data model for the journey entity.
 type Journey struct {
-	Legs *[]any `json:"legs,omitempty"`
-	RefreshToken *string `json:"refreshToken,omitempty"`
-	Type *string `json:"type,omitempty"`
 }
 
 // JourneyListMatch is the typed request payload for Journey.ListTyped.
@@ -74,11 +53,6 @@ type JourneyListMatch struct {
 
 // Location is the typed data model for the location entity.
 type Location struct {
-	Id *string `json:"id,omitempty"`
-	Location *map[string]any `json:"location,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Products *map[string]any `json:"products,omitempty"`
-	Type *string `json:"type,omitempty"`
 }
 
 // LocationListMatch is the typed request payload for Location.ListTyped.
@@ -92,11 +66,6 @@ type LocationListMatch struct {
 
 // Radar is the typed data model for the radar entity.
 type Radar struct {
-	Direction *string `json:"direction,omitempty"`
-	Line *map[string]any `json:"line,omitempty"`
-	Location *map[string]any `json:"location,omitempty"`
-	NextStopovers *[]any `json:"nextStopovers,omitempty"`
-	TripId *string `json:"tripId,omitempty"`
 }
 
 // RadarListMatch is the typed request payload for Radar.ListTyped.
@@ -110,12 +79,6 @@ type RadarListMatch struct {
 
 // Stop is the typed data model for the stop entity.
 type Stop struct {
-	Id *string `json:"id,omitempty"`
-	Location *map[string]any `json:"location,omitempty"`
-	Name *string `json:"name,omitempty"`
-	Products *map[string]any `json:"products,omitempty"`
-	Station *map[string]any `json:"station,omitempty"`
-	Type *string `json:"type,omitempty"`
 }
 
 // StopLoadMatch is the typed request payload for Stop.LoadTyped.
@@ -125,12 +88,6 @@ type StopLoadMatch struct {
 
 // Trip is the typed data model for the trip entity.
 type Trip struct {
-	Destination *map[string]any `json:"destination,omitempty"`
-	Direction *string `json:"direction,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Line *map[string]any `json:"line,omitempty"`
-	Origin *map[string]any `json:"origin,omitempty"`
-	Stopovers *[]any `json:"stopovers,omitempty"`
 }
 
 // TripLoadMatch is the typed request payload for Trip.LoadTyped.

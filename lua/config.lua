@@ -93,48 +93,57 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "delay",
-            ["short"] = "Delay in seconds",
+            ["title"] = "Delay",
             ["type"] = "`$INTEGER`",
+            ["short"] = "Delay in seconds",
           },
           {
             ["name"] = "direction",
-            ["short"] = "Direction of the trip",
+            ["title"] = "Direction",
             ["type"] = "`$STRING`",
+            ["short"] = "Direction of the trip",
           },
           {
             ["name"] = "line",
+            ["title"] = "Line",
             ["type"] = "`$OBJECT`",
           },
           {
             ["name"] = "plannedPlatform",
-            ["short"] = "Originally planned platform",
+            ["title"] = "Planned Platform",
             ["type"] = "`$STRING`",
+            ["short"] = "Originally planned platform",
           },
           {
-            ["format"] = "date-time",
             ["name"] = "plannedWhen",
-            ["short"] = "Originally planned arrival time",
+            ["title"] = "Planned When",
             ["type"] = "`$STRING`",
+            ["short"] = "Originally planned arrival time",
+            ["format"] = "date-time",
           },
           {
             ["name"] = "platform",
-            ["short"] = "Arrival platform",
+            ["title"] = "Platform",
             ["type"] = "`$STRING`",
+            ["short"] = "Arrival platform",
           },
           {
             ["name"] = "stop",
+            ["title"] = "Stop",
             ["type"] = "`$OBJECT`",
           },
           {
             ["name"] = "tripId",
-            ["short"] = "Trip identifier",
+            ["title"] = "Trip Id",
             ["type"] = "`$STRING`",
+            ["short"] = "Trip identifier",
           },
           {
-            ["format"] = "date-time",
             ["name"] = "when",
-            ["short"] = "Scheduled arrival time",
+            ["title"] = "When",
             ["type"] = "`$STRING`",
+            ["short"] = "Scheduled arrival time",
+            ["format"] = "date-time",
           },
         },
         ["name"] = "arrival",
@@ -144,47 +153,9 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "stop_id",
-                      ["orig"] = "id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                  ["query"] = {
-                    {
-                      ["example"] = 120,
-                      ["kind"] = "query",
-                      ["name"] = "duration",
-                      ["orig"] = "duration",
-                      ["type"] = "`$INTEGER`",
-                    },
-                    {
-                      ["example"] = 10,
-                      ["kind"] = "query",
-                      ["name"] = "result",
-                      ["orig"] = "result",
-                      ["type"] = "`$INTEGER`",
-                    },
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "when",
-                      ["orig"] = "when",
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/stops/{id}/arrivals",
-                ["rename"] = {
-                  ["param"] = {
-                    ["id"] = "stop_id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "stops",
@@ -196,6 +167,53 @@ local function make_config()
                     ["lit"] = "arrivals",
                   },
                 },
+                ["parts"] = {
+                  "stops",
+                  "{stop_id}",
+                  "arrivals",
+                },
+                ["rename"] = {
+                  ["param"] = {
+                    ["id"] = "stop_id",
+                  },
+                },
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body.arrivals`",
+                },
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "stop_id",
+                      ["orig"] = "id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                  },
+                  ["query"] = {
+                    {
+                      ["name"] = "duration",
+                      ["orig"] = "duration",
+                      ["type"] = "`$INTEGER`",
+                      ["kind"] = "query",
+                      ["example"] = 120,
+                    },
+                    {
+                      ["name"] = "result",
+                      ["orig"] = "result",
+                      ["type"] = "`$INTEGER`",
+                      ["kind"] = "query",
+                      ["example"] = 10,
+                    },
+                    {
+                      ["name"] = "when",
+                      ["orig"] = "when",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                    },
+                  },
+                },
                 ["select"] = {
                   ["exist"] = {
                     "duration",
@@ -204,15 +222,6 @@ local function make_config()
                     "when",
                   },
                 },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body.arrivals`",
-                },
-                ["parts"] = {
-                  "stops",
-                  "{stop_id}",
-                  "arrivals",
-                },
               },
             },
           },
@@ -220,7 +229,7 @@ local function make_config()
         ["relations"] = {
           ["ancestors"] = {
             {
-              "stop",
+              "$.main.kit.entity.stop",
             },
           },
         },
@@ -229,48 +238,57 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "delay",
-            ["short"] = "Delay in seconds",
+            ["title"] = "Delay",
             ["type"] = "`$INTEGER`",
+            ["short"] = "Delay in seconds",
           },
           {
             ["name"] = "direction",
-            ["short"] = "Direction of the trip",
+            ["title"] = "Direction",
             ["type"] = "`$STRING`",
+            ["short"] = "Direction of the trip",
           },
           {
             ["name"] = "line",
+            ["title"] = "Line",
             ["type"] = "`$OBJECT`",
           },
           {
             ["name"] = "plannedPlatform",
-            ["short"] = "Originally planned platform",
+            ["title"] = "Planned Platform",
             ["type"] = "`$STRING`",
+            ["short"] = "Originally planned platform",
           },
           {
-            ["format"] = "date-time",
             ["name"] = "plannedWhen",
-            ["short"] = "Originally planned departure time",
+            ["title"] = "Planned When",
             ["type"] = "`$STRING`",
+            ["short"] = "Originally planned departure time",
+            ["format"] = "date-time",
           },
           {
             ["name"] = "platform",
-            ["short"] = "Departure platform",
+            ["title"] = "Platform",
             ["type"] = "`$STRING`",
+            ["short"] = "Departure platform",
           },
           {
             ["name"] = "stop",
+            ["title"] = "Stop",
             ["type"] = "`$OBJECT`",
           },
           {
             ["name"] = "tripId",
-            ["short"] = "Trip identifier",
+            ["title"] = "Trip Id",
             ["type"] = "`$STRING`",
+            ["short"] = "Trip identifier",
           },
           {
-            ["format"] = "date-time",
             ["name"] = "when",
-            ["short"] = "Scheduled departure time",
+            ["title"] = "When",
             ["type"] = "`$STRING`",
+            ["short"] = "Scheduled departure time",
+            ["format"] = "date-time",
           },
         },
         ["name"] = "departure",
@@ -280,54 +298,9 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["example"] = "900000003201",
-                      ["kind"] = "param",
-                      ["name"] = "stop_id",
-                      ["orig"] = "id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                  ["query"] = {
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "direction",
-                      ["orig"] = "direction",
-                      ["type"] = "`$STRING`",
-                    },
-                    {
-                      ["example"] = 120,
-                      ["kind"] = "query",
-                      ["name"] = "duration",
-                      ["orig"] = "duration",
-                      ["type"] = "`$INTEGER`",
-                    },
-                    {
-                      ["example"] = 10,
-                      ["kind"] = "query",
-                      ["name"] = "result",
-                      ["orig"] = "result",
-                      ["type"] = "`$INTEGER`",
-                    },
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "when",
-                      ["orig"] = "when",
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/stops/{id}/departures",
-                ["rename"] = {
-                  ["param"] = {
-                    ["id"] = "stop_id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["lit"] = "stops",
@@ -339,6 +312,60 @@ local function make_config()
                     ["lit"] = "departures",
                   },
                 },
+                ["parts"] = {
+                  "stops",
+                  "{stop_id}",
+                  "departures",
+                },
+                ["rename"] = {
+                  ["param"] = {
+                    ["id"] = "stop_id",
+                  },
+                },
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body.departures`",
+                },
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "stop_id",
+                      ["orig"] = "id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                      ["example"] = "900000003201",
+                    },
+                  },
+                  ["query"] = {
+                    {
+                      ["name"] = "direction",
+                      ["orig"] = "direction",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                    },
+                    {
+                      ["name"] = "duration",
+                      ["orig"] = "duration",
+                      ["type"] = "`$INTEGER`",
+                      ["kind"] = "query",
+                      ["example"] = 120,
+                    },
+                    {
+                      ["name"] = "result",
+                      ["orig"] = "result",
+                      ["type"] = "`$INTEGER`",
+                      ["kind"] = "query",
+                      ["example"] = 10,
+                    },
+                    {
+                      ["name"] = "when",
+                      ["orig"] = "when",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                    },
+                  },
+                },
                 ["select"] = {
                   ["exist"] = {
                     "direction",
@@ -348,15 +375,6 @@ local function make_config()
                     "when",
                   },
                 },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body.departures`",
-                },
-                ["parts"] = {
-                  "stops",
-                  "{stop_id}",
-                  "departures",
-                },
               },
             },
           },
@@ -364,7 +382,7 @@ local function make_config()
         ["relations"] = {
           ["ancestors"] = {
             {
-              "stop",
+              "$.main.kit.entity.stop",
             },
           },
         },
@@ -373,16 +391,19 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "legs",
-            ["short"] = "Journey legs",
+            ["title"] = "Legs",
             ["type"] = "`$ARRAY`",
+            ["short"] = "Journey legs",
           },
           {
             ["name"] = "refreshToken",
-            ["short"] = "Token to refresh this journey",
+            ["title"] = "Refresh Token",
             ["type"] = "`$STRING`",
+            ["short"] = "Token to refresh this journey",
           },
           {
             ["name"] = "type",
+            ["title"] = "Type",
             ["type"] = "`$STRING`",
           },
         },
@@ -393,58 +414,66 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["args"] = {
-                  ["query"] = {
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "arrival",
-                      ["orig"] = "arrival",
-                      ["type"] = "`$STRING`",
-                    },
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "departure",
-                      ["orig"] = "departure",
-                      ["type"] = "`$STRING`",
-                    },
-                    {
-                      ["example"] = "900000003201",
-                      ["kind"] = "query",
-                      ["name"] = "from",
-                      ["orig"] = "from",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                    {
-                      ["example"] = 3,
-                      ["kind"] = "query",
-                      ["name"] = "result",
-                      ["orig"] = "result",
-                      ["type"] = "`$INTEGER`",
-                    },
-                    {
-                      ["example"] = false,
-                      ["kind"] = "query",
-                      ["name"] = "stopover",
-                      ["orig"] = "stopover",
-                      ["type"] = "`$BOOLEAN`",
-                    },
-                    {
-                      ["example"] = "900000100003",
-                      ["kind"] = "query",
-                      ["name"] = "to",
-                      ["orig"] = "to",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/journeys",
                 ["segments"] = {
                   {
                     ["lit"] = "journeys",
+                  },
+                },
+                ["parts"] = {
+                  "journeys",
+                },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body.journeys`",
+                },
+                ["args"] = {
+                  ["query"] = {
+                    {
+                      ["name"] = "arrival",
+                      ["orig"] = "arrival",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                    },
+                    {
+                      ["name"] = "departure",
+                      ["orig"] = "departure",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                    },
+                    {
+                      ["name"] = "from",
+                      ["orig"] = "from",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                      ["reqd"] = true,
+                      ["example"] = "900000003201",
+                    },
+                    {
+                      ["name"] = "result",
+                      ["orig"] = "result",
+                      ["type"] = "`$INTEGER`",
+                      ["kind"] = "query",
+                      ["example"] = 3,
+                    },
+                    {
+                      ["name"] = "stopover",
+                      ["orig"] = "stopover",
+                      ["type"] = "`$BOOLEAN`",
+                      ["kind"] = "query",
+                      ["example"] = false,
+                    },
+                    {
+                      ["name"] = "to",
+                      ["orig"] = "to",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                      ["reqd"] = true,
+                      ["example"] = "900000100003",
+                    },
                   },
                 },
                 ["select"] = {
@@ -456,13 +485,6 @@ local function make_config()
                     "stopover",
                     "to",
                   },
-                },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body.journeys`",
-                },
-                ["parts"] = {
-                  "journeys",
                 },
               },
             },
@@ -476,27 +498,32 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "id",
-            ["short"] = "Unique identifier for the location",
+            ["title"] = "Id",
             ["type"] = "`$STRING`",
+            ["short"] = "Unique identifier for the location",
           },
           {
             ["name"] = "location",
+            ["title"] = "Location",
             ["type"] = "`$OBJECT`",
           },
           {
             ["name"] = "name",
-            ["short"] = "Name of the location",
+            ["title"] = "Name",
             ["type"] = "`$STRING`",
+            ["short"] = "Name of the location",
           },
           {
             ["name"] = "products",
-            ["short"] = "Available products at this location",
+            ["title"] = "Products",
             ["type"] = "`$OBJECT`",
+            ["short"] = "Available products at this location",
           },
           {
             ["name"] = "type",
-            ["short"] = "Type of location",
+            ["title"] = "Type",
             ["type"] = "`$STRING`",
+            ["short"] = "Type of location",
           },
         },
         ["id"] = {
@@ -510,52 +537,60 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["args"] = {
-                  ["query"] = {
-                    {
-                      ["example"] = true,
-                      ["kind"] = "query",
-                      ["name"] = "address",
-                      ["orig"] = "address",
-                      ["type"] = "`$BOOLEAN`",
-                    },
-                    {
-                      ["example"] = true,
-                      ["kind"] = "query",
-                      ["name"] = "poi",
-                      ["orig"] = "poi",
-                      ["type"] = "`$BOOLEAN`",
-                    },
-                    {
-                      ["example"] = "Berlin",
-                      ["kind"] = "query",
-                      ["name"] = "query",
-                      ["orig"] = "query",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                    {
-                      ["example"] = 10,
-                      ["kind"] = "query",
-                      ["name"] = "result",
-                      ["orig"] = "result",
-                      ["type"] = "`$INTEGER`",
-                    },
-                    {
-                      ["example"] = true,
-                      ["kind"] = "query",
-                      ["name"] = "stop",
-                      ["orig"] = "stop",
-                      ["type"] = "`$BOOLEAN`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/locations",
                 ["segments"] = {
                   {
                     ["lit"] = "locations",
+                  },
+                },
+                ["parts"] = {
+                  "locations",
+                },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body`",
+                },
+                ["args"] = {
+                  ["query"] = {
+                    {
+                      ["name"] = "address",
+                      ["orig"] = "address",
+                      ["type"] = "`$BOOLEAN`",
+                      ["kind"] = "query",
+                      ["example"] = true,
+                    },
+                    {
+                      ["name"] = "poi",
+                      ["orig"] = "poi",
+                      ["type"] = "`$BOOLEAN`",
+                      ["kind"] = "query",
+                      ["example"] = true,
+                    },
+                    {
+                      ["name"] = "query",
+                      ["orig"] = "query",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                      ["reqd"] = true,
+                      ["example"] = "Berlin",
+                    },
+                    {
+                      ["name"] = "result",
+                      ["orig"] = "result",
+                      ["type"] = "`$INTEGER`",
+                      ["kind"] = "query",
+                      ["example"] = 10,
+                    },
+                    {
+                      ["name"] = "stop",
+                      ["orig"] = "stop",
+                      ["type"] = "`$BOOLEAN`",
+                      ["kind"] = "query",
+                      ["example"] = true,
+                    },
                   },
                 },
                 ["select"] = {
@@ -566,13 +601,6 @@ local function make_config()
                     "result",
                     "stop",
                   },
-                },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
-                },
-                ["parts"] = {
-                  "locations",
                 },
               },
             },
@@ -586,25 +614,30 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "direction",
-            ["short"] = "Direction of the movement",
+            ["title"] = "Direction",
             ["type"] = "`$STRING`",
+            ["short"] = "Direction of the movement",
           },
           {
             ["name"] = "line",
+            ["title"] = "Line",
             ["type"] = "`$OBJECT`",
           },
           {
             ["name"] = "location",
+            ["title"] = "Location",
             ["type"] = "`$OBJECT`",
           },
           {
             ["name"] = "nextStopovers",
+            ["title"] = "Next Stopovers",
             ["type"] = "`$ARRAY`",
           },
           {
             ["name"] = "tripId",
-            ["short"] = "Trip identifier",
+            ["title"] = "Trip Id",
             ["type"] = "`$STRING`",
+            ["short"] = "Trip identifier",
           },
         },
         ["name"] = "radar",
@@ -614,51 +647,59 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["args"] = {
-                  ["query"] = {
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "east",
-                      ["orig"] = "east",
-                      ["reqd"] = true,
-                      ["type"] = "`$NUMBER`",
-                    },
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "north",
-                      ["orig"] = "north",
-                      ["reqd"] = true,
-                      ["type"] = "`$NUMBER`",
-                    },
-                    {
-                      ["example"] = 256,
-                      ["kind"] = "query",
-                      ["name"] = "result",
-                      ["orig"] = "result",
-                      ["type"] = "`$INTEGER`",
-                    },
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "south",
-                      ["orig"] = "south",
-                      ["reqd"] = true,
-                      ["type"] = "`$NUMBER`",
-                    },
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "west",
-                      ["orig"] = "west",
-                      ["reqd"] = true,
-                      ["type"] = "`$NUMBER`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/radar",
                 ["segments"] = {
                   {
                     ["lit"] = "radar",
+                  },
+                },
+                ["parts"] = {
+                  "radar",
+                },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body.movements`",
+                },
+                ["args"] = {
+                  ["query"] = {
+                    {
+                      ["name"] = "east",
+                      ["orig"] = "east",
+                      ["type"] = "`$NUMBER`",
+                      ["kind"] = "query",
+                      ["reqd"] = true,
+                    },
+                    {
+                      ["name"] = "north",
+                      ["orig"] = "north",
+                      ["type"] = "`$NUMBER`",
+                      ["kind"] = "query",
+                      ["reqd"] = true,
+                    },
+                    {
+                      ["name"] = "result",
+                      ["orig"] = "result",
+                      ["type"] = "`$INTEGER`",
+                      ["kind"] = "query",
+                      ["example"] = 256,
+                    },
+                    {
+                      ["name"] = "south",
+                      ["orig"] = "south",
+                      ["type"] = "`$NUMBER`",
+                      ["kind"] = "query",
+                      ["reqd"] = true,
+                    },
+                    {
+                      ["name"] = "west",
+                      ["orig"] = "west",
+                      ["type"] = "`$NUMBER`",
+                      ["kind"] = "query",
+                      ["reqd"] = true,
+                    },
                   },
                 },
                 ["select"] = {
@@ -669,13 +710,6 @@ local function make_config()
                     "south",
                     "west",
                   },
-                },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body.movements`",
-                },
-                ["parts"] = {
-                  "radar",
                 },
               },
             },
@@ -689,30 +723,36 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "id",
-            ["short"] = "Unique identifier for the stop",
+            ["title"] = "Id",
             ["type"] = "`$STRING`",
+            ["short"] = "Unique identifier for the stop",
           },
           {
             ["name"] = "location",
+            ["title"] = "Location",
             ["type"] = "`$OBJECT`",
           },
           {
             ["name"] = "name",
-            ["short"] = "Name of the stop",
+            ["title"] = "Name",
             ["type"] = "`$STRING`",
+            ["short"] = "Name of the stop",
           },
           {
             ["name"] = "products",
-            ["short"] = "Available products at this stop",
+            ["title"] = "Products",
             ["type"] = "`$OBJECT`",
+            ["short"] = "Available products at this stop",
           },
           {
             ["name"] = "station",
-            ["short"] = "Parent station if applicable",
+            ["title"] = "Station",
             ["type"] = "`$OBJECT`",
+            ["short"] = "Parent station if applicable",
           },
           {
             ["name"] = "type",
+            ["title"] = "Type",
             ["type"] = "`$STRING`",
           },
         },
@@ -727,18 +767,6 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["example"] = "900000003201",
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/stops/{id}",
@@ -750,18 +778,31 @@ local function make_config()
                     ["var"] = "id",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "id",
-                  },
+                ["parts"] = {
+                  "stops",
+                  "{id}",
                 },
+                ["rename"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "stops",
-                  "{id}",
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                      ["example"] = "900000003201",
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "id",
+                  },
                 },
               },
             },
@@ -775,28 +816,34 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "destination",
+            ["title"] = "Destination",
             ["type"] = "`$OBJECT`",
           },
           {
             ["name"] = "direction",
-            ["short"] = "Direction of the trip",
+            ["title"] = "Direction",
             ["type"] = "`$STRING`",
+            ["short"] = "Direction of the trip",
           },
           {
             ["name"] = "id",
-            ["short"] = "Trip identifier",
+            ["title"] = "Id",
             ["type"] = "`$STRING`",
+            ["short"] = "Trip identifier",
           },
           {
             ["name"] = "line",
+            ["title"] = "Line",
             ["type"] = "`$OBJECT`",
           },
           {
             ["name"] = "origin",
+            ["title"] = "Origin",
             ["type"] = "`$OBJECT`",
           },
           {
             ["name"] = "stopovers",
+            ["title"] = "Stopovers",
             ["type"] = "`$ARRAY`",
           },
         },
@@ -811,32 +858,6 @@ local function make_config()
             ["name"] = "load",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "id",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                  ["query"] = {
-                    {
-                      ["kind"] = "query",
-                      ["name"] = "line_name",
-                      ["orig"] = "line_name",
-                      ["type"] = "`$STRING`",
-                    },
-                    {
-                      ["example"] = true,
-                      ["kind"] = "query",
-                      ["name"] = "stopover",
-                      ["orig"] = "stopover",
-                      ["type"] = "`$BOOLEAN`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/trips/{id}",
@@ -848,20 +869,47 @@ local function make_config()
                     ["var"] = "id",
                   },
                 },
+                ["parts"] = {
+                  "trips",
+                  "{id}",
+                },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body`",
+                },
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "id",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                    },
+                  },
+                  ["query"] = {
+                    {
+                      ["name"] = "line_name",
+                      ["orig"] = "line_name",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                    },
+                    {
+                      ["name"] = "stopover",
+                      ["orig"] = "stopover",
+                      ["type"] = "`$BOOLEAN`",
+                      ["kind"] = "query",
+                      ["example"] = true,
+                    },
+                  },
+                },
                 ["select"] = {
                   ["exist"] = {
                     "id",
                     "line_name",
                     "stopover",
                   },
-                },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
-                },
-                ["parts"] = {
-                  "trips",
-                  "{id}",
                 },
               },
             },

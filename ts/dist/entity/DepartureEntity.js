@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DepartureEntity = void 0;
 const TransportrestTransitApisEntityBase_1 = require("../TransportrestTransitApisEntityBase");
-// TODO: needs Entity superclass
 class DepartureEntity extends TransportrestTransitApisEntityBase_1.TransportrestTransitApisEntityBase {
     constructor(client, entopts) {
         super(client, entopts);
