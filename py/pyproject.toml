@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "voxgig-sdk-transportrest-transit-apis"
+name = "voxgig-sdk-transportrest-transit-apis-sdk"
 version = "0.0.1"
 description = "Unofficial generated Python SDK for the transport.rest transit APIs public API. Not affiliated with or endorsed by the upstream API provider."
 readme = "README.md"
