@@ -205,7 +205,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "result",
-											"orig": "result",
+											"orig": "results",
 											"type": "`$INTEGER`",
 											"kind": "query",
 											"example": 10,
@@ -357,7 +357,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "result",
-											"orig": "result",
+											"orig": "results",
 											"type": "`$INTEGER`",
 											"kind": "query",
 											"example": 10,
@@ -458,14 +458,14 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "result",
-											"orig": "result",
+											"orig": "results",
 											"type": "`$INTEGER`",
 											"kind": "query",
 											"example": 3,
 										},
 										map[string]any{
 											"name": "stopover",
-											"orig": "stopover",
+											"orig": "stopovers",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 											"example": false,
@@ -561,7 +561,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "address",
-											"orig": "address",
+											"orig": "addresses",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 											"example": true,
@@ -583,14 +583,14 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "result",
-											"orig": "result",
+											"orig": "results",
 											"type": "`$INTEGER`",
 											"kind": "query",
 											"example": 10,
 										},
 										map[string]any{
 											"name": "stop",
-											"orig": "stop",
+											"orig": "stops",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 											"example": true,
@@ -685,7 +685,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "result",
-											"orig": "result",
+											"orig": "results",
 											"type": "`$INTEGER`",
 											"kind": "query",
 											"example": 256,
@@ -895,13 +895,13 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "line_name",
-											"orig": "line_name",
+											"orig": "lineName",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
 										map[string]any{
 											"name": "stopover",
-											"orig": "stopover",
+											"orig": "stopovers",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 											"example": true,

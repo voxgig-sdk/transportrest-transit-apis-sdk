@@ -201,7 +201,7 @@ local function make_config()
                     },
                     {
                       ["name"] = "result",
-                      ["orig"] = "result",
+                      ["orig"] = "results",
                       ["type"] = "`$INTEGER`",
                       ["kind"] = "query",
                       ["example"] = 10,
@@ -353,7 +353,7 @@ local function make_config()
                     },
                     {
                       ["name"] = "result",
-                      ["orig"] = "result",
+                      ["orig"] = "results",
                       ["type"] = "`$INTEGER`",
                       ["kind"] = "query",
                       ["example"] = 10,
@@ -454,14 +454,14 @@ local function make_config()
                     },
                     {
                       ["name"] = "result",
-                      ["orig"] = "result",
+                      ["orig"] = "results",
                       ["type"] = "`$INTEGER`",
                       ["kind"] = "query",
                       ["example"] = 3,
                     },
                     {
                       ["name"] = "stopover",
-                      ["orig"] = "stopover",
+                      ["orig"] = "stopovers",
                       ["type"] = "`$BOOLEAN`",
                       ["kind"] = "query",
                       ["example"] = false,
@@ -557,7 +557,7 @@ local function make_config()
                   ["query"] = {
                     {
                       ["name"] = "address",
-                      ["orig"] = "address",
+                      ["orig"] = "addresses",
                       ["type"] = "`$BOOLEAN`",
                       ["kind"] = "query",
                       ["example"] = true,
@@ -579,14 +579,14 @@ local function make_config()
                     },
                     {
                       ["name"] = "result",
-                      ["orig"] = "result",
+                      ["orig"] = "results",
                       ["type"] = "`$INTEGER`",
                       ["kind"] = "query",
                       ["example"] = 10,
                     },
                     {
                       ["name"] = "stop",
-                      ["orig"] = "stop",
+                      ["orig"] = "stops",
                       ["type"] = "`$BOOLEAN`",
                       ["kind"] = "query",
                       ["example"] = true,
@@ -681,7 +681,7 @@ local function make_config()
                     },
                     {
                       ["name"] = "result",
-                      ["orig"] = "result",
+                      ["orig"] = "results",
                       ["type"] = "`$INTEGER`",
                       ["kind"] = "query",
                       ["example"] = 256,
@@ -891,13 +891,13 @@ local function make_config()
                   ["query"] = {
                     {
                       ["name"] = "line_name",
-                      ["orig"] = "line_name",
+                      ["orig"] = "lineName",
                       ["type"] = "`$STRING`",
                       ["kind"] = "query",
                     },
                     {
                       ["name"] = "stopover",
-                      ["orig"] = "stopover",
+                      ["orig"] = "stopovers",
                       ["type"] = "`$BOOLEAN`",
                       ["kind"] = "query",
                       ["example"] = true,

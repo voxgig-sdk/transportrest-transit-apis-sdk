@@ -70,7 +70,7 @@ main: kit: entity: radar: {
                 ex: 256
                 k: "query"
                 n: "result"
-                or: "result"
+                or: "results"
                 r: false
                 t: "`$INTEGER`"
               }

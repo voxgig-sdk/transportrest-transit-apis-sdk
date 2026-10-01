@@ -63,7 +63,7 @@ main: kit: entity: location: {
                 ex: true
                 k: "query"
                 n: "address"
-                or: "address"
+                or: "addresses"
                 r: false
                 t: "`$BOOLEAN`"
               }
@@ -87,7 +87,7 @@ main: kit: entity: location: {
                 ex: 10
                 k: "query"
                 n: "result"
-                or: "result"
+                or: "results"
                 r: false
                 t: "`$INTEGER`"
               }
@@ -95,7 +95,7 @@ main: kit: entity: location: {
                 ex: true
                 k: "query"
                 n: "stop"
-                or: "stop"
+                or: "stops"
                 r: false
                 t: "`$BOOLEAN`"
               }

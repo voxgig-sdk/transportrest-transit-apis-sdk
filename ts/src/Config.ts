@@ -258,7 +258,7 @@ class Config {
                   },
                   {
                     "name": "result",
-                    "orig": "result",
+                    "orig": "results",
                     "type": "`$INTEGER`",
                     "kind": "query",
                     "example": 10
@@ -410,7 +410,7 @@ class Config {
                   },
                   {
                     "name": "result",
-                    "orig": "result",
+                    "orig": "results",
                     "type": "`$INTEGER`",
                     "kind": "query",
                     "example": 10
@@ -511,14 +511,14 @@ class Config {
                   },
                   {
                     "name": "result",
-                    "orig": "result",
+                    "orig": "results",
                     "type": "`$INTEGER`",
                     "kind": "query",
                     "example": 3
                   },
                   {
                     "name": "stopover",
-                    "orig": "stopover",
+                    "orig": "stopovers",
                     "type": "`$BOOLEAN`",
                     "kind": "query",
                     "example": false
@@ -614,7 +614,7 @@ class Config {
                 "query": [
                   {
                     "name": "address",
-                    "orig": "address",
+                    "orig": "addresses",
                     "type": "`$BOOLEAN`",
                     "kind": "query",
                     "example": true
@@ -636,14 +636,14 @@ class Config {
                   },
                   {
                     "name": "result",
-                    "orig": "result",
+                    "orig": "results",
                     "type": "`$INTEGER`",
                     "kind": "query",
                     "example": 10
                   },
                   {
                     "name": "stop",
-                    "orig": "stop",
+                    "orig": "stops",
                     "type": "`$BOOLEAN`",
                     "kind": "query",
                     "example": true
@@ -738,7 +738,7 @@ class Config {
                   },
                   {
                     "name": "result",
-                    "orig": "result",
+                    "orig": "results",
                     "type": "`$INTEGER`",
                     "kind": "query",
                     "example": 256
@@ -948,13 +948,13 @@ class Config {
                 "query": [
                   {
                     "name": "line_name",
-                    "orig": "line_name",
+                    "orig": "lineName",
                     "type": "`$STRING`",
                     "kind": "query"
                   },
                   {
                     "name": "stopover",
-                    "orig": "stopover",
+                    "orig": "stopovers",
                     "type": "`$BOOLEAN`",
                     "kind": "query",
                     "example": true

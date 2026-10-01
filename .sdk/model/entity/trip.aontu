@@ -75,7 +75,7 @@ main: kit: entity: trip: {
               {
                 k: "query"
                 n: "line_name"
-                or: "line_name"
+                or: "lineName"
                 r: false
                 t: "`$STRING`"
               }
@@ -83,7 +83,7 @@ main: kit: entity: trip: {
                 ex: true
                 k: "query"
                 n: "stopover"
-                or: "stopover"
+                or: "stopovers"
                 r: false
                 t: "`$BOOLEAN`"
               }

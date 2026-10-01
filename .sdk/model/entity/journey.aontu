@@ -66,7 +66,7 @@ main: kit: entity: journey: {
                 ex: 3
                 k: "query"
                 n: "result"
-                or: "result"
+                or: "results"
                 r: false
                 t: "`$INTEGER`"
               }
@@ -74,7 +74,7 @@ main: kit: entity: journey: {
                 ex: false
                 k: "query"
                 n: "stopover"
-                or: "stopover"
+                or: "stopovers"
                 r: false
                 t: "`$BOOLEAN`"
               }

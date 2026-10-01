@@ -104,7 +104,7 @@ main: kit: entity: arrival: {
                 ex: 10
                 k: "query"
                 n: "result"
-                or: "result"
+                or: "results"
                 r: false
                 t: "`$INTEGER`"
               }

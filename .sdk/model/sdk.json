@@ -209,7 +209,7 @@
                         "ex": 10,
                         "k": "query",
                         "n": "result",
-                        "or": "result",
+                        "or": "results",
                         "r": false,
                         "t": "`$INTEGER`"
                       },
@@ -393,7 +393,7 @@
                         "ex": 10,
                         "k": "query",
                         "n": "result",
-                        "or": "result",
+                        "or": "results",
                         "r": false,
                         "t": "`$INTEGER`"
                       },
@@ -526,7 +526,7 @@
                         "ex": 3,
                         "k": "query",
                         "n": "result",
-                        "or": "result",
+                        "or": "results",
                         "r": false,
                         "t": "`$INTEGER`"
                       },
@@ -535,7 +535,7 @@
                         "ex": false,
                         "k": "query",
                         "n": "stopover",
-                        "or": "stopover",
+                        "or": "stopovers",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       },
@@ -651,7 +651,7 @@
                         "ex": true,
                         "k": "query",
                         "n": "address",
-                        "or": "address",
+                        "or": "addresses",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       },
@@ -678,7 +678,7 @@
                         "ex": 10,
                         "k": "query",
                         "n": "result",
-                        "or": "result",
+                        "or": "results",
                         "r": false,
                         "t": "`$INTEGER`"
                       },
@@ -687,7 +687,7 @@
                         "ex": true,
                         "k": "query",
                         "n": "stop",
-                        "or": "stop",
+                        "or": "stops",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       }
@@ -803,7 +803,7 @@
                         "ex": 256,
                         "k": "query",
                         "n": "result",
-                        "or": "result",
+                        "or": "results",
                         "r": false,
                         "t": "`$INTEGER`"
                       },
@@ -1051,7 +1051,7 @@
                         "a": true,
                         "k": "query",
                         "n": "line_name",
-                        "or": "line_name",
+                        "or": "lineName",
                         "r": false,
                         "t": "`$STRING`"
                       },
@@ -1060,7 +1060,7 @@
                         "ex": true,
                         "k": "query",
                         "n": "stopover",
-                        "or": "stopover",
+                        "or": "stopovers",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       }
@@ -1766,7 +1766,12 @@
         },
         "base": "http://localhost:8000",
         "clean": {
-          "keys": "key,token,id"
+          "active": true,
+          "hint": "0",
+          "keys": "key,secret,token,password,passwd,authorization,cookie,credential,signature",
+          "mask": "[redacted]",
+          "min": "4",
+          "values": ""
         },
         "entity": {
           "`$CHILD`": {

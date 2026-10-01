@@ -230,7 +230,7 @@ def make_config():
                     },
                     {
                       "name": "result",
-                      "orig": "result",
+                      "orig": "results",
                       "type": "`$INTEGER`",
                       "kind": "query",
                       "example": 10,
@@ -382,7 +382,7 @@ def make_config():
                     },
                     {
                       "name": "result",
-                      "orig": "result",
+                      "orig": "results",
                       "type": "`$INTEGER`",
                       "kind": "query",
                       "example": 10,
@@ -483,14 +483,14 @@ def make_config():
                     },
                     {
                       "name": "result",
-                      "orig": "result",
+                      "orig": "results",
                       "type": "`$INTEGER`",
                       "kind": "query",
                       "example": 3,
                     },
                     {
                       "name": "stopover",
-                      "orig": "stopover",
+                      "orig": "stopovers",
                       "type": "`$BOOLEAN`",
                       "kind": "query",
                       "example": False,
@@ -586,7 +586,7 @@ def make_config():
                   "query": [
                     {
                       "name": "address",
-                      "orig": "address",
+                      "orig": "addresses",
                       "type": "`$BOOLEAN`",
                       "kind": "query",
                       "example": True,
@@ -608,14 +608,14 @@ def make_config():
                     },
                     {
                       "name": "result",
-                      "orig": "result",
+                      "orig": "results",
                       "type": "`$INTEGER`",
                       "kind": "query",
                       "example": 10,
                     },
                     {
                       "name": "stop",
-                      "orig": "stop",
+                      "orig": "stops",
                       "type": "`$BOOLEAN`",
                       "kind": "query",
                       "example": True,
@@ -710,7 +710,7 @@ def make_config():
                     },
                     {
                       "name": "result",
-                      "orig": "result",
+                      "orig": "results",
                       "type": "`$INTEGER`",
                       "kind": "query",
                       "example": 256,
@@ -920,13 +920,13 @@ def make_config():
                   "query": [
                     {
                       "name": "line_name",
-                      "orig": "line_name",
+                      "orig": "lineName",
                       "type": "`$STRING`",
                       "kind": "query",
                     },
                     {
                       "name": "stopover",
-                      "orig": "stopover",
+                      "orig": "stopovers",
                       "type": "`$BOOLEAN`",
                       "kind": "query",
                       "example": True,

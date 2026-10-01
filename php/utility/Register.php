@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 TransportrestTransitApisUtility::setRegistrar(function (TransportrestTransitApisUtility $u): void {
     $u->clean = [TransportrestTransitApisClean::class, 'call'];
+    $u->clean_add = [TransportrestTransitApisClean::class, 'add'];
+    $u->clean_explain = [TransportrestTransitApisDone::class, 'clean_explain'];
     $u->done = [TransportrestTransitApisDone::class, 'call'];
     $u->make_error = [TransportrestTransitApisMakeError::class, 'call'];
     $u->feature_add = [TransportrestTransitApisFeatureAdd::class, 'call'];
