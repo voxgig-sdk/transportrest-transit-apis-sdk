@@ -129,17 +129,17 @@ main: kit: entity: departure: {
           o: "/stops/{id}/departures"
           q: {
             exist: [
-              "direction"
-              "duration"
-              "result"
               "stop_id"
-              "when"
             ]
           }
           r: {
             param: {
               id: "stop_id"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

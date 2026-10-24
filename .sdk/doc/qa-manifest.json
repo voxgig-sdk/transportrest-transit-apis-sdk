@@ -3,5 +3,42 @@
     "SUMMARY.md"
   ],
   "config": ".sdk/doc/qa/vale.ini",
-  "routes": {}
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "Arrival platform",
+      "Available products at this location",
+      "Available products at this stop",
+      "BVG (Berlin &amp; Brandenburg) API",
+      "Delay in seconds",
+      "Departure platform",
+      "Deutsche Bahn (Germany) API",
+      "Direction of the movement",
+      "Direction of the trip",
+      "Flixbus (Germany/Europe) API",
+      "Journey legs",
+      "Name of the location",
+      "Name of the stop",
+      "Nottingham City Transport (England) API",
+      "Originally planned arrival time",
+      "Originally planned departure time",
+      "Originally planned platform",
+      "Parent station if applicable",
+      "Poland transit API",
+      "Provides transit APIs for different regions such as Germany, Poland, Berlin-Brandenburg, Schleswig-Holstein, Europe, and England. Publicly available, developer-friendly transit data APIs run by friendly people on the internet.",
+      "Successful response with arrivals",
+      "Successful response with departures",
+      "Successful response with journeys",
+      "Successful response with locations",
+      "Successful response with stop details",
+      "Successful response with trip details",
+      "Successful response with vehicles",
+      "Token to refresh this journey",
+      "Trip identifier",
+      "Type of location",
+      "Unique identifier for the location",
+      "Unique identifier for the stop",
+      "VBB (Berlin &amp; Brandenburg) API"
+    ]
+  }
 }

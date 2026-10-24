@@ -12,7 +12,7 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `$
 
 ## Install
 This package is not yet published to Packagist. Install it from the
-GitHub release tag (`php/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/releases)), or
+GitHub release tag (`php/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/tags)), or
 from a clone as a Composer path repository:
 
 ```bash
@@ -41,7 +41,7 @@ $client = new TransportrestTransitApisSDK();
 ```php
 try {
     // list() returns entity instances; data_get() reads each record.
-    $arrivals = $client->Arrival()->list();
+    $arrivals = $client->Arrival()->list(["stop_id" => "example"]);
     foreach ($arrivals as $record) {
         $item = $record->data_get();
         echo $item["delay"] . "\n";
@@ -59,7 +59,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $locations = $client->Location()->list();
+    $locations = $client->Location()->list(["query" => "example"]);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -230,8 +230,8 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `($reqmatch, $ctrl): array` | Load a single entity by match criteria. |
-| `list` | `(?array $reqmatch = null, $ctrl): array` | List entities matching the criteria (call with no argument to list all). |
+| `load` | `($reqmatch, $ctrl): mixed` | Load a single entity by match criteria, and return it. |
+| `list` | `(?array $reqmatch = null, $ctrl): mixed` | List entities matching the criteria (call with no argument to list all), one per record. |
 | `data_get` | `(): array` | Get entity data. |
 | `data_set` | `($data): void` | Set entity data. |
 | `match_get` | `(): array` | Get entity match criteria. |
@@ -241,9 +241,9 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
-ops, a `list` for `list`) and throw on error. Wrap calls in
-`try`/`catch` to handle failures.
+Entity operations return the entity, and `list` an `array` of entities, one
+per record; an entity's `data_get()` reads its record (an `array`). They
+throw on error, so wrap calls in `try`/`catch` to handle failures.
 
 The `direct()` escape hatch never throws — it returns a result `array`
 you branch on via `$result["ok"]`:
@@ -397,8 +397,8 @@ Create an instance: `$arrival = $client->Arrival();`
 #### Example: List
 
 ```php
-// list() returns an array of Arrival records (throws on error).
-$arrivals = $client->Arrival()->list();
+// list() returns an array of Arrival entities, one per record (throws on error).
+$arrivals = $client->Arrival()->list(["stop_id" => "example"]);
 ```
 
 
@@ -429,8 +429,8 @@ Create an instance: `$departure = $client->Departure();`
 #### Example: List
 
 ```php
-// list() returns an array of Departure records (throws on error).
-$departures = $client->Departure()->list();
+// list() returns an array of Departure entities, one per record (throws on error).
+$departures = $client->Departure()->list(["stop_id" => "example"]);
 ```
 
 
@@ -455,8 +455,8 @@ Create an instance: `$journey = $client->Journey();`
 #### Example: List
 
 ```php
-// list() returns an array of Journey records (throws on error).
-$journeys = $client->Journey()->list();
+// list() returns an array of Journey entities, one per record (throws on error).
+$journeys = $client->Journey()->list(["from" => "example", "to" => "example"]);
 ```
 
 
@@ -483,8 +483,8 @@ Create an instance: `$location = $client->Location();`
 #### Example: List
 
 ```php
-// list() returns an array of Location records (throws on error).
-$locations = $client->Location()->list();
+// list() returns an array of Location entities, one per record (throws on error).
+$locations = $client->Location()->list(["query" => "example"]);
 ```
 
 
@@ -511,8 +511,8 @@ Create an instance: `$radar = $client->Radar();`
 #### Example: List
 
 ```php
-// list() returns an array of Radar records (throws on error).
-$radars = $client->Radar()->list();
+// list() returns an array of Radar entities, one per record (throws on error).
+$radars = $client->Radar()->list(["east" => 1, "north" => 1, "south" => 1, "west" => 1]);
 ```
 
 
@@ -736,7 +736,7 @@ stores the returned data and match criteria internally.
 
 ```php
 $location = $client->Location();
-$location->list();
+$location->list(["query" => "example"]);
 
 // $location->data_get() now returns the location data from the last list
 // $location->match_get() returns the last match criteria

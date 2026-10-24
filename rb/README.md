@@ -12,7 +12,7 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `c
 
 ## Install
 This package is not yet published to RubyGems. Install it from the
-GitHub release tag (`rb/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/releases)), or
+GitHub release tag (`rb/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/transportrest-transit-apis-sdk/tags)), or
 from a clone:
 
 ```bash
@@ -43,10 +43,11 @@ client = TransportrestTransitApisSDK.new
 
 ```ruby
 begin
-  # list returns an Array of Arrival records — iterate directly.
-  arrivals = client.Arrival.list
+  # list returns an Array of Arrival entities, one per record; data_get reads the record.
+  arrivals = client.Arrival.list({ "stop_id" => "example" })
   arrivals.each do |item|
-    puts "#{item["delay"]}"
+    record = item.data_get
+    puts "#{record["delay"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -60,7 +61,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  locations = client.Location.list()
+  locations = client.Location.list({ "query" => "example" })
 rescue => err
   warn "list failed: #{err}"
 end
@@ -128,10 +129,10 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = TransportrestTransitApisSDK.test
 
-# Entity ops return the ENTITY (raises on error);
-# call data_get for the mock record.
-location = client.Location.list()
-puts location
+# list returns an Array of Location entities, one per mock record (raises on
+# error); data_get reads each record.
+locations = client.Location.list({ "query" => "example" })
+locations.each { |item| puts item.data_get }
 ```
 
 ### Use a custom fetch function
@@ -221,8 +222,8 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
-| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all). Raises on error. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria, and return it. Raises on error. |
+| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all), one per record. Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -232,9 +233,10 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the result data directly. On failure they
-raise a `TransportrestTransitApisError` (a `StandardError` subclass), so wrap
-calls in `begin`/`rescue` where you need to handle errors.
+Entity operations return the entity, and `list` an `Array` of entities, one
+per record; an entity's `data_get` reads its record. On failure they raise a
+`TransportrestTransitApisError` (a `StandardError` subclass), so wrap calls in
+`begin`/`rescue` where you need to handle errors.
 
 The `direct` escape hatch is the exception: it never raises and instead
 returns a result `Hash` with these keys:
@@ -387,8 +389,9 @@ Create an instance: `arrival = client.Arrival`
 #### Example: List
 
 ```ruby
-# list returns an Array of Arrival records (raises on error).
-arrivals = client.Arrival.list
+# list returns an Array of Arrival entities, one per record (raises on error).
+arrivals = client.Arrival.list({ "stop_id" => "example" })
+arrivals.each { |item| puts item.data_get }
 ```
 
 
@@ -419,8 +422,9 @@ Create an instance: `departure = client.Departure`
 #### Example: List
 
 ```ruby
-# list returns an Array of Departure records (raises on error).
-departures = client.Departure.list
+# list returns an Array of Departure entities, one per record (raises on error).
+departures = client.Departure.list({ "stop_id" => "example" })
+departures.each { |item| puts item.data_get }
 ```
 
 
@@ -445,8 +449,9 @@ Create an instance: `journey = client.Journey`
 #### Example: List
 
 ```ruby
-# list returns an Array of Journey records (raises on error).
-journeys = client.Journey.list
+# list returns an Array of Journey entities, one per record (raises on error).
+journeys = client.Journey.list({ "from" => "example", "to" => "example" })
+journeys.each { |item| puts item.data_get }
 ```
 
 
@@ -473,8 +478,9 @@ Create an instance: `location = client.Location`
 #### Example: List
 
 ```ruby
-# list returns an Array of Location records (raises on error).
-locations = client.Location.list
+# list returns an Array of Location entities, one per record (raises on error).
+locations = client.Location.list({ "query" => "example" })
+locations.each { |item| puts item.data_get }
 ```
 
 
@@ -501,8 +507,9 @@ Create an instance: `radar = client.Radar`
 #### Example: List
 
 ```ruby
-# list returns an Array of Radar records (raises on error).
-radars = client.Radar.list
+# list returns an Array of Radar entities, one per record (raises on error).
+radars = client.Radar.list({ "east" => 1, "north" => 1, "south" => 1, "west" => 1 })
+radars.each { |item| puts item.data_get }
 ```
 
 
@@ -726,7 +733,7 @@ stores the returned data and match criteria internally.
 
 ```ruby
 location = client.Location
-location.list()
+location.list({ "query" => "example" })
 
 # location.data_get now returns the location data from the last list
 # location.match_get returns the last match criteria

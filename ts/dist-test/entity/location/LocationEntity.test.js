@@ -54,6 +54,53 @@ const utility_1 = require("../../utility");
         const ent = testsdk.Location();
         (0, node_assert_1.default)(null != ent);
     });
+    class FailHook extends __1.BaseFeature {
+        name = 'failhook';
+        version = '0.0.1';
+        active = true;
+        unexpected = 0;
+        init() { }
+        PreSpec() { throw new Error('location hook failed'); }
+        PreUnexpected() { this.unexpected++; }
+    }
+    (0, node_test_1.test)('stream-error', async () => {
+        const offline = { net: { offline: true } };
+        await node_assert_1.default.rejects(async () => {
+            for await (const _item of __1.TransportrestTransitApisSDK.test(offline).Location().stream('list')) { }
+        }, /offline/);
+        for await (const _item of __1.TransportrestTransitApisSDK.test(offline).Location()
+            .stream('list', undefined, { ctrl: { throw: false } })) { }
+        if (null != __1.config.feature?.rbac) {
+            const denied = __1.TransportrestTransitApisSDK.test(undefined, { feature: { rbac: { active: true, deny: true } } });
+            await node_assert_1.default.rejects(async () => {
+                for await (const _item of denied.Location().stream('list')) { }
+            }, (err) => 'rbac_denied' === err.code);
+        }
+    });
+    (0, node_test_1.test)('stream-ctrl', async () => {
+        const explain = {};
+        const ctrl = { explain };
+        for await (const _item of __1.TransportrestTransitApisSDK.test().Location().stream('list', undefined, { ctrl })) { }
+        node_assert_1.default.deepStrictEqual(Object.keys(ctrl), ['explain']);
+        (0, node_assert_1.default)(explain === ctrl.explain && 0 < Object.keys(explain).length);
+    });
+    (0, node_test_1.test)('unexpected', async () => {
+        const hook = new FailHook();
+        const client = new __1.TransportrestTransitApisSDK({ feature: { test: { active: true } }, extend: [hook] });
+        await node_assert_1.default.rejects(client.Location().list(), /hook failed/);
+        (0, node_assert_1.default)(0 < hook.unexpected);
+        const fired = hook.unexpected;
+        node_assert_1.default.strictEqual(await client.Location().list(undefined, { throw: false }), undefined);
+        (0, node_assert_1.default)(fired < hook.unexpected);
+    });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.TransportrestTransitApisSDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.Location().list({ "address": "x", "query": "x" }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.TRANSPORTREST_TRANSIT_APIS_TEST_LIVE;
         for (const op of ['list']) {
@@ -62,7 +109,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "id": { "a": true, "h": "Id", "n": "id", "r": false, "sh": "Unique identifier for the location", "t": "`$STRING`", "key$": "id", "index$": 0 }, "location": { "a": true, "h": "Location", "n": "location", "r": false, "t": "`$OBJECT`", "key$": "location", "index$": 1 }, "name": { "a": true, "h": "Name", "n": "name", "r": false, "sh": "Name of the location", "t": "`$STRING`", "key$": "name", "index$": 2 }, "products": { "a": true, "h": "Products", "n": "products", "r": false, "sh": "Available products at this location", "t": "`$OBJECT`", "key$": "products", "index$": 3 }, "type": { "a": true, "h": "Type", "n": "type", "r": false, "sh": "Type of location", "t": "`$STRING`", "key$": "type", "index$": 4 } }, "id": { "field": "id", "name": "id" }, "name": "location", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /locations", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "ex": true, "k": "query", "n": "address", "or": "addresses", "r": false, "t": "`$BOOLEAN`", "index$": 0 }, { "a": true, "ex": true, "k": "query", "n": "poi", "or": "poi", "r": false, "t": "`$BOOLEAN`", "index$": 1 }, { "a": true, "ex": "Berlin", "k": "query", "n": "query", "or": "query", "r": true, "t": "`$STRING`", "index$": 2 }, { "a": true, "ex": 10, "k": "query", "n": "result", "or": "results", "r": false, "t": "`$INTEGER`", "index$": 3 }, { "a": true, "ex": true, "k": "query", "n": "stop", "or": "stops", "r": false, "t": "`$BOOLEAN`", "index$": 4 }] }, "k": "http", "m": "GET", "o": "/locations", "q": { "exist": ["address", "poi", "query", "result", "stop"] }, "r": {}, "s": [{ "lit": "locations" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "list" } }, "relations": { "ancestors": [] }, "key$": "location", "name__orig": "location", "Name": "Location", "name_": "location", "name-": "location", "NAME": "LOCATION", "index$": 3 }, { "active": true, "entity": "location", "key$": "BasicLocationFlow", "kind": "basic", "name": "BasicLocationFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "location_ref01" } }], "index$": 0 }] }, 'Location', { "GET /locations": { "protocol": "http", "parameters": [{ "name": "query", "in": "query", "description": "Search query for locations", "required": true, "schema": { "type": "string" }, "example": "Berlin", "index$": 0 }, { "name": "results", "in": "query", "description": "Number of results to return", "required": false, "schema": { "type": "integer", "default": 10, "minimum": 1, "maximum": 100 }, "index$": 1 }, { "name": "stops", "in": "query", "description": "Include stops/stations in results", "required": false, "schema": { "type": "boolean", "default": true }, "index$": 2 }, { "name": "addresses", "in": "query", "description": "Include addresses in results", "required": false, "schema": { "type": "boolean", "default": true }, "index$": 3 }, { "name": "poi", "in": "query", "description": "Include points of interest in results", "required": false, "schema": { "type": "boolean", "default": true }, "index$": 4 }] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "id": { "a": true, "h": "Id", "n": "id", "r": false, "sh": "Unique identifier for the location", "t": "`$STRING`", "key$": "id", "index$": 0 }, "location": { "a": true, "h": "Location", "n": "location", "r": false, "t": "`$OBJECT`", "key$": "location", "index$": 1 }, "name": { "a": true, "h": "Name", "n": "name", "r": false, "sh": "Name of the location", "t": "`$STRING`", "key$": "name", "index$": 2 }, "products": { "a": true, "h": "Products", "n": "products", "r": false, "sh": "Available products at this location", "t": "`$OBJECT`", "key$": "products", "index$": 3 }, "type": { "a": true, "h": "Type", "n": "type", "r": false, "sh": "Type of location", "t": "`$STRING`", "key$": "type", "index$": 4 } }, "id": { "field": "id", "name": "id" }, "name": "location", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /locations", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "ex": true, "k": "query", "n": "address", "or": "addresses", "r": false, "t": "`$BOOLEAN`", "index$": 0 }, { "a": true, "ex": true, "k": "query", "n": "poi", "or": "poi", "r": false, "t": "`$BOOLEAN`", "index$": 1 }, { "a": true, "ex": "Berlin", "k": "query", "n": "query", "or": "query", "r": true, "t": "`$STRING`", "index$": 2 }, { "a": true, "ex": 10, "k": "query", "n": "result", "or": "results", "r": false, "t": "`$INTEGER`", "index$": 3 }, { "a": true, "ex": true, "k": "query", "n": "stop", "or": "stops", "r": false, "t": "`$BOOLEAN`", "index$": 4 }] }, "k": "http", "m": "GET", "o": "/locations", "q": { "exist": ["query"] }, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "locations" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "list" } }, "relations": { "ancestors": [] }, "key$": "location", "name__orig": "location", "Name": "Location", "name_": "location", "name-": "location", "NAME": "LOCATION", "index$": 3 }, { "active": true, "entity": "location", "key$": "BasicLocationFlow", "kind": "basic", "name": "BasicLocationFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "location_ref01" } }], "index$": 0 }] }, 'Location', { "GET /locations": { "protocol": "http", "parameters": [{ "name": "query", "in": "query", "description": "Search query for locations", "required": true, "schema": { "type": "string" }, "example": "Berlin", "index$": 0 }, { "name": "results", "in": "query", "description": "Number of results to return", "required": false, "schema": { "type": "integer", "default": 10, "minimum": 1, "maximum": 100 }, "index$": 1 }, { "name": "stops", "in": "query", "description": "Include stops/stations in results", "required": false, "schema": { "type": "boolean", "default": true }, "index$": 2 }, { "name": "addresses", "in": "query", "description": "Include addresses in results", "required": false, "schema": { "type": "boolean", "default": true }, "index$": 3 }, { "name": "poi", "in": "query", "description": "Include points of interest in results", "required": false, "schema": { "type": "boolean", "default": true }, "index$": 4 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -75,6 +122,11 @@ const utility_1 = require("../../utility");
         const location_ref01_list = (await location_ref01_ent.list(location_ref01_match)).map((e) => e.data());
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

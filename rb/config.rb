@@ -79,6 +79,7 @@ module TransportrestTransitApisConfig
           },
           "optspec" => {
             "clearTimer" => "`$FUNCTION`",
+            "now" => "`$FUNCTION`",
             "setTimer" => "`$FUNCTION`",
           },
           "strict" => false,
@@ -223,16 +224,18 @@ module TransportrestTransitApisConfig
                         "orig" => "when",
                         "type" => "`$STRING`",
                         "kind" => "query",
+                        "field" => true,
                       },
                     ],
                   },
                   "select" => {
                     "exist" => [
-                      "duration",
-                      "result",
                       "stop_id",
-                      "when",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -355,6 +358,7 @@ module TransportrestTransitApisConfig
                         "orig" => "direction",
                         "type" => "`$STRING`",
                         "kind" => "query",
+                        "field" => true,
                       },
                       {
                         "name" => "duration",
@@ -375,17 +379,18 @@ module TransportrestTransitApisConfig
                         "orig" => "when",
                         "type" => "`$STRING`",
                         "kind" => "query",
+                        "field" => true,
                       },
                     ],
                   },
                   "select" => {
                     "exist" => [
-                      "direction",
-                      "duration",
-                      "result",
                       "stop_id",
-                      "when",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -490,13 +495,13 @@ module TransportrestTransitApisConfig
                   },
                   "select" => {
                     "exist" => [
-                      "arrival",
-                      "departure",
                       "from",
-                      "result",
-                      "stopover",
                       "to",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -607,12 +612,12 @@ module TransportrestTransitApisConfig
                   },
                   "select" => {
                     "exist" => [
-                      "address",
-                      "poi",
                       "query",
-                      "result",
-                      "stop",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -718,10 +723,13 @@ module TransportrestTransitApisConfig
                     "exist" => [
                       "east",
                       "north",
-                      "result",
                       "south",
                       "west",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -815,6 +823,10 @@ module TransportrestTransitApisConfig
                     "exist" => [
                       "id",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -919,9 +931,11 @@ module TransportrestTransitApisConfig
                   "select" => {
                     "exist" => [
                       "id",
-                      "line_name",
-                      "stopover",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],

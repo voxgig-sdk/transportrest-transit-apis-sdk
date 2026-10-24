@@ -67,15 +67,21 @@ class Journey(TypedDict, total=False):
     type: str
 
 
-class JourneyListMatchRequired(TypedDict):
-    to: str
+JourneyListMatchRequired = TypedDict('JourneyListMatchRequired', {
+    "from": str,
+    "to": str,
+})
+
+JourneyListMatchOptional = TypedDict('JourneyListMatchOptional', {
+    "arrival": str,
+    "departure": str,
+    "result": int,
+    "stopover": bool,
+}, total=False)
 
 
-class JourneyListMatch(JourneyListMatchRequired, total=False):
-    arrival: str
-    departure: str
-    result: int
-    stopover: bool
+class JourneyListMatch(JourneyListMatchRequired, JourneyListMatchOptional):
+    pass
 
 
 class Location(TypedDict, total=False):

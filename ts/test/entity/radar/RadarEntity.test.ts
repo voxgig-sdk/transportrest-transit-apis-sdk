@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { TransportrestTransitApisSDK, BaseFeature, stdutil } from '../../..'
+import { TransportrestTransitApisSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,64 @@ describe('RadarEntity', async () => {
   })
 
 
+  class FailHook extends BaseFeature {
+    name = 'failhook'
+    version = '0.0.1'
+    active = true
+    unexpected = 0
+    init() { }
+    PreSpec() { throw new Error('radar hook failed') }
+    PreUnexpected() { this.unexpected++ }
+  }
+
+  test('stream-error', async () => {
+    const offline = { net: { offline: true } }
+    await assert.rejects(async () => {
+      for await (const _item of TransportrestTransitApisSDK.test(offline).Radar().stream('list')) { }
+    }, /offline/)
+
+    for await (const _item of TransportrestTransitApisSDK.test(offline).Radar()
+      .stream('list', undefined, { ctrl: { throw: false } })) { }
+
+    if (null != (config as any).feature?.rbac) {
+      const denied = TransportrestTransitApisSDK.test(undefined, { feature: { rbac: { active: true, deny: true } } })
+      await assert.rejects(async () => {
+        for await (const _item of denied.Radar().stream('list')) { }
+      }, (err: any) => 'rbac_denied' === err.code)
+    }
+  })
+
+  test('stream-ctrl', async () => {
+    const explain: any = {}
+    const ctrl: any = { explain }
+    for await (const _item of TransportrestTransitApisSDK.test().Radar().stream('list', undefined, { ctrl })) { }
+    assert.deepStrictEqual(Object.keys(ctrl), ['explain'])
+    assert(explain === ctrl.explain && 0 < Object.keys(explain).length)
+  })
+
+  test('unexpected', async () => {
+    const hook = new FailHook()
+    const client = new TransportrestTransitApisSDK({ feature: { test: { active: true } }, extend: [hook] })
+    await assert.rejects(client.Radar().list(), /hook failed/)
+    assert(0 < hook.unexpected)
+
+    const fired = hook.unexpected
+    assert.strictEqual(await client.Radar().list(undefined, { throw: false }), undefined)
+    assert(fired < hook.unexpected)
+  })
+
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = TransportrestTransitApisSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.Radar().list({"east":"x","north":1,"south":1,"west":1} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.TRANSPORTREST_TRANSIT_APIS_TEST_LIVE
@@ -51,7 +109,7 @@ describe('RadarEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"direction":{"a":true,"h":"Direction","n":"direction","r":false,"sh":"Direction of the movement","t":"`$STRING`","key$":"direction","index$":0},"line":{"a":true,"h":"Line","n":"line","r":false,"t":"`$OBJECT`","key$":"line","index$":1},"location":{"a":true,"h":"Location","n":"location","r":false,"t":"`$OBJECT`","key$":"location","index$":2},"nextStopovers":{"a":true,"h":"Next Stopovers","n":"nextStopovers","r":false,"t":"`$ARRAY`","key$":"nextStopovers","index$":3},"tripId":{"a":true,"h":"Trip Id","n":"tripId","r":false,"sh":"Trip identifier","t":"`$STRING`","key$":"tripId","index$":4}},"name":"radar","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /radar","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"east","or":"east","r":true,"t":"`$NUMBER`","index$":0},{"a":true,"k":"query","n":"north","or":"north","r":true,"t":"`$NUMBER`","index$":1},{"a":true,"ex":256,"k":"query","n":"result","or":"results","r":false,"t":"`$INTEGER`","index$":2},{"a":true,"k":"query","n":"south","or":"south","r":true,"t":"`$NUMBER`","index$":3},{"a":true,"k":"query","n":"west","or":"west","r":true,"t":"`$NUMBER`","index$":4}]},"k":"http","m":"GET","o":"/radar","q":{"exist":["east","north","result","south","west"]},"r":{},"s":[{"lit":"radar"}],"t":{"req":"`reqdata`","res":"`body.movements`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"radar","name__orig":"radar","Name":"Radar","name_":"radar","name-":"radar","NAME":"RADAR","index$":4}, {"active":true,"entity":"radar","key$":"BasicRadarFlow","kind":"basic","name":"BasicRadarFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"radar_ref01"}}],"index$":0}]}, 'Radar', {"GET /radar":{"protocol":"http","parameters":[{"name":"north","in":"query","description":"Northern latitude boundary","required":true,"schema":{"type":"number","format":"double"},"index$":0},{"name":"west","in":"query","description":"Western longitude boundary","required":true,"schema":{"type":"number","format":"double"},"index$":1},{"name":"south","in":"query","description":"Southern latitude boundary","required":true,"schema":{"type":"number","format":"double"},"index$":2},{"name":"east","in":"query","description":"Eastern longitude boundary","required":true,"schema":{"type":"number","format":"double"},"index$":3},{"name":"results","in":"query","description":"Maximum number of vehicles to return","required":false,"schema":{"type":"integer","default":256},"index$":4}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"direction":{"a":true,"h":"Direction","n":"direction","r":false,"sh":"Direction of the movement","t":"`$STRING`","key$":"direction","index$":0},"line":{"a":true,"h":"Line","n":"line","r":false,"t":"`$OBJECT`","key$":"line","index$":1},"location":{"a":true,"h":"Location","n":"location","r":false,"t":"`$OBJECT`","key$":"location","index$":2},"nextStopovers":{"a":true,"h":"Next Stopovers","n":"nextStopovers","r":false,"t":"`$ARRAY`","key$":"nextStopovers","index$":3},"tripId":{"a":true,"h":"Trip Id","n":"tripId","r":false,"sh":"Trip identifier","t":"`$STRING`","key$":"tripId","index$":4}},"name":"radar","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /radar","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"east","or":"east","r":true,"t":"`$NUMBER`","index$":0},{"a":true,"k":"query","n":"north","or":"north","r":true,"t":"`$NUMBER`","index$":1},{"a":true,"ex":256,"k":"query","n":"result","or":"results","r":false,"t":"`$INTEGER`","index$":2},{"a":true,"k":"query","n":"south","or":"south","r":true,"t":"`$NUMBER`","index$":3},{"a":true,"k":"query","n":"west","or":"west","r":true,"t":"`$NUMBER`","index$":4}]},"k":"http","m":"GET","o":"/radar","q":{"exist":["east","north","south","west"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"radar"}],"t":{"req":"`reqdata`","res":"`body.movements`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"radar","name__orig":"radar","Name":"Radar","name_":"radar","name-":"radar","NAME":"RADAR","index$":4}, {"active":true,"entity":"radar","key$":"BasicRadarFlow","kind":"basic","name":"BasicRadarFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"radar_ref01"}}],"index$":0}]}, 'Radar', {"GET /radar":{"protocol":"http","parameters":[{"name":"north","in":"query","description":"Northern latitude boundary","required":true,"schema":{"type":"number","format":"double"},"index$":0},{"name":"west","in":"query","description":"Western longitude boundary","required":true,"schema":{"type":"number","format":"double"},"index$":1},{"name":"south","in":"query","description":"Southern latitude boundary","required":true,"schema":{"type":"number","format":"double"},"index$":2},{"name":"east","in":"query","description":"Eastern longitude boundary","required":true,"schema":{"type":"number","format":"double"},"index$":3},{"name":"results","in":"query","description":"Maximum number of vehicles to return","required":false,"schema":{"type":"integer","default":256},"index$":4}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -72,6 +130,12 @@ describe('RadarEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

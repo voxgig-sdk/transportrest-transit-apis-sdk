@@ -22,48 +22,66 @@ const PLAN: any[] = [
       }
     ],
     "select": {
-      "duration": "v1",
-      "result": "v1",
+      "duration": 120,
+      "result": 10,
       "when": "v1"
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [
       "when",
       "duration",
       "results"
+    ],
+    "queryArgs": [
+      {
+        "name": "duration",
+        "wire": "duration"
+      },
+      {
+        "name": "result",
+        "wire": "results"
+      },
+      {
+        "name": "when",
+        "wire": "when"
+      }
     ],
     "auth": null,
     "status": 200,
     "sample": {
       "arrivals": [
         {
+          "tripId": "x",
+          "stop": {
+            "type": "stop",
+            "id": "x",
+            "name": "x",
+            "location": {
+              "type": "location",
+              "latitude": 1,
+              "longitude": 1
+            },
+            "products": {},
+            "station": {}
+          },
+          "when": "2026-01-01T00:00:00Z",
+          "plannedWhen": "2026-01-01T00:00:00Z",
           "delay": 1,
+          "platform": "x",
+          "plannedPlatform": "x",
           "direction": "x",
           "line": {
+            "type": "line",
             "id": "x",
+            "name": "x",
             "mode": "x",
-            "name": "x",
-            "operator": {},
             "product": "x",
-            "type": "line"
-          },
-          "plannedPlatform": "x",
-          "plannedWhen": "2026-01-01T00:00:00Z",
-          "platform": "x",
-          "stop": {
-            "id": "x",
-            "location": {
-              "latitude": 1,
-              "longitude": 1,
-              "type": "location"
-            },
-            "name": "x",
-            "products": {},
-            "station": {},
-            "type": "stop"
-          },
-          "tripId": "x",
-          "when": "2026-01-01T00:00:00Z"
+            "operator": {}
+          }
         }
       ]
     },
@@ -84,49 +102,71 @@ const PLAN: any[] = [
     ],
     "select": {
       "direction": "v1",
-      "duration": "v1",
-      "result": "v1",
+      "duration": 120,
+      "result": 10,
       "when": "v1"
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [
       "when",
       "duration",
       "results",
       "direction"
     ],
+    "queryArgs": [
+      {
+        "name": "direction",
+        "wire": "direction"
+      },
+      {
+        "name": "duration",
+        "wire": "duration"
+      },
+      {
+        "name": "result",
+        "wire": "results"
+      },
+      {
+        "name": "when",
+        "wire": "when"
+      }
+    ],
     "auth": null,
     "status": 200,
     "sample": {
       "departures": [
         {
+          "tripId": "x",
+          "stop": {
+            "type": "stop",
+            "id": "x",
+            "name": "x",
+            "location": {
+              "type": "location",
+              "latitude": 1,
+              "longitude": 1
+            },
+            "products": {},
+            "station": {}
+          },
+          "when": "2026-01-01T00:00:00Z",
+          "plannedWhen": "2026-01-01T00:00:00Z",
           "delay": 1,
+          "platform": "x",
+          "plannedPlatform": "x",
           "direction": "x",
           "line": {
+            "type": "line",
             "id": "x",
+            "name": "x",
             "mode": "x",
-            "name": "x",
-            "operator": {},
             "product": "x",
-            "type": "line"
-          },
-          "plannedPlatform": "x",
-          "plannedWhen": "2026-01-01T00:00:00Z",
-          "platform": "x",
-          "stop": {
-            "id": "x",
-            "location": {
-              "latitude": 1,
-              "longitude": 1,
-              "type": "location"
-            },
-            "name": "x",
-            "products": {},
-            "station": {},
-            "type": "stop"
-          },
-          "tripId": "x",
-          "when": "2026-01-01T00:00:00Z"
+            "operator": {}
+          }
         }
       ]
     },
@@ -140,14 +180,18 @@ const PLAN: any[] = [
     "path": "/journeys",
     "args": [],
     "select": {
+      "from": "900000003201",
+      "to": "900000100003",
       "arrival": "v1",
       "departure": "v1",
-      "from": "900000003201",
-      "result": "v1",
-      "stopover": "v1",
-      "to": "900000100003"
+      "result": 3,
+      "stopover": "v1"
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [
       "from",
       "to",
@@ -156,49 +200,75 @@ const PLAN: any[] = [
       "results",
       "stopovers"
     ],
+    "queryArgs": [
+      {
+        "name": "arrival",
+        "wire": "arrival"
+      },
+      {
+        "name": "departure",
+        "wire": "departure"
+      },
+      {
+        "name": "from",
+        "wire": "from"
+      },
+      {
+        "name": "result",
+        "wire": "results"
+      },
+      {
+        "name": "stopover",
+        "wire": "stopovers"
+      },
+      {
+        "name": "to",
+        "wire": "to"
+      }
+    ],
     "auth": null,
     "status": 200,
     "sample": {
       "journeys": [
         {
+          "type": "journey",
           "legs": [
             {
-              "arrival": "2026-01-01T00:00:00Z",
-              "departure": "2026-01-01T00:00:00Z",
-              "destination": {
+              "origin": {
+                "type": "stop",
                 "id": "x",
-                "location": {},
                 "name": "x",
+                "location": {},
                 "products": {},
-                "station": {},
-                "type": "stop"
+                "station": {}
+              },
+              "destination": {
+                "type": "stop",
+                "id": "x",
+                "name": "x",
+                "location": {},
+                "products": {},
+                "station": {}
+              },
+              "departure": "2026-01-01T00:00:00Z",
+              "plannedDeparture": "2026-01-01T00:00:00Z",
+              "arrival": "2026-01-01T00:00:00Z",
+              "plannedArrival": "2026-01-01T00:00:00Z",
+              "line": {
+                "type": "line",
+                "id": "x",
+                "name": "x",
+                "mode": "x",
+                "product": "x",
+                "operator": {}
               },
               "direction": "x",
-              "line": {
-                "id": "x",
-                "mode": "x",
-                "name": "x",
-                "operator": {},
-                "product": "x",
-                "type": "line"
-              },
-              "origin": {
-                "id": "x",
-                "location": {},
-                "name": "x",
-                "products": {},
-                "station": {},
-                "type": "stop"
-              },
-              "plannedArrival": "2026-01-01T00:00:00Z",
-              "plannedDeparture": "2026-01-01T00:00:00Z",
               "stopovers": [
                 {}
               ]
             }
           ],
-          "refreshToken": "x",
-          "type": "journey"
+          "refreshToken": "x"
         }
       ]
     },
@@ -212,19 +282,45 @@ const PLAN: any[] = [
     "path": "/locations",
     "args": [],
     "select": {
+      "query": "Berlin",
       "address": "v1",
       "poi": "v1",
-      "query": "Berlin",
-      "result": "v1",
+      "result": 10,
       "stop": "v1"
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [
       "query",
       "results",
       "stops",
       "addresses",
       "poi"
+    ],
+    "queryArgs": [
+      {
+        "name": "address",
+        "wire": "addresses"
+      },
+      {
+        "name": "poi",
+        "wire": "poi"
+      },
+      {
+        "name": "query",
+        "wire": "query"
+      },
+      {
+        "name": "result",
+        "wire": "results"
+      },
+      {
+        "name": "stop",
+        "wire": "stops"
+      }
     ],
     "auth": null,
     "status": 200,
@@ -253,11 +349,15 @@ const PLAN: any[] = [
     "select": {
       "east": "v1",
       "north": "v1",
-      "result": "v1",
       "south": "v1",
-      "west": "v1"
+      "west": "v1",
+      "result": 256
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [
       "north",
       "west",
@@ -265,42 +365,64 @@ const PLAN: any[] = [
       "east",
       "results"
     ],
+    "queryArgs": [
+      {
+        "name": "east",
+        "wire": "east"
+      },
+      {
+        "name": "north",
+        "wire": "north"
+      },
+      {
+        "name": "result",
+        "wire": "results"
+      },
+      {
+        "name": "south",
+        "wire": "south"
+      },
+      {
+        "name": "west",
+        "wire": "west"
+      }
+    ],
     "auth": null,
     "status": 200,
     "sample": {
       "movements": [
         {
+          "tripId": "x",
           "direction": "x",
           "line": {
+            "type": "line",
             "id": "x",
-            "mode": "x",
             "name": "x",
-            "operator": {},
+            "mode": "x",
             "product": "x",
-            "type": "line"
+            "operator": {}
           },
           "location": {
+            "type": "location",
             "latitude": 1,
-            "longitude": 1,
-            "type": "location"
+            "longitude": 1
           },
           "nextStopovers": [
             {
-              "arrival": "2026-01-01T00:00:00Z",
-              "departure": "2026-01-01T00:00:00Z",
-              "plannedArrival": "2026-01-01T00:00:00Z",
-              "plannedDeparture": "2026-01-01T00:00:00Z",
               "stop": {
+                "type": "stop",
                 "id": "x",
-                "location": {},
                 "name": "x",
+                "location": {},
                 "products": {},
-                "station": {},
-                "type": "stop"
-              }
+                "station": {}
+              },
+              "arrival": "2026-01-01T00:00:00Z",
+              "plannedArrival": "2026-01-01T00:00:00Z",
+              "departure": "2026-01-01T00:00:00Z",
+              "plannedDeparture": "2026-01-01T00:00:00Z"
             }
-          ],
-          "tripId": "x"
+          ]
         }
       ]
     },
@@ -321,7 +443,12 @@ const PLAN: any[] = [
     ],
     "select": {},
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [],
+    "queryArgs": [],
     "auth": null,
     "status": 200,
     "sample": {
@@ -329,9 +456,9 @@ const PLAN: any[] = [
       "id": "x",
       "name": "x",
       "location": {
+        "type": "location",
         "latitude": 1,
-        "longitude": 1,
-        "type": "location"
+        "longitude": 1
       },
       "products": {},
       "station": {}
@@ -356,9 +483,23 @@ const PLAN: any[] = [
       "stopover": "v1"
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [
       "lineName",
       "stopovers"
+    ],
+    "queryArgs": [
+      {
+        "name": "line_name",
+        "wire": "lineName"
+      },
+      {
+        "name": "stopover",
+        "wire": "stopovers"
+      }
     ],
     "auth": null,
     "status": 200,
@@ -378,9 +519,9 @@ const PLAN: any[] = [
         "id": "x",
         "name": "x",
         "location": {
+          "type": "location",
           "latitude": 1,
-          "longitude": 1,
-          "type": "location"
+          "longitude": 1
         },
         "products": {},
         "station": {}
@@ -390,9 +531,9 @@ const PLAN: any[] = [
         "id": "x",
         "name": "x",
         "location": {
+          "type": "location",
           "latitude": 1,
-          "longitude": 1,
-          "type": "location"
+          "longitude": 1
         },
         "products": {},
         "station": {}
@@ -400,16 +541,16 @@ const PLAN: any[] = [
       "stopovers": [
         {
           "stop": {
+            "type": "stop",
             "id": "x",
-            "location": {
-              "latitude": 1,
-              "longitude": 1,
-              "type": "location"
-            },
             "name": "x",
+            "location": {
+              "type": "location",
+              "latitude": 1,
+              "longitude": 1
+            },
             "products": {},
-            "station": {},
-            "type": "stop"
+            "station": {}
           },
           "arrival": "2026-01-01T00:00:00Z",
           "plannedArrival": "2026-01-01T00:00:00Z",

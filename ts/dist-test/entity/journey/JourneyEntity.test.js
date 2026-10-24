@@ -54,6 +54,53 @@ const utility_1 = require("../../utility");
         const ent = testsdk.Journey();
         (0, node_assert_1.default)(null != ent);
     });
+    class FailHook extends __1.BaseFeature {
+        name = 'failhook';
+        version = '0.0.1';
+        active = true;
+        unexpected = 0;
+        init() { }
+        PreSpec() { throw new Error('journey hook failed'); }
+        PreUnexpected() { this.unexpected++; }
+    }
+    (0, node_test_1.test)('stream-error', async () => {
+        const offline = { net: { offline: true } };
+        await node_assert_1.default.rejects(async () => {
+            for await (const _item of __1.TransportrestTransitApisSDK.test(offline).Journey().stream('list')) { }
+        }, /offline/);
+        for await (const _item of __1.TransportrestTransitApisSDK.test(offline).Journey()
+            .stream('list', undefined, { ctrl: { throw: false } })) { }
+        if (null != __1.config.feature?.rbac) {
+            const denied = __1.TransportrestTransitApisSDK.test(undefined, { feature: { rbac: { active: true, deny: true } } });
+            await node_assert_1.default.rejects(async () => {
+                for await (const _item of denied.Journey().stream('list')) { }
+            }, (err) => 'rbac_denied' === err.code);
+        }
+    });
+    (0, node_test_1.test)('stream-ctrl', async () => {
+        const explain = {};
+        const ctrl = { explain };
+        for await (const _item of __1.TransportrestTransitApisSDK.test().Journey().stream('list', undefined, { ctrl })) { }
+        node_assert_1.default.deepStrictEqual(Object.keys(ctrl), ['explain']);
+        (0, node_assert_1.default)(explain === ctrl.explain && 0 < Object.keys(explain).length);
+    });
+    (0, node_test_1.test)('unexpected', async () => {
+        const hook = new FailHook();
+        const client = new __1.TransportrestTransitApisSDK({ feature: { test: { active: true } }, extend: [hook] });
+        await node_assert_1.default.rejects(client.Journey().list(), /hook failed/);
+        (0, node_assert_1.default)(0 < hook.unexpected);
+        const fired = hook.unexpected;
+        node_assert_1.default.strictEqual(await client.Journey().list(undefined, { throw: false }), undefined);
+        (0, node_assert_1.default)(fired < hook.unexpected);
+    });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.TransportrestTransitApisSDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.Journey().list({ "arrival": 1, "from": "x", "to": "x" }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.TRANSPORTREST_TRANSIT_APIS_TEST_LIVE;
         for (const op of ['list']) {
@@ -62,7 +109,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "legs": { "a": true, "h": "Legs", "n": "legs", "r": false, "sh": "Journey legs", "t": "`$ARRAY`", "key$": "legs", "index$": 0 }, "refreshToken": { "a": true, "h": "Refresh Token", "n": "refreshToken", "r": false, "sh": "Token to refresh this journey", "t": "`$STRING`", "key$": "refreshToken", "index$": 1 }, "type": { "a": true, "h": "Type", "n": "type", "r": false, "t": "`$STRING`", "key$": "type", "index$": 2 } }, "name": "journey", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /journeys", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "k": "query", "n": "arrival", "or": "arrival", "r": false, "t": "`$STRING`", "index$": 0 }, { "a": true, "k": "query", "n": "departure", "or": "departure", "r": false, "t": "`$STRING`", "index$": 1 }, { "a": true, "ex": "900000003201", "k": "query", "n": "from", "or": "from", "r": true, "t": "`$STRING`", "index$": 2 }, { "a": true, "ex": 3, "k": "query", "n": "result", "or": "results", "r": false, "t": "`$INTEGER`", "index$": 3 }, { "a": true, "ex": false, "k": "query", "n": "stopover", "or": "stopovers", "r": false, "t": "`$BOOLEAN`", "index$": 4 }, { "a": true, "ex": "900000100003", "k": "query", "n": "to", "or": "to", "r": true, "t": "`$STRING`", "index$": 5 }] }, "k": "http", "m": "GET", "o": "/journeys", "q": { "exist": ["arrival", "departure", "from", "result", "stopover", "to"] }, "r": {}, "s": [{ "lit": "journeys" }], "t": { "req": "`reqdata`", "res": "`body.journeys`" }, "index$": 0 }], "key$": "list" } }, "relations": { "ancestors": [] }, "key$": "journey", "name__orig": "journey", "Name": "Journey", "name_": "journey", "name-": "journey", "NAME": "JOURNEY", "index$": 2 }, { "active": true, "entity": "journey", "key$": "BasicJourneyFlow", "kind": "basic", "name": "BasicJourneyFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "journey_ref01" } }], "index$": 0 }] }, 'Journey', { "GET /journeys": { "protocol": "http", "parameters": [{ "name": "from", "in": "query", "description": "Origin location ID or coordinates", "required": true, "schema": { "type": "string" }, "example": "900000003201", "index$": 0 }, { "name": "to", "in": "query", "description": "Destination location ID or coordinates", "required": true, "schema": { "type": "string" }, "example": "900000100003", "index$": 1 }, { "name": "departure", "in": "query", "description": "Desired departure time (ISO 8601 format)", "required": false, "schema": { "type": "string", "format": "date-time" }, "index$": 2 }, { "name": "arrival", "in": "query", "description": "Desired arrival time (ISO 8601 format)", "required": false, "schema": { "type": "string", "format": "date-time" }, "index$": 3 }, { "name": "results", "in": "query", "description": "Number of journey results to return", "required": false, "schema": { "type": "integer", "default": 3, "minimum": 1 }, "index$": 4 }, { "name": "stopovers", "in": "query", "description": "Include stopovers in journey details", "required": false, "schema": { "type": "boolean", "default": false }, "index$": 5 }] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "legs": { "a": true, "h": "Legs", "n": "legs", "r": false, "sh": "Journey legs", "t": "`$ARRAY`", "key$": "legs", "index$": 0 }, "refreshToken": { "a": true, "h": "Refresh Token", "n": "refreshToken", "r": false, "sh": "Token to refresh this journey", "t": "`$STRING`", "key$": "refreshToken", "index$": 1 }, "type": { "a": true, "h": "Type", "n": "type", "r": false, "t": "`$STRING`", "key$": "type", "index$": 2 } }, "name": "journey", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /journeys", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "k": "query", "n": "arrival", "or": "arrival", "r": false, "t": "`$STRING`", "index$": 0 }, { "a": true, "k": "query", "n": "departure", "or": "departure", "r": false, "t": "`$STRING`", "index$": 1 }, { "a": true, "ex": "900000003201", "k": "query", "n": "from", "or": "from", "r": true, "t": "`$STRING`", "index$": 2 }, { "a": true, "ex": 3, "k": "query", "n": "result", "or": "results", "r": false, "t": "`$INTEGER`", "index$": 3 }, { "a": true, "ex": false, "k": "query", "n": "stopover", "or": "stopovers", "r": false, "t": "`$BOOLEAN`", "index$": 4 }, { "a": true, "ex": "900000100003", "k": "query", "n": "to", "or": "to", "r": true, "t": "`$STRING`", "index$": 5 }] }, "k": "http", "m": "GET", "o": "/journeys", "q": { "exist": ["from", "to"] }, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "journeys" }], "t": { "req": "`reqdata`", "res": "`body.journeys`" }, "index$": 0 }], "key$": "list" } }, "relations": { "ancestors": [] }, "key$": "journey", "name__orig": "journey", "Name": "Journey", "name_": "journey", "name-": "journey", "NAME": "JOURNEY", "index$": 2 }, { "active": true, "entity": "journey", "key$": "BasicJourneyFlow", "kind": "basic", "name": "BasicJourneyFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "journey_ref01" } }], "index$": 0 }] }, 'Journey', { "GET /journeys": { "protocol": "http", "parameters": [{ "name": "from", "in": "query", "description": "Origin location ID or coordinates", "required": true, "schema": { "type": "string" }, "example": "900000003201", "index$": 0 }, { "name": "to", "in": "query", "description": "Destination location ID or coordinates", "required": true, "schema": { "type": "string" }, "example": "900000100003", "index$": 1 }, { "name": "departure", "in": "query", "description": "Desired departure time (ISO 8601 format)", "required": false, "schema": { "type": "string", "format": "date-time" }, "index$": 2 }, { "name": "arrival", "in": "query", "description": "Desired arrival time (ISO 8601 format)", "required": false, "schema": { "type": "string", "format": "date-time" }, "index$": 3 }, { "name": "results", "in": "query", "description": "Number of journey results to return", "required": false, "schema": { "type": "integer", "default": 3, "minimum": 1 }, "index$": 4 }, { "name": "stopovers", "in": "query", "description": "Include stopovers in journey details", "required": false, "schema": { "type": "boolean", "default": false }, "index$": 5 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -75,6 +122,11 @@ const utility_1 = require("../../utility");
         const journey_ref01_list = (await journey_ref01_ent.list(journey_ref01_match)).map((e) => e.data());
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

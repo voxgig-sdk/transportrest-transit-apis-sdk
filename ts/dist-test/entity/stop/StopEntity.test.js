@@ -54,6 +54,14 @@ const utility_1 = require("../../utility");
         const ent = testsdk.Stop();
         (0, node_assert_1.default)(null != ent);
     });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.TransportrestTransitApisSDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.Stop().load({ "id": 1 }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.TRANSPORTREST_TRANSIT_APIS_TEST_LIVE;
         for (const op of ['load']) {
@@ -62,7 +70,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "id": { "a": true, "h": "Id", "n": "id", "r": false, "sh": "Unique identifier for the stop", "t": "`$STRING`", "key$": "id", "index$": 0 }, "location": { "a": true, "h": "Location", "n": "location", "r": false, "t": "`$OBJECT`", "key$": "location", "index$": 1 }, "name": { "a": true, "h": "Name", "n": "name", "r": false, "sh": "Name of the stop", "t": "`$STRING`", "key$": "name", "index$": 2 }, "products": { "a": true, "h": "Products", "n": "products", "r": false, "sh": "Available products at this stop", "t": "`$OBJECT`", "key$": "products", "index$": 3 }, "station": { "a": true, "h": "Station", "n": "station", "r": false, "sh": "Parent station if applicable", "t": "`$OBJECT`", "key$": "station", "index$": 4 }, "type": { "a": true, "h": "Type", "n": "type", "r": false, "t": "`$STRING`", "key$": "type", "index$": 5 } }, "id": { "field": "id", "name": "id" }, "name": "stop", "op": { "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /stops/{id}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "ex": "900000003201", "k": "param", "n": "id", "or": "id", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/stops/{id}", "q": { "exist": ["id"] }, "r": {}, "s": [{ "lit": "stops" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "stop", "name__orig": "stop", "Name": "Stop", "name_": "stop", "name-": "stop", "NAME": "STOP", "index$": 5 }, { "active": true, "entity": "stop", "key$": "BasicStopFlow", "kind": "basic", "name": "BasicStopFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": { "ref": "stop_ref01", "srcdatavar": "stop_ref01_data", "suffix": "_dt0" }, "m": { "id": "stop01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-stop_ref01" } }], "index$": 0 }] }, 'Stop', { "GET /stops/{id}": { "protocol": "http", "parameters": [{ "name": "id", "in": "path", "description": "Stop/station ID", "required": true, "schema": { "type": "string" }, "example": "900000003201", "index$": 0 }] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "id": { "a": true, "h": "Id", "n": "id", "r": false, "sh": "Unique identifier for the stop", "t": "`$STRING`", "key$": "id", "index$": 0 }, "location": { "a": true, "h": "Location", "n": "location", "r": false, "t": "`$OBJECT`", "key$": "location", "index$": 1 }, "name": { "a": true, "h": "Name", "n": "name", "r": false, "sh": "Name of the stop", "t": "`$STRING`", "key$": "name", "index$": 2 }, "products": { "a": true, "h": "Products", "n": "products", "r": false, "sh": "Available products at this stop", "t": "`$OBJECT`", "key$": "products", "index$": 3 }, "station": { "a": true, "h": "Station", "n": "station", "r": false, "sh": "Parent station if applicable", "t": "`$OBJECT`", "key$": "station", "index$": 4 }, "type": { "a": true, "h": "Type", "n": "type", "r": false, "t": "`$STRING`", "key$": "type", "index$": 5 } }, "id": { "field": "id", "name": "id" }, "name": "stop", "op": { "load": { "input": "data", "name": "load", "points": [{ "a": true, "co": { "id": "GET /stops/{id}", "source": "openapi3", "version": 2 }, "g": { "params": [{ "a": true, "ex": "900000003201", "k": "param", "n": "id", "or": "id", "r": true, "t": "`$STRING`", "index$": 0 }] }, "k": "http", "m": "GET", "o": "/stops/{id}", "q": { "exist": ["id"] }, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "stops" }, { "var": "id" }], "t": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "stop", "name__orig": "stop", "Name": "Stop", "name_": "stop", "name-": "stop", "NAME": "STOP", "index$": 5 }, { "active": true, "entity": "stop", "key$": "BasicStopFlow", "kind": "basic", "name": "BasicStopFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": { "ref": "stop_ref01", "srcdatavar": "stop_ref01_data", "suffix": "_dt0" }, "m": { "id": "stop01" }, "o": "load", "s": [], "v": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-stop_ref01" } }], "index$": 0 }] }, 'Stop', { "GET /stops/{id}": { "protocol": "http", "parameters": [{ "name": "id", "in": "path", "description": "Stop/station ID", "required": true, "schema": { "type": "string" }, "example": "900000003201", "index$": 0 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -77,6 +85,11 @@ const utility_1 = require("../../utility");
         (0, node_assert_1.default)(stop_ref01_data_dt0.id === stop_ref01_data.id);
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

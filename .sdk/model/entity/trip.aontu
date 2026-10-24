@@ -94,9 +94,11 @@ main: kit: entity: trip: {
           q: {
             exist: [
               "id"
-              "line_name"
-              "stopover"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

@@ -105,12 +105,12 @@ main: kit: entity: location: {
           o: "/locations"
           q: {
             exist: [
-              "address"
-              "poi"
               "query"
-              "result"
-              "stop"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

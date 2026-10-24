@@ -96,6 +96,7 @@ def make_config():
         },
         "optspec": {
           "clearTimer": "`$FUNCTION`",
+          "now": "`$FUNCTION`",
           "setTimer": "`$FUNCTION`",
         },
         "strict": False,
@@ -240,16 +241,18 @@ def make_config():
                       "orig": "when",
                       "type": "`$STRING`",
                       "kind": "query",
+                      "field": True,
                     },
                   ],
                 },
                 "select": {
                   "exist": [
-                    "duration",
-                    "result",
                     "stop_id",
-                    "when",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -372,6 +375,7 @@ def make_config():
                       "orig": "direction",
                       "type": "`$STRING`",
                       "kind": "query",
+                      "field": True,
                     },
                     {
                       "name": "duration",
@@ -392,17 +396,18 @@ def make_config():
                       "orig": "when",
                       "type": "`$STRING`",
                       "kind": "query",
+                      "field": True,
                     },
                   ],
                 },
                 "select": {
                   "exist": [
-                    "direction",
-                    "duration",
-                    "result",
                     "stop_id",
-                    "when",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -507,13 +512,13 @@ def make_config():
                 },
                 "select": {
                   "exist": [
-                    "arrival",
-                    "departure",
                     "from",
-                    "result",
-                    "stopover",
                     "to",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -624,12 +629,12 @@ def make_config():
                 },
                 "select": {
                   "exist": [
-                    "address",
-                    "poi",
                     "query",
-                    "result",
-                    "stop",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -735,10 +740,13 @@ def make_config():
                   "exist": [
                     "east",
                     "north",
-                    "result",
                     "south",
                     "west",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -832,6 +840,10 @@ def make_config():
                   "exist": [
                     "id",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],
@@ -936,9 +948,11 @@ def make_config():
                 "select": {
                   "exist": [
                     "id",
-                    "line_name",
-                    "stopover",
                   ],
+                },
+                "response": {
+                  "kind": "json",
+                  "media": "application/json",
                 },
               },
             ],

@@ -87,6 +87,7 @@ class Config {
             },
             "optspec": {
                 "clearTimer": "`$FUNCTION`",
+                "now": "`$FUNCTION`",
                 "setTimer": "`$FUNCTION`"
             },
             "strict": false,
@@ -230,17 +231,19 @@ class Config {
                                         "name": "when",
                                         "orig": "when",
                                         "type": "`$STRING`",
-                                        "kind": "query"
+                                        "kind": "query",
+                                        "field": true
                                     }
                                 ]
                             },
                             "select": {
                                 "exist": [
-                                    "duration",
-                                    "result",
-                                    "stop_id",
-                                    "when"
+                                    "stop_id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -362,7 +365,8 @@ class Config {
                                         "name": "direction",
                                         "orig": "direction",
                                         "type": "`$STRING`",
-                                        "kind": "query"
+                                        "kind": "query",
+                                        "field": true
                                     },
                                     {
                                         "name": "duration",
@@ -382,18 +386,19 @@ class Config {
                                         "name": "when",
                                         "orig": "when",
                                         "type": "`$STRING`",
-                                        "kind": "query"
+                                        "kind": "query",
+                                        "field": true
                                     }
                                 ]
                             },
                             "select": {
                                 "exist": [
-                                    "direction",
-                                    "duration",
-                                    "result",
-                                    "stop_id",
-                                    "when"
+                                    "stop_id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -498,13 +503,13 @@ class Config {
                             },
                             "select": {
                                 "exist": [
-                                    "arrival",
-                                    "departure",
                                     "from",
-                                    "result",
-                                    "stopover",
                                     "to"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -615,12 +620,12 @@ class Config {
                             },
                             "select": {
                                 "exist": [
-                                    "address",
-                                    "poi",
-                                    "query",
-                                    "result",
-                                    "stop"
+                                    "query"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -726,10 +731,13 @@ class Config {
                                 "exist": [
                                     "east",
                                     "north",
-                                    "result",
                                     "south",
                                     "west"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -823,6 +831,10 @@ class Config {
                                 "exist": [
                                     "id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]
@@ -926,10 +938,12 @@ class Config {
                             },
                             "select": {
                                 "exist": [
-                                    "id",
-                                    "line_name",
-                                    "stopover"
+                                    "id"
                                 ]
+                            },
+                            "response": {
+                                "kind": "json",
+                                "media": "application/json"
                             }
                         }
                     ]

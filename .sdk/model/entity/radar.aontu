@@ -96,10 +96,13 @@ main: kit: entity: radar: {
             exist: [
               "east"
               "north"
-              "result"
               "south"
               "west"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

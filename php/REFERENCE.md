@@ -130,10 +130,10 @@ $arrival = $client->Arrival();
 
 #### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
-$results = $client->Arrival()->list();
+$results = $client->Arrival()->list(["stop_id" => "example"]);
 ```
 
 ### Common Methods
@@ -190,10 +190,10 @@ $departure = $client->Departure();
 
 #### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
-$results = $client->Departure()->list();
+$results = $client->Departure()->list(["stop_id" => "example"]);
 ```
 
 ### Common Methods
@@ -244,10 +244,10 @@ $journey = $client->Journey();
 
 #### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
-$results = $client->Journey()->list();
+$results = $client->Journey()->list(["from" => "example", "to" => "example"]);
 ```
 
 ### Common Methods
@@ -300,10 +300,10 @@ $location = $client->Location();
 
 #### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
-$results = $client->Location()->list();
+$results = $client->Location()->list(["query" => "example"]);
 ```
 
 ### Common Methods
@@ -356,10 +356,10 @@ $radar = $client->Radar();
 
 #### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
-$results = $client->Radar()->list();
+$results = $client->Radar()->list(["east" => 1, "north" => 1, "south" => 1, "west" => 1]);
 ```
 
 ### Common Methods
@@ -413,7 +413,7 @@ $stop = $client->Stop();
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->Stop()->load(["id" => "stop_id"]);
@@ -470,7 +470,7 @@ $trip = $client->Trip();
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
 $result = $client->Trip()->load(["id" => "trip_id"]);
@@ -663,6 +663,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

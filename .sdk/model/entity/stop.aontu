@@ -82,6 +82,10 @@ main: kit: entity: stop: {
               "id"
             ]
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "stops"

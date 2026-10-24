@@ -71,6 +71,7 @@ func MakeConfig() map[string]any {
 				},
 				"optspec": map[string]any{
 					"clearTimer": "`$FUNCTION`",
+					"now": "`$FUNCTION`",
 					"setTimer": "`$FUNCTION`",
 				},
 				"strict": false,
@@ -215,16 +216,18 @@ func MakeConfig() map[string]any {
 											"orig": "when",
 											"type": "`$STRING`",
 											"kind": "query",
+											"field": true,
 										},
 									},
 								},
 								"select": map[string]any{
 									"exist": []any{
-										"duration",
-										"result",
 										"stop_id",
-										"when",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -347,6 +350,7 @@ func MakeConfig() map[string]any {
 											"orig": "direction",
 											"type": "`$STRING`",
 											"kind": "query",
+											"field": true,
 										},
 										map[string]any{
 											"name": "duration",
@@ -367,17 +371,18 @@ func MakeConfig() map[string]any {
 											"orig": "when",
 											"type": "`$STRING`",
 											"kind": "query",
+											"field": true,
 										},
 									},
 								},
 								"select": map[string]any{
 									"exist": []any{
-										"direction",
-										"duration",
-										"result",
 										"stop_id",
-										"when",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -482,13 +487,13 @@ func MakeConfig() map[string]any {
 								},
 								"select": map[string]any{
 									"exist": []any{
-										"arrival",
-										"departure",
 										"from",
-										"result",
-										"stopover",
 										"to",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -599,12 +604,12 @@ func MakeConfig() map[string]any {
 								},
 								"select": map[string]any{
 									"exist": []any{
-										"address",
-										"poi",
 										"query",
-										"result",
-										"stop",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -710,10 +715,13 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"east",
 										"north",
-										"result",
 										"south",
 										"west",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -807,6 +815,10 @@ func MakeConfig() map[string]any {
 									"exist": []any{
 										"id",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -911,9 +923,11 @@ func MakeConfig() map[string]any {
 								"select": map[string]any{
 									"exist": []any{
 										"id",
-										"line_name",
-										"stopover",
 									},
+								},
+								"response": map[string]any{
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},

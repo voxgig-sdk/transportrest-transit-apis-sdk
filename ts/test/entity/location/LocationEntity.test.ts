@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { TransportrestTransitApisSDK, BaseFeature, stdutil } from '../../..'
+import { TransportrestTransitApisSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,64 @@ describe('LocationEntity', async () => {
   })
 
 
+  class FailHook extends BaseFeature {
+    name = 'failhook'
+    version = '0.0.1'
+    active = true
+    unexpected = 0
+    init() { }
+    PreSpec() { throw new Error('location hook failed') }
+    PreUnexpected() { this.unexpected++ }
+  }
+
+  test('stream-error', async () => {
+    const offline = { net: { offline: true } }
+    await assert.rejects(async () => {
+      for await (const _item of TransportrestTransitApisSDK.test(offline).Location().stream('list')) { }
+    }, /offline/)
+
+    for await (const _item of TransportrestTransitApisSDK.test(offline).Location()
+      .stream('list', undefined, { ctrl: { throw: false } })) { }
+
+    if (null != (config as any).feature?.rbac) {
+      const denied = TransportrestTransitApisSDK.test(undefined, { feature: { rbac: { active: true, deny: true } } })
+      await assert.rejects(async () => {
+        for await (const _item of denied.Location().stream('list')) { }
+      }, (err: any) => 'rbac_denied' === err.code)
+    }
+  })
+
+  test('stream-ctrl', async () => {
+    const explain: any = {}
+    const ctrl: any = { explain }
+    for await (const _item of TransportrestTransitApisSDK.test().Location().stream('list', undefined, { ctrl })) { }
+    assert.deepStrictEqual(Object.keys(ctrl), ['explain'])
+    assert(explain === ctrl.explain && 0 < Object.keys(explain).length)
+  })
+
+  test('unexpected', async () => {
+    const hook = new FailHook()
+    const client = new TransportrestTransitApisSDK({ feature: { test: { active: true } }, extend: [hook] })
+    await assert.rejects(client.Location().list(), /hook failed/)
+    assert(0 < hook.unexpected)
+
+    const fired = hook.unexpected
+    assert.strictEqual(await client.Location().list(undefined, { throw: false }), undefined)
+    assert(fired < hook.unexpected)
+  })
+
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = TransportrestTransitApisSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.Location().list({"address":"x","query":"x"} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.TRANSPORTREST_TRANSIT_APIS_TEST_LIVE
@@ -51,7 +109,7 @@ describe('LocationEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"id":{"a":true,"h":"Id","n":"id","r":false,"sh":"Unique identifier for the location","t":"`$STRING`","key$":"id","index$":0},"location":{"a":true,"h":"Location","n":"location","r":false,"t":"`$OBJECT`","key$":"location","index$":1},"name":{"a":true,"h":"Name","n":"name","r":false,"sh":"Name of the location","t":"`$STRING`","key$":"name","index$":2},"products":{"a":true,"h":"Products","n":"products","r":false,"sh":"Available products at this location","t":"`$OBJECT`","key$":"products","index$":3},"type":{"a":true,"h":"Type","n":"type","r":false,"sh":"Type of location","t":"`$STRING`","key$":"type","index$":4}},"id":{"field":"id","name":"id"},"name":"location","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /locations","source":"openapi3","version":2},"g":{"query":[{"a":true,"ex":true,"k":"query","n":"address","or":"addresses","r":false,"t":"`$BOOLEAN`","index$":0},{"a":true,"ex":true,"k":"query","n":"poi","or":"poi","r":false,"t":"`$BOOLEAN`","index$":1},{"a":true,"ex":"Berlin","k":"query","n":"query","or":"query","r":true,"t":"`$STRING`","index$":2},{"a":true,"ex":10,"k":"query","n":"result","or":"results","r":false,"t":"`$INTEGER`","index$":3},{"a":true,"ex":true,"k":"query","n":"stop","or":"stops","r":false,"t":"`$BOOLEAN`","index$":4}]},"k":"http","m":"GET","o":"/locations","q":{"exist":["address","poi","query","result","stop"]},"r":{},"s":[{"lit":"locations"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"location","name__orig":"location","Name":"Location","name_":"location","name-":"location","NAME":"LOCATION","index$":3}, {"active":true,"entity":"location","key$":"BasicLocationFlow","kind":"basic","name":"BasicLocationFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"location_ref01"}}],"index$":0}]}, 'Location', {"GET /locations":{"protocol":"http","parameters":[{"name":"query","in":"query","description":"Search query for locations","required":true,"schema":{"type":"string"},"example":"Berlin","index$":0},{"name":"results","in":"query","description":"Number of results to return","required":false,"schema":{"type":"integer","default":10,"minimum":1,"maximum":100},"index$":1},{"name":"stops","in":"query","description":"Include stops/stations in results","required":false,"schema":{"type":"boolean","default":true},"index$":2},{"name":"addresses","in":"query","description":"Include addresses in results","required":false,"schema":{"type":"boolean","default":true},"index$":3},{"name":"poi","in":"query","description":"Include points of interest in results","required":false,"schema":{"type":"boolean","default":true},"index$":4}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"id":{"a":true,"h":"Id","n":"id","r":false,"sh":"Unique identifier for the location","t":"`$STRING`","key$":"id","index$":0},"location":{"a":true,"h":"Location","n":"location","r":false,"t":"`$OBJECT`","key$":"location","index$":1},"name":{"a":true,"h":"Name","n":"name","r":false,"sh":"Name of the location","t":"`$STRING`","key$":"name","index$":2},"products":{"a":true,"h":"Products","n":"products","r":false,"sh":"Available products at this location","t":"`$OBJECT`","key$":"products","index$":3},"type":{"a":true,"h":"Type","n":"type","r":false,"sh":"Type of location","t":"`$STRING`","key$":"type","index$":4}},"id":{"field":"id","name":"id"},"name":"location","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /locations","source":"openapi3","version":2},"g":{"query":[{"a":true,"ex":true,"k":"query","n":"address","or":"addresses","r":false,"t":"`$BOOLEAN`","index$":0},{"a":true,"ex":true,"k":"query","n":"poi","or":"poi","r":false,"t":"`$BOOLEAN`","index$":1},{"a":true,"ex":"Berlin","k":"query","n":"query","or":"query","r":true,"t":"`$STRING`","index$":2},{"a":true,"ex":10,"k":"query","n":"result","or":"results","r":false,"t":"`$INTEGER`","index$":3},{"a":true,"ex":true,"k":"query","n":"stop","or":"stops","r":false,"t":"`$BOOLEAN`","index$":4}]},"k":"http","m":"GET","o":"/locations","q":{"exist":["query"]},"r":{},"rs":{"kind":"json","media":"application/json"},"s":[{"lit":"locations"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"location","name__orig":"location","Name":"Location","name_":"location","name-":"location","NAME":"LOCATION","index$":3}, {"active":true,"entity":"location","key$":"BasicLocationFlow","kind":"basic","name":"BasicLocationFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"location_ref01"}}],"index$":0}]}, 'Location', {"GET /locations":{"protocol":"http","parameters":[{"name":"query","in":"query","description":"Search query for locations","required":true,"schema":{"type":"string"},"example":"Berlin","index$":0},{"name":"results","in":"query","description":"Number of results to return","required":false,"schema":{"type":"integer","default":10,"minimum":1,"maximum":100},"index$":1},{"name":"stops","in":"query","description":"Include stops/stations in results","required":false,"schema":{"type":"boolean","default":true},"index$":2},{"name":"addresses","in":"query","description":"Include addresses in results","required":false,"schema":{"type":"boolean","default":true},"index$":3},{"name":"poi","in":"query","description":"Include points of interest in results","required":false,"schema":{"type":"boolean","default":true},"index$":4}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -72,6 +130,12 @@ describe('LocationEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

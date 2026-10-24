@@ -92,13 +92,13 @@ main: kit: entity: journey: {
           o: "/journeys"
           q: {
             exist: [
-              "arrival"
-              "departure"
               "from"
-              "result"
-              "stopover"
               "to"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

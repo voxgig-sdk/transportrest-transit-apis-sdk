@@ -128,10 +128,10 @@ local arrival = client:Arrival(nil)
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:Arrival():list()
+local results, err = client:Arrival():list({ stop_id = "example" })
 ```
 
 ### Common Methods
@@ -188,10 +188,10 @@ local departure = client:Departure(nil)
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:Departure():list()
+local results, err = client:Departure():list({ stop_id = "example" })
 ```
 
 ### Common Methods
@@ -242,10 +242,10 @@ local journey = client:Journey(nil)
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:Journey():list()
+local results, err = client:Journey():list({ from = "example", to = "example" })
 ```
 
 ### Common Methods
@@ -298,10 +298,10 @@ local location = client:Location(nil)
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:Location():list()
+local results, err = client:Location():list({ query = "example" })
 ```
 
 ### Common Methods
@@ -354,10 +354,10 @@ local radar = client:Radar(nil)
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:Radar():list()
+local results, err = client:Radar():list({ east = 1, north = 1, south = 1, west = 1 })
 ```
 
 ### Common Methods
@@ -411,7 +411,7 @@ local stop = client:Stop(nil)
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Stop():load({ id = "stop_id" })
@@ -468,7 +468,7 @@ local trip = client:Trip(nil)
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
 local result, err = client:Trip():load({ id = "trip_id" })
@@ -661,6 +661,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

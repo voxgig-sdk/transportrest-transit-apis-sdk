@@ -121,16 +121,17 @@ main: kit: entity: arrival: {
           o: "/stops/{id}/arrivals"
           q: {
             exist: [
-              "duration"
-              "result"
               "stop_id"
-              "when"
             ]
           }
           r: {
             param: {
               id: "stop_id"
             }
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {
